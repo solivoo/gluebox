@@ -48,6 +48,13 @@ jobs:
 
       - run: pnpm build:lib
 
-      - run: npm publish --access public
+      - name: Publish to npm
+        run: |
+          if [ -z "$NODE_AUTH_TOKEN" ]; then
+            echo "::error::NPM_TOKEN secret is missing in GitHub Actions"
+            exit 1
+          fi
+          npm whoami
+          npm publish --access public --ignore-scripts
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

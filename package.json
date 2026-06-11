@@ -4,7 +4,7 @@
   "description": "Librería de componentes React para aplicaciones empresariales — Sidebar con RBAC, temas e iconos personalizables",
   "type": "module",
   "license": "MIT",
-  "author": "",
+  "author": "solivoo",
   "keywords": [
     "react",
     "components",

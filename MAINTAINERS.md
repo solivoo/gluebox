@@ -18,7 +18,7 @@ Configuración única en GitHub:
 
 | Secret | Descripción |
 |--------|-------------|
-| `NPM_TOKEN` | Token de npm con permiso **Publish** (Granular → Packages: Read and write) |
+| `NPM_TOKEN` | Token granular de npm: **Packages Read and write**, scope **All packages**. Con 2FA activo, habilitar **Bypass two-factor authentication for automation**. |
 
 ### Automático (recomendado)
 
