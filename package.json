@@ -1,0 +1,90 @@
+{
+  "name": "glubox",
+  "version": "0.1.0",
+  "description": "Librería de componentes React para aplicaciones empresariales — Sidebar con RBAC, temas e iconos personalizables",
+  "type": "module",
+  "license": "MIT",
+  "author": "",
+  "keywords": [
+    "react",
+    "components",
+    "sidebar",
+    "rbac",
+    "design-system",
+    "typescript"
+  ],
+  "homepage": "https://solivoo.github.io/gluebox/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/solivoo/gluebox.git"
+  },
+  "bugs": {
+    "url": "https://github.com/solivoo/gluebox/issues"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/glubox.js",
+  "module": "./dist/glubox.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/glubox.js"
+    },
+    "./style.css": "./dist/glubox.css"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "build:lib": "vite build --config vite.config.lib.ts",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "node scripts/build-storybook.mjs",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "pnpm build-storybook && vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "prepublishOnly": "pnpm build:lib"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^5.2.1",
+    "@eslint/js": "^10.0.1",
+    "@storybook/addon-a11y": "10.4.3",
+    "@storybook/addon-docs": "10.4.3",
+    "@storybook/react-vite": "10.4.3",
+    "@types/node": "^24.12.3",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "@vitest/browser-playwright": "^4.1.8",
+    "@vitest/coverage-v8": "^4.1.8",
+    "eslint": "^10.3.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "eslint-plugin-storybook": "10.4.3",
+    "globals": "^17.6.0",
+    "lucide-react": "^1.17.0",
+    "playwright": "^1.60.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "storybook": "10.4.3",
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.59.2",
+    "vite": "^8.0.12",
+    "vite-plugin-dts": "^5.0.2",
+    "vitepress": "^1.6.4",
+    "vitest": "^4.1.8"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "packageManager": "pnpm@11.5.1"
+}
