@@ -3,6 +3,15 @@ name: Publish npm
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Versión a publicar (ej. 0.1.0)'
+        required: true
+        default: '0.1.0'
+
+permissions:
+  contents: read
 
 jobs:
   publish:
@@ -14,7 +23,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           cache: pnpm
           registry-url: https://registry.npmjs.org
 
@@ -22,11 +31,16 @@ jobs:
 
       - name: Sync version from tag
         run: |
-          VERSION=${GITHUB_REF#refs/tags/v}
+          if [ -n "${{ github.event.release.tag_name }}" ]; then
+            VERSION="${{ github.event.release.tag_name }}"
+          else
+            VERSION="v${{ inputs.version }}"
+          fi
+          VERSION="${VERSION#v}"
           npm version "$VERSION" --no-git-tag-version --allow-same-version
 
       - run: pnpm build:lib
 
-      - run: npm publish --access public
+      - run: pnpm publish --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
