@@ -22,9 +22,10 @@ Configuración única en GitHub:
 
 ### Automático (recomendado)
 
-1. Actualiza `version` en `package.json`
-2. GitHub → Releases → tag `v0.1.0` (debe coincidir con la versión)
-3. Publish release → workflow `publish-npm.yml`
+1. Actualiza `version` en `package.json` y haz push a `main`
+2. Crea tag y publícalo: `git tag v0.1.0 && git push origin v0.1.0`
+   - O crea un **Release** en GitHub con ese tag
+3. El workflow `publish-npm.yml` publica en npm (usa siempre el código de `main`)
 
 Reintento manual: **Actions → Publish npm → Run workflow**.
 
