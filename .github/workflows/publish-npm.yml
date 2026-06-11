@@ -31,6 +31,7 @@ jobs:
           node-version: 24
           cache: pnpm
           registry-url: https://registry.npmjs.org
+          always-auth: true
 
       - run: pnpm install --frozen-lockfile
 
@@ -48,13 +49,21 @@ jobs:
 
       - run: pnpm build:lib
 
-      - name: Publish to npm
+      - name: Verify npm token
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           if [ -z "$NODE_AUTH_TOKEN" ]; then
-            echo "::error::NPM_TOKEN secret is missing in GitHub Actions"
+            echo "::error::El secret NPM_TOKEN no está configurado en Settings → Secrets → Actions"
             exit 1
           fi
-          npm whoami
-          npm publish --access public --ignore-scripts
+          echo "NPM_TOKEN configurado (${#NODE_AUTH_TOKEN} caracteres)"
+          npm whoami || {
+            echo "::error::npm whoami falló. Revisa que el token tenga Packages: Read and write y bypass 2FA si aplica."
+            exit 1
+          }
+
+      - name: Publish to npm
+        run: npm publish --access public --ignore-scripts
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
