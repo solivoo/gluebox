@@ -20,8 +20,8 @@ features:
     details: Presets dark/light o tokens CSS personalizados para fondo, texto e iconos.
   - title: Extensible
     details: Inyecta iconos (Lucide, Iconify) y marca con componentes propios.
-  - title: Listo para npm
-    details: Publica la librería en npm y la documentación en GitHub Pages.
+  - title: Instalable vía npm
+    details: Paquete `glubox` con tipos TypeScript y CSS incluido.
 ---
 
 ## Quick start

@@ -28,22 +28,6 @@ pnpm build:lib        # Build npm
 pnpm docs:build       # Build docs + Storybook para GitHub Pages
 ```
 
-## Despliegue automático (GitHub Pages)
-
-Cada **push a `main`** ejecuta el workflow `deploy-pages.yml` y publica docs + Storybook.
-
-**Configuración única en GitHub:**
-
-1. Repo → **Settings → Pages**
-2. **Build and deployment → Source:** `GitHub Actions`
-3. Push a `main` → sitio en https://solivoo.github.io/gluebox/
-
-## Publicación npm
-
-1. Crea secret **`NPM_TOKEN`** en GitHub (Settings → Secrets → Actions)
-2. Crea un **Release** con tag `v0.1.0` → publica automáticamente vía `publish-npm.yml`
-3. O manual: `pnpm build:lib && npm publish --access public`
-
 ## Licencia
 
 MIT

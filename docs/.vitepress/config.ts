@@ -20,7 +20,6 @@ export default defineConfig({
         items: [
           { text: 'Introducción', link: '/guide/getting-started' },
           { text: 'Instalación', link: '/guide/installation' },
-          { text: 'Publicación npm', link: '/guide/publishing' },
         ],
       },
       {
