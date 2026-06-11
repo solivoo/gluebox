@@ -1,4 +1,5 @@
 import type { IconResolver } from './type/icon.types';
+import { sidebarBuiltinIcons } from './SidebarBuiltinIcons';
 
 interface SidebarIconProps {
   name: string;
@@ -11,6 +12,11 @@ export function SidebarIcon({
   className,
   renderIcon,
 }: SidebarIconProps) {
+  const BuiltinIcon = sidebarBuiltinIcons[name];
+  if (BuiltinIcon) {
+    return <BuiltinIcon className={className} width={20} height={20} />;
+  }
+
   if (renderIcon) {
     return <>{renderIcon(name, className)}</>;
   }

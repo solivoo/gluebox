@@ -4,6 +4,7 @@ import dts from 'vite-plugin-dts';
 import path from 'node:path';
 
 export default defineConfig({
+  publicDir: false,
   plugins: [
     react(),
     dts({
@@ -15,6 +16,9 @@ export default defineConfig({
         'src/main.tsx',
         'src/icons/**',
         'src/components/brand/**',
+        'src/components/Sidebar/data/**',
+        'src/components/Sidebar/mock/**',
+        'src/components/Sidebar/test/**',
       ],
       rollupTypes: true,
       tsconfigPath: './tsconfig.lib.json',

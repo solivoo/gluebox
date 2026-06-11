@@ -19,7 +19,7 @@ import type { SidebarProps, MenuConfig } from 'glubox';
 | `width` | `number \| string` | Ancho en px o CSS |
 | `theme` | `'dark' \| 'light' \| SidebarTheme` | Tema visual |
 | `activePath` | `string` | Ruta activa |
-| `renderIcon` | `IconResolver` | Renderiza iconos por nombre |
+| `renderIcon` | `IconResolver` | Iconos del menú (desde API). Chevron y contraer van integrados |
 | `brand` | `ComponentType` | Logo / nombre empresa |
 | `collapseOthersOnSelect` | `boolean` | Modo acordeón |
 | `onNavigate` | `(path) => void` | Callback al navegar |

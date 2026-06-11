@@ -1,6 +1,6 @@
 {
   "name": "glubox",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Librería de componentes React para aplicaciones empresariales — Sidebar con RBAC, temas e iconos personalizables",
   "type": "module",
   "license": "MIT",
@@ -25,14 +25,16 @@
     "**/*.css"
   ],
   "files": [
-    "dist"
+    "dist/glubox.js",
+    "dist/glubox.css",
+    "dist/src"
   ],
   "main": "./dist/glubox.js",
   "module": "./dist/glubox.js",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/src/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": "./dist/src/index.d.ts",
       "import": "./dist/glubox.js"
     },
     "./style.css": "./dist/glubox.css"
@@ -41,6 +43,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "build:lib": "vite build --config vite.config.lib.ts",
+    "clean:dist": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
+    "prepublish:lib": "pnpm clean:dist && pnpm build:lib",
+    "publish:lib": "npm publish --access public",
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
@@ -48,7 +53,7 @@
     "docs:dev": "vitepress dev docs",
     "docs:build": "pnpm build-storybook && vitepress build docs",
     "docs:preview": "vitepress preview docs",
-    "prepublishOnly": "pnpm build:lib"
+    "prepublishOnly": "pnpm prepublish:lib"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
