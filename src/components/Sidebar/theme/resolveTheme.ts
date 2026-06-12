@@ -21,5 +21,7 @@ export function themeToStyle(theme: SidebarTheme): CSSProperties {
     '--sidebar-muted-text': theme.mutedText ?? theme.text,
     '--sidebar-icon-fallback-bg':
       theme.iconFallbackBackground ?? theme.hoverBackground,
+    '--sidebar-tree-line': theme.treeLine ?? theme.hoverBackground,
+    '--sidebar-rail-active': theme.railActive ?? theme.activeText,
   } as CSSProperties;
 }

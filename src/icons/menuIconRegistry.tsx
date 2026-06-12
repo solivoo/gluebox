@@ -1,22 +1,26 @@
 import {
+  BookOpen,
   ChevronDown,
   Circle,
   HelpCircle,
   LayoutDashboard,
   PanelLeftClose,
   PanelLeftOpen,
+  Receipt,
   Settings,
-  ShoppingCart,
-  Users,
+  Store,
+  Warehouse,
   type LucideIcon,
 } from 'lucide-react';
 import type { IconResolver } from '@/components/Sidebar/type/icon.types';
 
 const registry: Record<string, LucideIcon> = {
   'layout-dashboard': LayoutDashboard,
-  'shopping-cart': ShoppingCart,
+  receipt: Receipt,
+  'book-open': BookOpen,
+  warehouse: Warehouse,
+  store: Store,
   settings: Settings,
-  users: Users,
   'help-circle': HelpCircle,
   'chevron-down': ChevronDown,
   'panel-left-close': PanelLeftClose,
@@ -25,7 +29,7 @@ const registry: Record<string, LucideIcon> = {
 
 export const renderMenuIcon: IconResolver = (name, className) => {
   const Icon = registry[name] ?? Circle;
-  return <Icon className={className} size={20} aria-hidden />;
+  return <Icon className={className} aria-hidden />;
 };
 
 /** Lista para futuro icon picker en el admin */

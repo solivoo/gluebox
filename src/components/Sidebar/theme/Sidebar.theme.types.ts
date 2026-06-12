@@ -4,16 +4,16 @@ export interface SidebarTheme {
   text: string;
   icon: string;
   hoverBackground: string;
-  /** Fondo del ítem abierto o seleccionado */
+  /** @deprecated Usar hoverBackground; ya no se aplica fondo en ítems abiertos */
   activeBackground: string;
-  /** Texto del ítem seleccionado (se aplica con negrita) */
   activeText: string;
-  /** Color de icono en ítem seleccionado (opcional) */
   activeIcon?: string;
-  /** Texto de subítems inactivos */
   mutedText?: string;
-  /** Fondo del fallback de icono cuando no hay renderIcon */
   iconFallbackBackground?: string;
+  /** Línea guía del árbol (opciones / acciones) */
+  treeLine?: string;
+  /** Barra lateral de módulo con descendiente activo o acción seleccionada */
+  railActive?: string;
 }
 
 export type SidebarThemePreset = 'dark' | 'light';

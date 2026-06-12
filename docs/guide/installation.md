@@ -8,25 +8,27 @@ pnpm add glubox
 
 ## Peer dependencies
 
-Asegúrate de tener React instalado:
-
 ```bash
 pnpm add react react-dom
 ```
 
+React **18+** es requerido.
+
 ## Estilos
 
-Importa el CSS del paquete en tu entry point:
+Importa el CSS en el entry point de tu aplicación:
 
 ```tsx
 import 'glubox/style.css';
 ```
 
-## Iconos
+Sin este import el Sidebar no tendrá layout ni tokens visuales.
 
-El sidebar **no incluye Lucide** (u otra librería de iconos). Debes pasar `renderIcon` para los iconos del menú que vienen de tu API/BD.
+## Iconos del menú
 
-Los iconos de **UI** (chevron de submenús, botón contraer sidebar) ya vienen integrados.
+gluBox **no incluye** Lucide, Iconify ni otras librerías de iconos. Los nombres vienen de tu API (`"receipt"`, `"settings"`, …) y los resuelves con la prop `renderIcon`.
+
+Los iconos de **UI del sidebar** (chevron, contraer/expandir) ya vienen integrados.
 
 ### Con Lucide (recomendado)
 
@@ -35,32 +37,33 @@ pnpm add lucide-react
 ```
 
 ```tsx
-import {
-  Circle,
-  LayoutDashboard,
-  Settings,
-  Users,
-  type LucideIcon,
-} from 'lucide-react';
+import { Circle, Receipt, Settings, type LucideIcon } from 'lucide-react';
 import type { IconResolver } from 'glubox';
 
 const iconRegistry: Record<string, LucideIcon> = {
-  'layout-dashboard': LayoutDashboard,
+  receipt: Receipt,
   settings: Settings,
-  users: Users,
 };
 
 export const renderMenuIcon: IconResolver = (name, className) => {
   const Icon = iconRegistry[name] ?? Circle;
-  return <Icon className={className} size={20} aria-hidden />;
+  return <Icon className={className} aria-hidden />;
 };
 ```
 
 ```tsx
-<Sidebar menu={menu} userPermissions={[]} renderIcon={renderMenuIcon} />
+<Sidebar menu={menu} userPermissions={permissions} renderIcon={renderMenuIcon} />
 ```
 
-Los nombres `chevron-down`, `panel-left-open` y `panel-left-close` los resuelve el propio sidebar; no hace falta registrarlos.
+::: tip Tamaño de iconos
+El Sidebar aplica la clase `sidebar__icon`. No es necesario pasar `size` en Lucide; el CSS controla el tamaño en modo expandido y colapsado.
+:::
+
+Nombres resueltos internamente (no registrar en tu `renderIcon`):
+
+- `chevron-down`
+- `panel-left-close`
+- `panel-left-open`
 
 ## Uso básico
 
@@ -68,6 +71,7 @@ Los nombres `chevron-down`, `panel-left-open` y `panel-left-close` los resuelve 
 import { useState } from 'react';
 import { Sidebar } from 'glubox';
 import type { MenuConfig } from 'glubox';
+import 'glubox/style.css';
 
 const menu: MenuConfig = {
   items: [
@@ -76,6 +80,7 @@ const menu: MenuConfig = {
       label: 'Inicio',
       icon: 'layout-dashboard',
       path: '/',
+      permissions: ['dashboard:read'],
     },
   ],
 };
@@ -90,15 +95,59 @@ export function AppShell() {
       collapsed={collapsed}
       onCollapsedChange={setCollapsed}
       renderIcon={renderMenuIcon}
+      theme="dark"
     />
   );
 }
 ```
 
-## TypeScript
-
-Los tipos se exportan desde el paquete:
+## Con router (React Router)
 
 ```tsx
-import type { SidebarProps, MenuConfig, SidebarTheme } from 'glubox';
+import { useLocation, useNavigate } from 'react-router-dom';
+
+const navigate = useNavigate();
+const { pathname } = useLocation();
+
+<Sidebar
+  menu={menu}
+  userPermissions={permissions}
+  activePath={pathname}
+  onNavigate={navigate}
+  renderIcon={renderMenuIcon}
+/>
 ```
+
+Guía completa: [Integración con routing](/guide/routing).
+
+## TypeScript
+
+Tipos y utilidades exportados:
+
+```tsx
+import {
+  Sidebar,
+  sidebarThemes,
+  hasPermission,
+  filterVisibleMenu,
+} from 'glubox';
+
+import type {
+  SidebarProps,
+  MenuConfig,
+  MenuItem,
+  MenuSubItem,
+  Permission,
+  SidebarTheme,
+  IconResolver,
+  SidebarBrandComponent,
+} from 'glubox';
+```
+
+- `hasPermission(userPermissions, required?)` — regla OR para guards de ruta.
+- `filterVisibleMenu(menu, userPermissions)` — misma lógica que aplica el Sidebar internamente.
+
+## Siguiente paso
+
+- [Esquema del menú para tu API](/guide/menu-api)
+- [Referencia completa del Sidebar](/components/sidebar)

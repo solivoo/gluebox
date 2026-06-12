@@ -33,7 +33,7 @@ export function SidebarMenuList({
           item={item}
           collapsed={collapsed}
           activePath={activePath}
-          isExpanded={isExpanded(item.id)}
+          isExpanded={isExpanded}
           onToggleExpand={onToggleExpand}
           onNavigate={onNavigate}
           renderIcon={renderIcon}

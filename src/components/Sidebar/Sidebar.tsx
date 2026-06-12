@@ -27,6 +27,7 @@ export function Sidebar(props: Readonly<SidebarProps>) {
     theme,
     activePath,
     collapseOthersOnSelect = false,
+    collapseOnNavigate = false,
   } = props;
   const visibleMenu = useMemo(
     () => filterVisibleMenu(menu, userPermissions),
@@ -44,6 +45,7 @@ export function Sidebar(props: Readonly<SidebarProps>) {
     items: visibleMenu.items,
     activePath,
     collapseOthersOnSelect,
+    collapseOnNavigate,
   });
 
   const shouldShowToggle =

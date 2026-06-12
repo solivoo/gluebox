@@ -13,6 +13,7 @@ export default defineConfig({
       { text: 'Guía', link: '/guide/getting-started' },
       { text: 'Sidebar', link: '/components/sidebar' },
       { text: 'Storybook', link: '/storybook/' },
+      { text: 'GitHub', link: 'https://github.com/solivoo/gluebox' },
     ],
     sidebar: [
       {
@@ -20,6 +21,8 @@ export default defineConfig({
         items: [
           { text: 'Introducción', link: '/guide/getting-started' },
           { text: 'Instalación', link: '/guide/installation' },
+          { text: 'Esquema del menú (API)', link: '/guide/menu-api' },
+          { text: 'Integración con routing', link: '/guide/routing' },
         ],
       },
       {

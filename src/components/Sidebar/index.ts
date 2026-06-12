@@ -19,4 +19,7 @@ export type {
   Permission,
 } from './type/menu.types';
 
+export { hasPermission } from './type/hasPermission';
+export { filterVisibleMenu } from './type/filterVisibleMenu';
+
 export { sidebarThemes } from './theme/defaultThemes';

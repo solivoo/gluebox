@@ -4,29 +4,27 @@ export type Permission = string;
 /** Zona del sidebar donde se renderiza el ítem */
 export type MenuItemPosition = 'top' | 'bottom';
 
-/** Un item hijo dentro de un submenu */
+/** Nodo de menú anidable (nivel 2 y 3) */
 export interface MenuSubItem {
-    id: string;
-    label: string;
-    path: string;
-    /** Permisos requeridos para ver este ítem */
-    permissions?: Permission[];
+  id: string;
+  label: string;
+  /** Ruta cuando el ítem es hoja; omitir si solo agrupa hijos */
+  path?: string;
+  permissions?: Permission[];
+  children?: MenuSubItem[];
 }
-
 
 export interface MenuItem {
-    id: string;
-    label: string;
-    /** Clave de icono resuelta por renderIcon en la app consumidora */
-    icon?: string;
-    path?: string;
-    permissions?: Permission[];
-    children?: MenuSubItem[];
-    /** Zona del menú: 'top' (default) o 'bottom' (ej. ajustes, ayuda) */
-    position?: MenuItemPosition;
+  id: string;
+  label: string;
+  icon?: string;
+  path?: string;
+  permissions?: Permission[];
+  children?: MenuSubItem[];
+  position?: MenuItemPosition;
 }
 
-/** Menú completo que vendra de la API */
+/** Menú completo que vendrá de la API */
 export interface MenuConfig {
-    items: MenuItem[];
+  items: MenuItem[];
 }

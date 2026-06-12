@@ -6,13 +6,16 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 Librería de componentes React para aplicaciones empresariales.
 
-## Características
+## Sidebar
 
-- **Sidebar** con menú dinámico, submenús y RBAC
-- Temas personalizables (`dark` / `light` / custom)
-- Iconos inyectables vía `renderIcon`
-- Marca personalizable vía componente `brand`
-- Ítems `top` / `bottom` en el menú
+Navegación lateral con:
+
+- Menú dinámico desde API (`MenuConfig`)
+- RBAC — filtrado por permisos del usuario
+- Hasta **3 niveles**: módulo → opción → acción
+- Temas `dark` / `light` / personalizados
+- Modo colapsado (rail de iconos)
+- Integración con router vía `activePath` y `onNavigate`
 
 ## Instalación
 
@@ -25,9 +28,13 @@ import { Sidebar } from 'glubox';
 import 'glubox/style.css';
 ```
 
-## Enlaces
+## Documentación
 
-- [Documentación completa](https://github.com/solivoo/gluebox#readme)
-- [Guía de inicio](https://solivoo.github.io/gluebox/guide/getting-started)
+| Recurso | URL |
+|---------|-----|
+| Referencia Sidebar | [components/sidebar](https://solivoo.github.io/gluebox/components/sidebar) |
+| Esquema menú (API) | [guide/menu-api](https://solivoo.github.io/gluebox/guide/menu-api) |
+| Routing | [guide/routing](https://solivoo.github.io/gluebox/guide/routing) |
+| Instalación | [guide/installation](https://solivoo.github.io/gluebox/guide/installation) |
 
-Explora **Components → Sidebar** para ver el playground interactivo.
+Explora **Components → Sidebar** en este Storybook para el playground interactivo.

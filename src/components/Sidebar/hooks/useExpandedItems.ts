@@ -1,52 +1,69 @@
 import { useCallback, useMemo, useState } from 'react';
 import type { MenuItem } from '../type/menu.types';
-import { findParentItemIdByPath } from '../utils/findParentItemId';
+import { findAncestorIdsByPath } from '../utils/findParentItemId';
 
 function createInitialExpanded(
   items: MenuItem[],
   activePath?: string,
 ): Set<string> {
-  const parentId = findParentItemIdByPath(items, activePath);
-  return parentId ? new Set([parentId]) : new Set();
+  return new Set(findAncestorIdsByPath(items, activePath));
+}
+
+function isTopLevelItem(itemId: string, items: MenuItem[]): boolean {
+  return items.some((item) => item.id === itemId);
 }
 
 interface UseExpandedItemsOptions {
   items: MenuItem[];
   activePath?: string;
   collapseOthersOnSelect: boolean;
+  collapseOnNavigate: boolean;
 }
 
 export function useExpandedItems({
   items,
   activePath,
   collapseOthersOnSelect,
+  collapseOnNavigate,
 }: UseExpandedItemsOptions) {
   const [openIds, setOpenIds] = useState<Set<string>>(() =>
     createInitialExpanded(items, activePath),
   );
 
-  const parentFromActive = findParentItemIdByPath(items, activePath);
+  const ancestorsFromActive = findAncestorIdsByPath(items, activePath);
 
   const expandedIds = useMemo(() => {
-    if (collapseOthersOnSelect) {
-      if (parentFromActive) {
-        return new Set([parentFromActive]);
-      }
-      return openIds;
-    }
-
     const merged = new Set(openIds);
-    if (parentFromActive) {
-      merged.add(parentFromActive);
+    for (const id of ancestorsFromActive) {
+      merged.add(id);
+    }
+    // Abrir módulo cuando la ruta activa es su inicio (/facturacion, etc.)
+    for (const item of items) {
+      if (item.path && item.path === activePath && item.children?.length) {
+        merged.add(item.id);
+      }
     }
     return merged;
-  }, [collapseOthersOnSelect, parentFromActive, openIds]);
+  }, [ancestorsFromActive, openIds, items, activePath]);
 
   const toggleExpand = useCallback(
     (itemId: string) => {
       setOpenIds((prev) => {
-        if (collapseOthersOnSelect) {
-          return prev.has(itemId) ? new Set<string>() : new Set([itemId]);
+        if (collapseOthersOnSelect && isTopLevelItem(itemId, items)) {
+          if (prev.has(itemId)) {
+            const next = new Set(prev);
+            next.delete(itemId);
+            return next;
+          }
+
+          const next = new Set<string>();
+          for (const id of prev) {
+            if (!isTopLevelItem(id, items)) {
+              next.add(id);
+            }
+          }
+          next.add(itemId);
+          return next;
         }
 
         const next = new Set(prev);
@@ -58,23 +75,32 @@ export function useExpandedItems({
         return next;
       });
     },
-    [collapseOthersOnSelect],
+    [collapseOthersOnSelect, items],
   );
 
   const syncOnNavigate = useCallback(
     (path: string) => {
-      const parentId = findParentItemIdByPath(items, path);
+      const ancestors = findAncestorIdsByPath(items, path);
 
-      if (collapseOthersOnSelect) {
-        setOpenIds(parentId ? new Set([parentId]) : new Set());
+      if (!collapseOnNavigate) {
+        if (ancestors.length > 0) {
+          setOpenIds((prev) => new Set([...prev, ...ancestors]));
+        }
         return;
       }
 
-      if (parentId) {
-        setOpenIds((prev) => new Set([...prev, parentId]));
+      if (ancestors.length === 0) {
+        return;
       }
+
+      if (collapseOthersOnSelect) {
+        setOpenIds(() => new Set(ancestors));
+        return;
+      }
+
+      setOpenIds((prev) => new Set([...prev, ...ancestors]));
     },
-    [collapseOthersOnSelect, items],
+    [collapseOnNavigate, collapseOthersOnSelect, items],
   );
 
   const isExpanded = useCallback(

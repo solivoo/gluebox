@@ -49,6 +49,15 @@ const meta = {
   tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',
+    docs: {
+      description: {
+        component:
+          'Navegación lateral con menú dinámico, RBAC y hasta 3 niveles. ' +
+          '[Documentación completa](https://solivoo.github.io/gluebox/components/sidebar) · ' +
+          '[Esquema API](https://solivoo.github.io/gluebox/guide/menu-api) · ' +
+          '[Routing](https://solivoo.github.io/gluebox/guide/routing)',
+      },
+    },
   },
   args: {
     menu: mockMenu,
@@ -85,10 +94,27 @@ export const AccordionOff: Story = {
   args: { collapseOthersOnSelect: false },
 };
 
-export const LimitedPermissions: Story = {
-  render: (args) => <SidebarPlayground {...args} activePath="/ventas/pedidos" />,
+export const CollapseOnNavigate: Story = {
+  render: (args) => (
+    <SidebarPlayground {...args} activePath="/facturacion/facturas/emitir" />
+  ),
   args: {
-    userPermissions: ['dashboard:read', 'ventas:read', 'ventas:pedidos:read'],
-    activePath: '/ventas/pedidos',
+    collapseOthersOnSelect: true,
+    collapseOnNavigate: true,
+    activePath: '/facturacion/facturas/emitir',
+  },
+};
+
+export const LimitedPermissions: Story = {
+  render: (args) => (
+    <SidebarPlayground {...args} activePath="/facturacion/documentos/emitidos" />
+  ),
+  args: {
+    userPermissions: [
+      'facturacion:read',
+      'facturacion:documentos:read',
+      'facturacion:documentos:emitidos',
+    ],
+    activePath: '/facturacion/documentos/emitidos',
   },
 };

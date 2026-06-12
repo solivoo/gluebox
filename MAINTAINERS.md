@@ -2,6 +2,19 @@
 
 Documentación interna del repo. No forma parte del sitio público en GitHub Pages.
 
+## Documentación pública
+
+Sitio VitePress en `docs/` — se publica en GitHub Pages con `pnpm docs:build`.
+
+| Archivo | Contenido |
+|---------|-----------|
+| `docs/components/sidebar.md` | Referencia completa del componente |
+| `docs/guide/menu-api.md` | Contrato JSON para backend |
+| `docs/guide/routing.md` | Integración con React Router |
+| `docs/guide/installation.md` | Instalación, iconos, TypeScript |
+
+Local: `pnpm docs:dev`
+
 ## Despliegue (GitHub Pages)
 
 Cada **push a `main`** ejecuta `deploy-pages.yml` y publica docs + Storybook.

@@ -12,20 +12,18 @@ export function SidebarIcon({
   className,
   renderIcon,
 }: SidebarIconProps) {
+  const iconClass = ['sidebar__icon', className].filter(Boolean).join(' ');
   const BuiltinIcon = sidebarBuiltinIcons[name];
   if (BuiltinIcon) {
-    return <BuiltinIcon className={className} width={20} height={20} />;
+    return <BuiltinIcon className={iconClass} aria-hidden="true" />;
   }
 
   if (renderIcon) {
-    return <>{renderIcon(name, className)}</>;
+    return <>{renderIcon(name, iconClass)}</>;
   }
 
   return (
-    <span
-      className={`sidebar__icon-fallback ${className ?? ''}`.trim()}
-      aria-hidden="true"
-    >
+    <span className={`sidebar__icon-fallback ${iconClass}`.trim()} aria-hidden="true">
       {name.charAt(0).toUpperCase()}
     </span>
   );

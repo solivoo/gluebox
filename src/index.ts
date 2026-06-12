@@ -1,7 +1,5 @@
 import '@/components/Sidebar/css/Sidebar.css';
 
-export { Sidebar, sidebarThemes } from '@/components/Sidebar';
-
 export type {
   SidebarProps,
   IconResolver,
@@ -16,4 +14,11 @@ export type {
   MenuSubItem,
   MenuItemPosition,
   Permission,
+} from '@/components/Sidebar';
+
+export {
+  Sidebar,
+  sidebarThemes,
+  hasPermission,
+  filterVisibleMenu,
 } from '@/components/Sidebar';

@@ -1,52 +1,148 @@
 {
   "items": [
     {
-      "id": "dashboard",
-      "label": "Dashboard",
-      "icon": "layout-dashboard",
-      "path": "/dashboard",
-      "permissions": ["dashboard:read"],
-      "position": "top"
-    },
-    {
-      "id": "ventas",
-      "label": "Ventas",
-      "icon": "shopping-cart",
-      "permissions": ["ventas:pedidos:read"],
+      "id": "facturacion",
+      "label": "Facturación",
+      "icon": "receipt",
+      "path": "/facturacion",
+      "permissions": ["facturacion:read"],
       "position": "top",
       "children": [
         {
-          "id": "ventas-pedidos",
-          "label": "Pedidos",
-          "path": "/ventas/pedidos",
-          "permissions": ["ventas:pedidos:read"]
+          "id": "facturacion-facturas",
+          "label": "Facturas",
+          "permissions": ["facturacion:facturas:read"],
+          "children": [
+            {
+              "id": "facturacion-facturas-emitir",
+              "label": "Emitir",
+              "path": "/facturacion/facturas/emitir",
+              "permissions": ["facturacion:facturas:emitir"]
+            },
+            {
+              "id": "facturacion-facturas-consultar",
+              "label": "Consultar",
+              "path": "/facturacion/facturas/consultar",
+              "permissions": ["facturacion:facturas:consultar"]
+            }
+          ]
         },
         {
-          "id": "ventas-facturas",
-          "label": "Facturas",
-          "path": "/ventas/facturas",
-          "permissions": ["ventas:facturas:read"]
+          "id": "facturacion-notas-credito",
+          "label": "Notas de crédito",
+          "permissions": ["facturacion:notas-credito:read"],
+          "children": [
+            {
+              "id": "facturacion-notas-credito-emitir",
+              "label": "Emitir",
+              "path": "/facturacion/notas-credito/emitir",
+              "permissions": ["facturacion:notas-credito:emitir"]
+            },
+            {
+              "id": "facturacion-notas-credito-consultar",
+              "label": "Consultar",
+              "path": "/facturacion/notas-credito/consultar",
+              "permissions": ["facturacion:notas-credito:consultar"]
+            }
+          ]
+        },
+        {
+          "id": "facturacion-guias-remision",
+          "label": "Guías de remisión",
+          "permissions": ["facturacion:guias-remision:read"],
+          "children": [
+            {
+              "id": "facturacion-guias-remision-emitir",
+              "label": "Emitir",
+              "path": "/facturacion/guias-remision/emitir",
+              "permissions": ["facturacion:guias-remision:emitir"]
+            }
+          ]
+        },
+        {
+          "id": "facturacion-documentos",
+          "label": "Documentos",
+          "permissions": ["facturacion:documentos:read"],
+          "children": [
+            {
+              "id": "facturacion-documentos-emitidos",
+              "label": "Emitidos",
+              "path": "/facturacion/documentos/emitidos",
+              "permissions": ["facturacion:documentos:emitidos"]
+            },
+            {
+              "id": "facturacion-documentos-anulaciones",
+              "label": "Anulaciones",
+              "path": "/facturacion/documentos/anulaciones",
+              "permissions": ["facturacion:documentos:anulaciones"]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "admin",
-      "label": "Administración",
-      "icon": "users",
-      "permissions": ["admin:read"],
+      "id": "contabilidad",
+      "label": "Contabilidad",
+      "icon": "book-open",
+      "path": "/contabilidad",
+      "permissions": ["contabilidad:read"],
       "position": "top",
       "children": [
         {
-          "id": "admin-usuarios",
-          "label": "Usuarios",
-          "path": "/admin/usuarios",
-          "permissions": ["admin:usuarios:read"]
+          "id": "contabilidad-plan-cuentas",
+          "label": "Plan de cuentas",
+          "path": "/contabilidad/plan-cuentas",
+          "permissions": ["contabilidad:plan-cuentas:read"]
         },
         {
-          "id": "admin-roles",
-          "label": "Roles y permisos",
-          "path": "/admin/roles",
-          "permissions": ["admin:roles:read"]
+          "id": "contabilidad-ejercicios",
+          "label": "Ejercicios contables",
+          "path": "/contabilidad/ejercicios",
+          "permissions": ["contabilidad:ejercicios:read"]
+        }
+      ]
+    },
+    {
+      "id": "bodegas",
+      "label": "Bodegas",
+      "icon": "warehouse",
+      "path": "/bodegas",
+      "permissions": ["bodegas:read"],
+      "position": "top",
+      "children": [
+        {
+          "id": "bodegas-entradas",
+          "label": "Entradas",
+          "path": "/bodegas/entradas",
+          "permissions": ["bodegas:entradas:read"]
+        },
+        {
+          "id": "bodegas-salidas",
+          "label": "Salidas",
+          "path": "/bodegas/salidas",
+          "permissions": ["bodegas:salidas:read"]
+        }
+      ]
+    },
+    {
+      "id": "ecommerce",
+      "label": "Ecommerce",
+      "icon": "store",
+      "path": "/ecommerce",
+      "permissions": ["ecommerce:read"],
+      "position": "top",
+      "children": [
+        {
+          "id": "ecommerce-productos",
+          "label": "Productos",
+          "path": "/ecommerce/productos",
+          "permissions": ["ecommerce:productos:read"]
+        },
+        {
+          "id": "ecommerce-categorias",
+          "label": "Categorías",
+          "path": "/ecommerce/categorias",
+          "permissions": ["ecommerce:categorias:read"]
         }
       ]
     },

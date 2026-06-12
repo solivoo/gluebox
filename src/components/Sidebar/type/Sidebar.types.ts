@@ -22,11 +22,16 @@ export interface SidebarProps {
   /** Ruta activa actual — resalta ítem y subítem seleccionados */
   activePath?: string;
   /**
-   * Si true, al seleccionar otro ítem se cierran los submenús abiertos (modo acordeón).
-   * Si false, cada submenú mantiene su estado de forma independiente.
+   * Si true, al expandir un módulo de primer nivel se cierran los demás (modo acordeón).
    * @default false
    */
   collapseOthersOnSelect?: boolean;
+  /**
+   * Si true, al navegar se sincroniza la expansión con la ruta (puede cerrar módulos abiertos).
+   * Si false, la navegación no contrae menús ya abiertos.
+   * @default false
+   */
+  collapseOnNavigate?: boolean;
 }
 
 export type { IconResolver, IconName } from './icon.types';

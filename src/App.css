@@ -26,3 +26,83 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+/* ── Demo app shell (routing) ── */
+
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+  background: #11111b;
+  color: #cdd6f4;
+}
+
+.app-main {
+  flex: 1;
+  min-width: 0;
+  padding: 1.5rem 2rem;
+  overflow-y: auto;
+}
+
+.page-view {
+  max-width: 48rem;
+}
+
+.page-view__breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+  font-size: 0.8125rem;
+  color: #a6adc8;
+}
+
+.page-view__separator {
+  margin: 0 0.25rem;
+  opacity: 0.5;
+}
+
+.page-view__crumb-current {
+  color: #cdd6f4;
+  font-weight: 500;
+}
+
+.page-view__header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.page-view__title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.page-view__path {
+  margin-top: 0.375rem;
+  font-family: ui-monospace, monospace;
+  font-size: 0.8125rem;
+  color: #89b4fa;
+}
+
+.page-view__body {
+  line-height: 1.6;
+  color: #bac2de;
+}
+
+.page-view--status .page-view__title {
+  font-size: 1.375rem;
+}
+
+.page-view__link {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #89b4fa;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.page-view__link:hover {
+  text-decoration: underline;
+}
