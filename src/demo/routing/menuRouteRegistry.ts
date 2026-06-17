@@ -3,4 +3,4 @@ import { collectMenuRoutes } from './collectMenuRoutes';
 
 export const menuRouteRegistry = collectMenuRoutes(mockMenu);
 
-export const defaultRoutePath = '/facturacion/facturas/emitir';
+export const defaultRoutePath = '/componentes/button';

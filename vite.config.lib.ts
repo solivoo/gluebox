@@ -8,10 +8,18 @@ export default defineConfig({
   plugins: [
     react(),
     dts({
-      include: ['src/index.ts', 'src/components/Sidebar/**/*'],
+      include: [
+        'src/index.ts',
+        'src/components/Sidebar/**/*',
+        'src/components/Button/**/*',
+        'src/components/Select/**/*',
+        'src/components/TextBox/**/*',
+        'src/components/DateBox/**/*',
+        'src/components/RangeDateBox/**/*',
+        'src/components/OptionGroup/**/*',
+        'src/components/CheckButton/**/*',
+      ],
       exclude: [
-        'src/**/*.stories.*',
-        'src/stories/**',
         'src/App.tsx',
         'src/main.tsx',
         'src/icons/**',
@@ -30,11 +38,12 @@ export default defineConfig({
     },
   },
   build: {
+    cssCodeSplit: true,
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
       name: 'GluBox',
       formats: ['es'],
-      fileName: 'glubox',
+      fileName: () => 'glubox.js',
     },
     rollupOptions: {
       external: ['react', 'react-dom', 'react/jsx-runtime'],

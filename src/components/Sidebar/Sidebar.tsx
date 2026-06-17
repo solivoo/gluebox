@@ -72,7 +72,7 @@ export function Sidebar(props: Readonly<SidebarProps>) {
   return (
     <aside
       className={`sidebar${collapsed ? ' sidebar--collapsed' : ''}`}
-      style={{ ...themeStyle, width: resolveWidth(width) }}
+      style={themeStyle ? { ...themeStyle, width: resolveWidth(width) } : { width: resolveWidth(width) }}
     >
       {(brand || (shouldShowToggle && onCollapsedChange)) && (
         <SidebarHeader

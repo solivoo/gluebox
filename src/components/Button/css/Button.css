@@ -1,0 +1,274 @@
+/* ── Base ── */
+
+.glb-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--glb-font-family, 'Poppins', sans-serif);
+  font-size: var(--btn-font-size, 0.875rem);
+  font-weight: 500;
+  line-height: 1;
+  border-radius: var(--btn-radius, 0.5rem);
+  border: 1px solid transparent;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: var(--btn-transition, all 0.15s ease);
+  box-sizing: border-box;
+  padding: 0.5rem 1rem;
+  outline: none;
+}
+
+.glb-btn:focus-visible {
+  box-shadow: 0 0 0 3px var(--btn-focus-ring);
+}
+
+/* ── Full Width ── */
+
+.glb-btn--full-width {
+  width: 100%;
+}
+
+/* ── Disabled / Loading ── */
+
+.glb-btn:disabled,
+.glb-btn--disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.glb-btn--loading {
+  cursor: wait;
+  pointer-events: none;
+}
+
+/* ── Sizes ── */
+
+.glb-btn--sm {
+  font-size: 0.8125rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: calc(var(--btn-radius, 0.5rem) - 0.0625rem);
+}
+
+.glb-btn--lg {
+  font-size: 1rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: calc(var(--btn-radius, 0.5rem) + 0.0625rem);
+}
+
+/* ── Variant: Primary ── */
+
+.glb-btn--primary {
+  background-color: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  border-color: var(--btn-primary-border);
+  --btn-focus-ring: var(--btn-primary-focus-ring);
+}
+
+.glb-btn--primary:hover:not(:disabled) {
+  background-color: var(--btn-primary-hover-bg);
+  border-color: var(--btn-primary-hover-border);
+}
+
+.glb-btn--primary:active:not(:disabled) {
+  background-color: var(--btn-primary-active-bg);
+  border-color: var(--btn-primary-active-border);
+}
+
+.glb-btn--primary:disabled,
+.glb-btn--primary.glb-btn--disabled {
+  background-color: var(--btn-primary-disabled-bg);
+  color: var(--btn-primary-disabled-text);
+  border-color: var(--btn-primary-disabled-border);
+  box-shadow: none;
+}
+
+.glb-btn--primary .glb-btn__spinner {
+  border-color: var(--btn-primary-spinner);
+  border-right-color: transparent;
+}
+
+/* ── Variant: Secondary ── */
+
+.glb-btn--secondary {
+  background-color: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
+  border-color: var(--btn-secondary-border);
+  --btn-focus-ring: var(--btn-secondary-focus-ring);
+}
+
+.glb-btn--secondary:hover:not(:disabled) {
+  background-color: var(--btn-secondary-hover-bg);
+  border-color: var(--btn-secondary-hover-border);
+}
+
+.glb-btn--secondary:active:not(:disabled) {
+  background-color: var(--btn-secondary-active-bg);
+  border-color: var(--btn-secondary-active-border);
+}
+
+.glb-btn--secondary:disabled,
+.glb-btn--secondary.glb-btn--disabled {
+  background-color: var(--btn-secondary-disabled-bg);
+  color: var(--btn-secondary-disabled-text);
+  border-color: var(--btn-secondary-disabled-border);
+  box-shadow: none;
+}
+
+.glb-btn--secondary .glb-btn__spinner {
+  border-color: var(--btn-secondary-spinner);
+  border-right-color: transparent;
+}
+
+/* ── Variant: Outline ── */
+
+.glb-btn--outline {
+  background-color: var(--btn-outline-bg);
+  color: var(--btn-outline-text);
+  border-color: var(--btn-outline-border);
+  --btn-focus-ring: var(--btn-outline-focus-ring);
+  box-shadow: none;
+}
+
+.glb-btn--outline:hover:not(:disabled) {
+  background-color: var(--btn-outline-hover-bg);
+  border-color: var(--btn-outline-hover-border);
+}
+
+.glb-btn--outline:active:not(:disabled) {
+  background-color: var(--btn-outline-active-bg);
+  border-color: var(--btn-outline-active-border);
+}
+
+.glb-btn--outline:disabled,
+.glb-btn--outline.glb-btn--disabled {
+  background-color: var(--btn-outline-disabled-bg);
+  color: var(--btn-outline-disabled-text);
+  border-color: var(--btn-outline-disabled-border);
+  box-shadow: none;
+}
+
+.glb-btn--outline .glb-btn__spinner {
+  border-color: var(--btn-outline-spinner);
+  border-right-color: transparent;
+}
+
+/* ── Variant: Ghost ── */
+
+.glb-btn--ghost {
+  background-color: var(--btn-ghost-bg);
+  color: var(--btn-ghost-text);
+  border-color: var(--btn-ghost-border);
+  --btn-focus-ring: var(--btn-ghost-focus-ring);
+  box-shadow: none;
+}
+
+.glb-btn--ghost:hover:not(:disabled) {
+  background-color: var(--btn-ghost-hover-bg);
+  border-color: var(--btn-ghost-hover-border);
+}
+
+.glb-btn--ghost:active:not(:disabled) {
+  background-color: var(--btn-ghost-active-bg);
+  border-color: var(--btn-ghost-active-border);
+}
+
+.glb-btn--ghost:disabled,
+.glb-btn--ghost.glb-btn--disabled {
+  background-color: var(--btn-ghost-disabled-bg);
+  color: var(--btn-ghost-disabled-text);
+  border-color: var(--btn-ghost-disabled-border);
+  box-shadow: none;
+}
+
+.glb-btn--ghost .glb-btn__spinner {
+  border-color: var(--btn-ghost-spinner);
+  border-right-color: transparent;
+}
+
+/* ── Variant: Danger ── */
+
+.glb-btn--danger {
+  background-color: var(--btn-danger-bg);
+  color: var(--btn-danger-text);
+  border-color: var(--btn-danger-border);
+  --btn-focus-ring: var(--btn-danger-focus-ring);
+}
+
+.glb-btn--danger:hover:not(:disabled) {
+  background-color: var(--btn-danger-hover-bg);
+  border-color: var(--btn-danger-hover-border);
+}
+
+.glb-btn--danger:active:not(:disabled) {
+  background-color: var(--btn-danger-active-bg);
+  border-color: var(--btn-danger-active-border);
+}
+
+.glb-btn--danger:disabled,
+.glb-btn--danger.glb-btn--disabled {
+  background-color: var(--btn-danger-disabled-bg);
+  color: var(--btn-danger-disabled-text);
+  border-color: var(--btn-danger-disabled-border);
+  box-shadow: none;
+}
+
+.glb-btn--danger .glb-btn__spinner {
+  border-color: var(--btn-danger-spinner);
+  border-right-color: transparent;
+}
+
+/* ── Icon spacing ── */
+
+.glb-btn__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.glb-btn__icon svg {
+  width: 1em;
+  height: 1em;
+}
+
+.glb-btn--sm .glb-btn__icon svg {
+  width: 0.875em;
+  height: 0.875em;
+}
+
+.glb-btn--lg .glb-btn__icon svg {
+  width: 1.125em;
+  height: 1.125em;
+}
+
+/* ── Spinner ── */
+
+.glb-btn__spinner {
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: glb-btn-spin 0.6s linear infinite;
+  flex-shrink: 0;
+}
+
+.glb-btn--sm .glb-btn__spinner {
+  width: 0.875em;
+  height: 0.875em;
+  border-width: 1.5px;
+}
+
+.glb-btn--lg .glb-btn__spinner {
+  width: 1.125em;
+  height: 1.125em;
+}
+
+@keyframes glb-btn-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

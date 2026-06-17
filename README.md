@@ -1,10 +1,10 @@
 # gluBox
 
-Librería de componentes React para aplicaciones empresariales. Primer componente: **Sidebar** con menú dinámico desde API, RBAC, temas e iconos personalizables.
+Librería de componentes React para aplicaciones empresariales: **Sidebar** con RBAC, controles de formulario, botones y 3 temas globales (Indigo / Emerald / Blue) en modo claro y oscuro.
 
 - **Documentación:** https://solivoo.github.io/gluebox/
-- **Storybook:** https://solivoo.github.io/gluebox/storybook/
 - **Repositorio:** https://github.com/solivoo/gluebox
+- **npm:** https://www.npmjs.com/package/glubox
 
 ## Instalación
 
@@ -13,32 +13,43 @@ pnpm add glubox
 ```
 
 ```tsx
-import { Sidebar, hasPermission, filterVisibleMenu } from 'glubox';
-import type { MenuConfig, SidebarProps } from 'glubox';
+import {
+  Sidebar,
+  Button,
+  Select,
+  TextBox,
+  DateBox,
+  RangeDateBox,
+  OptionGroup,
+  CheckButton,
+  hasPermission,
+  filterVisibleMenu,
+} from 'glubox';
 import 'glubox/style.css';
+import 'glubox/themes/default.css'; // o modern.css, enterprise.css, index.css
 ```
 
-## Sidebar — resumen
+## Componentes
 
-| Característica | Descripción |
-|----------------|-------------|
-| Menú dinámico | JSON desde API/BD (`MenuConfig`) |
-| RBAC | Filtrado por permisos (OR) |
-| 3 niveles | Módulo → Opción → Acción |
-| Routing | Agnóstico — `activePath` + `onNavigate` |
-| Temas | `dark`, `light` o tokens custom |
-| Colapsado | Modo rail con iconos centrados |
+| Componente | Descripción |
+|------------|-------------|
+| **Sidebar** | Navegación lateral, menú desde API, RBAC, 3 niveles |
+| **Button** | Botón con variantes y temas |
+| **TextBox** | Campo de texto con label top / floating / outlined / left |
+| **Select** | Desplegable con teclado y búsqueda type-ahead |
+| **DateBox** | Selector de fecha con calendario |
+| **RangeDateBox** | Rango de fechas en un solo control |
+| **OptionGroup** | Selección exclusiva (vertical, horizontal, segmented) |
+| **CheckButton** | Toggle con semántica checkbox |
 
-### Ejemplo mínimo
+## Uso rápido
+
+### Sidebar
 
 ```tsx
-import { useLocation, useNavigate } from 'react-router-dom';
-import { Sidebar } from 'glubox';
-import 'glubox/style.css';
-
 <Sidebar
-  menu={menuFromApi}
-  userPermissions={user.permissions}
+  menu={menuConfig}
+  userPermissions={userPermissions}
   activePath={pathname}
   onNavigate={navigate}
   renderIcon={renderMenuIcon}
@@ -47,32 +58,74 @@ import 'glubox/style.css';
 />
 ```
 
-## Documentación
+### Formularios
 
-| Tema | Enlace |
+```tsx
+<TextBox label="Email" placeholder="nombre@correo.com" clearable />
+
+<Select
+  options={[{ value: '1', label: 'Opción 1' }]}
+  label="País"
+  labelPosition="outlined"
+  placeholder="Seleccionar..."
+/>
+
+<DateBox label="Vencimiento" labelPosition="outlined" variant="outline" />
+
+<OptionGroup
+  label="Plan"
+  layout="segmented"
+  options={[
+    { value: 'basic', label: 'Basic' },
+    { value: 'pro', label: 'Pro' },
+  ]}
+/>
+```
+
+### Label outlined y canvas
+
+Con `labelPosition="outlined"` el control es transparente y el label se apoya en el fondo del contenedor. Si el formulario está sobre una card, define el canvas en el padre:
+
+```css
+.mi-card {
+  --glb-field-canvas: var(--glb-surface);
+}
+```
+
+### Temas globales
+
+```tsx
+import 'glubox/themes/enterprise.css';
+
+document.documentElement.setAttribute('data-theme', 'enterprise');
+document.documentElement.setAttribute('data-mode', 'dark');
+```
+
+| Tema | Acento |
 |------|--------|
-| Instalación e iconos | [guide/installation](https://solivoo.github.io/gluebox/guide/installation) |
-| Esquema JSON (API/backend) | [guide/menu-api](https://solivoo.github.io/gluebox/guide/menu-api) |
-| React Router y guards | [guide/routing](https://solivoo.github.io/gluebox/guide/routing) |
-| Referencia Sidebar (props, temas) | [components/sidebar](https://solivoo.github.io/gluebox/components/sidebar) |
+| `default` | Indigo |
+| `modern` | Emerald |
+| `enterprise` | Blue |
+
+Cada componente acepta además su prop `theme` (`light`, `dark`, presets como `modern-dark`, o tokens custom).
 
 ## Desarrollo
 
 ```bash
 pnpm install
-pnpm dev              # App demo con routing (src/demo/)
-pnpm storybook        # Playground Sidebar
-pnpm docs:dev         # VitePress
-pnpm build:lib        # Build npm
-pnpm docs:build       # Docs + Storybook → GitHub Pages
+pnpm dev              # Demo interactiva (playground)
+pnpm docs:dev         # Documentación VitePress
+pnpm build:lib        # Build para npm
+pnpm docs:build       # Build docs → GitHub Pages
 ```
 
 ## Estructura del repo
 
 ```
-src/components/Sidebar/   # Componente publicado en npm
-src/demo/                 # Ejemplo routing (no se publica)
-docs/                     # Documentación VitePress
+src/components/       # Componentes publicados en npm
+src/demo/             # Demo interactiva (no se publica)
+src/styles/           # Temas CSS y tokens globales
+docs/                 # Documentación VitePress
 ```
 
 ## Licencia

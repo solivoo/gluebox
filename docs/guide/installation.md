@@ -22,7 +22,33 @@ Importa el CSS en el entry point de tu aplicación:
 import 'glubox/style.css';
 ```
 
-Sin este import el Sidebar no tendrá layout ni tokens visuales.
+Sin este import los componentes no tendrán layout ni tokens visuales.
+
+### Temas globales (opcional)
+
+```tsx
+import 'glubox/themes/default.css';   // uno solo
+// import 'glubox/themes/index.css'; // los tres temas
+
+document.documentElement.setAttribute('data-theme', 'default');
+document.documentElement.setAttribute('data-mode', 'dark');
+```
+
+| Archivo | Acento |
+|---------|--------|
+| `glubox/themes/default.css` | Indigo |
+| `glubox/themes/modern.css` | Emerald |
+| `glubox/themes/enterprise.css` | Blue |
+
+### Label outlined en cards
+
+Si usas `labelPosition="outlined"` sobre un panel con fondo distinto al de la página:
+
+```css
+.mi-panel {
+  --glb-field-canvas: var(--glb-surface);
+}
+```
 
 ## Iconos del menú
 
@@ -127,7 +153,21 @@ Tipos y utilidades exportados:
 ```tsx
 import {
   Sidebar,
+  Button,
+  Select,
+  TextBox,
+  DateBox,
+  RangeDateBox,
+  OptionGroup,
+  CheckButton,
   sidebarThemes,
+  buttonThemes,
+  selectThemes,
+  textBoxThemes,
+  dateBoxThemes,
+  rangeDateBoxThemes,
+  optionGroupThemes,
+  checkButtonThemes,
   hasPermission,
   filterVisibleMenu,
 } from 'glubox';
@@ -135,12 +175,15 @@ import {
 import type {
   SidebarProps,
   MenuConfig,
-  MenuItem,
-  MenuSubItem,
+  ButtonProps,
+  SelectProps,
+  TextBoxProps,
+  DateBoxProps,
+  RangeDateBoxProps,
+  OptionGroupProps,
+  CheckButtonProps,
   Permission,
-  SidebarTheme,
   IconResolver,
-  SidebarBrandComponent,
 } from 'glubox';
 ```
 
@@ -149,5 +192,6 @@ import type {
 
 ## Siguiente paso
 
+- [Formularios](/components/forms)
 - [Esquema del menú para tu API](/guide/menu-api)
 - [Referencia completa del Sidebar](/components/sidebar)

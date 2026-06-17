@@ -2,7 +2,7 @@ import type { IconResolver } from './type/icon.types';
 import type { MenuSubItem } from './type/menu.types';
 import { SidebarIcon } from './SidebarIcon';
 import { buildLinkClass } from './utils/buildLinkClass';
-import { isActionActive } from './utils/menuActiveState';
+import { isActionActive, hasActiveDescendant } from './utils/menuActiveState';
 
 type SubItemLevel = 'option' | 'action';
 
@@ -30,6 +30,8 @@ export function SidebarSubItem({
   const hasChildren = Boolean(item.children?.length);
   const expanded = isExpanded(item.id);
   const actionActive = level === 'action' && isActionActive(item.path, activePath);
+  const optionActive = level === 'option' && isActionActive(item.path, activePath);
+  const descendantActive = !actionActive && !optionActive && hasActiveDescendant(item, activePath);
 
   const handleClick = () => {
     if (hasChildren) {
@@ -54,10 +56,13 @@ export function SidebarSubItem({
         className={buildLinkClass(
           levelClass,
           actionActive && 'sidebar__link--action-active',
+          optionActive && 'sidebar__link--option-active',
+          descendantActive && level === 'option' && 'sidebar__link--option-ancestor',
+          descendantActive && level === 'action' && 'sidebar__link--action-ancestor',
         )}
         onClick={handleClick}
         aria-expanded={hasChildren ? expanded : undefined}
-        aria-current={actionActive ? 'page' : undefined}
+        aria-current={actionActive || optionActive ? 'page' : descendantActive ? 'true' : undefined}
         data-expanded={hasChildren ? expanded : undefined}
       >
         {!collapsed && (

@@ -1,0 +1,526 @@
+@import '../../../styles/outlined-label.css';
+
+/* ── Wrapper ── */
+
+.glb-textbox {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  font-family: var(--glb-font-family, 'Poppins', sans-serif);
+  font-size: var(--textbox-font-size, 0.875rem);
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.glb-textbox--full-width {
+  width: 100%;
+}
+
+/* ── Label: Fixed (default) ── */
+
+.glb-textbox__label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--textbox-label-color, #4b5563);
+  line-height: 1.25;
+}
+
+/* ── Outside label (horizontal layout) ── */
+
+.glb-textbox--left .glb-textbox__row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.glb-textbox--left .glb-textbox__label {
+  flex-shrink: 0;
+  padding-top: 0.55rem;
+  min-width: 7rem;
+  text-align: right;
+}
+
+.glb-textbox--left .glb-textbox__wrapper {
+  flex: 1;
+  min-width: 0;
+}
+
+.glb-textbox--left .glb-textbox__helper {
+  margin-left: 7.75rem;
+}
+
+/* Outside sizes */
+.glb-textbox--left.glb-textbox--sm .glb-textbox__label {
+  padding-top: 0.4rem;
+  font-size: 0.75rem;
+}
+
+.glb-textbox--left.glb-textbox--lg .glb-textbox__label {
+  padding-top: 0.65rem;
+  font-size: 0.875rem;
+}
+
+/* ── Floating label container ── */
+
+.glb-textbox--floating .glb-textbox__wrapper {
+  position: relative;
+}
+
+.glb-textbox--floating .glb-textbox__label {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: inherit;
+  font-weight: 400;
+  color: var(--textbox-placeholder);
+  pointer-events: none;
+  transition: all 0.2s ease;
+  transform-origin: left top;
+  z-index: 1;
+  max-width: calc(100% - 1.5rem);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* Floating label — floated state (focus or has value) */
+.glb-textbox--floating.glb-textbox--label-floated .glb-textbox__label {
+  top: 0.35rem;
+  transform: translateY(0) scale(0.75);
+  font-weight: 500;
+  color: var(--textbox-label-color);
+}
+
+.glb-textbox--floating.glb-textbox--error .glb-textbox__label {
+  color: var(--textbox-error-color);
+}
+
+/* Input padding for floating label */
+.glb-textbox--floating .glb-textbox__input {
+  padding-top: 1.25rem;
+  padding-bottom: 0.4rem;
+}
+
+/* Floating label with left icon */
+.glb-textbox--floating.glb-textbox--has-left-icon .glb-textbox__label {
+  left: 2.25rem;
+  max-width: calc(100% - 3rem);
+}
+
+/* Floating sizes */
+.glb-textbox--floating.glb-textbox--sm .glb-textbox__label {
+  left: 0.625rem;
+}
+
+.glb-textbox--floating.glb-textbox--sm .glb-textbox__input {
+  padding-top: 1.1rem;
+  padding-bottom: 0.3rem;
+}
+
+.glb-textbox--floating.glb-textbox--sm.glb-textbox--label-floated .glb-textbox__label {
+  top: 0.25rem;
+  transform: translateY(0) scale(0.7);
+}
+
+.glb-textbox--floating.glb-textbox--sm.glb-textbox--has-left-icon .glb-textbox__label {
+  left: 2rem;
+}
+
+.glb-textbox--floating.glb-textbox--lg .glb-textbox__label {
+  left: 0.875rem;
+}
+
+.glb-textbox--floating.glb-textbox--lg .glb-textbox__input {
+  padding-top: 1.4rem;
+  padding-bottom: 0.5rem;
+}
+
+.glb-textbox--floating.glb-textbox--lg.glb-textbox--label-floated .glb-textbox__label {
+  top: 0.4rem;
+  transform: translateY(0) scale(0.75);
+}
+
+.glb-textbox--floating.glb-textbox--lg.glb-textbox--has-left-icon .glb-textbox__label {
+  left: 2.5rem;
+}
+
+/* Adjust icons vertical position for floating label */
+.glb-textbox--floating .glb-textbox__icon {
+  top: calc(50% + 0.15rem);
+}
+
+/* ── Outlined label (sobre el borde) ── */
+
+.glb-textbox--outlined {
+  gap: 0.25rem;
+}
+
+.glb-textbox--outlined .glb-textbox__outlined-field {
+  --glb-outlined-label-color: var(--textbox-label-color);
+  --glb-outlined-radius: var(--textbox-radius);
+}
+
+.glb-textbox--outlined.glb-textbox--primary .glb-textbox__outlined-field {
+  --glb-outlined-border: var(--textbox-primary-border);
+  --glb-outlined-hover-border: var(--textbox-primary-hover-border);
+  --glb-outlined-focus-border: var(--textbox-primary-focus-border);
+  --glb-outlined-focus-ring: var(--textbox-primary-focus-ring);
+  --glb-outlined-disabled-border: var(--textbox-primary-disabled-border);
+}
+
+.glb-textbox--outlined.glb-textbox--secondary .glb-textbox__outlined-field {
+  --glb-outlined-border: var(--textbox-secondary-border);
+  --glb-outlined-hover-border: var(--textbox-secondary-hover-border);
+  --glb-outlined-focus-border: var(--textbox-secondary-focus-border);
+  --glb-outlined-focus-ring: var(--textbox-secondary-focus-ring);
+  --glb-outlined-disabled-border: var(--textbox-secondary-disabled-border);
+}
+
+.glb-textbox--outlined.glb-textbox--outline .glb-textbox__outlined-field {
+  --glb-outlined-focus-border: var(--textbox-outline-focus-border);
+  --glb-outlined-focus-ring: var(--textbox-outline-focus-ring);
+  --glb-outlined-disabled-border: var(--textbox-outline-disabled-border);
+}
+
+.glb-textbox--outlined.glb-textbox--ghost .glb-textbox__outlined-field {
+  --glb-outlined-focus-border: var(--textbox-ghost-focus-border);
+  --glb-outlined-focus-ring: var(--textbox-ghost-focus-ring);
+  --glb-outlined-disabled-border: var(--textbox-ghost-disabled-border);
+}
+
+.glb-textbox--outlined.glb-textbox--error .glb-textbox__outlined-field {
+  --glb-outlined-border: var(--textbox-error-border);
+  --glb-outlined-focus-border: var(--textbox-error-border);
+  --glb-outlined-focus-ring: var(--textbox-error-focus-ring);
+  --glb-outlined-label-color: var(--textbox-error-color, var(--textbox-label-color));
+}
+
+/* ── Input container ── */
+
+.glb-textbox__wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* ── Input ── */
+
+.glb-textbox__input {
+  width: 100%;
+  font-family: var(--glb-font-family, 'Poppins', sans-serif);
+  font-size: inherit;
+  font-weight: 400;
+  line-height: 1.5;
+  border-radius: var(--textbox-radius, 0.5rem);
+  border: 1px solid transparent;
+  outline: none;
+  transition: var(--textbox-transition, all 0.15s ease);
+  box-sizing: border-box;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--textbox-bg);
+  color: var(--textbox-text);
+  border-color: var(--textbox-border);
+  box-shadow: var(--textbox-shadow, none);
+}
+
+.glb-textbox__input::placeholder {
+  color: var(--textbox-placeholder);
+}
+
+.glb-textbox__input:focus {
+  border-color: var(--textbox-focus-border);
+  background-color: var(--textbox-focus-bg);
+  box-shadow: 0 0 0 3px var(--textbox-focus-ring);
+}
+
+.glb-textbox__input:hover:not(:disabled):not(:focus) {
+  background-color: var(--textbox-hover-bg);
+  border-color: var(--textbox-hover-border);
+}
+
+.glb-textbox__input:disabled {
+  background-color: var(--textbox-disabled-bg);
+  color: var(--textbox-disabled-text);
+  border-color: var(--textbox-disabled-border);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.glb-textbox__input:disabled::placeholder {
+  color: var(--textbox-disabled-text);
+}
+
+/* Error */
+.glb-textbox--error .glb-textbox__input {
+  border-color: var(--textbox-error-border);
+}
+
+.glb-textbox--error .glb-textbox__input:focus {
+  border-color: var(--textbox-error-border);
+  box-shadow: 0 0 0 3px var(--textbox-error-focus-ring);
+}
+
+/* Outlined label: el contenedor lleva borde/focus; el input queda transparente */
+.glb-textbox--outlined .glb-textbox__input,
+.glb-textbox--outlined .glb-textbox__input:hover:not(:disabled),
+.glb-textbox--outlined .glb-textbox__input:focus,
+.glb-textbox--outlined .glb-textbox__input:disabled {
+  border: none;
+  border-color: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  background-color: transparent;
+  padding-top: 0.875rem;
+  min-height: 2.625rem;
+}
+
+/* ── Left / Right icon adjustment ── */
+
+.glb-textbox--has-left-icon .glb-textbox__input {
+  padding-left: 2.25rem;
+}
+
+.glb-textbox--has-right-icon .glb-textbox__input {
+  padding-right: 2.25rem;
+}
+
+.glb-textbox--clearable .glb-textbox__input {
+  padding-right: 2.25rem;
+}
+
+.glb-textbox--has-right-icon.glb-textbox--clearable .glb-textbox__input {
+  padding-right: 4rem;
+}
+
+/* ── Icon slots ── */
+
+.glb-textbox__icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  color: var(--textbox-icon);
+  line-height: 1;
+}
+
+.glb-textbox__icon svg {
+  width: 1em;
+  height: 1em;
+}
+
+.glb-textbox__icon--left {
+  left: 0.75rem;
+}
+
+.glb-textbox__icon--right {
+  right: 0.75rem;
+}
+
+.glb-textbox--clearable .glb-textbox__icon--right {
+  right: 2.25rem;
+}
+
+/* ── Clear button ── */
+
+.glb-textbox__clear {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0.375rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--textbox-clear-color);
+  border-radius: 50%;
+  padding: 0;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.glb-textbox__clear:hover {
+  color: var(--textbox-clear-hover-color);
+  background-color: rgba(128, 128, 128, 0.15);
+}
+
+.glb-textbox__clear:focus-visible {
+  outline: 2px solid var(--textbox-focus-border);
+  outline-offset: 1px;
+}
+
+.glb-textbox__clear svg {
+  width: 0.875em;
+  height: 0.875em;
+}
+
+/* ── Helper / Error text ── */
+
+.glb-textbox__helper {
+  font-size: 0.75rem;
+  line-height: 1.25;
+  color: var(--textbox-helper-color);
+}
+
+.glb-textbox__helper--error {
+  color: var(--textbox-error-color);
+}
+
+/* ── Sizes ── */
+
+.glb-textbox--sm {
+  font-size: 0.8125rem;
+}
+
+.glb-textbox--sm .glb-textbox__input {
+  padding: 0.375rem 0.625rem;
+  border-radius: calc(var(--textbox-radius, 0.5rem) - 0.0625rem);
+}
+
+.glb-textbox--sm .glb-textbox__label {
+  font-size: 0.75rem;
+}
+
+.glb-textbox--sm.glb-textbox--has-left-icon .glb-textbox__input {
+  padding-left: 2rem;
+}
+
+.glb-textbox--sm.glb-textbox--has-right-icon .glb-textbox__input,
+.glb-textbox--sm.glb-textbox--clearable .glb-textbox__input {
+  padding-right: 2rem;
+}
+
+.glb-textbox--sm .glb-textbox__icon--left {
+  left: 0.625rem;
+}
+
+.glb-textbox--sm .glb-textbox__icon--right {
+  right: 0.625rem;
+}
+
+.glb-textbox--sm.glb-textbox--clearable .glb-textbox__icon--right {
+  right: 2rem;
+}
+
+.glb-textbox--lg {
+  font-size: 1rem;
+}
+
+.glb-textbox--lg .glb-textbox__input {
+  padding: 0.625rem 0.875rem;
+  border-radius: calc(var(--textbox-radius, 0.5rem) + 0.0625rem);
+}
+
+.glb-textbox--lg .glb-textbox__label {
+  font-size: 0.875rem;
+}
+
+.glb-textbox--lg.glb-textbox--has-left-icon .glb-textbox__input {
+  padding-left: 2.5rem;
+}
+
+.glb-textbox--lg.glb-textbox--has-right-icon .glb-textbox__input,
+.glb-textbox--lg.glb-textbox--clearable .glb-textbox__input {
+  padding-right: 2.5rem;
+}
+
+.glb-textbox--lg .glb-textbox__icon--left {
+  left: 0.875rem;
+}
+
+.glb-textbox--lg .glb-textbox__icon--right {
+  right: 0.875rem;
+}
+
+.glb-textbox--lg.glb-textbox--clearable .glb-textbox__icon--right {
+  right: 2.5rem;
+}
+
+/* ── Variant: Primary ── */
+
+.glb-textbox--primary {
+  --textbox-bg: var(--textbox-primary-bg);
+  --textbox-text: var(--textbox-primary-text);
+  --textbox-border: var(--textbox-primary-border);
+  --textbox-placeholder: var(--textbox-primary-placeholder);
+  --textbox-icon: var(--textbox-primary-icon);
+  --textbox-hover-bg: var(--textbox-primary-hover-bg);
+  --textbox-hover-border: var(--textbox-primary-hover-border);
+  --textbox-focus-bg: var(--textbox-primary-focus-bg);
+  --textbox-focus-border: var(--textbox-primary-focus-border);
+  --textbox-focus-ring: var(--textbox-primary-focus-ring);
+  --textbox-disabled-bg: var(--textbox-primary-disabled-bg);
+  --textbox-disabled-text: var(--textbox-primary-disabled-text);
+  --textbox-disabled-border: var(--textbox-primary-disabled-border);
+  --textbox-error-border: var(--textbox-primary-error-border);
+  --textbox-error-focus-ring: var(--textbox-primary-error-focus-ring);
+}
+
+/* ── Variant: Secondary ── */
+
+.glb-textbox--secondary {
+  --textbox-bg: var(--textbox-secondary-bg);
+  --textbox-text: var(--textbox-secondary-text);
+  --textbox-border: var(--textbox-secondary-border);
+  --textbox-placeholder: var(--textbox-secondary-placeholder);
+  --textbox-icon: var(--textbox-secondary-icon);
+  --textbox-hover-bg: var(--textbox-secondary-hover-bg);
+  --textbox-hover-border: var(--textbox-secondary-hover-border);
+  --textbox-focus-bg: var(--textbox-secondary-focus-bg);
+  --textbox-focus-border: var(--textbox-secondary-focus-border);
+  --textbox-focus-ring: var(--textbox-secondary-focus-ring);
+  --textbox-disabled-bg: var(--textbox-secondary-disabled-bg);
+  --textbox-disabled-text: var(--textbox-secondary-disabled-text);
+  --textbox-disabled-border: var(--textbox-secondary-disabled-border);
+  --textbox-error-border: var(--textbox-secondary-error-border);
+  --textbox-error-focus-ring: var(--textbox-secondary-error-focus-ring);
+}
+
+/* ── Variant: Outline ── */
+
+.glb-textbox--outline {
+  --textbox-bg: var(--textbox-outline-bg);
+  --textbox-text: var(--textbox-outline-text);
+  --textbox-border: var(--textbox-outline-border);
+  --textbox-placeholder: var(--textbox-outline-placeholder);
+  --textbox-icon: var(--textbox-outline-icon);
+  --textbox-hover-bg: var(--textbox-outline-hover-bg);
+  --textbox-hover-border: var(--textbox-outline-hover-border);
+  --textbox-focus-bg: var(--textbox-outline-focus-bg);
+  --textbox-focus-border: var(--textbox-outline-focus-border);
+  --textbox-focus-ring: var(--textbox-outline-focus-ring);
+  --textbox-disabled-bg: var(--textbox-outline-disabled-bg);
+  --textbox-disabled-text: var(--textbox-outline-disabled-text);
+  --textbox-disabled-border: var(--textbox-outline-disabled-border);
+  --textbox-error-border: var(--textbox-outline-error-border);
+  --textbox-error-focus-ring: var(--textbox-outline-error-focus-ring);
+}
+
+/* ── Variant: Ghost ── */
+
+.glb-textbox--ghost {
+  --textbox-bg: var(--textbox-ghost-bg);
+  --textbox-text: var(--textbox-ghost-text);
+  --textbox-border: var(--textbox-ghost-border);
+  --textbox-placeholder: var(--textbox-ghost-placeholder);
+  --textbox-icon: var(--textbox-ghost-icon);
+  --textbox-hover-bg: var(--textbox-ghost-hover-bg);
+  --textbox-hover-border: var(--textbox-ghost-hover-border);
+  --textbox-focus-bg: var(--textbox-ghost-focus-bg);
+  --textbox-focus-border: var(--textbox-ghost-focus-border);
+  --textbox-focus-ring: var(--textbox-ghost-focus-ring);
+  --textbox-disabled-bg: var(--textbox-ghost-disabled-bg);
+  --textbox-disabled-text: var(--textbox-ghost-disabled-text);
+  --textbox-disabled-border: var(--textbox-ghost-disabled-border);
+  --textbox-error-border: var(--textbox-ghost-error-border);
+  --textbox-error-focus-ring: var(--textbox-ghost-error-focus-ring);
+}

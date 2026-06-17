@@ -1,27 +1,5 @@
 import type { Permission } from '../type/menu.types';
 
 export const mockUserPermissions: Permission[] = [
-  'facturacion:read',
-  'facturacion:facturas:read',
-  'facturacion:facturas:emitir',
-  'facturacion:facturas:consultar',
-  'facturacion:notas-credito:read',
-  'facturacion:notas-credito:emitir',
-  'facturacion:notas-credito:consultar',
-  'facturacion:guias-remision:read',
-  'facturacion:guias-remision:emitir',
-  'facturacion:documentos:read',
-  'facturacion:documentos:emitidos',
-  'facturacion:documentos:anulaciones',
-  'contabilidad:read',
-  'contabilidad:plan-cuentas:read',
-  'contabilidad:ejercicios:read',
-  'bodegas:read',
-  'bodegas:entradas:read',
-  'bodegas:salidas:read',
-  'ecommerce:read',
-  'ecommerce:productos:read',
-  'ecommerce:categorias:read',
-  'ajustes:read',
-  'ayuda:read',
+  'componentes:read',
 ];

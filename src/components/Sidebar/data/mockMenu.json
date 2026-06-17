@@ -1,166 +1,558 @@
 {
   "items": [
     {
-      "id": "facturacion",
-      "label": "Facturación",
-      "icon": "receipt",
-      "path": "/facturacion",
-      "permissions": ["facturacion:read"],
+      "id": "componentes",
+      "label": "UI Components",
+      "icon": "layout-dashboard",
+      "path": "/componentes",
+      "permissions": ["componentes:read"],
       "position": "top",
       "children": [
         {
-          "id": "facturacion-facturas",
-          "label": "Facturas",
-          "permissions": ["facturacion:facturas:read"],
+          "id": "componentes-button",
+          "label": "Button",
+          "permissions": ["componentes:read"],
           "children": [
             {
-              "id": "facturacion-facturas-emitir",
-              "label": "Emitir",
-              "path": "/facturacion/facturas/emitir",
-              "permissions": ["facturacion:facturas:emitir"]
+              "id": "componentes-button-overview",
+              "label": "Overview",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-button-overview-getting-started",
+                  "label": "Getting Started",
+                  "path": "/componentes/button/overview/getting-started",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-button-overview-how-to",
+                  "label": "How To",
+                  "path": "/componentes/button/overview/how-to",
+                  "permissions": ["componentes:read"]
+                }
+              ]
             },
             {
-              "id": "facturacion-facturas-consultar",
-              "label": "Consultar",
-              "path": "/facturacion/facturas/consultar",
-              "permissions": ["facturacion:facturas:consultar"]
-            }
-          ]
-        },
-        {
-          "id": "facturacion-notas-credito",
-          "label": "Notas de crédito",
-          "permissions": ["facturacion:notas-credito:read"],
-          "children": [
-            {
-              "id": "facturacion-notas-credito-emitir",
-              "label": "Emitir",
-              "path": "/facturacion/notas-credito/emitir",
-              "permissions": ["facturacion:notas-credito:emitir"]
+              "id": "componentes-button-api",
+              "label": "API",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-button-api-props",
+                  "label": "Props",
+                  "path": "/componentes/button/api/props",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-button-api-events",
+                  "label": "Events",
+                  "path": "/componentes/button/api/events",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-button-api-types",
+                  "label": "Types",
+                  "path": "/componentes/button/api/types",
+                  "permissions": ["componentes:read"]
+                }
+              ]
             },
             {
-              "id": "facturacion-notas-credito-consultar",
-              "label": "Consultar",
-              "path": "/facturacion/notas-credito/consultar",
-              "permissions": ["facturacion:notas-credito:consultar"]
-            }
-          ]
-        },
-        {
-          "id": "facturacion-guias-remision",
-          "label": "Guías de remisión",
-          "permissions": ["facturacion:guias-remision:read"],
-          "children": [
-            {
-              "id": "facturacion-guias-remision-emitir",
-              "label": "Emitir",
-              "path": "/facturacion/guias-remision/emitir",
-              "permissions": ["facturacion:guias-remision:emitir"]
-            }
-          ]
-        },
-        {
-          "id": "facturacion-documentos",
-          "label": "Documentos",
-          "permissions": ["facturacion:documentos:read"],
-          "children": [
-            {
-              "id": "facturacion-documentos-emitidos",
-              "label": "Emitidos",
-              "path": "/facturacion/documentos/emitidos",
-              "permissions": ["facturacion:documentos:emitidos"]
+              "id": "componentes-button-accessibility",
+              "label": "Accessibility",
+              "path": "/componentes/button/accessibility",
+              "permissions": ["componentes:read"]
             },
             {
-              "id": "facturacion-documentos-anulaciones",
-              "label": "Anulaciones",
-              "path": "/facturacion/documentos/anulaciones",
-              "permissions": ["facturacion:documentos:anulaciones"]
+              "id": "componentes-button-demos",
+              "label": "Demos",
+              "path": "/componentes/button",
+              "permissions": ["componentes:read"]
+            }
+          ]
+        },
+        {
+          "id": "componentes-select",
+          "label": "Select",
+          "permissions": ["componentes:read"],
+          "children": [
+            {
+              "id": "componentes-select-overview",
+              "label": "Overview",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-select-overview-getting-started",
+                  "label": "Getting Started",
+                  "path": "/componentes/select/overview/getting-started",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-select-overview-how-to",
+                  "label": "How To",
+                  "path": "/componentes/select/overview/how-to",
+                  "permissions": ["componentes:read"]
+                }
+              ]
+            },
+            {
+              "id": "componentes-select-api",
+              "label": "API",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-select-api-props",
+                  "label": "Props",
+                  "path": "/componentes/select/api/props",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-select-api-events",
+                  "label": "Events",
+                  "path": "/componentes/select/api/events",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-select-api-types",
+                  "label": "Types",
+                  "path": "/componentes/select/api/types",
+                  "permissions": ["componentes:read"]
+                }
+              ]
+            },
+            {
+              "id": "componentes-select-accessibility",
+              "label": "Accessibility",
+              "path": "/componentes/select/accessibility",
+              "permissions": ["componentes:read"]
+            },
+            {
+              "id": "componentes-select-demos",
+              "label": "Demos",
+              "path": "/componentes/select",
+              "permissions": ["componentes:read"]
+            }
+          ]
+        },
+        {
+          "id": "componentes-textbox",
+          "label": "TextBox",
+          "permissions": ["componentes:read"],
+          "children": [
+            {
+              "id": "componentes-textbox-overview",
+              "label": "Overview",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-textbox-overview-getting-started",
+                  "label": "Getting Started",
+                  "path": "/componentes/textbox/overview/getting-started",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-textbox-overview-how-to",
+                  "label": "How To",
+                  "path": "/componentes/textbox/overview/how-to",
+                  "permissions": ["componentes:read"]
+                }
+              ]
+            },
+            {
+              "id": "componentes-textbox-api",
+              "label": "API",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-textbox-api-props",
+                  "label": "Props",
+                  "path": "/componentes/textbox/api/props",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-textbox-api-events",
+                  "label": "Events",
+                  "path": "/componentes/textbox/api/events",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-textbox-api-types",
+                  "label": "Types",
+                  "path": "/componentes/textbox/api/types",
+                  "permissions": ["componentes:read"]
+                }
+              ]
+            },
+            {
+              "id": "componentes-textbox-accessibility",
+              "label": "Accessibility",
+              "path": "/componentes/textbox/accessibility",
+              "permissions": ["componentes:read"]
+            },
+            {
+              "id": "componentes-textbox-demos",
+              "label": "Demos",
+              "path": "/componentes/textbox",
+              "permissions": ["componentes:read"]
+            }
+          ]
+        },
+        {
+          "id": "componentes-datebox",
+          "label": "DateBox",
+          "permissions": ["componentes:read"],
+          "children": [
+            {
+              "id": "componentes-datebox-overview",
+              "label": "Overview",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-datebox-overview-getting-started",
+                  "label": "Getting Started",
+                  "path": "/componentes/datebox/overview/getting-started",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-datebox-overview-how-to",
+                  "label": "How To",
+                  "path": "/componentes/datebox/overview/how-to",
+                  "permissions": ["componentes:read"]
+                }
+              ]
+            },
+            {
+              "id": "componentes-datebox-api",
+              "label": "API",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-datebox-api-props",
+                  "label": "Props",
+                  "path": "/componentes/datebox/api/props",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-datebox-api-events",
+                  "label": "Events",
+                  "path": "/componentes/datebox/api/events",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-datebox-api-types",
+                  "label": "Types",
+                  "path": "/componentes/datebox/api/types",
+                  "permissions": ["componentes:read"]
+                }
+              ]
+            },
+            {
+              "id": "componentes-datebox-accessibility",
+              "label": "Accessibility",
+              "path": "/componentes/datebox/accessibility",
+              "permissions": ["componentes:read"]
+            },
+            {
+              "id": "componentes-datebox-demos",
+              "label": "Demos",
+              "path": "/componentes/datebox",
+              "permissions": ["componentes:read"]
+            }
+          ]
+        },
+        {
+          "id": "componentes-rangedatebox",
+          "label": "RangeDateBox",
+          "permissions": ["componentes:read"],
+          "children": [
+            {
+              "id": "componentes-rangedatebox-overview",
+              "label": "Overview",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-rangedatebox-overview-getting-started",
+                  "label": "Getting Started",
+                  "path": "/componentes/rangedatebox/overview/getting-started",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-rangedatebox-overview-how-to",
+                  "label": "How To",
+                  "path": "/componentes/rangedatebox/overview/how-to",
+                  "permissions": ["componentes:read"]
+                }
+              ]
+            },
+            {
+              "id": "componentes-rangedatebox-api",
+              "label": "API",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-rangedatebox-api-props",
+                  "label": "Props",
+                  "path": "/componentes/rangedatebox/api/props",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-rangedatebox-api-events",
+                  "label": "Events",
+                  "path": "/componentes/rangedatebox/api/events",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-rangedatebox-api-types",
+                  "label": "Types",
+                  "path": "/componentes/rangedatebox/api/types",
+                  "permissions": ["componentes:read"]
+                }
+              ]
+            },
+            {
+              "id": "componentes-rangedatebox-accessibility",
+              "label": "Accessibility",
+              "path": "/componentes/rangedatebox/accessibility",
+              "permissions": ["componentes:read"]
+            },
+            {
+              "id": "componentes-rangedatebox-demos",
+              "label": "Demos",
+              "path": "/componentes/rangedatebox",
+              "permissions": ["componentes:read"]
+            }
+          ]
+        },
+        {
+          "id": "componentes-optiongroup",
+          "label": "OptionGroup",
+          "permissions": ["componentes:read"],
+          "children": [
+            {
+              "id": "componentes-optiongroup-overview",
+              "label": "Overview",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-optiongroup-overview-getting-started",
+                  "label": "Getting Started",
+                  "path": "/componentes/optiongroup/overview/getting-started",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-optiongroup-overview-how-to",
+                  "label": "How To",
+                  "path": "/componentes/optiongroup/overview/how-to",
+                  "permissions": ["componentes:read"]
+                }
+              ]
+            },
+            {
+              "id": "componentes-optiongroup-api",
+              "label": "API",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-optiongroup-api-props",
+                  "label": "Props",
+                  "path": "/componentes/optiongroup/api/props",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-optiongroup-api-events",
+                  "label": "Events",
+                  "path": "/componentes/optiongroup/api/events",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-optiongroup-api-types",
+                  "label": "Types",
+                  "path": "/componentes/optiongroup/api/types",
+                  "permissions": ["componentes:read"]
+                }
+              ]
+            },
+            {
+              "id": "componentes-optiongroup-accessibility",
+              "label": "Accessibility",
+              "path": "/componentes/optiongroup/accessibility",
+              "permissions": ["componentes:read"]
+            },
+            {
+              "id": "componentes-optiongroup-demos",
+              "label": "Demos",
+              "path": "/componentes/optiongroup",
+              "permissions": ["componentes:read"]
+            }
+          ]
+        },
+        {
+          "id": "componentes-checkbutton",
+          "label": "CheckButton",
+          "permissions": ["componentes:read"],
+          "children": [
+            {
+              "id": "componentes-checkbutton-overview",
+              "label": "Overview",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-checkbutton-overview-getting-started",
+                  "label": "Getting Started",
+                  "path": "/componentes/checkbutton/overview/getting-started",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-checkbutton-overview-how-to",
+                  "label": "How To",
+                  "path": "/componentes/checkbutton/overview/how-to",
+                  "permissions": ["componentes:read"]
+                }
+              ]
+            },
+            {
+              "id": "componentes-checkbutton-api",
+              "label": "API",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-checkbutton-api-props",
+                  "label": "Props",
+                  "path": "/componentes/checkbutton/api/props",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-checkbutton-api-events",
+                  "label": "Events",
+                  "path": "/componentes/checkbutton/api/events",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-checkbutton-api-types",
+                  "label": "Types",
+                  "path": "/componentes/checkbutton/api/types",
+                  "permissions": ["componentes:read"]
+                }
+              ]
+            },
+            {
+              "id": "componentes-checkbutton-accessibility",
+              "label": "Accessibility",
+              "path": "/componentes/checkbutton/accessibility",
+              "permissions": ["componentes:read"]
+            },
+            {
+              "id": "componentes-checkbutton-demos",
+              "label": "Demos",
+              "path": "/componentes/checkbutton",
+              "permissions": ["componentes:read"]
+            }
+          ]
+        },
+        {
+          "id": "componentes-sidebar",
+          "label": "Sidebar",
+          "permissions": ["componentes:read"],
+          "children": [
+            {
+              "id": "componentes-sidebar-overview",
+              "label": "Overview",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-sidebar-overview-getting-started",
+                  "label": "Getting Started",
+                  "path": "/componentes/sidebar/overview/getting-started",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-sidebar-overview-how-to",
+                  "label": "How To",
+                  "path": "/componentes/sidebar/overview/how-to",
+                  "permissions": ["componentes:read"]
+                }
+              ]
+            },
+            {
+              "id": "componentes-sidebar-api",
+              "label": "API",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-sidebar-api-props",
+                  "label": "Props",
+                  "path": "/componentes/sidebar/api/props",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-sidebar-api-events",
+                  "label": "Events",
+                  "path": "/componentes/sidebar/api/events",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-sidebar-api-types",
+                  "label": "Types",
+                  "path": "/componentes/sidebar/api/types",
+                  "permissions": ["componentes:read"]
+                }
+              ]
+            },
+            {
+              "id": "componentes-sidebar-accessibility",
+              "label": "Accessibility",
+              "path": "/componentes/sidebar/accessibility",
+              "permissions": ["componentes:read"]
+            },
+            {
+              "id": "componentes-sidebar-demos",
+              "label": "Demos",
+              "path": "/componentes/sidebar",
+              "permissions": ["componentes:read"]
             }
           ]
         }
       ]
     },
     {
-      "id": "contabilidad",
-      "label": "Contabilidad",
-      "icon": "book-open",
-      "path": "/contabilidad",
-      "permissions": ["contabilidad:read"],
-      "position": "top",
-      "children": [
-        {
-          "id": "contabilidad-plan-cuentas",
-          "label": "Plan de cuentas",
-          "path": "/contabilidad/plan-cuentas",
-          "permissions": ["contabilidad:plan-cuentas:read"]
-        },
-        {
-          "id": "contabilidad-ejercicios",
-          "label": "Ejercicios contables",
-          "path": "/contabilidad/ejercicios",
-          "permissions": ["contabilidad:ejercicios:read"]
-        }
-      ]
-    },
-    {
-      "id": "bodegas",
-      "label": "Bodegas",
-      "icon": "warehouse",
-      "path": "/bodegas",
-      "permissions": ["bodegas:read"],
-      "position": "top",
-      "children": [
-        {
-          "id": "bodegas-entradas",
-          "label": "Entradas",
-          "path": "/bodegas/entradas",
-          "permissions": ["bodegas:entradas:read"]
-        },
-        {
-          "id": "bodegas-salidas",
-          "label": "Salidas",
-          "path": "/bodegas/salidas",
-          "permissions": ["bodegas:salidas:read"]
-        }
-      ]
-    },
-    {
-      "id": "ecommerce",
-      "label": "Ecommerce",
-      "icon": "store",
-      "path": "/ecommerce",
-      "permissions": ["ecommerce:read"],
-      "position": "top",
-      "children": [
-        {
-          "id": "ecommerce-productos",
-          "label": "Productos",
-          "path": "/ecommerce/productos",
-          "permissions": ["ecommerce:productos:read"]
-        },
-        {
-          "id": "ecommerce-categorias",
-          "label": "Categorías",
-          "path": "/ecommerce/categorias",
-          "permissions": ["ecommerce:categorias:read"]
-        }
-      ]
-    },
-    {
-      "id": "ajustes",
-      "label": "Ajustes",
+      "id": "apariencia",
+      "label": "Apariencia",
       "icon": "settings",
-      "path": "/ajustes",
-      "permissions": ["ajustes:read"],
-      "position": "bottom"
-    },
-    {
-      "id": "ayuda",
-      "label": "Ayuda",
-      "icon": "help-circle",
-      "path": "/ayuda",
-      "permissions": ["ayuda:read"],
-      "position": "bottom"
+      "path": "/apariencia",
+      "permissions": ["componentes:read"],
+      "position": "bottom",
+      "children": [
+        {
+          "id": "apariencia-temas",
+          "label": "Temas",
+          "path": "/apariencia/temas",
+          "permissions": ["componentes:read"]
+        },
+        {
+          "id": "apariencia-modo-oscuro",
+          "label": "Modo Oscuro",
+          "path": "/apariencia/modo-oscuro",
+          "permissions": ["componentes:read"]
+        },
+        {
+          "id": "apariencia-instalacion",
+          "label": "Instalación",
+          "path": "/apariencia/instalacion",
+          "permissions": ["componentes:read"]
+        },
+        {
+          "id": "apariencia-importacion",
+          "label": "Importación",
+          "path": "/apariencia/importacion",
+          "permissions": ["componentes:read"]
+        },
+        {
+          "id": "apariencia-personalizacion",
+          "label": "Personalización",
+          "path": "/apariencia/personalizacion",
+          "permissions": ["componentes:read"]
+        }
+      ]
     }
   ]
 }

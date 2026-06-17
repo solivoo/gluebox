@@ -25,6 +25,5 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
-  "exclude": ["src/**/*.stories.*", "src/stories"]
+  "include": ["src"]
 }

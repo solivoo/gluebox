@@ -2,6 +2,12 @@ import { useCallback, useMemo, useState } from 'react';
 import type { MenuItem } from '../type/menu.types';
 import { findAncestorIdsByPath } from '../utils/findParentItemId';
 
+interface ExpansionState {
+  openIds: Set<string>;
+  /** Módulos/nodos que el usuario cerró explícitamente (prevalece sobre auto-expansión) */
+  userCollapsedIds: Set<string>;
+}
+
 function createInitialExpanded(
   items: MenuItem[],
   activePath?: string,
@@ -11,6 +17,33 @@ function createInitialExpanded(
 
 function isTopLevelItem(itemId: string, items: MenuItem[]): boolean {
   return items.some((item) => item.id === itemId);
+}
+
+/** Ids que deben abrirse automáticamente según la ruta activa */
+function getAutoExpandedIds(items: MenuItem[], activePath?: string): Set<string> {
+  const ids = new Set(findAncestorIdsByPath(items, activePath));
+  for (const item of items) {
+    if (item.path && item.path === activePath && item.children?.length) {
+      ids.add(item.id);
+    }
+  }
+  return ids;
+}
+
+function computeExpandedIds(
+  openIds: Set<string>,
+  userCollapsedIds: Set<string>,
+  items: MenuItem[],
+  activePath?: string,
+): Set<string> {
+  const merged = new Set(openIds);
+  for (const id of getAutoExpandedIds(items, activePath)) {
+    merged.add(id);
+  }
+  for (const id of userCollapsedIds) {
+    merged.delete(id);
+  }
+  return merged;
 }
 
 interface UseExpandedItemsOptions {
@@ -26,79 +59,99 @@ export function useExpandedItems({
   collapseOthersOnSelect,
   collapseOnNavigate,
 }: UseExpandedItemsOptions) {
-  const [openIds, setOpenIds] = useState<Set<string>>(() =>
-    createInitialExpanded(items, activePath),
+  const [state, setState] = useState<ExpansionState>(() => ({
+    openIds: createInitialExpanded(items, activePath),
+    userCollapsedIds: new Set(),
+  }));
+
+  const expandedIds = useMemo(
+    () => computeExpandedIds(state.openIds, state.userCollapsedIds, items, activePath),
+    [state.openIds, state.userCollapsedIds, items, activePath],
   );
-
-  const ancestorsFromActive = findAncestorIdsByPath(items, activePath);
-
-  const expandedIds = useMemo(() => {
-    const merged = new Set(openIds);
-    for (const id of ancestorsFromActive) {
-      merged.add(id);
-    }
-    // Abrir módulo cuando la ruta activa es su inicio (/facturacion, etc.)
-    for (const item of items) {
-      if (item.path && item.path === activePath && item.children?.length) {
-        merged.add(item.id);
-      }
-    }
-    return merged;
-  }, [ancestorsFromActive, openIds, items, activePath]);
 
   const toggleExpand = useCallback(
     (itemId: string) => {
-      setOpenIds((prev) => {
-        if (collapseOthersOnSelect && isTopLevelItem(itemId, items)) {
-          if (prev.has(itemId)) {
-            const next = new Set(prev);
-            next.delete(itemId);
-            return next;
-          }
+      setState((prev) => {
+        const isOpen = computeExpandedIds(
+          prev.openIds,
+          prev.userCollapsedIds,
+          items,
+          activePath,
+        ).has(itemId);
 
-          const next = new Set<string>();
-          for (const id of prev) {
-            if (!isTopLevelItem(id, items)) {
-              next.add(id);
+        const nextOpen = new Set(prev.openIds);
+        const nextCollapsed = new Set(prev.userCollapsedIds);
+
+        if (isOpen) {
+          nextCollapsed.add(itemId);
+          nextOpen.delete(itemId);
+          return { openIds: nextOpen, userCollapsedIds: nextCollapsed };
+        }
+
+        nextCollapsed.delete(itemId);
+
+        if (collapseOthersOnSelect && isTopLevelItem(itemId, items)) {
+          for (const item of items) {
+            if (item.id !== itemId) {
+              nextCollapsed.add(item.id);
+              nextOpen.delete(item.id);
             }
           }
-          next.add(itemId);
-          return next;
         }
 
-        const next = new Set(prev);
-        if (next.has(itemId)) {
-          next.delete(itemId);
-        } else {
-          next.add(itemId);
-        }
-        return next;
+        nextOpen.add(itemId);
+        return { openIds: nextOpen, userCollapsedIds: nextCollapsed };
       });
     },
-    [collapseOthersOnSelect, items],
+    [collapseOthersOnSelect, items, activePath],
   );
 
   const syncOnNavigate = useCallback(
     (path: string) => {
-      const ancestors = findAncestorIdsByPath(items, path);
+      const autoIds = getAutoExpandedIds(items, path);
 
       if (!collapseOnNavigate) {
-        if (ancestors.length > 0) {
-          setOpenIds((prev) => new Set([...prev, ...ancestors]));
-        }
+        if (autoIds.size === 0) return;
+
+        setState((prev) => {
+          const nextOpen = new Set([...prev.openIds, ...autoIds]);
+          const nextCollapsed = new Set(prev.userCollapsedIds);
+          for (const id of autoIds) {
+            nextCollapsed.delete(id);
+          }
+          return { openIds: nextOpen, userCollapsedIds: nextCollapsed };
+        });
         return;
       }
 
-      if (ancestors.length === 0) {
+      if (autoIds.size === 0) {
         return;
       }
 
       if (collapseOthersOnSelect) {
-        setOpenIds(() => new Set(ancestors));
+        setState((prev) => {
+          const nextCollapsed = new Set(prev.userCollapsedIds);
+          for (const id of autoIds) {
+            nextCollapsed.delete(id);
+          }
+          for (const item of items) {
+            if (!autoIds.has(item.id)) {
+              nextCollapsed.add(item.id);
+            }
+          }
+          return { openIds: new Set(autoIds), userCollapsedIds: nextCollapsed };
+        });
         return;
       }
 
-      setOpenIds((prev) => new Set([...prev, ...ancestors]));
+      setState((prev) => {
+        const nextOpen = new Set([...prev.openIds, ...autoIds]);
+        const nextCollapsed = new Set(prev.userCollapsedIds);
+        for (const id of autoIds) {
+          nextCollapsed.delete(id);
+        }
+        return { openIds: nextOpen, userCollapsedIds: nextCollapsed };
+      });
     },
     [collapseOnNavigate, collapseOthersOnSelect, items],
   );

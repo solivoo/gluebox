@@ -342,15 +342,10 @@ import type {
 7. (Recomendado) Guard de permisos en rutas para URLs directas.
 8. Probar modo colapsado, acordeón y ítems `bottom`.
 
-## Storybook
-
-Variantes interactivas: [Storybook → Sidebar](/storybook/?path=/docs/components-sidebar--docs).
-
 ## Referencia en el repositorio
 
 | Recurso | Ubicación |
 |---------|-----------|
 | Menú demo | `src/components/Sidebar/data/mockMenu.json` |
 | Permisos demo | `src/components/Sidebar/mock/mockUserPermissions.ts` |
-| App con routing | `src/demo/` |
-| Stories | `src/components/Sidebar/Sidebar.stories.tsx` |
+| App demo con routing | `src/demo/` |

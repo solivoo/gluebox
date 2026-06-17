@@ -8,18 +8,18 @@ Sitio VitePress en `docs/` — se publica en GitHub Pages con `pnpm docs:build`.
 
 | Archivo | Contenido |
 |---------|-----------|
-| `docs/components/sidebar.md` | Referencia completa del componente |
+| `docs/components/sidebar.md` | Referencia del Sidebar |
+| `docs/components/forms.md` | TextBox, Select, DateBox, RangeDateBox |
+| `docs/components/buttons.md` | Button, CheckButton, OptionGroup |
 | `docs/guide/menu-api.md` | Contrato JSON para backend |
 | `docs/guide/routing.md` | Integración con React Router |
-| `docs/guide/installation.md` | Instalación, iconos, TypeScript |
+| `docs/guide/installation.md` | Instalación, temas, TypeScript |
 
 Local: `pnpm docs:dev`
 
 ## Despliegue (GitHub Pages)
 
-Cada **push a `main`** ejecuta `deploy-pages.yml` y publica docs + Storybook.
-
-Configuración única en GitHub:
+Cada **push a `main`** ejecuta `deploy-pages.yml` y publica la documentación.
 
 1. Repo → **Settings → Pages**
 2. **Build and deployment → Source:** `GitHub Actions`
@@ -31,27 +31,34 @@ Configuración única en GitHub:
 
 | Secret | Descripción |
 |--------|-------------|
-| `NPM_TOKEN` | Token granular de npm: **Packages Read and write**, scope **All packages**. Con 2FA activo, habilitar **Bypass two-factor authentication for automation**. |
+| `NPM_TOKEN` | Token granular de npm: **Packages Read and write**. Con 2FA, habilitar bypass para automation. |
 
 ### Automático (recomendado)
 
-1. Actualiza `version` en `package.json` y haz push a `main`
-2. Crea tag y publícalo: `git tag v0.1.0 && git push origin v0.1.0`
-   - O crea un **Release** en GitHub con ese tag
-3. El workflow `publish-npm.yml` publica en npm (usa siempre el código de `main`)
+1. Actualiza `version` en `package.json` y haz commit en `main`
+2. `git tag v0.1.3 && git push origin v0.1.3` (o Release en GitHub)
+3. El workflow `publish-npm.yml` ejecuta `pnpm build:lib` y publica
 
-Reintento manual: **Actions → Publish npm → Run workflow**.
-
-### Manual (local)
+### Build de librería
 
 ```bash
-pnpm build:lib
-npm publish --access public
+pnpm build:lib   # vite lib + scripts/copy-themes.mjs (vía prepublishOnly)
 ```
 
-### Checklist
+### Checklist release
 
-- [ ] `pnpm build:lib` OK
-- [ ] `pnpm lint` OK
-- [ ] `pnpm-workspace.yaml` con `allowBuilds.esbuild: true` (pnpm 11)
-- [ ] No hay secretos en el código
+- [ ] `pnpm lint`
+- [ ] `pnpm build:lib`
+- [ ] `pnpm docs:build`
+- [ ] README y `docs/` actualizados
+- [ ] `version` en `package.json` alineada con el tag
+- [ ] Push a `main` → Pages
+- [ ] Tag `v*` → npm
+
+## Changelog v0.1.3
+
+- Button, Select, TextBox, DateBox, RangeDateBox, OptionGroup, CheckButton
+- Demo interactiva con playground (reemplaza Storybook)
+- Label `outlined` con `--glb-field-canvas` para fondo transparente
+- Fix Sidebar: colapsar ítem padre activo
+- Temas globales en `glubox/themes/*.css`

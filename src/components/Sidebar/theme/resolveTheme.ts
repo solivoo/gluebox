@@ -2,14 +2,16 @@ import type { CSSProperties } from 'react';
 import type { SidebarTheme, SidebarThemeInput } from './Sidebar.theme.types';
 import { sidebarThemes } from './defaultThemes';
 
-export function resolveTheme(theme?: SidebarThemeInput): SidebarTheme {
-  if (!theme) return sidebarThemes.dark;
+export function resolveTheme(theme?: SidebarThemeInput): SidebarTheme | undefined {
+  if (!theme) return undefined;
   if (typeof theme === 'string') return sidebarThemes[theme];
   return theme;
 }
 
-/** Convierte el tema en CSS variables para el root del Sidebar */
-export function themeToStyle(theme: SidebarTheme): CSSProperties {
+/** Convierte el tema en CSS variables para el root del Sidebar.
+ * Si no hay tema, retorna undefined para que el CSS global (data-theme/data-mode) controle el aspecto. */
+export function themeToStyle(theme: SidebarTheme | undefined): CSSProperties | undefined {
+  if (!theme) return undefined;
   return {
     '--sidebar-bg': theme.background,
     '--sidebar-text': theme.text,

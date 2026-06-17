@@ -1,0 +1,46 @@
+import type { InputHTMLAttributes, ReactNode } from 'react';
+import type { TextBoxThemeInput } from '../theme/TextBox.theme.types';
+
+export type TextBoxVariant =
+  | 'primary'
+  | 'secondary'
+  | 'outline'
+  | 'ghost';
+
+export type TextBoxSize = 'sm' | 'md' | 'lg';
+
+export type TextBoxLabelPosition = 'top' | 'floating' | 'outlined' | 'left';
+
+export interface TextBoxProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'children'> {
+  /** Variante visual */
+  variant?: TextBoxVariant;
+  /** Tamaño */
+  size?: TextBoxSize;
+  /** Texto de la etiqueta superior */
+  label?: string;
+  /** Posición del label: 'top', 'floating' (dentro), 'outlined' (sobre el borde), 'left' (horizontal) */
+  labelPosition?: TextBoxLabelPosition;
+  /** Texto placeholder */
+  placeholder?: string;
+  /** Texto de ayuda debajo del campo */
+  helperText?: string;
+  /** Muestra estado de error */
+  error?: boolean;
+  /** Mensaje de error debajo del campo (activa error implícitamente) */
+  errorMessage?: string;
+  /** Ícono a la izquierda del input */
+  iconLeft?: ReactNode;
+  /** Ícono a la derecha del input */
+  iconRight?: ReactNode;
+  /** Muestra botón de limpiar (X) cuando hay texto */
+  clearable?: boolean;
+  /** Ocupa todo el ancho disponible */
+  fullWidth?: boolean;
+  /** Ancho fijo del campo (ej. '320px', 200, '100%'). Prevalece sobre fullWidth. */
+  width?: string | number;
+  /** Preset ('dark' | 'light') o tema personalizado */
+  theme?: TextBoxThemeInput;
+  /** Clases CSS adicionales */
+  className?: string;
+}

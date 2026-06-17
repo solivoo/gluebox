@@ -4,17 +4,28 @@ gluBox es una librería de componentes React para dashboards y aplicaciones inte
 
 ## Qué incluye hoy
 
-- **[Sidebar](/components/sidebar)** — Navegación lateral con menú dinámico desde API, RBAC, 3 niveles, temas, modo colapsado e iconos personalizables.
+### Navegación
+
+- **[Sidebar](/components/sidebar)** — Menú dinámico desde API, RBAC, 3 niveles, temas, modo colapsado e iconos personalizables.
+
+### Formularios
+
+- **[TextBox, Select, DateBox, RangeDateBox](/components/forms)** — Campos con variantes visuales, estados de error, label outlined (sobre el borde) y temas.
+
+### Botones y selección
+
+- **[Button, CheckButton, OptionGroup](/components/buttons)** — Acciones, toggles y grupos de opción exclusiva.
 
 ## Documentación
 
 | Guía | Contenido |
 |------|-----------|
-| [Instalación](/guide/installation) | npm, CSS, iconos, TypeScript |
+| [Instalación](/guide/installation) | npm, CSS, temas, TypeScript |
 | [Esquema del menú (API)](/guide/menu-api) | Contrato JSON para backend |
 | [Integración con routing](/guide/routing) | React Router, guards, registro de rutas |
-| [Sidebar (referencia)](/components/sidebar) | Props, temas, RBAC, checklist |
-| [Storybook](/storybook/) | Playground interactivo |
+| [Formularios](/components/forms) | TextBox, Select, fechas, label outlined |
+| [Botones](/components/buttons) | Button, CheckButton, OptionGroup |
+| [Sidebar (referencia)](/components/sidebar) | Props, temas, RBAC |
 
 ## Requisitos
 
@@ -27,19 +38,15 @@ gluBox es una librería de componentes React para dashboards y aplicaciones inte
 git clone https://github.com/solivoo/gluebox.git
 cd gluebox
 pnpm install
-pnpm dev          # App demo con routing (src/demo/)
-pnpm storybook    # Playground del Sidebar
-pnpm docs:dev     # Sitio de documentación
+pnpm dev          # Playground interactivo en /componentes/*
+pnpm docs:dev     # Esta documentación
 ```
 
 ## Flujo típico de integración
 
-1. Instalar `glubox` e importar estilos.
-2. Consumir `MenuConfig` desde tu API ([esquema](/guide/menu-api)).
-3. Pasar permisos del usuario y `renderIcon`.
-4. Conectar `activePath` / `onNavigate` al router ([guía](/guide/routing)).
-5. Validar permisos también en rutas (403) y en el backend.
-
-## Próximos componentes
-
-La librería crecerá con más bloques reutilizables (Header, DataTable, etc.).
+1. Instalar `glubox` e importar `glubox/style.css` y un tema (`glubox/themes/default.css`).
+2. Configurar `data-theme` y `data-mode` en `<html>`.
+3. Consumir `MenuConfig` desde tu API ([esquema](/guide/menu-api)).
+4. Conectar Sidebar con `activePath` / `onNavigate` ([routing](/guide/routing)).
+5. Usar controles de formulario con el mismo sistema de temas.
+6. Validar permisos en rutas (403) y en el backend.

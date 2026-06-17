@@ -1,0 +1,320 @@
+/* ══════════════════════════════════════════════════
+   gluBox Enterprise Theme — Blue / Slate
+   ══════════════════════════════════════════════════ */
+
+/* ── Sidebar ── */
+[data-theme="enterprise"] {
+  --sidebar-bg: #fafafa;
+  --sidebar-text: #1e293b;
+  --sidebar-icon: #64748b;
+  --sidebar-hover-bg: rgba(15, 23, 42, 0.04);
+  --sidebar-active-bg: rgba(15, 23, 42, 0.04);
+  --sidebar-active-text: #2563eb;
+  --sidebar-active-icon: #2563eb;
+  --sidebar-muted-text: #64748b;
+  --sidebar-icon-fallback-bg: #f1f5f9;
+  --sidebar-tree-line: rgba(15, 23, 42, 0.08);
+  --sidebar-rail-active: #3b82f6;
+
+  --glb-toolbar-bg: #f6f8fd;
+  --glb-toolbar-border: #e0e5f0;
+  --glb-app-bg: #f3f5fa;
+  --glb-app-text: #1b222e;
+  --glb-surface: #ffffff;
+  --glb-surface-hover: #f0f3fa;
+  --glb-border: #e0e5f0;
+  --glb-input-bg: #ffffff;
+  --glb-text: #1b222e;
+  --glb-muted: #6b7280;
+}
+
+[data-theme="enterprise"][data-mode="dark"] {
+  --sidebar-bg: #1a1a24;
+  --sidebar-text: #e2e8f0;
+  --sidebar-icon: #94a3b8;
+  --sidebar-hover-bg: rgba(255, 255, 255, 0.05);
+  --sidebar-active-bg: rgba(255, 255, 255, 0.05);
+  --sidebar-active-text: #93c5fd;
+  --sidebar-active-icon: #93c5fd;
+  --sidebar-muted-text: #94a3b8;
+  --sidebar-icon-fallback-bg: rgba(255, 255, 255, 0.08);
+  --sidebar-tree-line: rgba(255, 255, 255, 0.08);
+  --sidebar-rail-active: #60a5fa;
+
+  --glb-toolbar-bg: rgba(59, 130, 246, 0.06);
+  --glb-toolbar-border: rgba(59, 130, 246, 0.12);
+  --glb-app-bg: #10141a;
+  --glb-app-text: #e0e2e8;
+  --glb-surface: #1a1e26;
+  --glb-surface-hover: #20242e;
+  --glb-border: rgba(59, 130, 246, 0.12);
+  --glb-input-bg: #1a1e26;
+  --glb-text: #e0e2e8;
+  --glb-muted: #606878;
+}
+
+/* ── Button (light) ── */
+[data-theme="enterprise"] {
+  --btn-font-size: 0.875rem;
+  --btn-radius: 0.5rem;
+  --btn-transition: all 0.15s ease;
+  --btn-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --btn-hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  --btn-primary-bg: #2563eb; --btn-primary-text: #fff; --btn-primary-border: #2563eb;
+  --btn-primary-hover-bg: #3b82f6; --btn-primary-hover-border: #3b82f6;
+  --btn-primary-active-bg: #1d4ed8; --btn-primary-active-border: #1d4ed8;
+  --btn-primary-focus-ring: rgba(37,99,235,0.4);
+  --btn-primary-disabled-bg: #e5e7eb; --btn-primary-disabled-text: #9ca3af; --btn-primary-disabled-border: #e5e7eb;
+  --btn-primary-spinner: #fff;
+
+  --btn-secondary-bg: #f3f4f6; --btn-secondary-text: #1f2937; --btn-secondary-border: #f3f4f6;
+  --btn-secondary-hover-bg: #e5e7eb; --btn-secondary-hover-border: #e5e7eb;
+  --btn-secondary-active-bg: #d1d5db; --btn-secondary-active-border: #d1d5db;
+  --btn-secondary-focus-ring: rgba(156,163,175,0.5);
+  --btn-secondary-disabled-bg: #f9fafb; --btn-secondary-disabled-text: #d1d5db; --btn-secondary-disabled-border: #f9fafb;
+  --btn-secondary-spinner: #1f2937;
+
+  --btn-outline-bg: transparent; --btn-outline-text: #374151; --btn-outline-border: #d1d5db;
+  --btn-outline-hover-bg: rgba(0,0,0,0.02); --btn-outline-hover-border: #9ca3af;
+  --btn-outline-active-bg: rgba(0,0,0,0.04); --btn-outline-active-border: #6b7280;
+  --btn-outline-focus-ring: rgba(156,163,175,0.5);
+  --btn-outline-disabled-bg: transparent; --btn-outline-disabled-text: #d1d5db; --btn-outline-disabled-border: #e5e7eb;
+  --btn-outline-spinner: #374151;
+
+  --btn-ghost-bg: transparent; --btn-ghost-text: #374151; --btn-ghost-border: transparent;
+  --btn-ghost-hover-bg: rgba(0,0,0,0.04); --btn-ghost-hover-border: transparent;
+  --btn-ghost-active-bg: rgba(0,0,0,0.06); --btn-ghost-active-border: transparent;
+  --btn-ghost-focus-ring: rgba(156,163,175,0.5);
+  --btn-ghost-disabled-bg: transparent; --btn-ghost-disabled-text: #d1d5db; --btn-ghost-disabled-border: transparent;
+  --btn-ghost-spinner: #374151;
+
+  --btn-danger-bg: #dc2626; --btn-danger-text: #fff; --btn-danger-border: #dc2626;
+  --btn-danger-hover-bg: #ef4444; --btn-danger-hover-border: #ef4444;
+  --btn-danger-active-bg: #b91c1c; --btn-danger-active-border: #b91c1c;
+  --btn-danger-focus-ring: rgba(220,38,38,0.4);
+  --btn-danger-disabled-bg: #fecaca; --btn-danger-disabled-text: #fca5a5; --btn-danger-disabled-border: #fecaca;
+  --btn-danger-spinner: #fff;
+}
+
+/* ── Button (dark) ── */
+[data-theme="enterprise"][data-mode="dark"] {
+  --btn-font-size: 0.875rem;
+  --btn-radius: 0.5rem;
+  --btn-transition: all 0.15s ease;
+  --btn-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --btn-hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+
+  --btn-primary-bg: #3b82f6; --btn-primary-text: #fff; --btn-primary-border: #3b82f6;
+  --btn-primary-hover-bg: #60a5fa; --btn-primary-hover-border: #60a5fa;
+  --btn-primary-active-bg: #2563eb; --btn-primary-active-border: #2563eb;
+  --btn-primary-focus-ring: rgba(59,130,246,0.5);
+  --btn-primary-disabled-bg: #374151; --btn-primary-disabled-text: #6b7280; --btn-primary-disabled-border: #374151;
+  --btn-primary-spinner: #fff;
+
+  --btn-secondary-bg: #374151; --btn-secondary-text: #e5e7eb; --btn-secondary-border: #374151;
+  --btn-secondary-hover-bg: #4b5563; --btn-secondary-hover-border: #4b5563;
+  --btn-secondary-active-bg: #1f2937; --btn-secondary-active-border: #1f2937;
+  --btn-secondary-focus-ring: rgba(107,114,128,0.5);
+  --btn-secondary-disabled-bg: #1f2937; --btn-secondary-disabled-text: #6b7280; --btn-secondary-disabled-border: #1f2937;
+  --btn-secondary-spinner: #e5e7eb;
+
+  --btn-outline-bg: transparent; --btn-outline-text: #e5e7eb; --btn-outline-border: #4b5563;
+  --btn-outline-hover-bg: rgba(255,255,255,0.05); --btn-outline-hover-border: #6b7280;
+  --btn-outline-active-bg: rgba(255,255,255,0.08); --btn-outline-active-border: #9ca3af;
+  --btn-outline-focus-ring: rgba(156,163,175,0.5);
+  --btn-outline-disabled-bg: transparent; --btn-outline-disabled-text: #4b5563; --btn-outline-disabled-border: #374151;
+  --btn-outline-spinner: #e5e7eb;
+
+  --btn-ghost-bg: transparent; --btn-ghost-text: #e5e7eb; --btn-ghost-border: transparent;
+  --btn-ghost-hover-bg: rgba(255,255,255,0.05); --btn-ghost-hover-border: transparent;
+  --btn-ghost-active-bg: rgba(255,255,255,0.08); --btn-ghost-active-border: transparent;
+  --btn-ghost-focus-ring: rgba(156,163,175,0.5);
+  --btn-ghost-disabled-bg: transparent; --btn-ghost-disabled-text: #4b5563; --btn-ghost-disabled-border: transparent;
+  --btn-ghost-spinner: #e5e7eb;
+
+  --btn-danger-bg: #dc2626; --btn-danger-text: #fff; --btn-danger-border: #dc2626;
+  --btn-danger-hover-bg: #ef4444; --btn-danger-hover-border: #ef4444;
+  --btn-danger-active-bg: #b91c1c; --btn-danger-active-border: #b91c1c;
+  --btn-danger-focus-ring: rgba(220,38,38,0.5);
+  --btn-danger-disabled-bg: #374151; --btn-danger-disabled-text: #6b7280; --btn-danger-disabled-border: #374151;
+  --btn-danger-spinner: #fff;
+}
+
+/* ── Select (light) ── */
+[data-theme="enterprise"] {
+  --select-font-size: 0.875rem; --select-radius: 0.5rem; --select-transition: all 0.15s ease;
+  --select-shadow: 0 1px 2px rgba(0,0,0,0.06);
+  --select-dropdown-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  --select-dropdown-border: #e5e7eb; --select-dropdown-bg: #fff;
+  --select-helper-color: #9ca3af; --select-error-color: #dc2626; --select-label-color: #4b5563;
+
+  --select-primary-bg: #fff; --select-primary-text: #1f2937; --select-primary-border: #d1d5db;
+  --select-primary-placeholder: #9ca3af; --select-primary-icon: #6b7280;
+  --select-primary-hover-bg: #fff; --select-primary-hover-border: #3b82f6;
+  --select-primary-focus-bg: #fff; --select-primary-focus-border: #3b82f6; --select-primary-focus-ring: rgba(59,130,246,0.25);
+  --select-primary-disabled-bg: #f9fafb; --select-primary-disabled-text: #d1d5db; --select-primary-disabled-border: #e5e7eb;
+  --select-primary-error-border: #ef4444; --select-primary-error-focus-ring: rgba(239,68,68,0.25);
+  --select-primary-option-bg: #fff; --select-primary-option-text: #1f2937;
+  --select-primary-option-hover-bg: #3b82f6; --select-primary-option-hover-text: #fff;
+  --select-primary-option-selected-bg: rgba(59,130,246,0.08); --select-primary-option-selected-text: #2563eb;
+  --select-primary-option-disabled-text: #d1d5db;
+
+  --select-secondary-bg: #f3f4f6; --select-secondary-text: #1f2937; --select-secondary-border: #d1d5db;
+  --select-secondary-placeholder: #9ca3af; --select-secondary-icon: #6b7280;
+  --select-secondary-hover-bg: #f3f4f6; --select-secondary-hover-border: #9ca3af;
+  --select-secondary-focus-bg: #f3f4f6; --select-secondary-focus-border: #9ca3af; --select-secondary-focus-ring: rgba(156,163,175,0.3);
+  --select-secondary-disabled-bg: #f9fafb; --select-secondary-disabled-text: #d1d5db; --select-secondary-disabled-border: #e5e7eb;
+  --select-secondary-error-border: #ef4444; --select-secondary-error-focus-ring: rgba(239,68,68,0.25);
+  --select-secondary-option-bg: #fff; --select-secondary-option-text: #1f2937;
+  --select-secondary-option-hover-bg: #f3f4f6; --select-secondary-option-hover-text: #1f2937;
+  --select-secondary-option-selected-bg: rgba(59,130,246,0.08); --select-secondary-option-selected-text: #2563eb;
+  --select-secondary-option-disabled-text: #d1d5db;
+
+  --select-outline-bg: transparent; --select-outline-text: #374151; --select-outline-border: #d1d5db;
+  --select-outline-placeholder: #9ca3af; --select-outline-icon: #6b7280;
+  --select-outline-hover-bg: rgba(0,0,0,0.02); --select-outline-hover-border: #9ca3af;
+  --select-outline-focus-bg: rgba(0,0,0,0.02); --select-outline-focus-border: #9ca3af; --select-outline-focus-ring: rgba(156,163,175,0.3);
+  --select-outline-disabled-bg: transparent; --select-outline-disabled-text: #d1d5db; --select-outline-disabled-border: #e5e7eb;
+  --select-outline-error-border: #ef4444; --select-outline-error-focus-ring: rgba(239,68,68,0.25);
+  --select-outline-option-bg: #fff; --select-outline-option-text: #1f2937;
+  --select-outline-option-hover-bg: #f3f4f6; --select-outline-option-hover-text: #1f2937;
+  --select-outline-option-selected-bg: rgba(59,130,246,0.08); --select-outline-option-selected-text: #2563eb;
+  --select-outline-option-disabled-text: #d1d5db;
+
+  --select-ghost-bg: transparent; --select-ghost-text: #374151; --select-ghost-border: transparent;
+  --select-ghost-placeholder: #9ca3af; --select-ghost-icon: #6b7280;
+  --select-ghost-hover-bg: rgba(0,0,0,0.04); --select-ghost-hover-border: transparent;
+  --select-ghost-focus-bg: rgba(0,0,0,0.04); --select-ghost-focus-border: transparent; --select-ghost-focus-ring: rgba(156,163,175,0.3);
+  --select-ghost-disabled-bg: transparent; --select-ghost-disabled-text: #d1d5db; --select-ghost-disabled-border: transparent;
+  --select-ghost-error-border: #ef4444; --select-ghost-error-focus-ring: rgba(239,68,68,0.25);
+  --select-ghost-option-bg: #fff; --select-ghost-option-text: #1f2937;
+  --select-ghost-option-hover-bg: #f3f4f6; --select-ghost-option-hover-text: #1f2937;
+  --select-ghost-option-selected-bg: rgba(59,130,246,0.08); --select-ghost-option-selected-text: #2563eb;
+  --select-ghost-option-disabled-text: #d1d5db;
+}
+
+/* ── Select (dark) ── */
+[data-theme="enterprise"][data-mode="dark"] {
+  --select-font-size: 0.875rem; --select-radius: 0.5rem; --select-transition: all 0.15s ease;
+  --select-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  --select-dropdown-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  --select-dropdown-border: #374151; --select-dropdown-bg: #1f2937;
+  --select-helper-color: #9ca3af; --select-error-color: #fca5a5; --select-label-color: #d1d5db;
+
+  --select-primary-bg: #1f2937; --select-primary-text: #e5e7eb; --select-primary-border: #4b5563;
+  --select-primary-placeholder: #6b7280; --select-primary-icon: #9ca3af;
+  --select-primary-hover-bg: #1f2937; --select-primary-hover-border: #3b82f6;
+  --select-primary-focus-bg: #1f2937; --select-primary-focus-border: #3b82f6; --select-primary-focus-ring: rgba(59,130,246,0.3);
+  --select-primary-disabled-bg: #111827; --select-primary-disabled-text: #4b5563; --select-primary-disabled-border: #374151;
+  --select-primary-error-border: #ef4444; --select-primary-error-focus-ring: rgba(239,68,68,0.3);
+  --select-primary-option-bg: #1f2937; --select-primary-option-text: #e5e7eb;
+  --select-primary-option-hover-bg: #3b82f6; --select-primary-option-hover-text: #fff;
+  --select-primary-option-selected-bg: rgba(59,130,246,0.15); --select-primary-option-selected-text: #a5b4fc;
+  --select-primary-option-disabled-text: #4b5563;
+
+  --select-secondary-bg: #374151; --select-secondary-text: #e5e7eb; --select-secondary-border: #4b5563;
+  --select-secondary-placeholder: #6b7280; --select-secondary-icon: #9ca3af;
+  --select-secondary-hover-bg: #374151; --select-secondary-hover-border: #6b7280;
+  --select-secondary-focus-bg: #374151; --select-secondary-focus-border: #6b7280; --select-secondary-focus-ring: rgba(107,114,128,0.3);
+  --select-secondary-disabled-bg: #1f2937; --select-secondary-disabled-text: #4b5563; --select-secondary-disabled-border: #374151;
+  --select-secondary-error-border: #ef4444; --select-secondary-error-focus-ring: rgba(239,68,68,0.3);
+  --select-secondary-option-bg: #374151; --select-secondary-option-text: #e5e7eb;
+  --select-secondary-option-hover-bg: #4b5563; --select-secondary-option-hover-text: #fff;
+  --select-secondary-option-selected-bg: rgba(107,114,128,0.2); --select-secondary-option-selected-text: #d1d5db;
+  --select-secondary-option-disabled-text: #4b5563;
+
+  --select-outline-bg: transparent; --select-outline-text: #e5e7eb; --select-outline-border: #4b5563;
+  --select-outline-placeholder: #6b7280; --select-outline-icon: #9ca3af;
+  --select-outline-hover-bg: rgba(255,255,255,0.03); --select-outline-hover-border: #6b7280;
+  --select-outline-focus-bg: rgba(255,255,255,0.03); --select-outline-focus-border: #6b7280; --select-outline-focus-ring: rgba(107,114,128,0.3);
+  --select-outline-disabled-bg: transparent; --select-outline-disabled-text: #4b5563; --select-outline-disabled-border: #374151;
+  --select-outline-error-border: #ef4444; --select-outline-error-focus-ring: rgba(239,68,68,0.3);
+  --select-outline-option-bg: #1f2937; --select-outline-option-text: #e5e7eb;
+  --select-outline-option-hover-bg: #374151; --select-outline-option-hover-text: #fff;
+  --select-outline-option-selected-bg: rgba(59,130,246,0.15); --select-outline-option-selected-text: #a5b4fc;
+  --select-outline-option-disabled-text: #4b5563;
+
+  --select-ghost-bg: transparent; --select-ghost-text: #e5e7eb; --select-ghost-border: transparent;
+  --select-ghost-placeholder: #6b7280; --select-ghost-icon: #9ca3af;
+  --select-ghost-hover-bg: rgba(255,255,255,0.05); --select-ghost-hover-border: transparent;
+  --select-ghost-focus-bg: rgba(255,255,255,0.05); --select-ghost-focus-border: transparent; --select-ghost-focus-ring: rgba(107,114,128,0.3);
+  --select-ghost-disabled-bg: transparent; --select-ghost-disabled-text: #4b5563; --select-ghost-disabled-border: transparent;
+  --select-ghost-error-border: #ef4444; --select-ghost-error-focus-ring: rgba(239,68,68,0.3);
+  --select-ghost-option-bg: #1f2937; --select-ghost-option-text: #e5e7eb;
+  --select-ghost-option-hover-bg: #374151; --select-ghost-option-hover-text: #fff;
+  --select-ghost-option-selected-bg: rgba(59,130,246,0.15); --select-ghost-option-selected-text: #a5b4fc;
+  --select-ghost-option-disabled-text: #4b5563;
+}
+
+/* ── TextBox (light) ── */
+[data-theme="enterprise"] {
+  --textbox-font-size: 0.875rem; --textbox-radius: 0.5rem; --textbox-transition: all 0.15s ease;
+  --textbox-shadow: 0 1px 2px rgba(0,0,0,0.06);
+  --textbox-helper-color: #9ca3af; --textbox-error-color: #dc2626; --textbox-label-color: #4b5563;
+  --textbox-clear-color: #9ca3af; --textbox-clear-hover-color: #6b7280;
+
+  --textbox-primary-bg: #fff; --textbox-primary-text: #1f2937; --textbox-primary-border: #d1d5db;
+  --textbox-primary-placeholder: #9ca3af; --textbox-primary-icon: #6b7280;
+  --textbox-primary-hover-bg: #fff; --textbox-primary-hover-border: #3b82f6;
+  --textbox-primary-focus-bg: #fff; --textbox-primary-focus-border: #3b82f6; --textbox-primary-focus-ring: rgba(59,130,246,0.25);
+  --textbox-primary-disabled-bg: #f9fafb; --textbox-primary-disabled-text: #d1d5db; --textbox-primary-disabled-border: #e5e7eb;
+  --textbox-primary-error-border: #ef4444; --textbox-primary-error-focus-ring: rgba(239,68,68,0.25);
+
+  --textbox-secondary-bg: #f3f4f6; --textbox-secondary-text: #1f2937; --textbox-secondary-border: #d1d5db;
+  --textbox-secondary-placeholder: #9ca3af; --textbox-secondary-icon: #6b7280;
+  --textbox-secondary-hover-bg: #f3f4f6; --textbox-secondary-hover-border: #9ca3af;
+  --textbox-secondary-focus-bg: #f3f4f6; --textbox-secondary-focus-border: #9ca3af; --textbox-secondary-focus-ring: rgba(156,163,175,0.3);
+  --textbox-secondary-disabled-bg: #f9fafb; --textbox-secondary-disabled-text: #d1d5db; --textbox-secondary-disabled-border: #e5e7eb;
+  --textbox-secondary-error-border: #ef4444; --textbox-secondary-error-focus-ring: rgba(239,68,68,0.25);
+
+  --textbox-outline-bg: transparent; --textbox-outline-text: #374151; --textbox-outline-border: #d1d5db;
+  --textbox-outline-placeholder: #9ca3af; --textbox-outline-icon: #6b7280;
+  --textbox-outline-hover-bg: rgba(0,0,0,0.02); --textbox-outline-hover-border: #9ca3af;
+  --textbox-outline-focus-bg: rgba(0,0,0,0.02); --textbox-outline-focus-border: #9ca3af; --textbox-outline-focus-ring: rgba(156,163,175,0.3);
+  --textbox-outline-disabled-bg: transparent; --textbox-outline-disabled-text: #d1d5db; --textbox-outline-disabled-border: #e5e7eb;
+  --textbox-outline-error-border: #ef4444; --textbox-outline-error-focus-ring: rgba(239,68,68,0.25);
+
+  --textbox-ghost-bg: transparent; --textbox-ghost-text: #374151; --textbox-ghost-border: transparent;
+  --textbox-ghost-placeholder: #9ca3af; --textbox-ghost-icon: #6b7280;
+  --textbox-ghost-hover-bg: rgba(0,0,0,0.04); --textbox-ghost-hover-border: transparent;
+  --textbox-ghost-focus-bg: rgba(0,0,0,0.04); --textbox-ghost-focus-border: transparent; --textbox-ghost-focus-ring: rgba(156,163,175,0.3);
+  --textbox-ghost-disabled-bg: transparent; --textbox-ghost-disabled-text: #d1d5db; --textbox-ghost-disabled-border: transparent;
+  --textbox-ghost-error-border: #ef4444; --textbox-ghost-error-focus-ring: rgba(239,68,68,0.25);
+}
+
+/* ── TextBox (dark) ── */
+[data-theme="enterprise"][data-mode="dark"] {
+  --textbox-font-size: 0.875rem; --textbox-radius: 0.5rem; --textbox-transition: all 0.15s ease;
+  --textbox-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  --textbox-helper-color: #9ca3af; --textbox-error-color: #fca5a5; --textbox-label-color: #d1d5db;
+  --textbox-clear-color: #6b7280; --textbox-clear-hover-color: #9ca3af;
+
+  --textbox-primary-bg: #1f2937; --textbox-primary-text: #e5e7eb; --textbox-primary-border: #4b5563;
+  --textbox-primary-placeholder: #6b7280; --textbox-primary-icon: #9ca3af;
+  --textbox-primary-hover-bg: #1f2937; --textbox-primary-hover-border: #3b82f6;
+  --textbox-primary-focus-bg: #1f2937; --textbox-primary-focus-border: #3b82f6; --textbox-primary-focus-ring: rgba(59,130,246,0.3);
+  --textbox-primary-disabled-bg: #111827; --textbox-primary-disabled-text: #4b5563; --textbox-primary-disabled-border: #374151;
+  --textbox-primary-error-border: #ef4444; --textbox-primary-error-focus-ring: rgba(239,68,68,0.3);
+
+  --textbox-secondary-bg: #374151; --textbox-secondary-text: #e5e7eb; --textbox-secondary-border: #4b5563;
+  --textbox-secondary-placeholder: #6b7280; --textbox-secondary-icon: #9ca3af;
+  --textbox-secondary-hover-bg: #374151; --textbox-secondary-hover-border: #6b7280;
+  --textbox-secondary-focus-bg: #374151; --textbox-secondary-focus-border: #6b7280; --textbox-secondary-focus-ring: rgba(107,114,128,0.3);
+  --textbox-secondary-disabled-bg: #1f2937; --textbox-secondary-disabled-text: #4b5563; --textbox-secondary-disabled-border: #374151;
+  --textbox-secondary-error-border: #ef4444; --textbox-secondary-error-focus-ring: rgba(239,68,68,0.3);
+
+  --textbox-outline-bg: transparent; --textbox-outline-text: #e5e7eb; --textbox-outline-border: #4b5563;
+  --textbox-outline-placeholder: #6b7280; --textbox-outline-icon: #9ca3af;
+  --textbox-outline-hover-bg: rgba(255,255,255,0.03); --textbox-outline-hover-border: #6b7280;
+  --textbox-outline-focus-bg: rgba(255,255,255,0.03); --textbox-outline-focus-border: #6b7280; --textbox-outline-focus-ring: rgba(107,114,128,0.3);
+  --textbox-outline-disabled-bg: transparent; --textbox-outline-disabled-text: #4b5563; --textbox-outline-disabled-border: #374151;
+  --textbox-outline-error-border: #ef4444; --textbox-outline-error-focus-ring: rgba(239,68,68,0.3);
+
+  --textbox-ghost-bg: transparent; --textbox-ghost-text: #e5e7eb; --textbox-ghost-border: transparent;
+  --textbox-ghost-placeholder: #6b7280; --textbox-ghost-icon: #9ca3af;
+  --textbox-ghost-hover-bg: rgba(255,255,255,0.05); --textbox-ghost-hover-border: transparent;
+  --textbox-ghost-focus-bg: rgba(255,255,255,0.05); --textbox-ghost-focus-border: transparent; --textbox-ghost-focus-ring: rgba(107,114,128,0.3);
+  --textbox-ghost-disabled-bg: transparent; --textbox-ghost-disabled-text: #4b5563; --textbox-ghost-disabled-border: transparent;
+  --textbox-ghost-error-border: #ef4444; --textbox-ghost-error-focus-ring: rgba(239,68,68,0.3);
+}

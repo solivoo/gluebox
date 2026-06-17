@@ -4,27 +4,24 @@ layout: home
 hero:
   name: gluBox
   text: Componentes React empresariales
-  tagline: Sidebar con RBAC, menú dinámico desde API, temas e integración con cualquier router
+  tagline: Sidebar con RBAC, formularios temáticos, calendarios y demo interactiva con playground
   actions:
     - theme: brand
       text: Empezar
       link: /guide/getting-started
     - theme: alt
-      text: Sidebar — referencia
-      link: /components/sidebar
-    - theme: alt
-      text: Storybook
-      link: /storybook/
+      text: Formularios
+      link: /components/forms
 
 features:
   - title: Menú desde API
-    details: Contrato JSON documentado para backend — módulos, opciones y acciones hasta 3 niveles.
-  - title: RBAC integrado
-    details: Filtrado por permisos (OR), utilidades hasPermission y filterVisibleMenu exportadas.
-  - title: Router-agnostic
-    details: Conecta activePath y onNavigate con React Router, Next.js o estado local.
-  - title: Temas e iconos
-    details: Presets dark/light, tokens custom, renderIcon para Lucide o Iconify.
+    details: Contrato JSON documentado — módulos, opciones y acciones hasta 3 niveles con RBAC.
+  - title: Controles de formulario
+    details: TextBox, Select, DateBox, RangeDateBox con label top, floating, outlined y left.
+  - title: Temas globales
+    details: Default, Modern y Enterprise en dark/light más temas por componente.
+  - title: Demo interactiva
+    details: Playground en el repo para probar props y variantes sin Storybook.
 ---
 
 ## Quick start
@@ -34,14 +31,15 @@ pnpm add glubox
 ```
 
 ```tsx
-import { Sidebar } from 'glubox';
+import { Sidebar, TextBox } from 'glubox';
 import 'glubox/style.css';
+import 'glubox/themes/default.css';
 ```
 
 ## Documentación
 
+- [Introducción](/guide/getting-started)
 - [Instalación](/guide/installation)
-- [Esquema del menú (API)](/guide/menu-api) — para equipos backend
-- [Integración con routing](/guide/routing)
-- [Sidebar — referencia completa](/components/sidebar)
-- [Storybook interactivo](/storybook/)
+- [Formularios](/components/forms)
+- [Botones y selección](/components/buttons)
+- [Sidebar — referencia](/components/sidebar)

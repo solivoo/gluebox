@@ -1,0 +1,531 @@
+@import '../../../styles/outlined-label.css';
+
+/* ── Wrapper ── */
+
+.glb-select {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  font-family: var(--glb-font-family, 'Poppins', sans-serif);
+  font-size: var(--select-font-size, 0.875rem);
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.glb-select--full-width {
+  width: 100%;
+}
+
+/* ── Label: Fixed (default) ── */
+
+.glb-select__label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--select-label-color, #4b5563);
+  line-height: 1.25;
+}
+
+/* ── Outside label (horizontal layout) ── */
+
+.glb-select--left .glb-select__row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.glb-select--left .glb-select__label {
+  flex-shrink: 0;
+  padding-top: 0.55rem;
+  min-width: 7rem;
+  text-align: right;
+}
+
+.glb-select--left .glb-select__row > div {
+  flex: 1;
+  min-width: 0;
+  overflow: visible;
+}
+
+.glb-select--left .glb-select__helper {
+  margin-left: 7.75rem;
+}
+
+/* Outside sizes */
+.glb-select--left.glb-select--sm .glb-select__label {
+  padding-top: 0.4rem;
+  font-size: 0.75rem;
+}
+
+.glb-select--left.glb-select--lg .glb-select__label {
+  padding-top: 0.65rem;
+  font-size: 0.875rem;
+}
+
+/* ── Floating label ── */
+
+.glb-select--floating .glb-select__label {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: inherit;
+  font-weight: 400;
+  color: var(--select-placeholder);
+  pointer-events: none;
+  transition: all 0.2s ease;
+  transform-origin: left top;
+  z-index: 1;
+  max-width: calc(100% - 2.5rem);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* Floating label — floated state (open or has value) */
+.glb-select--floating.glb-select--label-floated .glb-select__label {
+  top: 0.35rem;
+  transform: translateY(0) scale(0.75);
+  font-weight: 500;
+  color: var(--select-label-color);
+}
+
+.glb-select--floating.glb-select--error .glb-select__label {
+  color: var(--select-error-color);
+}
+
+/* Trigger padding for floating label */
+.glb-select--floating .glb-select__trigger {
+  padding-top: 1.25rem;
+  padding-bottom: 0.4rem;
+}
+
+/* Floating sizes */
+.glb-select--floating.glb-select--sm .glb-select__trigger {
+  padding-top: 1.1rem;
+  padding-bottom: 0.3rem;
+}
+
+.glb-select--floating.glb-select--sm .glb-select__label {
+  left: 0.625rem;
+}
+
+.glb-select--floating.glb-select--sm.glb-select--label-floated .glb-select__label {
+  top: 0.25rem;
+  transform: translateY(0) scale(0.7);
+}
+
+.glb-select--floating.glb-select--lg .glb-select__trigger {
+  padding-top: 1.4rem;
+  padding-bottom: 0.5rem;
+}
+
+.glb-select--floating.glb-select--lg .glb-select__label {
+  left: 0.875rem;
+}
+
+.glb-select--floating.glb-select--lg.glb-select--label-floated .glb-select__label {
+  top: 0.4rem;
+  transform: translateY(0) scale(0.75);
+}
+
+/* ── Outlined label (sobre el borde) ── */
+
+.glb-select--outlined {
+  gap: 0.25rem;
+}
+
+.glb-select--outlined .glb-select__outlined-field {
+  --glb-outlined-label-color: var(--select-label-color);
+  --glb-outlined-radius: var(--select-radius);
+}
+
+.glb-select--outlined.glb-select--primary .glb-select__outlined-field {
+  --glb-outlined-border: var(--select-primary-border);
+  --glb-outlined-hover-border: var(--select-primary-hover-border);
+  --glb-outlined-focus-border: var(--select-primary-focus-border);
+  --glb-outlined-focus-ring: var(--select-primary-focus-ring);
+  --glb-outlined-disabled-border: var(--select-primary-disabled-border);
+}
+
+.glb-select--outlined.glb-select--secondary .glb-select__outlined-field {
+  --glb-outlined-border: var(--select-secondary-border);
+  --glb-outlined-hover-border: var(--select-secondary-hover-border);
+  --glb-outlined-focus-border: var(--select-secondary-focus-border);
+  --glb-outlined-focus-ring: var(--select-secondary-focus-ring);
+  --glb-outlined-disabled-border: var(--select-secondary-disabled-border);
+}
+
+.glb-select--outlined.glb-select--outline .glb-select__outlined-field {
+  --glb-outlined-focus-border: var(--select-outline-focus-border);
+  --glb-outlined-focus-ring: var(--select-outline-focus-ring);
+  --glb-outlined-disabled-border: var(--select-outline-disabled-border);
+}
+
+.glb-select--outlined.glb-select--ghost .glb-select__outlined-field {
+  --glb-outlined-focus-border: var(--select-ghost-focus-border);
+  --glb-outlined-focus-ring: var(--select-ghost-focus-ring);
+  --glb-outlined-disabled-border: var(--select-ghost-disabled-border);
+}
+
+.glb-select--outlined.glb-select--error .glb-select__outlined-field {
+  --glb-outlined-border: var(--select-error-border);
+  --glb-outlined-focus-border: var(--select-error-border);
+  --glb-outlined-focus-ring: var(--select-error-focus-ring);
+}
+
+.glb-select--outlined .glb-select__trigger {
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  border-radius: 0;
+  padding-top: 0.875rem;
+  min-height: 2.625rem;
+}
+
+.glb-select--outlined .glb-select__trigger:hover:not(:disabled):not(.glb-select__trigger--open) {
+  background: transparent;
+  border-color: transparent;
+}
+
+.glb-select--outlined .glb-select__trigger:focus-visible,
+.glb-select--outlined .glb-select__trigger--open {
+  box-shadow: none;
+  background: transparent;
+  border-color: transparent;
+}
+
+.glb-select--outlined .glb-select__outlined-field:has(.glb-select__trigger--open) {
+  border-color: var(--glb-outlined-focus-border, var(--select-focus-border));
+  box-shadow: 0 0 0 3px var(--glb-outlined-focus-ring, var(--select-focus-ring));
+}
+
+.glb-select--outlined.glb-select--error .glb-select__outlined-field:has(.glb-select__trigger--open) {
+  box-shadow: 0 0 0 3px var(--select-error-focus-ring);
+}
+
+/* ── Trigger ── */
+
+.glb-select__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  font-family: var(--glb-font-family, 'Poppins', sans-serif);
+  font-size: inherit;
+  font-weight: 400;
+  line-height: 1.5;
+  border-radius: var(--select-radius, 0.5rem);
+  border: 1px solid transparent;
+  cursor: pointer;
+  user-select: none;
+  transition: var(--select-transition, all 0.15s ease);
+  box-sizing: border-box;
+  outline: none;
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--select-bg);
+  color: var(--select-text);
+  border-color: var(--select-border);
+  box-shadow: var(--select-shadow);
+}
+
+.glb-select__trigger:focus-visible {
+  border-color: var(--select-focus-border);
+  background-color: var(--select-focus-bg);
+  box-shadow: 0 0 0 3px var(--select-focus-ring);
+}
+
+.glb-select__trigger:hover:not(:disabled):not(.glb-select__trigger--open) {
+  background-color: var(--select-hover-bg);
+  border-color: var(--select-hover-border);
+}
+
+.glb-select__trigger--open {
+  border-color: var(--select-focus-border);
+  background-color: var(--select-focus-bg);
+  box-shadow: 0 0 0 3px var(--select-focus-ring);
+}
+
+.glb-select__trigger--error {
+  border-color: var(--select-error-border);
+}
+
+.glb-select__trigger--error:focus-visible,
+.glb-select__trigger--error.glb-select__trigger--open {
+  border-color: var(--select-error-border);
+  box-shadow: 0 0 0 3px var(--select-error-focus-ring);
+}
+
+.glb-select__trigger:disabled {
+  background-color: var(--select-disabled-bg);
+  color: var(--select-disabled-text);
+  border-color: var(--select-disabled-border);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ── Value / Placeholder ── */
+
+.glb-select__value {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.glb-select__placeholder {
+  color: var(--select-placeholder);
+}
+
+.glb-select__trigger:disabled .glb-select__placeholder {
+  color: var(--select-disabled-text);
+}
+
+/* ── Chevron icon ── */
+
+.glb-select__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--select-icon);
+  transition: transform 0.2s ease;
+}
+
+.glb-select__icon svg {
+  width: 1em;
+  height: 1em;
+}
+
+.glb-select__trigger--open .glb-select__icon {
+  transform: rotate(180deg);
+}
+
+.glb-select__trigger:disabled .glb-select__icon {
+  opacity: 0.4;
+}
+
+/* ── Dropdown ── */
+
+.glb-select__dropdown {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  left: 0;
+  z-index: 50;
+  min-width: 100%;
+  max-height: 15rem;
+  overflow-y: auto;
+  background-color: var(--select-dropdown-bg);
+  border: 1px solid var(--select-dropdown-border);
+  border-radius: var(--select-radius, 0.5rem);
+  box-shadow: var(--select-dropdown-shadow);
+  padding: 0.25rem;
+  animation: glb-select-fade-in 0.12s ease;
+}
+
+@keyframes glb-select-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Dropdown scrollbar ── */
+
+.glb-select__dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+
+.glb-select__dropdown::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.glb-select__dropdown::-webkit-scrollbar-thumb {
+  background: rgba(128, 128, 128, 0.3);
+  border-radius: 3px;
+}
+
+/* ── Option ── */
+
+.glb-select__option {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  border-radius: calc(var(--select-radius, 0.5rem) - 0.125rem);
+  cursor: pointer;
+  font-size: inherit;
+  font-family: var(--glb-font-family, 'Poppins', sans-serif);
+  line-height: 1.5;
+  background-color: var(--select-option-bg);
+  color: var(--select-option-text);
+  transition: background-color 0.1s ease, color 0.1s ease;
+  outline: none;
+  user-select: none;
+}
+
+.glb-select__option:hover,
+.glb-select__option--highlighted {
+  background-color: var(--select-option-hover-bg);
+  color: var(--select-option-hover-text);
+}
+
+.glb-select__option--selected {
+  background-color: var(--select-option-selected-bg);
+  color: var(--select-option-selected-text);
+  font-weight: 500;
+}
+
+.glb-select__option--disabled {
+  color: var(--select-option-disabled-text);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Helper / Error text ── */
+
+.glb-select__helper {
+  font-size: 0.75rem;
+  line-height: 1.25;
+  color: var(--select-helper-color);
+}
+
+.glb-select__helper--error {
+  color: var(--select-error-color);
+}
+
+/* ── Sizes ── */
+
+.glb-select--sm .glb-select__trigger {
+  font-size: 0.8125rem;
+  padding: 0.375rem 0.625rem;
+  border-radius: calc(var(--select-radius, 0.5rem) - 0.0625rem);
+}
+
+.glb-select--sm .glb-select__label {
+  font-size: 0.75rem;
+}
+
+.glb-select--lg .glb-select__trigger {
+  font-size: 1rem;
+  padding: 0.625rem 0.875rem;
+  border-radius: calc(var(--select-radius, 0.5rem) + 0.0625rem);
+}
+
+.glb-select--lg .glb-select__label {
+  font-size: 0.875rem;
+}
+
+/* ── Variant: Primary ── */
+
+.glb-select--primary {
+  --select-bg: var(--select-primary-bg);
+  --select-text: var(--select-primary-text);
+  --select-border: var(--select-primary-border);
+  --select-placeholder: var(--select-primary-placeholder);
+  --select-icon: var(--select-primary-icon);
+  --select-hover-bg: var(--select-primary-hover-bg);
+  --select-hover-border: var(--select-primary-hover-border);
+  --select-focus-bg: var(--select-primary-focus-bg);
+  --select-focus-border: var(--select-primary-focus-border);
+  --select-focus-ring: var(--select-primary-focus-ring);
+  --select-disabled-bg: var(--select-primary-disabled-bg);
+  --select-disabled-text: var(--select-primary-disabled-text);
+  --select-disabled-border: var(--select-primary-disabled-border);
+  --select-error-border: var(--select-primary-error-border);
+  --select-error-focus-ring: var(--select-primary-error-focus-ring);
+  --select-option-bg: var(--select-primary-option-bg);
+  --select-option-text: var(--select-primary-option-text);
+  --select-option-hover-bg: var(--select-primary-option-hover-bg);
+  --select-option-hover-text: var(--select-primary-option-hover-text);
+  --select-option-selected-bg: var(--select-primary-option-selected-bg);
+  --select-option-selected-text: var(--select-primary-option-selected-text);
+  --select-option-disabled-text: var(--select-primary-option-disabled-text);
+}
+
+/* ── Variant: Secondary ── */
+
+.glb-select--secondary {
+  --select-bg: var(--select-secondary-bg);
+  --select-text: var(--select-secondary-text);
+  --select-border: var(--select-secondary-border);
+  --select-placeholder: var(--select-secondary-placeholder);
+  --select-icon: var(--select-secondary-icon);
+  --select-hover-bg: var(--select-secondary-hover-bg);
+  --select-hover-border: var(--select-secondary-hover-border);
+  --select-focus-bg: var(--select-secondary-focus-bg);
+  --select-focus-border: var(--select-secondary-focus-border);
+  --select-focus-ring: var(--select-secondary-focus-ring);
+  --select-disabled-bg: var(--select-secondary-disabled-bg);
+  --select-disabled-text: var(--select-secondary-disabled-text);
+  --select-disabled-border: var(--select-secondary-disabled-border);
+  --select-error-border: var(--select-secondary-error-border);
+  --select-error-focus-ring: var(--select-secondary-error-focus-ring);
+  --select-option-bg: var(--select-secondary-option-bg);
+  --select-option-text: var(--select-secondary-option-text);
+  --select-option-hover-bg: var(--select-secondary-option-hover-bg);
+  --select-option-hover-text: var(--select-secondary-option-hover-text);
+  --select-option-selected-bg: var(--select-secondary-option-selected-bg);
+  --select-option-selected-text: var(--select-secondary-option-selected-text);
+  --select-option-disabled-text: var(--select-secondary-option-disabled-text);
+}
+
+/* ── Variant: Outline ── */
+
+.glb-select--outline {
+  --select-bg: var(--select-outline-bg);
+  --select-text: var(--select-outline-text);
+  --select-border: var(--select-outline-border);
+  --select-placeholder: var(--select-outline-placeholder);
+  --select-icon: var(--select-outline-icon);
+  --select-hover-bg: var(--select-outline-hover-bg);
+  --select-hover-border: var(--select-outline-hover-border);
+  --select-focus-bg: var(--select-outline-focus-bg);
+  --select-focus-border: var(--select-outline-focus-border);
+  --select-focus-ring: var(--select-outline-focus-ring);
+  --select-disabled-bg: var(--select-outline-disabled-bg);
+  --select-disabled-text: var(--select-outline-disabled-text);
+  --select-disabled-border: var(--select-outline-disabled-border);
+  --select-error-border: var(--select-outline-error-border);
+  --select-error-focus-ring: var(--select-outline-error-focus-ring);
+  --select-option-bg: var(--select-outline-option-bg);
+  --select-option-text: var(--select-outline-option-text);
+  --select-option-hover-bg: var(--select-outline-option-hover-bg);
+  --select-option-hover-text: var(--select-outline-option-hover-text);
+  --select-option-selected-bg: var(--select-outline-option-selected-bg);
+  --select-option-selected-text: var(--select-outline-option-selected-text);
+  --select-option-disabled-text: var(--select-outline-option-disabled-text);
+}
+
+/* ── Variant: Ghost ── */
+
+.glb-select--ghost {
+  --select-bg: var(--select-ghost-bg);
+  --select-text: var(--select-ghost-text);
+  --select-border: var(--select-ghost-border);
+  --select-placeholder: var(--select-ghost-placeholder);
+  --select-icon: var(--select-ghost-icon);
+  --select-hover-bg: var(--select-ghost-hover-bg);
+  --select-hover-border: var(--select-ghost-hover-border);
+  --select-focus-bg: var(--select-ghost-focus-bg);
+  --select-focus-border: var(--select-ghost-focus-border);
+  --select-focus-ring: var(--select-ghost-focus-ring);
+  --select-disabled-bg: var(--select-ghost-disabled-bg);
+  --select-disabled-text: var(--select-ghost-disabled-text);
+  --select-disabled-border: var(--select-ghost-disabled-border);
+  --select-error-border: var(--select-ghost-error-border);
+  --select-error-focus-ring: var(--select-ghost-error-focus-ring);
+  --select-option-bg: var(--select-ghost-option-bg);
+  --select-option-text: var(--select-ghost-option-text);
+  --select-option-hover-bg: var(--select-ghost-option-hover-bg);
+  --select-option-hover-text: var(--select-ghost-option-hover-text);
+  --select-option-selected-bg: var(--select-ghost-option-selected-bg);
+  --select-option-selected-text: var(--select-ghost-option-selected-text);
+  --select-option-disabled-text: var(--select-ghost-option-disabled-text);
+}

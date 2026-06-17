@@ -1,0 +1,662 @@
+@import '../../../styles/outlined-label.css';
+
+/* ── Base ── */
+.glb-datebox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  font-family: var(--glb-font-family, 'Poppins', sans-serif);
+  font-size: var(--datebox-font-size, 0.875rem);
+  box-sizing: border-box;
+  outline: none;
+}
+
+/* ── Full Width ── */
+.glb-datebox--full-width {
+  width: 100%;
+}
+
+.glb-datebox--full-width .glb-datebox__wrapper {
+  width: 100%;
+}
+
+/* ── Row (label izquierda + wrapper) ── */
+.glb-datebox__row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.glb-datebox--left .glb-datebox__row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.glb-datebox--left .glb-datebox__label {
+  flex-shrink: 0;
+  margin-bottom: 0;
+  white-space: nowrap;
+  padding-top: 0;
+}
+
+/* ── Label ── */
+.glb-datebox__label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--datebox-label-color, #d1d5db);
+  margin-bottom: 0.25rem;
+  transition: var(--datebox-transition, all 0.15s ease);
+}
+
+/* ── Floating Label ── */
+.glb-datebox--floating .glb-datebox__wrapper {
+  position: relative;
+}
+
+.glb-datebox--floating .glb-datebox__label {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-bottom: 0;
+  pointer-events: none;
+  color: var(--datebox-primary-placeholder, #6b7280);
+  font-weight: 400;
+  font-size: var(--datebox-font-size, 0.875rem);
+  transition: all 0.2s ease;
+  z-index: 2;
+}
+
+.glb-datebox--label-floated .glb-datebox__label {
+  top: 0.375rem;
+  transform: translateY(0) scale(0.75);
+  transform-origin: left top;
+  color: var(--datebox-label-color, #d1d5db);
+  font-weight: 500;
+}
+
+/* ── Outlined label (sobre el borde) ── */
+
+.glb-datebox--outlined {
+  gap: 0.25rem;
+}
+
+.glb-datebox--outlined .glb-datebox__outlined-field {
+  --glb-outlined-label-color: var(--datebox-label-color, #d1d5db);
+  --glb-outlined-radius: var(--datebox-radius, 0.5rem);
+}
+
+.glb-datebox--outlined.glb-datebox--primary .glb-datebox__outlined-field {
+  --glb-outlined-border: var(--datebox-primary-border);
+  --glb-outlined-hover-border: var(--datebox-primary-hover-border);
+  --glb-outlined-focus-border: var(--datebox-primary-focus-border);
+  --glb-outlined-focus-ring: var(--datebox-primary-focus-ring);
+  --glb-outlined-disabled-border: var(--datebox-primary-disabled-border);
+}
+
+.glb-datebox--outlined.glb-datebox--secondary .glb-datebox__outlined-field {
+  --glb-outlined-border: var(--datebox-secondary-border);
+  --glb-outlined-hover-border: var(--datebox-secondary-hover-border);
+  --glb-outlined-focus-border: var(--datebox-secondary-focus-border);
+  --glb-outlined-focus-ring: var(--datebox-secondary-focus-ring);
+  --glb-outlined-disabled-border: var(--datebox-secondary-disabled-border);
+}
+
+.glb-datebox--outlined.glb-datebox--outline .glb-datebox__outlined-field {
+  --glb-outlined-focus-border: var(--datebox-outline-focus-border);
+  --glb-outlined-focus-ring: var(--datebox-outline-focus-ring);
+  --glb-outlined-disabled-border: var(--datebox-outline-disabled-border);
+}
+
+.glb-datebox--outlined.glb-datebox--ghost .glb-datebox__outlined-field {
+  --glb-outlined-focus-border: var(--datebox-ghost-focus-border);
+  --glb-outlined-focus-ring: var(--datebox-ghost-focus-ring);
+  --glb-outlined-disabled-border: var(--datebox-ghost-disabled-border);
+}
+
+.glb-datebox--outlined.glb-datebox--error .glb-datebox__outlined-field {
+  --glb-outlined-border: var(--datebox-primary-error-border, #ef4444);
+  --glb-outlined-focus-border: var(--datebox-primary-error-border, #ef4444);
+  --glb-outlined-focus-ring: var(--datebox-primary-error-focus-ring, rgba(239, 68, 68, 0.3));
+}
+
+.glb-datebox--outlined .glb-datebox__display-input {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  border-radius: 0;
+  padding-top: 0.875rem;
+  min-height: 2.625rem;
+}
+
+.glb-datebox--outlined .glb-datebox__display-input:hover:not(:disabled),
+.glb-datebox--outlined .glb-datebox__display-input:focus {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* ── Wrapper ── */
+.glb-datebox__wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* ── Calendar Container ── */
+.glb-datebox__calendar-container {
+  position: relative;
+  width: 100%;
+}
+
+.glb-datebox__calendar-container--icon {
+  width: auto;
+}
+
+/* ── Icon Trigger ── */
+.glb-datebox__icon-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border-radius: var(--datebox-radius, 0.5rem);
+  border: 1px solid var(--datebox-primary-border, #4b5563);
+  background-color: var(--datebox-primary-bg, #1f2937);
+  color: var(--datebox-calendar-icon-color, #9ca3af);
+  cursor: pointer;
+  transition: var(--datebox-transition, all 0.15s ease);
+  box-shadow: var(--datebox-shadow, 0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+.glb-datebox__icon-trigger:hover:not(:disabled) {
+  border-color: var(--datebox-primary-hover-border);
+  color: var(--datebox-primary-text);
+}
+
+.glb-datebox__icon-trigger:focus-visible {
+  outline: none;
+  border-color: var(--datebox-primary-focus-border);
+  box-shadow: 0 0 0 3px var(--datebox-primary-focus-ring);
+}
+
+.glb-datebox__icon-trigger:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.glb-datebox__icon-trigger--open {
+  border-color: var(--datebox-primary-focus-border);
+  box-shadow: 0 0 0 3px var(--datebox-primary-focus-ring);
+}
+
+.glb-datebox__icon-trigger-badge {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+  background: var(--datebox-dropdown-accent, #6366f1);
+  box-shadow: 0 0 0 2px var(--datebox-primary-bg, #1f2937);
+}
+
+.glb-datebox--icon-mode {
+  width: auto;
+  display: inline-flex;
+}
+
+.glb-datebox--icon-mode .glb-datebox__wrapper {
+  width: auto;
+}
+
+.glb-datebox--sm .glb-datebox__icon-trigger {
+  width: 2rem;
+  height: 2rem;
+}
+
+.glb-datebox--lg .glb-datebox__icon-trigger {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.glb-datebox--secondary .glb-datebox__icon-trigger {
+  background-color: var(--datebox-secondary-bg);
+  border-color: var(--datebox-secondary-border);
+}
+
+.glb-datebox--outline .glb-datebox__icon-trigger {
+  background-color: var(--datebox-outline-bg);
+  border-color: var(--datebox-outline-border);
+  box-shadow: none;
+}
+
+.glb-datebox--ghost .glb-datebox__icon-trigger {
+  background-color: var(--datebox-ghost-bg);
+  border-color: var(--datebox-ghost-border);
+  box-shadow: none;
+}
+
+.glb-datebox--error .glb-datebox__icon-trigger {
+  border-color: var(--datebox-primary-error-border, #ef4444) !important;
+}
+
+/* ── Display Input (replaces native date input) ── */
+.glb-datebox__display-input {
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0.5rem 2.25rem 0.5rem 0.75rem;
+  border-radius: var(--datebox-radius, 0.5rem);
+  transition: var(--datebox-transition, all 0.15s ease);
+  box-sizing: border-box;
+  outline: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.glb-datebox__display-input::placeholder {
+  color: var(--datebox-primary-placeholder, #6b7280);
+  opacity: 1;
+}
+
+/* ── Calendar Icon (inside wrapper, outside the container) ── */
+.glb-datebox__calendar-icon {
+  position: absolute;
+  right: 0.625rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--datebox-calendar-icon-color, #9ca3af);
+  z-index: 1;
+}
+
+/* ── Clear Button ── */
+.glb-datebox__clear {
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.125rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--datebox-clear-color, #6b7280);
+  transition: color 0.15s ease;
+  z-index: 2;
+}
+
+.glb-datebox__clear:hover {
+  color: var(--datebox-clear-hover-color, #9ca3af);
+}
+
+.glb-datebox--clearable .glb-datebox__display-input {
+  padding-right: 3.75rem;
+}
+
+/* ── Helper Text ── */
+.glb-datebox__helper {
+  font-size: 0.75rem;
+  color: var(--datebox-helper-color, #9ca3af);
+  min-height: 1rem;
+  margin-top: 0.125rem;
+}
+
+.glb-datebox__helper--error {
+  color: var(--datebox-error-color, #fca5a5);
+  font-weight: 500;
+}
+
+/* ── Sizes ── */
+.glb-datebox--sm .glb-datebox__display-input {
+  font-size: 0.8125rem;
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+}
+
+.glb-datebox--lg .glb-datebox__display-input {
+  font-size: 1rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+}
+
+/* ════════════════════════════════════════════ */
+/*  Dropdown Calendar                        */
+/* ════════════════════════════════════════════ */
+
+.glb-datebox__dropdown {
+  min-width: 17.5rem;
+  background: var(--datebox-dropdown-bg, #1a1d27);
+  border: 1px solid var(--datebox-dropdown-border, #2d3139);
+  border-radius: 0.625rem;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--datebox-dropdown-border, #2d3139);
+  padding: 0.75rem;
+  font-family: var(--glb-font-family, 'Poppins', sans-serif);
+  font-size: var(--datebox-font-size, 0.875rem);
+}
+
+.glb-datebox__dropdown--floating {
+  animation: glb-datebox-fade-in 0.15s ease;
+}
+
+.glb-datebox__dropdown--positioned {
+  animation: glb-datebox-fade-in 0.15s ease;
+}
+
+@keyframes glb-datebox-fade-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Dropdown Header ── */
+.glb-datebox__dropdown-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.625rem;
+  padding: 0 0.125rem;
+}
+
+.glb-datebox__month-year {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--datebox-dropdown-text, #e5e7eb);
+  user-select: none;
+}
+
+.glb-datebox__nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 0.375rem;
+  background: transparent;
+  color: var(--datebox-dropdown-muted, #9ca3af);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.glb-datebox__nav-btn:hover {
+  background: var(--datebox-dropdown-hover-bg, rgba(255, 255, 255, 0.06));
+  color: var(--datebox-dropdown-text, #e5e7eb);
+}
+
+/* ── Day Names Row ── */
+.glb-datebox__day-names {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 0.25rem;
+}
+
+.glb-datebox__day-name {
+  text-align: center;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--datebox-dropdown-muted, #6b7280);
+  padding: 0.375rem 0;
+  user-select: none;
+}
+
+/* ── Day Grid ── */
+.glb-datebox__day-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.125rem;
+}
+
+/* ── Day Button ── */
+.glb-datebox__day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 0.375rem;
+  background: transparent;
+  color: var(--datebox-dropdown-text, #e5e7eb);
+  font-family: inherit;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+
+.glb-datebox__day:hover:not(:disabled):not(.glb-datebox__day--selected) {
+  background: var(--datebox-dropdown-hover-bg, rgba(255, 255, 255, 0.06));
+}
+
+.glb-datebox__day:focus-visible {
+  outline: 2px solid var(--datebox-primary-focus-border, #6366f1);
+  outline-offset: -2px;
+}
+
+/* ── Other Month ── */
+.glb-datebox__day--other-month {
+  color: var(--datebox-dropdown-muted, #4b5563);
+}
+
+/* ── Today ── */
+.glb-datebox__day--today {
+  font-weight: 700;
+  color: var(--datebox-dropdown-accent, #6366f1);
+  background: var(--datebox-dropdown-today-bg, rgba(99, 102, 241, 0.1));
+}
+
+.glb-datebox__day--today.glb-datebox__day--selected {
+  color: #fff;
+}
+
+/* ── Selected ── */
+.glb-datebox__day--selected {
+  background: var(--datebox-dropdown-accent, #6366f1) !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.35);
+}
+
+/* ── Range highlight ── */
+.glb-datebox__day--in-range {
+  background: color-mix(in srgb, var(--datebox-dropdown-accent, #6366f1) 16%, transparent);
+  color: var(--datebox-dropdown-text, #e5e7eb);
+  border-radius: 0;
+}
+
+.glb-datebox__day--in-range:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--datebox-dropdown-accent, #6366f1) 26%, transparent);
+}
+
+.glb-datebox__day--range-endpoint {
+  background: var(--datebox-dropdown-accent, #6366f1) !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  z-index: 1;
+}
+
+.glb-datebox__day--range-start {
+  border-radius: 0.375rem 0 0 0.375rem;
+}
+
+.glb-datebox__day--range-end {
+  border-radius: 0 0.375rem 0.375rem 0;
+}
+
+.glb-datebox__day--range-single {
+  border-radius: 0.375rem;
+}
+
+.glb-datebox__day--active-field {
+  box-shadow: 0 0 0 2px var(--datebox-dropdown-bg, #1f2937),
+    0 0 0 4px var(--datebox-dropdown-accent, #6366f1);
+}
+
+.glb-datebox__day--other-month.glb-datebox__day--in-range,
+.glb-datebox__day--other-month.glb-datebox__day--range-endpoint {
+  color: var(--datebox-dropdown-muted, #6b7280);
+}
+
+/* ── Disabled ── */
+.glb-datebox__day--disabled {
+  color: var(--datebox-dropdown-disabled, #374151) !important;
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+/* ── Dropdown Footer ── */
+.glb-datebox__dropdown-footer {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--datebox-dropdown-border, #2d3139);
+  display: flex;
+  justify-content: center;
+}
+
+.glb-datebox__today-btn {
+  border: none;
+  background: transparent;
+  color: var(--datebox-dropdown-accent, #6366f1);
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.375rem 1rem;
+  border-radius: 0.375rem;
+  transition: background 0.15s ease;
+}
+
+.glb-datebox__today-btn:hover:not(:disabled) {
+  background: var(--datebox-dropdown-today-bg, rgba(99, 102, 241, 0.1));
+}
+
+.glb-datebox__today-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ════════════════════════════════════════════ */
+/*  Variant input styles (applied to        */
+/*  .glb-datebox__display-input)            */
+/* ════════════════════════════════════════════ */
+
+/* ── Variant: Primary ── */
+.glb-datebox--primary .glb-datebox__display-input {
+  background-color: var(--datebox-primary-bg);
+  color: var(--datebox-primary-text);
+  border: 1px solid var(--datebox-primary-border);
+  box-shadow: var(--datebox-shadow, 0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+.glb-datebox--primary .glb-datebox__display-input:hover:not(:disabled) {
+  border-color: var(--datebox-primary-hover-border);
+}
+
+.glb-datebox--primary .glb-datebox__display-input:focus {
+  border-color: var(--datebox-primary-focus-border);
+  box-shadow: 0 0 0 3px var(--datebox-primary-focus-ring);
+}
+
+.glb-datebox--primary .glb-datebox__display-input:disabled {
+  background-color: var(--datebox-primary-disabled-bg);
+  color: var(--datebox-primary-disabled-text);
+  border-color: var(--datebox-primary-disabled-border);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* ── Variant: Secondary ── */
+.glb-datebox--secondary .glb-datebox__display-input {
+  background-color: var(--datebox-secondary-bg);
+  color: var(--datebox-secondary-text);
+  border: 1px solid var(--datebox-secondary-border);
+  box-shadow: var(--datebox-shadow, 0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+.glb-datebox--secondary .glb-datebox__display-input:hover:not(:disabled) {
+  border-color: var(--datebox-secondary-hover-border);
+}
+
+.glb-datebox--secondary .glb-datebox__display-input:focus {
+  border-color: var(--datebox-secondary-focus-border);
+  box-shadow: 0 0 0 3px var(--datebox-secondary-focus-ring);
+}
+
+.glb-datebox--secondary .glb-datebox__display-input:disabled {
+  background-color: var(--datebox-secondary-disabled-bg);
+  color: var(--datebox-secondary-disabled-text);
+  border-color: var(--datebox-secondary-disabled-border);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* ── Variant: Outline ── */
+.glb-datebox--outline .glb-datebox__display-input {
+  background-color: var(--datebox-outline-bg);
+  color: var(--datebox-outline-text);
+  border: 1px solid var(--datebox-outline-border);
+  box-shadow: none;
+}
+
+.glb-datebox--outline .glb-datebox__display-input:hover:not(:disabled) {
+  border-color: var(--datebox-outline-hover-border);
+  background-color: var(--datebox-outline-hover-bg);
+}
+
+.glb-datebox--outline .glb-datebox__display-input:focus {
+  border-color: var(--datebox-outline-focus-border);
+  box-shadow: 0 0 0 3px var(--datebox-outline-focus-ring);
+}
+
+.glb-datebox--outline .glb-datebox__display-input:disabled {
+  background-color: var(--datebox-outline-disabled-bg);
+  color: var(--datebox-outline-disabled-text);
+  border-color: var(--datebox-outline-disabled-border);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* ── Variant: Ghost ── */
+.glb-datebox--ghost .glb-datebox__display-input {
+  background-color: var(--datebox-ghost-bg);
+  color: var(--datebox-ghost-text);
+  border: 1px solid var(--datebox-ghost-border);
+  box-shadow: none;
+}
+
+.glb-datebox--ghost .glb-datebox__display-input:hover:not(:disabled) {
+  background-color: var(--datebox-ghost-hover-bg);
+  border-color: var(--datebox-ghost-hover-border);
+}
+
+.glb-datebox--ghost .glb-datebox__display-input:focus {
+  border-color: var(--datebox-ghost-focus-border);
+  box-shadow: 0 0 0 3px var(--datebox-ghost-focus-ring);
+}
+
+.glb-datebox--ghost .glb-datebox__display-input:disabled {
+  background-color: var(--datebox-ghost-disabled-bg);
+  color: var(--datebox-ghost-disabled-text);
+  border-color: var(--datebox-ghost-disabled-border);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* ── Error State ── */
+.glb-datebox--error .glb-datebox__display-input {
+  border-color: var(--datebox-primary-error-border, #ef4444) !important;
+}
+
+.glb-datebox--error .glb-datebox__display-input:focus {
+  box-shadow: 0 0 0 3px var(--datebox-primary-error-focus-ring, rgba(239, 68, 68, 0.3)) !important;
+}

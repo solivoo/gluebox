@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import './outlined-label.css';
+
+:root {
+  --glb-font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ── App-level tokens for the demo shell ── */
+:root,
+[data-mode="light"] {
+  --glb-app-bg: #f8fafc;
+  --glb-app-text: #1e293b;
+  --glb-toolbar-bg: #ffffff;
+  --glb-toolbar-border: #e2e8f0;
+  --glb-surface: #ffffff;
+  --glb-surface-hover: #f1f5f9;
+  --glb-border: #e2e8f0;
+  --glb-input-bg: #ffffff;
+  --glb-text: #1e293b;
+  --glb-preview-dot: rgba(0, 0, 0, 0.015);
+  --glb-muted: #94a3b8;
+  /* Fondo detrás del campo (notch del label outlined en variantes transparentes) */
+  --glb-field-canvas: var(--glb-app-bg);
+
+  --glb-scrollbar-track: transparent;
+  --glb-scrollbar-thumb: #cbd5e1;
+  --glb-scrollbar-thumb-hover: #94a3b8;
+}
+
+[data-mode="dark"] {
+  --glb-app-bg: #0f1117;
+  --glb-app-text: #e2e8f0;
+  --glb-toolbar-bg: #11131a;
+  --glb-toolbar-border: rgba(255, 255, 255, 0.06);
+  --glb-surface: #1a1d27;
+  --glb-surface-hover: #22252f;
+  --glb-border: #2d3139;
+  --glb-input-bg: #1a1d27;
+  --glb-text: #e2e8f0;
+  --glb-preview-dot: rgba(255, 255, 255, 0.03);
+  --glb-muted: #64748b;
+  --glb-field-canvas: var(--glb-app-bg);
+
+  --glb-scrollbar-track: transparent;
+  --glb-scrollbar-thumb: #3b3f4a;
+  --glb-scrollbar-thumb-hover: #555b6a;
+}
+
+/* ── Themed scrollbar ── */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--glb-scrollbar-thumb) var(--glb-scrollbar-track);
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--glb-scrollbar-track);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--glb-scrollbar-thumb);
+  border-radius: 3px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--glb-scrollbar-thumb-hover);
+}

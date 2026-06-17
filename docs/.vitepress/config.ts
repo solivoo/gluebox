@@ -11,8 +11,8 @@ export default defineConfig({
     nav: [
       { text: 'Inicio', link: '/' },
       { text: 'Guía', link: '/guide/getting-started' },
+      { text: 'Formularios', link: '/components/forms' },
       { text: 'Sidebar', link: '/components/sidebar' },
-      { text: 'Storybook', link: '/storybook/' },
       { text: 'GitHub', link: 'https://github.com/solivoo/gluebox' },
     ],
     sidebar: [
@@ -27,7 +27,11 @@ export default defineConfig({
       },
       {
         text: 'Componentes',
-        items: [{ text: 'Sidebar', link: '/components/sidebar' }],
+        items: [
+          { text: 'Formularios', link: '/components/forms' },
+          { text: 'Botones y selección', link: '/components/buttons' },
+          { text: 'Sidebar', link: '/components/sidebar' },
+        ],
       },
     ],
     socialLinks: [
