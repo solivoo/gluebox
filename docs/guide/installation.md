@@ -160,6 +160,9 @@ import {
   RangeDateBox,
   OptionGroup,
   CheckButton,
+  Popup,
+  ToastProvider,
+  useToast,
   sidebarThemes,
   buttonThemes,
   selectThemes,
@@ -168,6 +171,8 @@ import {
   rangeDateBoxThemes,
   optionGroupThemes,
   checkButtonThemes,
+  popupThemes,
+  toastThemes,
   hasPermission,
   filterVisibleMenu,
 } from 'glubox';
@@ -182,16 +187,27 @@ import type {
   RangeDateBoxProps,
   OptionGroupProps,
   CheckButtonProps,
+  PopupProps,
+  ShowToastOptions,
   Permission,
   IconResolver,
+  // Handlers de eventos (tipado de callbacks)
+  SelectOnChangeHandler,
+  PopupOnCloseHandler,
+  ToastShowHandler,
+  OptionalEventHandler,
+  EventHandlerPayload,
 } from 'glubox';
 ```
 
 - `hasPermission(userPermissions, required?)` — regla OR para guards de ruta.
 - `filterVisibleMenu(menu, userPermissions)` — misma lógica que aplica el Sidebar internamente.
+- Tipos `*OnChangeHandler`, `*OnCloseHandler`, etc. — ver [Tipos de eventos](/guide/event-types).
 
 ## Siguiente paso
 
+- [Tipos de eventos](/guide/event-types)
 - [Formularios](/components/forms)
+- [Overlays (Popup / Toast)](/components/overlays)
 - [Esquema del menú para tu API](/guide/menu-api)
 - [Referencia completa del Sidebar](/components/sidebar)

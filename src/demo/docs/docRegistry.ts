@@ -7,6 +7,8 @@ import { dateBoxMeta } from '@/demo/metadata/dateBoxMeta';
 import { rangeDateBoxMeta } from '@/demo/metadata/rangeDateBoxMeta';
 import { optionGroupMeta } from '@/demo/metadata/optionGroupMeta';
 import { checkButtonMeta } from '@/demo/metadata/checkButtonMeta';
+import { popupMeta } from '@/demo/metadata/popupMeta';
+import { toastMeta } from '@/demo/metadata/toastMeta';
 
 export interface DocEntry {
   component: string;
@@ -97,6 +99,26 @@ export const componentDocEntries: Record<string, DocEntry> = {
     importPath: "import { CheckButton } from 'glubox';",
     installNote:
       'CheckButton usa role="checkbox" y aria-checked. Soporta checked/defaultChecked para modos controlado y no controlado.',
+  },
+  popup: {
+    component: 'Popup',
+    label: 'Popup',
+    description:
+      'Diálogo modal con ancho/alto configurables, contenido libre, pie con botones (alineación derecha por defecto), botón cerrar y arrastre desde la cabecera.',
+    meta: popupMeta,
+    importPath: "import { Popup } from 'glubox';",
+    installNote:
+      'Popup renderiza en portal a document.body. Requiere estado controlado open/onClose.',
+  },
+  toast: {
+    component: 'Toast',
+    label: 'Toast',
+    description:
+      'Notificaciones no bloqueantes con posicionamiento en viewport, título, botón cerrar y variantes success/warning/error/info.',
+    meta: toastMeta,
+    importPath: "import { ToastProvider, useToast } from 'glubox';",
+    installNote:
+      'Envolvé la app con ToastProvider y usá useToast().show() para encolar notificaciones.',
   },
 };
 

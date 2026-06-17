@@ -44,3 +44,12 @@ export interface TextBoxProps
   /** Clases CSS adicionales */
   className?: string;
 }
+
+/** Handler del evento `onChange`. */
+export type TextBoxOnChangeHandler = NonNullable<TextBoxProps['onChange']>;
+
+/** Handler del evento `onFocus`. */
+export type TextBoxOnFocusHandler = NonNullable<TextBoxProps['onFocus']>;
+
+/** Handler del evento `onBlur`. */
+export type TextBoxOnBlurHandler = NonNullable<TextBoxProps['onBlur']>;

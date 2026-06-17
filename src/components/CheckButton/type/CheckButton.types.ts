@@ -33,3 +33,9 @@ export interface CheckButtonProps
   /** Preset o tema personalizado */
   theme?: CheckButtonThemeInput;
 }
+
+/** Valor emitido por `onChange`. */
+export type CheckButtonChangeValue = boolean;
+
+/** Handler del evento `onChange`. */
+export type CheckButtonOnChangeHandler = NonNullable<CheckButtonProps['onChange']>;

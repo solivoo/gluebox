@@ -1,4 +1,4 @@
-import type { ComponentType } from 'react';
+import type { ComponentType, ReactNode } from 'react';
 
 /** Tipos de control disponibles para cada prop */
 export type ControlKind = 'select' | 'boolean' | 'text' | 'number' | 'color' | 'slot';
@@ -26,6 +26,10 @@ export interface EventMeta {
   name: string;
   signature: string;
   description: string;
+  /** Tipo TypeScript exportado desde `glubox` para tipar el handler. */
+  handlerType?: string;
+  /** Tipo del valor emitido (payload), si aplica. */
+  payloadType?: string;
 }
 
 /** Sección de documentación de props (agrupadas por categoría) */
@@ -52,6 +56,16 @@ export interface ComponentMeta<P = Record<string, unknown>> {
 /** Props del <ComponentPlayground> */
 export interface ComponentPlaygroundProps {
   meta: ComponentMeta;
-  /** El componente real a renderizar */
-  Component: ComponentType<Record<string, unknown>>;
+  /** El componente real a renderizar en el preview */
+  Component?: ComponentType<Record<string, unknown>>;
+  /**
+   * Preview personalizado (modales, toasts, etc.).
+   * Si se define, tiene prioridad sobre `Component`.
+   */
+  renderPreview?: (props: Record<string, unknown>) => ReactNode;
+  /**
+   * Envuelve el playground completo (ej. ToastProvider).
+   * Recibe el layout y las props limpias del panel.
+   */
+  wrapper?: (children: ReactNode, props: Record<string, unknown>) => ReactNode;
 }

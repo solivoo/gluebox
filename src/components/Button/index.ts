@@ -4,6 +4,7 @@ export type {
   ButtonProps,
   ButtonVariant,
   ButtonSize,
+  ButtonOnClickHandler,
 } from './type/Button.types';
 
 export type {

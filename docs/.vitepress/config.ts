@@ -23,6 +23,7 @@ export default defineConfig({
           { text: 'Instalación', link: '/guide/installation' },
           { text: 'Esquema del menú (API)', link: '/guide/menu-api' },
           { text: 'Integración con routing', link: '/guide/routing' },
+          { text: 'Tipos de eventos', link: '/guide/event-types' },
         ],
       },
       {
@@ -30,6 +31,7 @@ export default defineConfig({
         items: [
           { text: 'Formularios', link: '/components/forms' },
           { text: 'Botones y selección', link: '/components/buttons' },
+          { text: 'Overlays (Popup / Toast)', link: '/components/overlays' },
           { text: 'Sidebar', link: '/components/sidebar' },
         ],
       },

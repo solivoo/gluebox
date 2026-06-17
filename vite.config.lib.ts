@@ -10,6 +10,7 @@ export default defineConfig({
     dts({
       include: [
         'src/index.ts',
+        'src/shared/**/*',
         'src/components/Sidebar/**/*',
         'src/components/Button/**/*',
         'src/components/Select/**/*',
@@ -18,6 +19,9 @@ export default defineConfig({
         'src/components/RangeDateBox/**/*',
         'src/components/OptionGroup/**/*',
         'src/components/CheckButton/**/*',
+        'src/components/Popup/**/*',
+        'src/components/Toast/**/*',
+        'src/components/shared/**/*',
       ],
       exclude: [
         'src/App.tsx',

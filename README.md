@@ -22,11 +22,24 @@ import {
   RangeDateBox,
   OptionGroup,
   CheckButton,
+  Popup,
+  ToastProvider,
+  useToast,
   hasPermission,
   filterVisibleMenu,
 } from 'glubox';
 import 'glubox/style.css';
 import 'glubox/themes/default.css'; // o modern.css, enterprise.css, index.css
+```
+
+Tipado de eventos:
+
+```tsx
+import type {
+  SelectOnChangeHandler,
+  PopupOnCloseHandler,
+  ToastShowHandler,
+} from 'glubox';
 ```
 
 ## Componentes
@@ -41,6 +54,10 @@ import 'glubox/themes/default.css'; // o modern.css, enterprise.css, index.css
 | **RangeDateBox** | Rango de fechas en un solo control |
 | **OptionGroup** | Selección exclusiva (vertical, horizontal, segmented) |
 | **CheckButton** | Toggle con semántica checkbox |
+| **Popup** | Diálogo modal arrastrable con acciones en el pie |
+| **Toast** | Notificaciones con posicionamiento, timer y animaciones |
+
+Documentación de tipos de eventos: ver `docs/guide/event-types.md` o la demo → API → Events.
 
 ## Uso rápido
 
@@ -82,6 +99,18 @@ import 'glubox/themes/default.css'; // o modern.css, enterprise.css, index.css
 />
 ```
 
+### Popup y Toast
+
+```tsx
+<Popup open={open} onClose={() => setOpen(false)} title="Confirmar" width={480}>
+  Contenido del diálogo
+</Popup>
+
+// Envolver la app con ToastProvider
+const { show } = useToast();
+show({ title: 'Guardado', message: 'Cambios aplicados.', variant: 'success' });
+```
+
 ### Label outlined y canvas
 
 Con `labelPosition="outlined"` el control es transparente y el label se apoya en el fondo del contenedor. Si el formulario está sobre una card, define el canvas en el padre:
@@ -103,9 +132,9 @@ document.documentElement.setAttribute('data-mode', 'dark');
 
 | Tema | Acento |
 |------|--------|
-| `default` | Indigo |
-| `modern` | Emerald |
-| `enterprise` | Blue |
+| `default` | Periwinkle pastel |
+| `modern` | Sage pastel |
+| `enterprise` | Powder blue pastel |
 
 Cada componente acepta además su prop `theme` (`light`, `dark`, presets como `modern-dark`, o tokens custom).
 
@@ -116,7 +145,18 @@ pnpm install
 pnpm dev              # Demo interactiva (playground)
 pnpm docs:dev         # Documentación VitePress
 pnpm build:lib        # Build para npm
+pnpm publish:lib      # prepublish:lib + npm publish (tras npm login)
 pnpm docs:build       # Build docs → GitHub Pages
+```
+
+### Publicar en npm (manual)
+
+```bash
+pnpm install
+pnpm build:lib
+npm login
+npm publish --access public
+# o: pnpm publish:lib
 ```
 
 ## Estructura del repo

@@ -110,12 +110,14 @@ export const sidebarMeta: ComponentMeta<SidebarProps> = {
       signature: '(collapsed: boolean) => void',
       description:
         'Se dispara cuando el usuario presiona el botón de colapsar/expandir en el sidebar.',
+      handlerType: 'SidebarOnCollapsedChangeHandler',
     },
     {
       name: 'onNavigate',
       signature: '(path: string) => void',
       description:
         'Se dispara cuando el usuario hace clic en un ítem de menú que tiene path. La app consumidora decide cómo navegar.',
+      handlerType: 'SidebarOnNavigateHandler',
     },
   ],
 };

@@ -4,6 +4,8 @@ export type {
   CheckButtonProps,
   CheckButtonVariant,
   CheckButtonSize,
+  CheckButtonChangeValue,
+  CheckButtonOnChangeHandler,
 } from './type/CheckButton.types';
 
 export type {

@@ -201,6 +201,8 @@ export const rangeDateBoxMeta: ComponentMeta<RangeDateBoxProps> = {
       name: 'onChange',
       signature: '(range: DateRange) => void',
       description: 'Se dispara cuando cambia la fecha de inicio o fin. Recibe { start: string, end: string }.',
+      handlerType: 'RangeDateBoxOnChangeHandler',
+      payloadType: 'RangeDateBoxChangeEvent',
     },
   ],
 };

@@ -180,6 +180,8 @@ export const selectMeta: ComponentMeta<SelectProps> = {
       name: 'onChange',
       signature: '(value: string) => void',
       description: 'Se dispara cuando cambia la opción seleccionada. Recibe el value de la opción.',
+      handlerType: 'SelectOnChangeHandler',
+      payloadType: 'SelectChangeValue',
     },
   ],
 };

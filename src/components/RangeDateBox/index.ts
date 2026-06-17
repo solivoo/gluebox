@@ -7,6 +7,8 @@ export type {
   RangeDateBoxLabelPosition,
   RangeDateBoxDisplayMode,
   DateRange,
+  RangeDateBoxChangeEvent,
+  RangeDateBoxOnChangeHandler,
 } from './type/RangeDateBox.types';
 
 export type {

@@ -5,6 +5,9 @@ export type {
   TextBoxVariant,
   TextBoxSize,
   TextBoxLabelPosition,
+  TextBoxOnChangeHandler,
+  TextBoxOnFocusHandler,
+  TextBoxOnBlurHandler,
 } from './type/TextBox.types';
 
 export type {

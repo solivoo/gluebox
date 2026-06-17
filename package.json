@@ -1,7 +1,7 @@
 {
   "name": "glubox",
-  "version": "0.1.3",
-  "description": "Librería de componentes React para aplicaciones empresariales — Sidebar RBAC, formularios, botones y temas",
+  "version": "0.1.4",
+  "description": "Librería de componentes React para aplicaciones empresariales — Sidebar RBAC, formularios, Popup, Toast, botones y temas pastel",
   "type": "module",
   "license": "MIT",
   "author": "solivoo",
@@ -14,7 +14,11 @@
     "typescript",
     "textbox",
     "select",
-    "datepicker"
+    "datepicker",
+    "popup",
+    "modal",
+    "toast",
+    "notification"
   ],
   "homepage": "https://solivoo.github.io/gluebox/",
   "repository": {
@@ -53,6 +57,7 @@
     "build:lib": "vite build --config vite.config.lib.ts && node scripts/copy-themes.mjs",
     "clean:dist": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
     "prepublish:lib": "pnpm clean:dist && pnpm build:lib",
+    "prepublishOnly": "pnpm clean:dist && pnpm build:lib",
     "publish:lib": "npm publish --access public",
     "lint": "eslint .",
     "preview": "vite preview",

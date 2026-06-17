@@ -7,6 +7,8 @@ export type {
   OptionGroupVariant,
   OptionGroupSize,
   OptionGroupLabelPosition,
+  OptionGroupChangeValue,
+  OptionGroupOnChangeHandler,
 } from './type/OptionGroup.types';
 
 export type {

@@ -51,3 +51,6 @@ export interface DateBoxProps
   /** Clases CSS adicionales */
   className?: string;
 }
+
+/** Handler del evento `onChange`. */
+export type DateBoxOnChangeHandler = NonNullable<DateBoxProps['onChange']>;

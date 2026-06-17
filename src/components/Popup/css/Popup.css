@@ -1,0 +1,122 @@
+/* ── Popup overlay ── */
+
+.glb-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  font-family: var(--glb-font-family, 'Poppins', sans-serif);
+  font-size: var(--popup-font-size, 0.875rem);
+}
+
+.glb-popup__overlay {
+  position: absolute;
+  inset: 0;
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: var(--popup-overlay-bg, rgba(15, 23, 42, 0.35));
+  cursor: default;
+}
+
+.glb-popup__panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  max-width: calc(100vw - 2rem);
+  max-height: calc(100vh - 2rem);
+  background: var(--popup-panel-bg, var(--glb-surface, #ffffff));
+  color: var(--popup-panel-text, var(--glb-text, #1e293b));
+  border: 1px solid var(--popup-panel-border, var(--glb-border, #e4e7ee));
+  border-radius: var(--popup-radius, 0.75rem);
+  box-shadow: var(--popup-shadow, 0 20px 40px rgba(15, 23, 42, 0.12));
+  transform: translate(
+    calc(-50% + var(--popup-drag-x, 0px)),
+    calc(-50% + var(--popup-drag-y, 0px))
+  );
+  overflow: hidden;
+  outline: none;
+}
+
+.glb-popup__panel--draggable .glb-popup__header {
+  cursor: grab;
+  user-select: none;
+}
+
+.glb-popup__panel--draggable .glb-popup__header:active {
+  cursor: grabbing;
+}
+
+.glb-popup__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid var(--popup-panel-border, var(--glb-border, #e4e7ee));
+  touch-action: none;
+}
+
+.glb-popup__title {
+  flex: 1;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--popup-header-text, var(--glb-text, #0f172a));
+}
+
+.glb-popup__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 0.375rem;
+  background: transparent;
+  color: var(--popup-close-color, #64748b);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.glb-popup__close:hover {
+  background: var(--popup-close-hover-bg, rgba(15, 23, 42, 0.06));
+  color: var(--popup-header-text, #0f172a);
+}
+
+.glb-popup__close:focus-visible {
+  outline: 2px solid var(--popup-accent-border, #9dabce);
+  outline-offset: 2px;
+}
+
+.glb-popup__body {
+  flex: 1;
+  min-height: 0;
+  padding: 1rem;
+  overflow: auto;
+}
+
+.glb-popup__footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  padding: 0.75rem 1rem;
+  background: var(--popup-footer-bg, #f8fafc);
+  border-top: 1px solid var(--popup-panel-border, var(--glb-border, #e4e7ee));
+}
+
+.glb-popup__footer--left {
+  justify-content: flex-start;
+}
+
+.glb-popup__footer--center {
+  justify-content: center;
+}
+
+.glb-popup__footer--right {
+  justify-content: flex-end;
+}

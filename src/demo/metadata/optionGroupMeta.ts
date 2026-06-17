@@ -180,6 +180,8 @@ export const optionGroupMeta: ComponentMeta<OptionGroupProps> = {
       name: 'onChange',
       signature: '(value: string) => void',
       description: 'Se dispara al seleccionar una opción distinta.',
+      handlerType: 'OptionGroupOnChangeHandler',
+      payloadType: 'OptionGroupChangeValue',
     },
   ],
 };

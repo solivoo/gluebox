@@ -1,5 +1,9 @@
 import { useParams, useLocation } from 'react-router-dom';
 import { getDocEntry, type DocEntry } from '@/demo/docs/docRegistry';
+import {
+  getEventTypesDoc,
+  SHARED_EVENT_UTILITIES,
+} from '@/demo/docs/eventTypesRegistry';
 import './ComponentDocPage.css';
 
 type DocSection =
@@ -217,7 +221,9 @@ function PropsTable({ entry }: { entry: DocEntry }) {
   );
 }
 
-function EventsTable({ entry }: { entry: DocEntry }) {
+function EventsTable({ entry, componentId }: { entry: DocEntry; componentId: string }) {
+  const eventTypesDoc = getEventTypesDoc(componentId);
+
   return (
     <section className="dcd__section">
       <h2>Events</h2>
@@ -229,6 +235,7 @@ function EventsTable({ entry }: { entry: DocEntry }) {
             <tr>
               <th>Evento</th>
               <th>Signatura</th>
+              <th>Tipo exportado</th>
               <th>Descripción</th>
             </tr>
           </thead>
@@ -237,17 +244,44 @@ function EventsTable({ entry }: { entry: DocEntry }) {
               <tr key={event.name}>
                 <td className="dcd__prop-name">{event.name}</td>
                 <td className="dcd__prop-type">{event.signature}</td>
+                <td className="dcd__prop-type">
+                  {event.handlerType ? (
+                    <>
+                      <code>{event.handlerType}</code>
+                      {event.payloadType && (
+                        <span className="dcd__payload">
+                          {' '}
+                          · payload: <code>{event.payloadType}</code>
+                        </span>
+                      )}
+                    </>
+                  ) : (
+                    '—'
+                  )}
+                </td>
                 <td>{event.description}</td>
               </tr>
             ))}
           </tbody>
         </table>
       )}
+
+      {eventTypesDoc && (
+        <>
+          <h3>Importar tipos de eventos</h3>
+          <pre className="dcd__code">{eventTypesDoc.importTypes}</pre>
+
+          <h3>Ejemplo tipado</h3>
+          <pre className="dcd__code">{eventTypesDoc.usageExample}</pre>
+        </>
+      )}
     </section>
   );
 }
 
-function TypesSection({ entry }: { entry: DocEntry }) {
+function TypesSection({ entry, componentId }: { entry: DocEntry; componentId: string }) {
+  const eventTypesDoc = getEventTypesDoc(componentId);
+
   const types: Record<string, string> = {
     Button: `export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
 export type ButtonSize = 'sm' | 'md' | 'lg';
@@ -343,9 +377,54 @@ export interface SidebarProps {
   return (
     <section className="dcd__section">
       <h2>Types</h2>
+
+      <h3>Props y tipos del componente</h3>
       <pre className="dcd__code">
         {types[entry.label] ?? '// Tipos definidos en el módulo del componente'}
       </pre>
+
+      {eventTypesDoc && (
+        <>
+          <h3>Tipos de eventos exportados</h3>
+          <p>
+            Todos los handlers están disponibles desde <code>glubox</code> para tipar
+            callbacks sin depender de las props del componente.
+          </p>
+          <table className="dcd__table">
+            <thead>
+              <tr>
+                <th>Tipo</th>
+                <th>Signatura</th>
+                <th>Descripción</th>
+              </tr>
+            </thead>
+            <tbody>
+              {eventTypesDoc.handlers.map((handler) => (
+                <tr key={handler.handlerType}>
+                  <td className="dcd__prop-name">
+                    <code>{handler.handlerType}</code>
+                  </td>
+                  <td className="dcd__prop-type">{handler.signature}</td>
+                  <td>{handler.description}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <h3>Importación</h3>
+          <pre className="dcd__code">{eventTypesDoc.importTypes}</pre>
+
+          <h3>Uso</h3>
+          <pre className="dcd__code">{eventTypesDoc.usageExample}</pre>
+        </>
+      )}
+
+      <h3>Utilidades genéricas</h3>
+      <p>
+        Para eventos sin alias dedicado, podés derivar el tipo desde las props con las
+        utilidades exportadas:
+      </p>
+      <pre className="dcd__code">{SHARED_EVENT_UTILITIES}</pre>
     </section>
   );
 }
@@ -442,8 +521,8 @@ export function ComponentDocPage() {
         {section === 'getting-started' && <GettingStarted entry={entry} />}
         {section === 'how-to' && <HowTo entry={entry} />}
         {section === 'props' && <PropsTable entry={entry} />}
-        {section === 'events' && <EventsTable entry={entry} />}
-        {section === 'types' && <TypesSection entry={entry} />}
+        {section === 'events' && <EventsTable entry={entry} componentId={component} />}
+        {section === 'types' && <TypesSection entry={entry} componentId={component} />}
         {section === 'accessibility' && <AccessibilitySection entry={entry} />}
       </div>
     </article>

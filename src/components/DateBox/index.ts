@@ -6,6 +6,7 @@ export type {
   DateBoxSize,
   DateBoxLabelPosition,
   DateBoxDisplayMode,
+  DateBoxOnChangeHandler,
 } from './type/DateBox.types';
 
 export type {

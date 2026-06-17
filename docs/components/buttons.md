@@ -76,6 +76,24 @@ Selección exclusiva entre opciones:
 
 Props: `variant`, `size`, `labelPosition`, `disabled`, `error`, `fullWidth`, `theme`.
 
+## Tipos de eventos
+
+| Componente | Tipos exportados |
+|------------|------------------|
+| `Button` | `ButtonOnClickHandler` |
+| `CheckButton` | `CheckButtonOnChangeHandler`, `CheckButtonChangeValue` |
+| `OptionGroup` | `OptionGroupOnChangeHandler`, `OptionGroupChangeValue` |
+
+```tsx
+import type { CheckButtonOnChangeHandler } from 'glubox';
+
+const handleToggle: CheckButtonOnChangeHandler = (checked) => {
+  setSubscribed(checked);
+};
+```
+
+Referencia completa: [Tipos de eventos](/guide/event-types).
+
 ## Temas
 
 ```tsx

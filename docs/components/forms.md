@@ -151,6 +151,25 @@ document.documentElement.setAttribute('data-theme', 'modern');
 document.documentElement.setAttribute('data-mode', 'dark');
 ```
 
+## Tipos de eventos
+
+| Componente | Tipos exportados |
+|------------|------------------|
+| `TextBox` | `TextBoxOnChangeHandler`, `TextBoxOnFocusHandler`, `TextBoxOnBlurHandler` |
+| `Select` | `SelectOnChangeHandler`, `SelectChangeValue` |
+| `DateBox` | `DateBoxOnChangeHandler` |
+| `RangeDateBox` | `RangeDateBoxOnChangeHandler`, `RangeDateBoxChangeEvent` |
+
+```tsx
+import type { SelectOnChangeHandler } from 'glubox';
+
+const handleFramework: SelectOnChangeHandler = (value) => {
+  setFramework(value);
+};
+```
+
+Referencia completa: [Tipos de eventos](/guide/event-types).
+
 ## Siguiente paso
 
 - [Botones y selección](/components/buttons)

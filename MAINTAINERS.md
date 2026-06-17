@@ -11,6 +11,8 @@ Sitio VitePress en `docs/` — se publica en GitHub Pages con `pnpm docs:build`.
 | `docs/components/sidebar.md` | Referencia del Sidebar |
 | `docs/components/forms.md` | TextBox, Select, DateBox, RangeDateBox |
 | `docs/components/buttons.md` | Button, CheckButton, OptionGroup |
+| `docs/components/overlays.md` | Popup, Toast |
+| `docs/guide/event-types.md` | Tipos de handlers exportados |
 | `docs/guide/menu-api.md` | Contrato JSON para backend |
 | `docs/guide/routing.md` | Integración con React Router |
 | `docs/guide/installation.md` | Instalación, temas, TypeScript |
@@ -36,7 +38,7 @@ Cada **push a `main`** ejecuta `deploy-pages.yml` y publica la documentación.
 ### Automático (recomendado)
 
 1. Actualiza `version` en `package.json` y haz commit en `main`
-2. `git tag v0.1.3 && git push origin v0.1.3` (o Release en GitHub)
+2. `git tag v0.1.4 && git push origin v0.1.4` (o Release en GitHub)
 3. El workflow `publish-npm.yml` ejecuta `pnpm build:lib` y publica
 
 ### Build de librería
@@ -44,6 +46,18 @@ Cada **push a `main`** ejecuta `deploy-pages.yml` y publica la documentación.
 ```bash
 pnpm build:lib   # vite lib + scripts/copy-themes.mjs (vía prepublishOnly)
 ```
+
+### Manual (local)
+
+```bash
+pnpm install
+pnpm build:lib
+npm login
+npm publish --access public
+# equivalente: pnpm publish:lib
+```
+
+Verifica en https://www.npmjs.com/package/glubox que la versión coincida con `package.json`.
 
 ### Checklist release
 
@@ -54,6 +68,12 @@ pnpm build:lib   # vite lib + scripts/copy-themes.mjs (vía prepublishOnly)
 - [ ] `version` en `package.json` alineada con el tag
 - [ ] Push a `main` → Pages
 - [ ] Tag `v*` → npm
+
+## Changelog v0.1.4
+
+- Popup, Toast, tipos de eventos exportados, paleta pastel
+- Docs: event-types, overlays, README actualizado
+- Ver `CHANGELOG.md` en la raíz del repo
 
 ## Changelog v0.1.3
 

@@ -2,15 +2,14 @@ import type {
   OptionGroupTheme,
   OptionGroupVariantTheme,
 } from './OptionGroup.theme.types';
+import {
+  defaultPastel,
+  enterprisePastel,
+  modernPastel,
+} from '@/styles/pastelPalette';
+import type { PastelAccent } from '@/styles/pastelPalette';
 
-interface Accent {
-  main: string;
-  hover: string;
-  active: string;
-  ring: string;
-}
-
-function buildVariants(isDark: boolean, accent: Accent): OptionGroupTheme['variants'] {
+function buildVariants(isDark: boolean, accent: PastelAccent): OptionGroupTheme['variants'] {
   const surface = isDark ? '#1f2937' : '#ffffff';
   const text = isDark ? '#e5e7eb' : '#1f2937';
   const muted = isDark ? '#9ca3af' : '#6b7280';
@@ -22,64 +21,60 @@ function buildVariants(isDark: boolean, accent: Accent): OptionGroupTheme['varia
     optionBackground: surface,
     optionText: text,
     optionBorder: border,
-    selectedBackground: accent.main,
-    selectedText: '#ffffff',
-    selectedBorder: accent.main,
+    selectedBackground: accent.surface,
+    selectedText: accent.onFill,
+    selectedBorder: accent.border,
     hoverOptionBackground: isDark ? '#374151' : '#f9fafb',
-    hoverOptionBorder: accent.main,
-    hoverSelectedBackground: accent.hover,
-    hoverSelectedBorder: accent.hover,
-    focusRing: accent.ring,
+    hoverOptionBorder: accent.borderStrong,
+    hoverSelectedBackground: accent.surfaceHover,
+    hoverSelectedBorder: accent.borderStrong,
+    focusRing: accent.focusRing,
     disabledBackground: disabledBg,
     disabledText,
     disabledBorder: isDark ? '#374151' : '#e5e7eb',
     indicatorBorder: muted,
-    indicatorSelected: '#ffffff',
+    indicatorSelected: accent.onFill,
   };
 
   const outline: OptionGroupVariantTheme = {
     ...primary,
     optionBackground: 'transparent',
-    selectedBackground: isDark ? 'rgba(255,255,255,0.08)' : accent.main,
-    selectedText: isDark ? accent.main : '#ffffff',
-    selectedBorder: accent.main,
-    hoverOptionBackground: isDark ? 'rgba(255,255,255,0.04)' : 'rgba(99,102,241,0.06)',
-    hoverSelectedBackground: isDark ? 'rgba(255,255,255,0.12)' : accent.hover,
-    indicatorSelected: isDark ? accent.main : '#ffffff',
+    selectedBackground: isDark ? accent.subtleBg : accent.surface,
+    selectedText: accent.onFill,
+    selectedBorder: accent.borderStrong,
+    hoverOptionBackground: isDark ? 'rgba(255,255,255,0.04)' : accent.subtleBg,
+    hoverSelectedBackground: accent.surfaceHover,
+    indicatorSelected: accent.onFill,
   };
 
   const ghost: OptionGroupVariantTheme = {
     ...outline,
     optionBorder: 'transparent',
     hoverOptionBorder: 'transparent',
-    selectedBorder: isDark ? accent.main : accent.main,
+    selectedBorder: accent.borderStrong,
   };
 
   return { primary, outline, ghost };
 }
 
-function buildTheme(isDark: boolean, accent: Accent): OptionGroupTheme {
+function buildTheme(isDark: boolean, accent: PastelAccent): OptionGroupTheme {
   return {
     fontSize: '0.875rem',
     borderRadius: '0.5rem',
     transition: 'all 0.15s ease',
     shadow: isDark ? '0 1px 2px rgba(0,0,0,0.3)' : '0 1px 2px rgba(0,0,0,0.06)',
     helperTextColor: isDark ? '#9ca3af' : '#6b7280',
-    errorTextColor: isDark ? '#fca5a5' : '#dc2626',
+    errorTextColor: isDark ? '#e8b4b4' : '#9b5555',
     labelColor: isDark ? '#d1d5db' : '#4b5563',
     variants: buildVariants(isDark, accent),
   };
 }
 
-const indigo = { main: '#6366f1', hover: '#818cf8', active: '#4f46e5', ring: 'rgba(99,102,241,0.45)' };
-const emerald = { main: '#10b981', hover: '#34d399', active: '#059669', ring: 'rgba(16,185,129,0.45)' };
-const blue = { main: '#3b82f6', hover: '#60a5fa', active: '#2563eb', ring: 'rgba(59,130,246,0.45)' };
-
 export const optionGroupThemes = {
-  dark: buildTheme(true, indigo),
-  light: buildTheme(false, indigo),
-  'modern-dark': buildTheme(true, emerald),
-  'modern-light': buildTheme(false, emerald),
-  'enterprise-dark': buildTheme(true, blue),
-  'enterprise-light': buildTheme(false, blue),
+  dark: buildTheme(true, defaultPastel.dark),
+  light: buildTheme(false, defaultPastel.light),
+  'modern-dark': buildTheme(true, modernPastel.dark),
+  'modern-light': buildTheme(false, modernPastel.light),
+  'enterprise-dark': buildTheme(true, enterprisePastel.dark),
+  'enterprise-light': buildTheme(false, enterprisePastel.light),
 } as const;

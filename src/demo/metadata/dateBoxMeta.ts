@@ -192,6 +192,7 @@ export const dateBoxMeta: ComponentMeta<DateBoxProps> = {
       name: 'onChange',
       signature: '(event: ChangeEvent<HTMLInputElement>) => void',
       description: 'Se dispara cuando cambia la fecha seleccionada.',
+      handlerType: 'DateBoxOnChangeHandler',
     },
     {
       name: 'onFocus',

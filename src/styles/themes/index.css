@@ -2,6 +2,7 @@
    gluBox Themes — Barrel
    ══════════════════════════════════════════════════ */
 
+@import './pastel-accents.css';
 @import './default.css';
 @import './modern.css';
 @import './enterprise.css';

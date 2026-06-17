@@ -6,6 +6,8 @@ export type {
   SelectVariant,
   SelectSize,
   SelectLabelPosition,
+  SelectChangeValue,
+  SelectOnChangeHandler,
 } from './type/Select.types';
 
 export type {

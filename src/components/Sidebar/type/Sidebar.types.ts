@@ -34,6 +34,12 @@ export interface SidebarProps {
   collapseOnNavigate?: boolean;
 }
 
+/** Handler del evento `onCollapsedChange`. */
+export type SidebarOnCollapsedChangeHandler = NonNullable<SidebarProps['onCollapsedChange']>;
+
+/** Handler del evento `onNavigate`. */
+export type SidebarOnNavigateHandler = NonNullable<SidebarProps['onNavigate']>;
+
 export type { IconResolver, IconName } from './icon.types';
 export type { SidebarBrandProps, SidebarBrandComponent } from './brand.types';
 export type {  SidebarTheme,

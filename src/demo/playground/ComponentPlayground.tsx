@@ -3,7 +3,12 @@ import type { ComponentPlaygroundProps } from './types';
 import { PropControl } from './PropControl';
 import './ComponentPlayground.css';
 
-export function ComponentPlayground({ meta, Component }: Readonly<ComponentPlaygroundProps>) {
+export function ComponentPlayground({
+  meta,
+  Component,
+  renderPreview,
+  wrapper,
+}: Readonly<ComponentPlaygroundProps>) {
   const [props, setProps] = useState<Record<string, unknown>>({ ...meta.defaults });
   const [activeTab, setActiveTab] = useState<'props' | 'events'>('props');
 
@@ -21,13 +26,19 @@ export function ComponentPlayground({ meta, Component }: Readonly<ComponentPlayg
     return cleaned;
   }, [meta.defaults, props]);
 
-  return (
+  const preview = renderPreview ? (
+    renderPreview(cleanProps)
+  ) : Component ? (
+    <Component {...cleanProps} />
+  ) : null;
+
+  const layout = (
     <div className="cpg">
       {/* Preview */}
       <section className="cpg__preview">
         <div className="cpg__preview-label">Preview</div>
         <div className={`cpg__preview-stage${meta.fullWidthPreview ? ' cpg__preview-stage--full' : ''}`}>
-          <Component {...cleanProps} />
+          {preview}
         </div>
       </section>
 
@@ -104,4 +115,6 @@ export function ComponentPlayground({ meta, Component }: Readonly<ComponentPlayg
       </aside>
     </div>
   );
+
+  return wrapper ? wrapper(layout, cleanProps) : layout;
 }

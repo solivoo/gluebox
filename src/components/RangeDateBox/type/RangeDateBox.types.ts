@@ -67,3 +67,9 @@ export interface RangeDateBoxProps {
   /** Se dispara cuando cambia la fecha de inicio o fin */
   onChange?: (range: DateRange) => void;
 }
+
+/** Payload del evento `onChange`. */
+export type RangeDateBoxChangeEvent = DateRange;
+
+/** Handler del evento `onChange`. */
+export type RangeDateBoxOnChangeHandler = NonNullable<RangeDateBoxProps['onChange']>;

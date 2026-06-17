@@ -8,7 +8,9 @@ const destDir = path.join(root, 'dist/themes');
 
 mkdirSync(destDir, { recursive: true });
 
-for (const name of ['default.css', 'modern.css', 'enterprise.css', 'index.css']) {
+const themeFiles = ['default.css', 'modern.css', 'enterprise.css', 'index.css', 'pastel-accents.css'];
+
+for (const name of themeFiles) {
   cpSync(path.join(srcDir, name), path.join(destDir, name));
 }
 

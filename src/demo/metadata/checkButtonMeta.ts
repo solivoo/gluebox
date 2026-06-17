@@ -125,6 +125,8 @@ export const checkButtonMeta: ComponentMeta<CheckButtonProps> = {
       name: 'onChange',
       signature: '(checked: boolean) => void',
       description: 'Se dispara al alternar el estado marcado/desmarcado.',
+      handlerType: 'CheckButtonOnChangeHandler',
+      payloadType: 'CheckButtonChangeValue',
     },
   ],
 };

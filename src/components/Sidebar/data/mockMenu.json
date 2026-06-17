@@ -450,6 +450,132 @@
           ]
         },
         {
+          "id": "componentes-popup",
+          "label": "Popup",
+          "permissions": ["componentes:read"],
+          "children": [
+            {
+              "id": "componentes-popup-overview",
+              "label": "Overview",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-popup-overview-getting-started",
+                  "label": "Getting Started",
+                  "path": "/componentes/popup/overview/getting-started",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-popup-overview-how-to",
+                  "label": "How To",
+                  "path": "/componentes/popup/overview/how-to",
+                  "permissions": ["componentes:read"]
+                }
+              ]
+            },
+            {
+              "id": "componentes-popup-api",
+              "label": "API",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-popup-api-props",
+                  "label": "Props",
+                  "path": "/componentes/popup/api/props",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-popup-api-events",
+                  "label": "Events",
+                  "path": "/componentes/popup/api/events",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-popup-api-types",
+                  "label": "Types",
+                  "path": "/componentes/popup/api/types",
+                  "permissions": ["componentes:read"]
+                }
+              ]
+            },
+            {
+              "id": "componentes-popup-accessibility",
+              "label": "Accessibility",
+              "path": "/componentes/popup/accessibility",
+              "permissions": ["componentes:read"]
+            },
+            {
+              "id": "componentes-popup-demos",
+              "label": "Demos",
+              "path": "/componentes/popup",
+              "permissions": ["componentes:read"]
+            }
+          ]
+        },
+        {
+          "id": "componentes-toast",
+          "label": "Toast",
+          "permissions": ["componentes:read"],
+          "children": [
+            {
+              "id": "componentes-toast-overview",
+              "label": "Overview",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-toast-overview-getting-started",
+                  "label": "Getting Started",
+                  "path": "/componentes/toast/overview/getting-started",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-toast-overview-how-to",
+                  "label": "How To",
+                  "path": "/componentes/toast/overview/how-to",
+                  "permissions": ["componentes:read"]
+                }
+              ]
+            },
+            {
+              "id": "componentes-toast-api",
+              "label": "API",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-toast-api-props",
+                  "label": "Props",
+                  "path": "/componentes/toast/api/props",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-toast-api-events",
+                  "label": "Events",
+                  "path": "/componentes/toast/api/events",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-toast-api-types",
+                  "label": "Types",
+                  "path": "/componentes/toast/api/types",
+                  "permissions": ["componentes:read"]
+                }
+              ]
+            },
+            {
+              "id": "componentes-toast-accessibility",
+              "label": "Accessibility",
+              "path": "/componentes/toast/accessibility",
+              "permissions": ["componentes:read"]
+            },
+            {
+              "id": "componentes-toast-demos",
+              "label": "Demos",
+              "path": "/componentes/toast",
+              "permissions": ["componentes:read"]
+            }
+          ]
+        },
+        {
           "id": "componentes-sidebar",
           "label": "Sidebar",
           "permissions": ["componentes:read"],

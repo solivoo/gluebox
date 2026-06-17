@@ -180,16 +180,19 @@ export const textBoxMeta: ComponentMeta<TextBoxProps> = {
       name: 'onChange',
       signature: '(event: ChangeEvent<HTMLInputElement>) => void',
       description: 'Se dispara en cada cambio de valor del input. Heredado de InputHTMLAttributes.',
+      handlerType: 'TextBoxOnChangeHandler',
     },
     {
       name: 'onFocus',
       signature: '(event: FocusEvent<HTMLInputElement>) => void',
       description: 'Se dispara cuando el campo recibe el foco.',
+      handlerType: 'TextBoxOnFocusHandler',
     },
     {
       name: 'onBlur',
       signature: '(event: FocusEvent<HTMLInputElement>) => void',
       description: 'Se dispara cuando el campo pierde el foco.',
+      handlerType: 'TextBoxOnBlurHandler',
     },
     {
       name: 'onKeyDown',

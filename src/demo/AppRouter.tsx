@@ -11,6 +11,8 @@ import { DateBoxDemo } from '@/demo/pages/demos/DateBoxDemo';
 import { RangeDateBoxDemo } from '@/demo/pages/demos/RangeDateBoxDemo';
 import { OptionGroupDemo } from '@/demo/pages/demos/OptionGroupDemo';
 import { CheckButtonDemo } from '@/demo/pages/demos/CheckButtonDemo';
+import { PopupDemo } from '@/demo/pages/demos/PopupDemo';
+import { ToastDemo } from '@/demo/pages/demos/ToastDemo';
 import { defaultRoutePath } from '@/demo/routing/menuRouteRegistry';
 import '@/demo/pages/docs/ComponentDocPage.css';
 import '@/demo/pages/docs/AppearancePage.css';
@@ -35,6 +37,8 @@ function ComponentListPage() {
           { name: 'RangeDateBox', desc: 'Selector de rango de fechas con campos inicio/fin vinculados.', color: '#ec4899' },
           { name: 'OptionGroup', desc: 'Selección exclusiva con layouts vertical, horizontal y segmentado.', color: '#14b8a6' },
           { name: 'CheckButton', desc: 'Botón toggle con semántica de checkbox e ícono de check.', color: '#f97316' },
+          { name: 'Popup', desc: 'Diálogo modal arrastrable con acciones en el pie y cierre flexible.', color: '#6366f1' },
+          { name: 'Toast', desc: 'Notificaciones posicionables con título, variantes y useToast.', color: '#22c55e' },
         ].map((c) => (
           <div
             key={c.name}
@@ -87,6 +91,8 @@ export function AppRouter() {
           <Route path="componentes/rangedatebox" element={<RangeDateBoxDemo />} />
           <Route path="componentes/optiongroup" element={<OptionGroupDemo />} />
           <Route path="componentes/checkbutton" element={<CheckButtonDemo />} />
+          <Route path="componentes/popup" element={<PopupDemo />} />
+          <Route path="componentes/toast" element={<ToastDemo />} />
 
           {/* ═══ Documentación de componentes ═══ */}
           <Route path="componentes/:component/*" element={<ComponentDocPage />} />

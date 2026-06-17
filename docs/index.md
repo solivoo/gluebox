@@ -22,6 +22,8 @@ features:
     details: Default, Modern y Enterprise en dark/light más temas por componente.
   - title: Demo interactiva
     details: Playground en el repo para probar props y variantes sin Storybook.
+  - title: Overlays
+    details: Popup modal arrastrable y Toast con posicionamiento, timer y tipos de eventos exportados.
 ---
 
 ## Quick start
@@ -40,6 +42,8 @@ import 'glubox/themes/default.css';
 
 - [Introducción](/guide/getting-started)
 - [Instalación](/guide/installation)
+- [Tipos de eventos](/guide/event-types)
 - [Formularios](/components/forms)
 - [Botones y selección](/components/buttons)
+- [Overlays (Popup / Toast)](/components/overlays)
 - [Sidebar — referencia](/components/sidebar)

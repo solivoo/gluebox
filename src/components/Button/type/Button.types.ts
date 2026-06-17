@@ -31,3 +31,6 @@ export interface ButtonProps
   /** Preset ('dark' | 'light') o objeto con colores personalizados */
   theme?: ButtonThemeInput;
 }
+
+/** Handler del evento `onClick`. */
+export type ButtonOnClickHandler = NonNullable<ButtonProps['onClick']>;

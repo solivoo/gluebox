@@ -56,3 +56,9 @@ export interface SelectProps {
   /** Nombre del campo (para formularios) */
   name?: string;
 }
+
+/** Valor emitido por `onChange`. */
+export type SelectChangeValue = string;
+
+/** Handler del evento `onChange`. */
+export type SelectOnChangeHandler = NonNullable<SelectProps['onChange']>;

@@ -119,6 +119,7 @@ export const buttonMeta: ComponentMeta<ButtonProps> = {
       name: 'onClick',
       signature: '(event: MouseEvent<HTMLButtonElement>) => void',
       description: 'Se dispara al hacer clic en el botón. Heredado de ButtonHTMLAttributes.',
+      handlerType: 'ButtonOnClickHandler',
     },
     {
       name: 'onFocus',

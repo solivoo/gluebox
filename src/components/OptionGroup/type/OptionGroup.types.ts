@@ -60,3 +60,9 @@ export interface OptionGroupProps {
   /** Contenido adicional (no usado en render, para extensión) */
   children?: ReactNode;
 }
+
+/** Valor emitido por `onChange`. */
+export type OptionGroupChangeValue = string;
+
+/** Handler del evento `onChange`. */
+export type OptionGroupOnChangeHandler = NonNullable<OptionGroupProps['onChange']>;

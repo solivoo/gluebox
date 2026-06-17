@@ -2,15 +2,24 @@ import type {
   CheckButtonTheme,
   CheckButtonVariantTheme,
 } from './CheckButton.theme.types';
+import {
+  defaultPastel,
+  enterprisePastel,
+  modernPastel,
+} from '@/styles/pastelPalette';
+import type { PastelAccent } from '@/styles/pastelPalette';
 
-interface Accent {
-  main: string;
-  hover: string;
-  active: string;
-  ring: string;
+function accentToLegacy(accent: PastelAccent) {
+  return {
+    main: accent.surface,
+    hover: accent.surfaceHover,
+    active: accent.surfaceActive,
+    ring: accent.focusRing,
+    onFill: accent.onFill,
+  };
 }
 
-function buildVariant(isDark: boolean, accent: Accent): CheckButtonVariantTheme {
+function buildVariant(isDark: boolean, accent: ReturnType<typeof accentToLegacy>): CheckButtonVariantTheme {
   const surface = isDark ? '#1f2937' : '#ffffff';
   const text = isDark ? '#e5e7eb' : '#1f2937';
   const border = isDark ? '#4b5563' : '#d1d5db';
@@ -34,35 +43,35 @@ function buildVariant(isDark: boolean, accent: Accent): CheckButtonVariantTheme 
     },
     checked: {
       background: accent.main,
-      text: '#ffffff',
-      border: accent.main,
+      text: accent.onFill,
+      border: accent.active,
       hoverBackground: accent.hover,
-      hoverBorder: accent.hover,
+      hoverBorder: accent.active,
       activeBackground: accent.active,
       activeBorder: accent.active,
       focusRing: accent.ring,
-      disabledBackground: isDark ? '#374151' : '#e5e7eb',
+      disabledBackground: isDark ? '#374151' : '#e8eaef',
       disabledText: isDark ? '#6b7280' : '#9ca3af',
-      disabledBorder: isDark ? '#374151' : '#e5e7eb',
-      iconColor: '#ffffff',
+      disabledBorder: isDark ? '#374151' : '#e8eaef',
+      iconColor: accent.onFill,
     },
   };
 }
 
-function buildOutlineVariant(isDark: boolean, accent: Accent): CheckButtonVariantTheme {
+function buildOutlineVariant(isDark: boolean, accent: ReturnType<typeof accentToLegacy>): CheckButtonVariantTheme {
   const base = buildVariant(isDark, accent);
   return {
     unchecked: {
       ...base.unchecked,
       background: 'transparent',
-      hoverBackground: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(99,102,241,0.05)',
-      hoverBorder: accent.main,
+      hoverBackground: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(120, 135, 175, 0.08)',
+      hoverBorder: accent.active,
     },
     checked: base.checked,
   };
 }
 
-function buildGhostVariant(isDark: boolean, accent: Accent): CheckButtonVariantTheme {
+function buildGhostVariant(isDark: boolean, accent: ReturnType<typeof accentToLegacy>): CheckButtonVariantTheme {
   const outline = buildOutlineVariant(isDark, accent);
   return {
     unchecked: {
@@ -77,29 +86,26 @@ function buildGhostVariant(isDark: boolean, accent: Accent): CheckButtonVariantT
   };
 }
 
-function buildTheme(isDark: boolean, accent: Accent): CheckButtonTheme {
+function buildTheme(isDark: boolean, accent: PastelAccent): CheckButtonTheme {
+  const legacy = accentToLegacy(accent);
   return {
     fontSize: '0.875rem',
     borderRadius: '0.5rem',
     transition: 'all 0.15s ease',
     shadow: isDark ? '0 1px 2px rgba(0,0,0,0.3)' : '0 1px 2px rgba(0,0,0,0.06)',
     variants: {
-      primary: buildVariant(isDark, accent),
-      outline: buildOutlineVariant(isDark, accent),
-      ghost: buildGhostVariant(isDark, accent),
+      primary: buildVariant(isDark, legacy),
+      outline: buildOutlineVariant(isDark, legacy),
+      ghost: buildGhostVariant(isDark, legacy),
     },
   };
 }
 
-const indigo = { main: '#6366f1', hover: '#818cf8', active: '#4f46e5', ring: 'rgba(99,102,241,0.45)' };
-const emerald = { main: '#10b981', hover: '#34d399', active: '#059669', ring: 'rgba(16,185,129,0.45)' };
-const blue = { main: '#3b82f6', hover: '#60a5fa', active: '#2563eb', ring: 'rgba(59,130,246,0.45)' };
-
 export const checkButtonThemes = {
-  dark: buildTheme(true, indigo),
-  light: buildTheme(false, indigo),
-  'modern-dark': buildTheme(true, emerald),
-  'modern-light': buildTheme(false, emerald),
-  'enterprise-dark': buildTheme(true, blue),
-  'enterprise-light': buildTheme(false, blue),
+  dark: buildTheme(true, defaultPastel.dark),
+  light: buildTheme(false, defaultPastel.light),
+  'modern-dark': buildTheme(true, modernPastel.dark),
+  'modern-light': buildTheme(false, modernPastel.light),
+  'enterprise-dark': buildTheme(true, enterprisePastel.dark),
+  'enterprise-light': buildTheme(false, enterprisePastel.light),
 } as const;

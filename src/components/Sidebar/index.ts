@@ -9,6 +9,8 @@ export type {
   SidebarTheme,
   SidebarThemePreset,
   SidebarThemeInput,
+  SidebarOnCollapsedChangeHandler,
+  SidebarOnNavigateHandler,
 } from './type/Sidebar.types';
 
 export type {
