@@ -1,7 +1,7 @@
 {
   "name": "glubox",
-  "version": "0.1.4",
-  "description": "Librería de componentes React para aplicaciones empresariales — Sidebar RBAC, formularios, Popup, Toast, botones y temas pastel",
+  "version": "0.1.5",
+  "description": "Librería de componentes React para aplicaciones empresariales — Sidebar RBAC, DataGrid, formularios, Popup, Toast, botones y temas pastel",
   "type": "module",
   "license": "MIT",
   "author": "solivoo",
@@ -18,7 +18,10 @@
     "popup",
     "modal",
     "toast",
-    "notification"
+    "notification",
+    "datagrid",
+    "table",
+    "textarea"
   ],
   "homepage": "https://solivoo.github.io/gluebox/",
   "repository": {

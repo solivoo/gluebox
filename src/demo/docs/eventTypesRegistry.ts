@@ -99,6 +99,33 @@ export const componentEventTypesDocs: Record<string, ComponentEventTypesDoc> = {
   setEmail(event.target.value);
 };`,
   },
+  textarea: {
+    importTypes: `import type {
+  TextAreaOnChangeHandler,
+  TextAreaOnFocusHandler,
+  TextAreaOnBlurHandler,
+} from 'glubox';`,
+    handlers: [
+      {
+        handlerType: 'TextAreaOnChangeHandler',
+        signature: '(event: ChangeEvent<HTMLTextAreaElement>) => void',
+        description: 'Handler de onChange. Heredado de TextareaHTMLAttributes.',
+      },
+      {
+        handlerType: 'TextAreaOnFocusHandler',
+        signature: '(event: FocusEvent<HTMLTextAreaElement>) => void',
+        description: 'Handler de onFocus.',
+      },
+      {
+        handlerType: 'TextAreaOnBlurHandler',
+        signature: '(event: FocusEvent<HTMLTextAreaElement>) => void',
+        description: 'Handler de onBlur.',
+      },
+    ],
+    usageExample: `const handleChange: TextAreaOnChangeHandler = (event) => {
+  setNotes(event.target.value);
+};`,
+  },
   sidebar: {
     importTypes: `import type {
   SidebarOnCollapsedChangeHandler,
@@ -261,6 +288,46 @@ const handleAccept: PopupActionOnClickHandler = () => {
 const notify: ToastShowHandler = (options) => show(options);
 
 const closeOne: ToastDismissHandler = (id) => dismiss(id);`,
+  },
+  datagrid: {
+    importTypes: `import type {
+  DataGridOnRowSelectHandler,
+  DataGridOnSelectionChangeHandler,
+  DataGridOnCardSelectHandler,
+  DataGridOnPageChangeHandler,
+  DataGridOnPageSizeChangeHandler,
+} from 'glubox';`,
+    handlers: [
+      {
+        handlerType: 'DataGridOnRowSelectHandler',
+        signature: '(row: T) => void',
+        description: 'Handler de onRowSelect en modo single. T es el tipo de fila.',
+      },
+      {
+        handlerType: 'DataGridOnSelectionChangeHandler',
+        signature: '(selectedRows: T[]) => void',
+        description: 'Handler de onSelectionChange con filas completas seleccionadas.',
+      },
+      {
+        handlerType: 'DataGridOnCardSelectHandler',
+        signature: '(row: T) => void',
+        description: 'Handler de onCardSelect en layout card. Recibe la fila activada.',
+      },
+      {
+        handlerType: 'DataGridOnPageChangeHandler',
+        signature: '(page: number) => void',
+        description: 'Handler de onPageChange (página 1-based).',
+      },
+      {
+        handlerType: 'DataGridOnPageSizeChangeHandler',
+        signature: '(pageSize: number) => void',
+        description: 'Handler de onPageSizeChange.',
+      },
+    ],
+    usageExample: `const handlePage: DataGridOnPageChangeHandler = (page) => {
+  setPage(page);
+  fetchRows(page, pageSize);
+};`,
   },
 };
 

@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.1.5] — 2026-06-15
+
+### Añadido
+
+- **DataGrid** — tabla empresarial con búsqueda (debounce), ordenamiento, selección single/multiple, paginación client/server, virtualización, columnas redimensionables/reordenables, layout tabla/tarjetas/auto responsive, i18n vía `messages` y hook `useDataGridController`.
+- **TextArea** — control multilínea con temas, variantes y demo playground.
+- Documentación: [DataGrid](/components/datagrid), [Temas](/guide/themes), índice de componentes.
+- Demo interactiva: DataGrid y TextArea con playground.
+
+### Cambiado
+
+- `ComponentPlayground` con soporte genérico de props para demos tipadas.
+- Exports públicos del DataGrid: `useDataGridController`, `defaultDataGridMessages`, `resolveDataGridMessages`.
+
 ## [0.1.4] — 2026-06-15
 
 ### Añadido
@@ -24,4 +38,5 @@
 - Label `outlined` con `--glb-field-canvas`.
 - Temas globales en `glubox/themes/*.css`.
 
+[0.1.5]: https://github.com/solivoo/gluebox/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/solivoo/gluebox/compare/v0.1.3...v0.1.4

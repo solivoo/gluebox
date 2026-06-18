@@ -6,6 +6,7 @@ import { AppearancePage } from '@/demo/pages/docs/AppearancePage';
 import { ButtonDemo } from '@/demo/pages/demos/ButtonDemo';
 import { SelectDemo } from '@/demo/pages/demos/SelectDemo';
 import { TextBoxDemo } from '@/demo/pages/demos/TextBoxDemo';
+import { TextAreaDemo } from '@/demo/pages/demos/TextAreaDemo';
 import { SidebarDemo } from '@/demo/pages/demos/SidebarDemo';
 import { DateBoxDemo } from '@/demo/pages/demos/DateBoxDemo';
 import { RangeDateBoxDemo } from '@/demo/pages/demos/RangeDateBoxDemo';
@@ -13,6 +14,7 @@ import { OptionGroupDemo } from '@/demo/pages/demos/OptionGroupDemo';
 import { CheckButtonDemo } from '@/demo/pages/demos/CheckButtonDemo';
 import { PopupDemo } from '@/demo/pages/demos/PopupDemo';
 import { ToastDemo } from '@/demo/pages/demos/ToastDemo';
+import { DataGridDemo } from '@/demo/pages/demos/DataGridDemo';
 import { defaultRoutePath } from '@/demo/routing/menuRouteRegistry';
 import '@/demo/pages/docs/ComponentDocPage.css';
 import '@/demo/pages/docs/AppearancePage.css';
@@ -32,6 +34,7 @@ function ComponentListPage() {
           { name: 'Button', desc: 'Botón multi-variante con carga, temas y estados.', color: '#6366f1' },
           { name: 'Select', desc: 'Select con búsqueda, teclado y label flotante.', color: '#059669' },
           { name: 'TextBox', desc: 'Campo de texto con adornos, clearable y validación.', color: '#0ea5e9' },
+          { name: 'TextArea', desc: 'Texto multilínea con filas, resize y mismas variantes que TextBox.', color: '#38bdf8' },
           { name: 'Sidebar', desc: 'Navegación jerárquica RBAC/ABAC con colapsado.', color: '#f59e0b' },
           { name: 'DateBox', desc: 'Selector de fecha individual con calendario nativo y temas.', color: '#8b5cf6' },
           { name: 'RangeDateBox', desc: 'Selector de rango de fechas con campos inicio/fin vinculados.', color: '#ec4899' },
@@ -39,6 +42,7 @@ function ComponentListPage() {
           { name: 'CheckButton', desc: 'Botón toggle con semántica de checkbox e ícono de check.', color: '#f97316' },
           { name: 'Popup', desc: 'Diálogo modal arrastrable con acciones en el pie y cierre flexible.', color: '#6366f1' },
           { name: 'Toast', desc: 'Notificaciones posicionables con título, variantes y useToast.', color: '#22c55e' },
+          { name: 'DataGrid', desc: 'Tabla genérica con búsqueda, sort, selección y sticky column.', color: '#a855f7' },
         ].map((c) => (
           <div
             key={c.name}
@@ -86,6 +90,7 @@ export function AppRouter() {
           <Route path="componentes/button" element={<ButtonDemo />} />
           <Route path="componentes/select" element={<SelectDemo />} />
           <Route path="componentes/textbox" element={<TextBoxDemo />} />
+          <Route path="componentes/textarea" element={<TextAreaDemo />} />
           <Route path="componentes/sidebar" element={<SidebarDemo />} />
           <Route path="componentes/datebox" element={<DateBoxDemo />} />
           <Route path="componentes/rangedatebox" element={<RangeDateBoxDemo />} />
@@ -93,6 +98,7 @@ export function AppRouter() {
           <Route path="componentes/checkbutton" element={<CheckButtonDemo />} />
           <Route path="componentes/popup" element={<PopupDemo />} />
           <Route path="componentes/toast" element={<ToastDemo />} />
+          <Route path="componentes/datagrid" element={<DataGridDemo />} />
 
           {/* ═══ Documentación de componentes ═══ */}
           <Route path="componentes/:component/*" element={<ComponentDocPage />} />

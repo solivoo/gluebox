@@ -44,10 +44,11 @@ Toggle con semántica de checkbox (estado checked / unchecked):
 
 ```tsx
 <CheckButton
-  label="Recibir novedades"
   checked={subscribed}
   onChange={setSubscribed}
-/>
+>
+  Recibir novedades
+</CheckButton>
 ```
 
 ## OptionGroup
@@ -96,10 +97,14 @@ Referencia completa: [Tipos de eventos](/guide/event-types).
 
 ## Temas
 
+Cada componente acepta `theme` con los 6 presets (`light`, `dark`, `modern-light`, `modern-dark`, `enterprise-light`, `enterprise-dark`) u objeto custom:
+
 ```tsx
 <Button theme="modern-dark">Acción</Button>
 <OptionGroup theme={optionGroupThemes.dark} options={options} />
 ```
+
+Temas globales de la app (`data-theme` / `data-mode`) y prioridad con la prop `theme`: [Guía de temas](/guide/themes).
 
 ## Siguiente paso
 

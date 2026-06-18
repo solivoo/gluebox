@@ -42,7 +42,9 @@ import 'glubox/themes/default.css';
 
 - [Introducción](/guide/getting-started)
 - [Instalación](/guide/installation)
+- [Temas y apariencia](/guide/themes)
 - [Tipos de eventos](/guide/event-types)
+- [Componentes (índice)](/components/)
 - [Formularios](/components/forms)
 - [Botones y selección](/components/buttons)
 - [Overlays (Popup / Toast)](/components/overlays)

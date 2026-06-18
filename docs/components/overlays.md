@@ -90,6 +90,22 @@ function Page() {
 
 Ver la guía completa: [Tipos de eventos](/guide/event-types).
 
+## Temas
+
+```tsx
+<Popup theme="enterprise-dark" open={open} onClose={onClose} title="Confirmar">
+  ...
+</Popup>
+
+<ToastProvider position="top-right" theme="dark" defaultDuration={5000}>
+  {children}
+</ToastProvider>
+```
+
+Presets: `popupThemes`, `toastThemes` — mismos 6 nombres que el resto de componentes. Sin `theme` explícito, Toast sigue `data-theme` / `data-mode` del documento.
+
+[Guía de temas](/guide/themes)
+
 ## Siguiente paso
 
 - [Tipos de eventos](/guide/event-types)

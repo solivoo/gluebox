@@ -3,12 +3,14 @@ import '@/components/Sidebar/css/Sidebar.css';
 import '@/components/Button/css/Button.css';
 import '@/components/Select/css/Select.css';
 import '@/components/TextBox/css/TextBox.css';
+import '@/components/TextArea/css/TextArea.css';
 import '@/components/DateBox/css/DateBox.css';
 import '@/components/RangeDateBox/css/RangeDateBox.css';
 import '@/components/OptionGroup/css/OptionGroup.css';
 import '@/components/CheckButton/css/CheckButton.css';
 import '@/components/Popup/css/Popup.css';
 import '@/components/Toast/css/Toast.css';
+import '@/components/DataGrid/css/DataGrid.css';
 
 export type {
   SidebarProps,
@@ -88,6 +90,26 @@ export {
   TextBox,
   textBoxThemes,
 } from '@/components/TextBox';
+
+export type {
+  TextAreaProps,
+  TextAreaVariant,
+  TextAreaSize,
+  TextAreaLabelPosition,
+  TextAreaResize,
+  TextAreaTheme,
+  TextAreaVariantTheme,
+  TextAreaThemePreset,
+  TextAreaThemeInput,
+  TextAreaOnChangeHandler,
+  TextAreaOnFocusHandler,
+  TextAreaOnBlurHandler,
+} from '@/components/TextArea';
+
+export {
+  TextArea,
+  textAreaThemes,
+} from '@/components/TextArea';
 
 export type {
   DateBoxProps,
@@ -214,3 +236,52 @@ export type {
   OptionalEventHandler,
   EventHandlerPayload,
 } from '@/shared/eventHandlerTypes';
+
+export type {
+  DataGridProps,
+  ColumnDef,
+  DataGridSelectionMode,
+  DataGridSortDirection,
+  DataGridSortState,
+  DataGridTheme,
+  DataGridThemePreset,
+  DataGridThemeInput,
+  DataGridOnRowSelectHandler,
+  DataGridOnSelectionChangeHandler,
+  DataGridPaginationMode,
+  DataGridColumnWidths,
+  DataGridSearchPosition,
+  DataGridLayout,
+  DataGridCardRenderContext,
+  DataGridRenderCard,
+  DataGridCardComponent,
+  DataGridOnCardSelectHandler,
+  DataGridOnPageChangeHandler,
+  DataGridOnPageSizeChangeHandler,
+  UsePaginationOptions,
+  UsePaginationReturn,
+  UseColumnLayoutOptions,
+  UseColumnLayoutReturn,
+  UseDataGridOptions,
+  UseDataGridReturn,
+  DataGridMessages,
+} from '@/components/DataGrid';
+
+export type {
+  VirtualRowsRange,
+  UseVirtualRowsOptions,
+  UseVirtualRowsReturn,
+} from '@/components/DataGrid';
+
+export {
+  DataGrid,
+  useDataGrid,
+  useDataGridController,
+  useVirtualRows,
+  usePagination,
+  useColumnLayout,
+  computeVirtualRowsRange,
+  dataGridThemes,
+  defaultDataGridMessages,
+  resolveDataGridMessages,
+} from '@/components/DataGrid';

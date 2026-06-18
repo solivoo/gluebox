@@ -9,9 +9,11 @@ Sitio VitePress en `docs/` — se publica en GitHub Pages con `pnpm docs:build`.
 | Archivo | Contenido |
 |---------|-----------|
 | `docs/components/sidebar.md` | Referencia del Sidebar |
-| `docs/components/forms.md` | TextBox, Select, DateBox, RangeDateBox |
+| `docs/components/forms.md` | TextBox, Select, DateBox, RangeDateBox, TextArea |
+| `docs/components/datagrid.md` | DataGrid empresarial |
 | `docs/components/buttons.md` | Button, CheckButton, OptionGroup |
 | `docs/components/overlays.md` | Popup, Toast |
+| `docs/guide/themes.md` | Temas globales, prop `theme`, presets |
 | `docs/guide/event-types.md` | Tipos de handlers exportados |
 | `docs/guide/menu-api.md` | Contrato JSON para backend |
 | `docs/guide/routing.md` | Integración con React Router |
@@ -38,7 +40,7 @@ Cada **push a `main`** ejecuta `deploy-pages.yml` y publica la documentación.
 ### Automático (recomendado)
 
 1. Actualiza `version` en `package.json` y haz commit en `main`
-2. `git tag v0.1.4 && git push origin v0.1.4` (o Release en GitHub)
+2. `git tag v0.1.5 && git push origin v0.1.5` (o Release en GitHub)
 3. El workflow `publish-npm.yml` ejecuta `pnpm build:lib` y publica
 
 ### Build de librería
@@ -68,6 +70,12 @@ Verifica en https://www.npmjs.com/package/glubox que la versión coincida con `p
 - [ ] `version` en `package.json` alineada con el tag
 - [ ] Push a `main` → Pages
 - [ ] Tag `v*` → npm
+
+## Changelog v0.1.5
+
+- DataGrid empresarial (paginación, virtualización, layout auto, i18n, `useDataGridController`)
+- TextArea, docs datagrid/themes, demo playgrounds
+- Ver `CHANGELOG.md` en la raíz del repo
 
 ## Changelog v0.1.4
 

@@ -259,7 +259,9 @@ Tokens disponibles en `SidebarTheme`:
 | `railActive` | Barra lateral del ítem activo |
 | `iconFallbackBackground` | Fondo del fallback de icono |
 
-Presets exportados: `sidebarThemes.dark`, `sidebarThemes.light`.
+Presets exportados: `sidebarThemes` con `light`, `dark`, `modern-light`, `modern-dark`, `enterprise-light`, `enterprise-dark`.
+
+Temas globales CSS: [Guía de temas](/guide/themes).
 
 ## Jerarquía visual
 

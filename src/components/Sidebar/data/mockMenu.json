@@ -198,6 +198,132 @@
           ]
         },
         {
+          "id": "componentes-textarea",
+          "label": "TextArea",
+          "permissions": ["componentes:read"],
+          "children": [
+            {
+              "id": "componentes-textarea-overview",
+              "label": "Overview",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-textarea-overview-getting-started",
+                  "label": "Getting Started",
+                  "path": "/componentes/textarea/overview/getting-started",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-textarea-overview-how-to",
+                  "label": "How To",
+                  "path": "/componentes/textarea/overview/how-to",
+                  "permissions": ["componentes:read"]
+                }
+              ]
+            },
+            {
+              "id": "componentes-textarea-api",
+              "label": "API",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-textarea-api-props",
+                  "label": "Props",
+                  "path": "/componentes/textarea/api/props",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-textarea-api-events",
+                  "label": "Events",
+                  "path": "/componentes/textarea/api/events",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-textarea-api-types",
+                  "label": "Types",
+                  "path": "/componentes/textarea/api/types",
+                  "permissions": ["componentes:read"]
+                }
+              ]
+            },
+            {
+              "id": "componentes-textarea-accessibility",
+              "label": "Accessibility",
+              "path": "/componentes/textarea/accessibility",
+              "permissions": ["componentes:read"]
+            },
+            {
+              "id": "componentes-textarea-demos",
+              "label": "Demos",
+              "path": "/componentes/textarea",
+              "permissions": ["componentes:read"]
+            }
+          ]
+        },
+        {
+          "id": "componentes-datagrid",
+          "label": "DataGrid",
+          "permissions": ["componentes:read"],
+          "children": [
+            {
+              "id": "componentes-datagrid-overview",
+              "label": "Overview",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-datagrid-overview-getting-started",
+                  "label": "Getting Started",
+                  "path": "/componentes/datagrid/overview/getting-started",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-datagrid-overview-how-to",
+                  "label": "How To",
+                  "path": "/componentes/datagrid/overview/how-to",
+                  "permissions": ["componentes:read"]
+                }
+              ]
+            },
+            {
+              "id": "componentes-datagrid-api",
+              "label": "API",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-datagrid-api-props",
+                  "label": "Props",
+                  "path": "/componentes/datagrid/api/props",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-datagrid-api-events",
+                  "label": "Events",
+                  "path": "/componentes/datagrid/api/events",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-datagrid-api-types",
+                  "label": "Types",
+                  "path": "/componentes/datagrid/api/types",
+                  "permissions": ["componentes:read"]
+                }
+              ]
+            },
+            {
+              "id": "componentes-datagrid-accessibility",
+              "label": "Accessibility",
+              "path": "/componentes/datagrid/accessibility",
+              "permissions": ["componentes:read"]
+            },
+            {
+              "id": "componentes-datagrid-demos",
+              "label": "Demos",
+              "path": "/componentes/datagrid",
+              "permissions": ["componentes:read"]
+            }
+          ]
+        },
+        {
           "id": "componentes-datebox",
           "label": "DateBox",
           "permissions": ["componentes:read"],

@@ -155,6 +155,44 @@ function HowTo({ entry }: { entry: DocEntry }) {
 
 // Variante outline
 <TextBox variant="outline" />`,
+    TextArea: `// Campo básico
+<TextArea placeholder="Escribí tu mensaje..." />
+
+// Con label y filas
+<TextArea label="Comentarios" rows={5} />
+
+// Label flotante
+<TextArea label="Descripción" labelPosition="floating" />
+
+// Sin resize
+<TextArea label="Notas" resize="none" clearable />
+
+// Estado de error
+<TextArea label="Motivo" error errorMessage="Campo requerido" />
+
+// Variante outline
+<TextArea variant="outline" label="Observaciones" />`,
+    DataGrid: `interface User extends Record<string, unknown> {
+  id: number;
+  name: string;
+  email: string;
+}
+
+const columns: ColumnDef<User>[] = [
+  { key: 'name', header: 'Nombre', sortable: true },
+  { key: 'email', header: 'Email', sortable: true },
+];
+
+<DataGrid
+  data={users}
+  columns={columns}
+  getRowId={(row) => row.id}
+  selectionMode="multiple"
+  onSelectionChange={(rows) => setSelected(rows)}
+/>
+
+// Hook standalone
+const grid = useDataGrid({ data, columns, getRowId: (r) => r.id });`,
     Sidebar: `// Con React Router
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -339,6 +377,48 @@ export interface TextBoxProps extends InputHTMLAttributes<HTMLInputElement> {
   width?: string | number;
   theme?: TextBoxThemeInput;
 }`,
+    TextArea: `export type TextAreaLabelPosition = 'top' | 'floating' | 'outlined' | 'left';
+export type TextAreaVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
+export type TextAreaSize = 'sm' | 'md' | 'lg';
+export type TextAreaResize = 'none' | 'vertical' | 'horizontal' | 'both';
+
+export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  label?: string;
+  labelPosition?: TextAreaLabelPosition;
+  variant?: TextAreaVariant;
+  size?: TextAreaSize;
+  rows?: number;
+  resize?: TextAreaResize;
+  error?: boolean;
+  errorMessage?: string;
+  helperText?: string;
+  clearable?: boolean;
+  fullWidth?: boolean;
+  width?: string | number;
+  theme?: TextAreaThemeInput;
+}`,
+    DataGrid: `export type DataGridSelectionMode = 'none' | 'single' | 'multiple';
+
+export type ColumnDef<T extends Record<string, unknown>> = {
+  [K in keyof T]: {
+    key: K;
+    header: string;
+    sortable?: boolean;
+    renderCell?: (value: T[K], row: T, rowIndex: number) => ReactNode;
+  };
+}[keyof T];
+
+export interface DataGridProps<T extends Record<string, unknown>> {
+  data: T[];
+  columns: ColumnDef<T>[];
+  getRowId: (row: T) => string | number;
+  selectionMode?: DataGridSelectionMode;
+  onRowSelect?: (row: T) => void;
+  onSelectionChange?: (selectedRows: T[]) => void;
+  debounceMs?: number;
+  stickyFirstColumn?: boolean;
+  theme?: DataGridThemeInput;
+}`,
     Sidebar: `export interface MenuConfig { items: MenuItem[]; }
 
 export interface MenuItem {
@@ -446,6 +526,16 @@ function AccessibilitySection({ entry }: { entry: DocEntry }) {
 - Errores: aria-invalid="true" + aria-describedby al mensaje.
 - Helper: aria-describedby también referencia helperText.
 - Placeholder: no sustituye al label. Usar label + placeholder.`,
+    TextArea: `- Rol: textbox (implícito en <textarea>).
+- Label: asociado vía <label htmlFor> automático con prop label.
+- Errores: aria-invalid="true" + aria-describedby al mensaje.
+- Helper: aria-describedby también referencia helperText.
+- Multilínea: soporta resize nativo configurable con resize.`,
+    DataGrid: `- Rol: grid en la tabla.
+- Ordenamiento: aria-sort en encabezados sortables.
+- Selección: aria-selected en filas; checkboxes con labels en modo multiple.
+- Búsqueda: input type="search" con aria-label.
+- Scroll: viewport dedicado; primera columna sticky en móvil.`,
     Sidebar: `- Rol: navigation en <nav>.
 - Ítems expandibles: aria-expanded en botones con hijos.
 - Ítem activo: aria-current="page" en la página actual.

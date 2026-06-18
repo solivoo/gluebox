@@ -65,6 +65,23 @@ const handleClick: ButtonOnClickHandler = (event) => {
 | `TextBoxOnFocusHandler` | `(event: FocusEvent<HTMLInputElement>) => void` |
 | `TextBoxOnBlurHandler` | `(event: FocusEvent<HTMLInputElement>) => void` |
 
+### TextArea
+
+| Tipo | Signatura |
+|------|-----------|
+| `TextAreaOnChangeHandler` | `(event: ChangeEvent<HTMLTextAreaElement>) => void` |
+| `TextAreaOnFocusHandler` | `(event: FocusEvent<HTMLTextAreaElement>) => void` |
+| `TextAreaOnBlurHandler` | `(event: FocusEvent<HTMLTextAreaElement>) => void` |
+
+### DataGrid
+
+| Tipo | Signatura |
+|------|-----------|
+| `DataGridOnRowSelectHandler<T>` | `(row: T) => void` |
+| `DataGridOnSelectionChangeHandler<T>` | `(selectedRows: T[]) => void` |
+| `DataGridOnPageChangeHandler` | `(page: number) => void` |
+| `DataGridOnPageSizeChangeHandler` | `(pageSize: number) => void` |
+
 ### DateBox
 
 | Tipo | Signatura |

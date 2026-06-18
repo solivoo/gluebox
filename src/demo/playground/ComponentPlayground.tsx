@@ -3,13 +3,15 @@ import type { ComponentPlaygroundProps } from './types';
 import { PropControl } from './PropControl';
 import './ComponentPlayground.css';
 
-export function ComponentPlayground({
+export function ComponentPlayground<P extends object = Record<string, unknown>>({
   meta,
   Component,
   renderPreview,
   wrapper,
-}: Readonly<ComponentPlaygroundProps>) {
-  const [props, setProps] = useState<Record<string, unknown>>({ ...meta.defaults });
+}: Readonly<ComponentPlaygroundProps<P>>) {
+  const [props, setProps] = useState<Record<string, unknown>>({
+    ...(meta.defaults as Record<string, unknown>),
+  });
   const [activeTab, setActiveTab] = useState<'props' | 'events'>('props');
 
   const handlePropChange = useCallback((name: string, value: unknown) => {
@@ -18,10 +20,12 @@ export function ComponentPlayground({
 
   /** Filtra props: fusiona defaults + estado, convierte strings vacíos en undefined */
   const cleanProps = useMemo(() => {
-    const merged = { ...meta.defaults, ...props };
-    const cleaned: Record<string, unknown> = {};
-    for (const [key, val] of Object.entries(merged)) {
-      cleaned[key] = val === '' ? undefined : val;
+    const merged = { ...meta.defaults, ...props } as P;
+    const cleaned = { ...merged } as P;
+    for (const [key, val] of Object.entries(merged as Record<string, unknown>)) {
+      if (val === '') {
+        (cleaned as Record<string, unknown>)[key] = undefined;
+      }
     }
     return cleaned;
   }, [meta.defaults, props]);

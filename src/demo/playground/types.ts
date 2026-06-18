@@ -39,7 +39,7 @@ export interface PropSection {
 }
 
 /** Metadata completa de un componente */
-export interface ComponentMeta<P = Record<string, unknown>> {
+export interface ComponentMeta<P extends object = Record<string, unknown>> {
   name: string;
   description: string;
   sourcePath: string;
@@ -54,18 +54,18 @@ export interface ComponentMeta<P = Record<string, unknown>> {
 }
 
 /** Props del <ComponentPlayground> */
-export interface ComponentPlaygroundProps {
-  meta: ComponentMeta;
+export interface ComponentPlaygroundProps<P extends object = Record<string, unknown>> {
+  meta: ComponentMeta<P>;
   /** El componente real a renderizar en el preview */
-  Component?: ComponentType<Record<string, unknown>>;
+  Component?: ComponentType<P>;
   /**
    * Preview personalizado (modales, toasts, etc.).
    * Si se define, tiene prioridad sobre `Component`.
    */
-  renderPreview?: (props: Record<string, unknown>) => ReactNode;
+  renderPreview?: (props: P) => ReactNode;
   /**
    * Envuelve el playground completo (ej. ToastProvider).
    * Recibe el layout y las props limpias del panel.
    */
-  wrapper?: (children: ReactNode, props: Record<string, unknown>) => ReactNode;
+  wrapper?: (children: ReactNode, props: P) => ReactNode;
 }

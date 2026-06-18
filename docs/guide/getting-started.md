@@ -4,6 +4,15 @@ gluBox es una librería de componentes React para dashboards y aplicaciones inte
 
 ## Qué incluye hoy
 
+| Componente | Documentación |
+|------------|---------------|
+| Sidebar | [sidebar](/components/sidebar) |
+| TextBox, Select, DateBox, RangeDateBox | [formularios](/components/forms) |
+| Button, CheckButton, OptionGroup | [botones](/components/buttons) |
+| Popup, Toast | [overlays](/components/overlays) |
+
+Listado completo: [Componentes](/components/).
+
 ### Navegación
 
 - **[Sidebar](/components/sidebar)** — Menú dinámico desde API, RBAC, 3 niveles, temas, modo colapsado e iconos personalizables.
@@ -25,6 +34,7 @@ gluBox es una librería de componentes React para dashboards y aplicaciones inte
 | Guía | Contenido |
 |------|-----------|
 | [Instalación](/guide/installation) | npm, CSS, temas, TypeScript |
+| [Temas y apariencia](/guide/themes) | `data-theme`, `data-mode`, prop `theme`, presets |
 | [Tipos de eventos](/guide/event-types) | Handlers exportados (`*OnChangeHandler`, etc.) |
 | [Esquema del menú (API)](/guide/menu-api) | Contrato JSON para backend |
 | [Integración con routing](/guide/routing) | React Router, guards, registro de rutas |

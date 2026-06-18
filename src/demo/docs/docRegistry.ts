@@ -2,6 +2,7 @@ import type { ComponentMeta } from '@/demo/playground/types';
 import { buttonMeta } from '@/demo/metadata/buttonMeta';
 import { selectMeta } from '@/demo/metadata/selectMeta';
 import { textBoxMeta } from '@/demo/metadata/textBoxMeta';
+import { textAreaMeta } from '@/demo/metadata/textAreaMeta';
 import { sidebarMeta } from '@/demo/metadata/sidebarMeta';
 import { dateBoxMeta } from '@/demo/metadata/dateBoxMeta';
 import { rangeDateBoxMeta } from '@/demo/metadata/rangeDateBoxMeta';
@@ -9,12 +10,13 @@ import { optionGroupMeta } from '@/demo/metadata/optionGroupMeta';
 import { checkButtonMeta } from '@/demo/metadata/checkButtonMeta';
 import { popupMeta } from '@/demo/metadata/popupMeta';
 import { toastMeta } from '@/demo/metadata/toastMeta';
+import { dataGridMeta } from '@/demo/metadata/dataGridMeta';
 
 export interface DocEntry {
   component: string;
   label: string;
   description: string;
-  meta: ComponentMeta;
+  meta: ComponentMeta<object>;
   importPath: string;
   installNote: string;
 }
@@ -49,6 +51,16 @@ export const componentDocEntries: Record<string, DocEntry> = {
     importPath: "import { TextBox } from 'glubox';",
     installNote:
       'TextBox extiende InputHTMLAttributes. Compatible con formularios controlados y no controlados.',
+  },
+  textarea: {
+    component: 'TextArea',
+    label: 'TextArea',
+    description:
+      'Campo de texto multilínea con filas configurables, resize, label top/flotante/outlined/left, clearable, estados de error/ayuda y temas.',
+    meta: textAreaMeta,
+    importPath: "import { TextArea } from 'glubox';",
+    installNote:
+      'TextArea extiende TextareaHTMLAttributes. Compatible con formularios controlados y no controlados.',
   },
   sidebar: {
     component: 'Sidebar',
@@ -119,6 +131,16 @@ export const componentDocEntries: Record<string, DocEntry> = {
     importPath: "import { ToastProvider, useToast } from 'glubox';",
     installNote:
       'Envolvé la app con ToastProvider y usá useToast().show() para encolar notificaciones.',
+  },
+  datagrid: {
+    component: 'DataGrid',
+    label: 'DataGrid',
+    description:
+      'Tabla genérica con búsqueda con debounce, ordenamiento por columna, selección single/multiple, primera columna sticky y hook useDataGrid reutilizable.',
+    meta: dataGridMeta,
+    importPath: "import { DataGrid, useDataGrid } from 'glubox';",
+    installNote:
+      'DataGrid es genérico: definí ColumnDef<T> y getRowId. El hook useDataGrid expone filtrado, sort y selección para UIs custom.',
   },
 };
 

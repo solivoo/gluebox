@@ -1,6 +1,6 @@
 # gluBox
 
-Librería de componentes React para aplicaciones empresariales: **Sidebar** con RBAC, controles de formulario, botones y 3 temas globales (Indigo / Emerald / Blue) en modo claro y oscuro.
+Librería de componentes React para aplicaciones empresariales: **Sidebar** con RBAC, **DataGrid**, controles de formulario, botones y 3 temas globales (Indigo / Emerald / Blue) en modo claro y oscuro.
 
 - **Documentación:** https://solivoo.github.io/gluebox/
 - **Repositorio:** https://github.com/solivoo/gluebox
@@ -137,6 +137,8 @@ document.documentElement.setAttribute('data-mode', 'dark');
 | `enterprise` | Powder blue pastel |
 
 Cada componente acepta además su prop `theme` (`light`, `dark`, presets como `modern-dark`, o tokens custom).
+
+Documentación completa del sistema de temas: [docs/guide/themes.md](docs/guide/themes.md) (VitePress) o `pnpm docs:dev` → **Temas y apariencia**.
 
 ## Desarrollo
 

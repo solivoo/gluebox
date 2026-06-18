@@ -34,11 +34,13 @@ document.documentElement.setAttribute('data-theme', 'default');
 document.documentElement.setAttribute('data-mode', 'dark');
 ```
 
-| Archivo | Acento |
-|---------|--------|
-| `glubox/themes/default.css` | Indigo |
-| `glubox/themes/modern.css` | Emerald |
-| `glubox/themes/enterprise.css` | Blue |
+| Archivo | Paleta pastel |
+|---------|---------------|
+| `glubox/themes/default.css` | Periwinkle (indigo suave) |
+| `glubox/themes/modern.css` | Sage (verde suave) |
+| `glubox/themes/enterprise.css` | Powder blue (azul suave) |
+
+Guía completa: [Temas y apariencia](/guide/themes).
 
 ### Label outlined en cards
 

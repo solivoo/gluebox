@@ -11,6 +11,7 @@ export default defineConfig({
     nav: [
       { text: 'Inicio', link: '/' },
       { text: 'Guía', link: '/guide/getting-started' },
+      { text: 'Temas', link: '/guide/themes' },
       { text: 'Formularios', link: '/components/forms' },
       { text: 'Sidebar', link: '/components/sidebar' },
       { text: 'GitHub', link: 'https://github.com/solivoo/gluebox' },
@@ -21,17 +22,20 @@ export default defineConfig({
         items: [
           { text: 'Introducción', link: '/guide/getting-started' },
           { text: 'Instalación', link: '/guide/installation' },
+          { text: 'Temas y apariencia', link: '/guide/themes' },
+          { text: 'Tipos de eventos', link: '/guide/event-types' },
           { text: 'Esquema del menú (API)', link: '/guide/menu-api' },
           { text: 'Integración con routing', link: '/guide/routing' },
-          { text: 'Tipos de eventos', link: '/guide/event-types' },
         ],
       },
       {
         text: 'Componentes',
         items: [
+          { text: 'Resumen', link: '/components/' },
           { text: 'Formularios', link: '/components/forms' },
           { text: 'Botones y selección', link: '/components/buttons' },
           { text: 'Overlays (Popup / Toast)', link: '/components/overlays' },
+          { text: 'DataGrid', link: '/components/datagrid' },
           { text: 'Sidebar', link: '/components/sidebar' },
         ],
       },
