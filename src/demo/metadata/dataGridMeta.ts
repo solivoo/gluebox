@@ -57,6 +57,55 @@ export const dataGridMeta: ComponentMeta<DataGridPlaygroundDefaults> = {
   },
   sections: [
     {
+      title: 'Datos',
+      props: [
+        {
+          name: 'dataSource',
+          type: 'T[]',
+          defaultValue: undefined,
+          description:
+            'Estructura: array plano de objetos fila (T[]). Requerido. `[]` OK. No pasar `{ items }` / `{ data }` — usá response.items.',
+          control: 'slot',
+          hideInPlayground: true,
+        },
+        {
+          name: 'keyExpr',
+          type: 'keyof T | string',
+          defaultValue: undefined,
+          description:
+            'Campo clave de cada fila (debe existir en T y ser string | number). Ej: "id".',
+          control: 'slot',
+          hideInPlayground: true,
+        },
+        {
+          name: 'columns',
+          type: 'ColumnDef<T>[]',
+          defaultValue: undefined,
+          description:
+            'Array de columnas tipadas: { key, header, sortable?, renderCell? }. key ∈ keyof T.',
+          control: 'slot',
+          hideInPlayground: true,
+        },
+        {
+          name: 'paging',
+          type: 'DataGridPaging',
+          defaultValue: undefined,
+          description:
+            'Paginación: { enabled?, pageIndex? (0-based), pageSize? }. Default pageSize 20 si se pasa el objeto.',
+          control: 'slot',
+          hideInPlayground: true,
+        },
+        {
+          name: 'totalRowCount',
+          type: 'number',
+          defaultValue: undefined,
+          description: 'Total de registros en modo server (requerido si paginationMode="server").',
+          control: 'number',
+          hideInPlayground: true,
+        },
+      ],
+    },
+    {
       title: 'Comportamiento',
       props: [
         {
@@ -70,6 +119,14 @@ export const dataGridMeta: ComponentMeta<DataGridPlaygroundDefaults> = {
             { label: 'Única', value: 'single' },
             { label: 'Múltiple', value: 'multiple' },
           ],
+        },
+        {
+          name: 'selectedRowIds',
+          type: 'Array<string | number>',
+          defaultValue: undefined,
+          description: 'IDs seleccionados en modo controlado (con onSelectionChange).',
+          control: 'slot',
+          hideInPlayground: true,
         },
         {
           name: 'showSearch',
@@ -105,6 +162,14 @@ export const dataGridMeta: ComponentMeta<DataGridPlaygroundDefaults> = {
           control: 'text',
         },
         {
+          name: 'searchKeys',
+          type: 'Array<keyof T>',
+          defaultValue: undefined,
+          description: 'Claves sobre las que filtrar; por defecto todas las columnas visibles.',
+          control: 'slot',
+          hideInPlayground: true,
+        },
+        {
           name: 'debounceMs',
           type: 'number',
           defaultValue: 300,
@@ -122,8 +187,9 @@ export const dataGridMeta: ComponentMeta<DataGridPlaygroundDefaults> = {
           name: 'pagingEnabled',
           type: 'boolean',
           defaultValue: true,
-          description: 'Activa paging.enabled (muestra el pager).',
+          description: 'Control del playground → paging.enabled.',
           control: 'boolean',
+          hideInDocs: true,
         },
         {
           name: 'paginationMode',
@@ -140,23 +206,25 @@ export const dataGridMeta: ComponentMeta<DataGridPlaygroundDefaults> = {
       ],
     },
     {
-      title: 'Paginación (paging)',
+      title: 'Paginación',
       props: [
         {
           name: 'pageIndex',
           type: 'number',
           defaultValue: 0,
-          description: 'Página actual (0-based) → paging.pageIndex.',
+          description: 'Control del playground → paging.pageIndex (0-based).',
           control: 'number',
           dependsOn: { prop: 'pagingEnabled', value: true },
+          hideInDocs: true,
         },
         {
           name: 'pageSize',
           type: 'number',
           defaultValue: 20,
-          description: 'Filas por página → paging.pageSize.',
+          description: 'Control del playground → paging.pageSize.',
           control: 'number',
           dependsOn: { prop: 'pagingEnabled', value: true },
+          hideInDocs: true,
         },
         {
           name: 'pageSizeOptions',
@@ -205,6 +273,24 @@ export const dataGridMeta: ComponentMeta<DataGridPlaygroundDefaults> = {
             { label: 'Tabla', value: 'table' },
             { label: 'Tarjetas', value: 'card' },
           ],
+        },
+        {
+          name: 'renderCard',
+          type: 'DataGridRenderCard<T>',
+          defaultValue: undefined,
+          description:
+            'Función que recibe DataGridCardRenderContext (row, selected, selectionMode…) y renderiza la tarjeta.',
+          control: 'slot',
+          hideInPlayground: true,
+        },
+        {
+          name: 'renderCardComponent',
+          type: 'DataGridCardComponent<T>',
+          defaultValue: undefined,
+          description:
+            'Componente React con las props de DataGridCardRenderContext. Preferible a renderCard.',
+          control: 'slot',
+          hideInPlayground: true,
         },
         {
           name: 'cardOnMobile',
@@ -323,7 +409,7 @@ export const dataGridMeta: ComponentMeta<DataGridPlaygroundDefaults> = {
           description: 'Preset (ej. enterprise-dark) o tema parcial personalizado.',
           control: 'select',
           options: [
-            { label: 'Auto (contexto)', value: undefined },
+            { label: 'Auto (contexto)', value: '' },
             { label: 'Default light', value: 'default-light' },
             { label: 'Default dark', value: 'default-dark' },
             { label: 'Modern light', value: 'modern-light' },
@@ -338,33 +424,40 @@ export const dataGridMeta: ComponentMeta<DataGridPlaygroundDefaults> = {
   events: [
     {
       name: 'onRowSelect',
-      type: 'DataGridOnRowSelectHandler<T>',
       signature: '(row: T) => void',
       description: 'Se dispara al seleccionar una fila en modo single.',
+      handlerType: 'DataGridOnRowSelectHandler',
+      payloadType: 'T',
     },
     {
       name: 'onSelectionChange',
-      type: 'DataGridOnSelectionChangeHandler<T>',
       signature: '(selectedRows: T[]) => void',
-      description: 'Se dispara cuando cambia el conjunto de filas seleccionadas.',
+      description:
+        'Cambia el conjunto seleccionado (single y multiple). En card, al clic también se actualiza la selección.',
+      handlerType: 'DataGridOnSelectionChangeHandler',
+      payloadType: 'T[]',
     },
     {
       name: 'onCardSelect',
-      type: 'DataGridOnCardSelectHandler<T>',
       signature: '(row: T) => void',
-      description: 'Se dispara al activar una tarjeta en layout card.',
+      description:
+        'Se dispara al activar una tarjeta (layout card). No reemplaza onSelectionChange.',
+      handlerType: 'DataGridOnCardSelectHandler',
+      payloadType: 'T',
     },
     {
       name: 'onPageChange',
-      type: 'DataGridOnPageChangeHandler',
       signature: '(pageIndex: number) => void',
       description: 'Cambio de página (pageIndex 0-based).',
+      handlerType: 'DataGridOnPageChangeHandler',
+      payloadType: 'number',
     },
     {
       name: 'onPageSizeChange',
-      type: 'DataGridOnPageSizeChangeHandler',
       signature: '(pageSize: number) => void',
       description: 'Cambio del tamaño de página.',
+      handlerType: 'DataGridOnPageSizeChangeHandler',
+      payloadType: 'number',
     },
   ],
 };

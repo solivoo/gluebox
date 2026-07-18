@@ -49,7 +49,7 @@ import type {
 
 | Componente | Descripción |
 |------------|-------------|
-| **DataGrid** | Tabla/cards: `dataSource`, `keyExpr`, `paging` |
+| **DataGrid** | Tabla/cards: `dataSource: T[]` plano + `keyExpr` + `columns` + `paging` |
 | **Sidebar** | Navegación lateral, menú desde API, RBAC, 3 niveles |
 | **Button** | Botón con variantes y temas |
 | **TextBox** | Campo de texto con label top / floating / outlined / left |
@@ -79,14 +79,14 @@ const columns: ColumnDef<Row>[] = [
 ];
 
 <DataGrid
-  dataSource={[{ id: 1, name: 'Ana' }]}
+  dataSource={[{ id: 1, name: 'Ana' }]}  // T[] plano — no { items }
   keyExpr="id"
   columns={columns}
   paging={{ enabled: true, pageIndex: 0, pageSize: 10 }}
 />
 ```
 
-Guía completa: [DataGrid](https://solivoo.github.io/gluebox/components/datagrid).
+Estructura: cada fila es un objeto; `dataSource` es el array; `keyExpr` nombra el campo clave. Guía: [DataGrid](https://solivoo.github.io/gluebox/components/datagrid#datos--estructura-esperada).
 
 ### Sidebar
 

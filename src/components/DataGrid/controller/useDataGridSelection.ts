@@ -32,8 +32,9 @@ function rowsFromIds<T extends Record<string, unknown>>(
   getRowId: (row: T) => string | number,
   ids: Iterable<string | number>,
 ): T[] {
+  const safeData = Array.isArray(data) ? data : [];
   const idSet = new Set(Array.from(ids, normalizeId));
-  return data.filter((item) => idSet.has(normalizeId(getRowId(item))));
+  return safeData.filter((item) => idSet.has(normalizeId(getRowId(item))));
 }
 
 export function useDataGridSelection<T extends Record<string, unknown>>(

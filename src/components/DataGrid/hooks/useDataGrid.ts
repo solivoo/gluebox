@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 import type {
+  ColumnDef,
   DataGridSortState,
   UseDataGridOptions,
   UseDataGridReturn,
@@ -11,12 +12,16 @@ import {
   sortRows,
 } from '../utils/gridUtils';
 
+function asArray<T>(value: unknown): T[] {
+  return Array.isArray(value) ? (value as T[]) : [];
+}
+
 export function useDataGrid<T extends Record<string, unknown>>(
   options: UseDataGridOptions<T>,
 ): UseDataGridReturn<T> {
   const {
-    data,
-    columns,
+    data: dataProp,
+    columns: columnsProp,
     getRowId,
     selectionMode = 'none',
     selectedRowIds,
@@ -24,6 +29,9 @@ export function useDataGrid<T extends Record<string, unknown>>(
     debounceMs = 300,
     initialSort = null,
   } = options;
+
+  const data = asArray<T>(dataProp);
+  const columns = asArray<ColumnDef<T>>(columnsProp);
 
   const [searchQuery, setSearchQuery] = useState('');
   const [sort, setSort] = useState<DataGridSortState<T> | null>(initialSort);
@@ -50,7 +58,7 @@ export function useDataGrid<T extends Record<string, unknown>>(
 
   const selectedIds = useMemo(() => {
     if (selectedRowIds) {
-      return new Set(selectedRowIds.map(normalizeId));
+      return new Set(asArray<string | number>(selectedRowIds).map(normalizeId));
     }
     return internalSelectedIds;
   }, [selectedRowIds, internalSelectedIds]);

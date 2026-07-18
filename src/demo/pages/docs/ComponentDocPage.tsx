@@ -58,6 +58,14 @@ function breadcrumbLabel(pathname: string, entry: DocEntry): string {
 /* ── Sub-components ── */
 
 function GettingStarted({ entry }: { entry: DocEntry }) {
+  const basicUsage =
+    entry.basicUsage ??
+    `import { ${entry.label} } from 'glubox';
+
+function App() {
+  return <${entry.label} />;
+}`;
+
   return (
     <section className="dcd__section">
       <h2>Getting Started</h2>
@@ -73,11 +81,14 @@ function GettingStarted({ entry }: { entry: DocEntry }) {
       <pre className="dcd__code">{entry.importPath}</pre>
 
       <h3>Uso básico</h3>
-      <pre className="dcd__code">{`import { ${entry.label} } from 'glubox';
+      <pre className="dcd__code">{basicUsage}</pre>
 
-function App() {
-  return <${entry.label} />;
-}`}</pre>
+      {entry.dataContract && (
+        <>
+          <h3>Estructura de datos</h3>
+          <pre className="dcd__code">{entry.dataContract}</pre>
+        </>
+      )}
 
       <h3>Configuración global</h3>
       <p>
@@ -172,15 +183,22 @@ function HowTo({ entry }: { entry: DocEntry }) {
 
 // Variante outline
 <TextArea variant="outline" label="Observaciones" />`,
-    DataGrid: `interface User extends Record<string, unknown> {
+    DataGrid: `// 1) Tipá la fila (T extends Record<string, unknown>)
+interface User extends Record<string, unknown> {
   id: number;
   name: string;
   email: string;
 }
 
+// 2) columns: ColumnDef<T>[] — key debe existir en T
 const columns: ColumnDef<User>[] = [
   { key: 'name', header: 'Nombre', sortable: true },
   { key: 'email', header: 'Email', sortable: true },
+];
+
+// 3) dataSource: T[] plano (no { items })
+const users: User[] = [
+  { id: 1, name: 'Ana', email: 'ana@corp.com' },
 ];
 
 <DataGrid
@@ -192,7 +210,11 @@ const columns: ColumnDef<User>[] = [
   onSelectionChange={(rows) => setSelected(rows)}
 />
 
-// Hook standalone
+// Desde API con envoltorio:
+// const { items, totalCount } = await api.list();
+// <DataGrid dataSource={items} keyExpr="id" columns={columns} totalRowCount={totalCount} />
+
+// Hook headless (API interna distinta):
 const grid = useDataGrid({ data: users, columns, getRowId: (r) => r.id });`,
     Sidebar: `// Con React Router
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -226,10 +248,17 @@ function App() {
 }
 
 function PropsTable({ entry }: { entry: DocEntry }) {
+  const sections = entry.meta.sections
+    .map((sec) => ({
+      ...sec,
+      props: sec.props.filter((prop) => !prop.hideInDocs),
+    }))
+    .filter((sec) => sec.props.length > 0);
+
   return (
     <section className="dcd__section">
       <h2>Props</h2>
-      {entry.meta.sections.map((sec) => (
+      {sections.map((sec) => (
         <div key={sec.title} className="dcd__props-group">
           <h3>{sec.title}</h3>
           <table className="dcd__table">
@@ -398,27 +427,41 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   width?: string | number;
   theme?: TextAreaThemeInput;
 }`,
-    DataGrid: `export type DataGridSelectionMode = 'none' | 'single' | 'multiple';
+    DataGrid: `// Fila: objeto plano (T extends Record<string, unknown>)
+// dataSource: T[]  — array plano, no { items }
 
-export type ColumnDef<T extends Record<string, unknown>> = {
-  [K in keyof T]: {
-    key: K;
-    header: string;
-    sortable?: boolean;
-    renderCell?: (value: T[K], row: T, rowIndex: number) => ReactNode;
-  };
-}[keyof T];
+export type ColumnDef<T> = {
+  key: keyof T;
+  header: string;
+  sortable?: boolean;
+  renderCell?: (value: T[keyof T], row: T, rowIndex: number) => ReactNode;
+  // + width, minWidth, align…
+};
+
+export interface DataGridPaging {
+  enabled?: boolean;
+  pageIndex?: number; // 0-based
+  pageSize?: number;
+}
+
+export interface DataGridCardRenderContext<T> {
+  row: T;
+  rowIndex: number;
+  selected: boolean;
+  selectionMode: 'none' | 'single' | 'multiple';
+  columns: ColumnDef<T>[];
+}
 
 export interface DataGridProps<T extends Record<string, unknown>> {
-  data: T[];
-  columns: ColumnDef<T>[];
-  getRowId: (row: T) => string | number;
-  selectionMode?: DataGridSelectionMode;
-  onRowSelect?: (row: T) => void;
+  dataSource: T[];                 // requerido, Array.isArray
+  keyExpr: keyof T | string;       // campo clave en cada fila
+  columns: ColumnDef<T>[];         // requerido
+  paging?: DataGridPaging;
+  pageSizeOptions?: number[];
+  selectionMode?: 'none' | 'single' | 'multiple';
+  renderCardComponent?: DataGridCardComponent<T>;
   onSelectionChange?: (selectedRows: T[]) => void;
-  debounceMs?: number;
-  stickyFirstColumn?: boolean;
-  theme?: DataGridThemeInput;
+  onPageChange?: (pageIndex: number) => void;
 }`,
     Sidebar: `export interface MenuConfig { items: MenuItem[]; }
 

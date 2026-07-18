@@ -74,28 +74,32 @@ export function ComponentPlayground<P extends object = Record<string, unknown>>(
         {/* Props tab */}
         {activeTab === 'props' && (
           <div className="cpg__props">
-            {meta.sections.map((section) => (
+            {meta.sections.map((section) => {
+              const visibleProps = section.props.filter((prop) => {
+                if (prop.hideInPlayground) return false;
+                if (prop.dependsOn) {
+                  const depValue = props[prop.dependsOn.prop];
+                  if (JSON.stringify(depValue) !== JSON.stringify(prop.dependsOn.value)) {
+                    return false;
+                  }
+                }
+                return true;
+              });
+              if (visibleProps.length === 0) return null;
+              return (
               <div key={section.title} className="cpg__section">
                 <h3 className="cpg__section-title">{section.title}</h3>
-                {section.props.map((prop) => {
-                  // Check dependency visibility
-                  if (prop.dependsOn) {
-                    const depValue = props[prop.dependsOn.prop];
-                    if (JSON.stringify(depValue) !== JSON.stringify(prop.dependsOn.value)) {
-                      return null;
-                    }
-                  }
-                  return (
+                {visibleProps.map((prop) => (
                     <PropControl
                       key={prop.name}
                       meta={prop}
                       value={props[prop.name] ?? prop.defaultValue}
                       onChange={(v) => handlePropChange(prop.name, v)}
                     />
-                  );
-                })}
+                ))}
               </div>
-            ))}
+              );
+            })}
           </div>
         )}
 

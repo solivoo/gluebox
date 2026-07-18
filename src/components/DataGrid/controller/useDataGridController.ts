@@ -75,6 +75,8 @@ export function useDataGridController<T extends Record<string, unknown>>(
   const normalized = normalizeDataGridProps(props);
   const {
     data,
+    columns,
+    pageSizeOptions,
     getRowId,
     pagination,
     page,
@@ -84,7 +86,6 @@ export function useDataGridController<T extends Record<string, unknown>>(
   } = normalized;
 
   const {
-    columns,
     selectionMode = 'none',
     selectedRowIds,
     onRowSelect,
@@ -113,7 +114,6 @@ export function useDataGridController<T extends Record<string, unknown>>(
     cardBreakpoint = 640,
     maxRecords,
     paginationMode = 'client',
-    pageSizeOptions = [10, 25, 50, 100],
     totalRowCount,
     onPageChange,
     onPageSizeChange,

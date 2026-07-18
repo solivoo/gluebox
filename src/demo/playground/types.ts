@@ -19,6 +19,10 @@ export interface PropMeta {
   options?: ControlOption[];
   /** Props que dependen de esta (se ocultan si esta prop tiene cierto valor) */
   dependsOn?: { prop: string; value: unknown };
+  /** Solo documentación API; no aparece en el panel del playground */
+  hideInPlayground?: boolean;
+  /** Solo control del playground; no aparece en /api/props */
+  hideInDocs?: boolean;
 }
 
 /** Metadata de un evento / callback */

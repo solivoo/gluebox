@@ -51,17 +51,106 @@ Sin `height` ni `maxHeight`, el grid **se encoge** a las filas de la página (ta
 
 ---
 
-## Datos
+## Datos — estructura esperada
 
-| Prop | Rol |
-|------|-----|
-| `dataSource` | Array de filas (**requerido**) |
-| `keyExpr` | Nombre del campo clave, ej. `"id"` (**requerido**) |
-| `columns` | Definición de columnas |
+El DataGrid espera **tres piezas tipadas**:
+
+| Prop | Tipo | Rol |
+|------|------|-----|
+| `dataSource` | `T[]` | Array **plano** de filas (objetos). También válido: `[]`. |
+| `keyExpr` | `keyof T \| string` | Nombre del campo clave único en cada fila (ej. `"id"`). |
+| `columns` | `ColumnDef<T>[]` | Array de definiciones de columna. |
+
+`T` debe extender `Record<string, unknown>` (objeto plano por fila).
+
+### Forma de cada fila
+
+```ts
+// ✅ Cada elemento de dataSource es un objeto con campos estables
+interface Employee extends Record<string, unknown> {
+  id: number;          // ← keyExpr apunta a este campo
+  name: string;
+  email: string;
+  department: string;
+  status?: 'Activo' | 'Inactivo';
+}
+
+const dataSource: Employee[] = [
+  { id: 1, name: 'Ana', email: 'ana@corp.com', department: 'Ventas', status: 'Activo' },
+  { id: 2, name: 'Bruno', email: 'bruno@corp.com', department: 'IT' },
+];
+```
+
+- Cada fila = **un objeto**.
+- `keyExpr` debe existir en **todas** las filas y devolver `string` o `number` (si falta → error en runtime).
+- Campos extra en la fila están permitidos; solo se muestran los que declares en `columns` (o uses en `renderCard`).
+
+### Forma de `columns`
+
+```ts
+import type { ColumnDef } from 'glubox';
+
+const columns: ColumnDef<Employee>[] = [
+  { key: 'name', header: 'Nombre', sortable: true },
+  { key: 'email', header: 'Email', sortable: true },
+  {
+    key: 'department',
+    header: 'Depto',
+    renderCell: (value) => <strong>{value}</strong>,
+  },
+];
+```
+
+| Campo | Descripción |
+|-------|-------------|
+| `key` | Propiedad de `T` (tipada) |
+| `header` | Título visible |
+| `sortable` | Orden al clic |
+| `width` / `minWidth` / `align` | Layout |
+| `renderCell` | UI custom: `(value, row, rowIndex) => ReactNode` |
+
+### Uso correcto
 
 ```tsx
-<DataGrid dataSource={rows} keyExpr="id" columns={columns} />
+<DataGrid
+  dataSource={employees}   // Employee[]
+  keyExpr="id"
+  columns={columns}        // ColumnDef<Employee>[]
+/>
 ```
+
+### Desde una API (respuesta con envoltorio)
+
+El grid **no** desempaqueta `{ items }`, `{ Items }`, `{ data }`, etc. Pasá el array plano:
+
+```tsx
+// Respuesta típica del backend
+const response = await fetch('/api/employees').then((r) => r.json());
+// response = { items: [...], totalCount: 120 }
+
+// ❌ Incorrecto — dataSource no es un Array
+// <DataGrid dataSource={response} keyExpr="id" columns={columns} />
+
+// ✅ Correcto
+<DataGrid
+  dataSource={response.items}
+  keyExpr="id"
+  columns={columns}
+  paginationMode="server"
+  totalRowCount={response.totalCount}
+  paging={{ enabled: true, pageIndex, pageSize }}
+/>
+```
+
+### Contrato runtime (`Array.isArray`)
+
+| Valor | Resultado |
+|-------|-----------|
+| `[]` | OK — toolbar, empty message y pager |
+| `[{ id: 1, … }]` | OK |
+| `null` / `undefined` | Error: `` Se requiere `dataSource` (array de filas). `` |
+| `{ items: [...] }` u otro objeto | Error: `` `dataSource` debe ser un Array. Recibido: Object. `` |
+| `columns` / `pageSizeOptions` no-array | Error claro (mismo criterio) |
 
 ---
 

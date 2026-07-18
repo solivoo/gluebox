@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.1.9] — 2026-07-18
+
+### Corregido
+
+- **DataGrid a prueba de datos:** `dataSource` se valida con `Array.isArray`. `[]` monta toolbar / empty / pager sin `TypeError: … is not iterable`.
+- Mensajes claros si `dataSource` es `null`/`undefined` o un objeto (p. ej. `{ items }`); hint opcional para envoltorios.
+- `columns` y `pageSizeOptions` (si se pasan) deben ser arrays; error explícito en lugar de fallos opacos en `.map` / `for…of`.
+- Iteraciones internas (`sortRows`, `filterRowsBySearch`, `useDataGrid`, selección) toleran valores no iterables.
+
+### Documentación
+
+- Sección **Datos — estructura esperada**: forma de fila (`T`), `columns` / `keyExpr`, ejemplos API con envoltorio `{ items }`, tabla de errores runtime.
+- Demo Getting Started / How To / API props alineados al contrato `dataSource: T[]`.
+
 ## [0.1.8] — 2026-07-18
 
 ### Añadido

@@ -315,8 +315,8 @@ const closeOne: ToastDismissHandler = (id) => dismiss(id);`,
       },
       {
         handlerType: 'DataGridOnPageChangeHandler',
-        signature: '(page: number) => void',
-        description: 'Handler de onPageChange (página 1-based).',
+        signature: '(pageIndex: number) => void',
+        description: 'Handler de onPageChange (pageIndex 0-based).',
       },
       {
         handlerType: 'DataGridOnPageSizeChangeHandler',
@@ -324,9 +324,9 @@ const closeOne: ToastDismissHandler = (id) => dismiss(id);`,
         description: 'Handler de onPageSizeChange.',
       },
     ],
-    usageExample: `const handlePage: DataGridOnPageChangeHandler = (page) => {
-  setPage(page);
-  fetchRows(page, pageSize);
+    usageExample: `const handlePage: DataGridOnPageChangeHandler = (pageIndex) => {
+  setPageIndex(pageIndex);
+  fetchRows(pageIndex, pageSize);
 };`,
   },
 };

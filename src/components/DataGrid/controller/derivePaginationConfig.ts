@@ -32,10 +32,9 @@ export function useDerivedPaginationConfig(
     maxRecords != null ? Math.max(1, maxRecords) : undefined;
 
   const effectivePageSizeOptions = useMemo(() => {
-    if (resolvedMaxRecords == null) return pageSizeOptions;
-    const filtered = pageSizeOptions.filter(
-      (size) => size <= resolvedMaxRecords,
-    );
+    const options = Array.isArray(pageSizeOptions) ? pageSizeOptions : [];
+    if (resolvedMaxRecords == null) return options;
+    const filtered = options.filter((size) => size <= resolvedMaxRecords);
     if (filtered.length > 0) return filtered;
     return [resolvedMaxRecords];
   }, [pageSizeOptions, resolvedMaxRecords]);

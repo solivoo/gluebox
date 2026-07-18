@@ -23,7 +23,7 @@ Inventario de lo publicado en npm (`glubox` v0.1.8+).
 
 | Página | Componentes |
 |--------|-------------|
-| [DataGrid](/components/datagrid) | Guía: `dataSource`, `keyExpr`, `paging`, altura, table/card |
+| [DataGrid](/components/datagrid) | Guía: estructura `T[]` + `keyExpr` + `columns`, paging, table/card |
 | [Sidebar](/components/sidebar) | Sidebar |
 | [Formularios](/components/forms) | TextBox, TextArea, Select, DateBox, RangeDateBox |
 | [Botones y selección](/components/buttons) | Button, CheckButton, OptionGroup |

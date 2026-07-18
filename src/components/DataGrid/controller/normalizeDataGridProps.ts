@@ -1,9 +1,16 @@
-import type { DataGridPaging, DataGridProps } from '../type/DataGrid.types';
+import type {
+  ColumnDef,
+  DataGridPaging,
+  DataGridProps,
+} from '../type/DataGrid.types';
 
 const DEFAULT_PAGE_SIZE = 20;
+const DEFAULT_PAGE_SIZE_OPTIONS = [10, 25, 50, 100];
 
 export interface NormalizedDataGridProps<T extends Record<string, unknown>> {
   data: T[];
+  columns: ColumnDef<T>[];
+  pageSizeOptions: number[];
   getRowId: (row: T) => string | number;
   /** Pager visible */
   pagination: boolean;
@@ -14,6 +21,76 @@ export interface NormalizedDataGridProps<T extends Record<string, unknown>> {
   defaultPageSize: number;
   pageControlled: boolean;
   pageSizeControlled: boolean;
+}
+
+function describeReceived(value: unknown): string {
+  if (value === null) return 'null';
+  if (value === undefined) return 'undefined';
+  if (Array.isArray(value)) return 'Array';
+  if (typeof value === 'object') return 'Object';
+  return typeof value;
+}
+
+function looksLikeItemsWrapper(value: unknown): boolean {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    !Array.isArray(value) &&
+    ('items' in value || 'Items' in value)
+  );
+}
+
+/**
+ * Valida `dataSource`: debe ser un Array (incluido `[]`).
+ * No hace unwrap de `{ items }` / `{ Items }`.
+ */
+export function assertDataSource<T extends Record<string, unknown>>(
+  dataSource: unknown,
+): T[] {
+  if (dataSource == null) {
+    throw new Error('[DataGrid] Se requiere `dataSource` (array de filas).');
+  }
+
+  if (!Array.isArray(dataSource)) {
+    const hint = looksLikeItemsWrapper(dataSource)
+      ? ' ¿envoltorio `{ items }`? Pasá el array plano.'
+      : '';
+    throw new Error(
+      `[DataGrid] \`dataSource\` debe ser un Array. Recibido: ${describeReceived(dataSource)}.${hint}`,
+    );
+  }
+
+  return dataSource as T[];
+}
+
+export function assertColumns<T extends Record<string, unknown>>(
+  columns: unknown,
+): ColumnDef<T>[] {
+  if (columns == null) {
+    throw new Error('[DataGrid] Se requiere `columns` (array de columnas).');
+  }
+
+  if (!Array.isArray(columns)) {
+    throw new Error(
+      `[DataGrid] \`columns\` debe ser un Array. Recibido: ${describeReceived(columns)}.`,
+    );
+  }
+
+  return columns as ColumnDef<T>[];
+}
+
+export function assertPageSizeOptions(
+  pageSizeOptions: unknown,
+): number[] | undefined {
+  if (pageSizeOptions == null) return undefined;
+
+  if (!Array.isArray(pageSizeOptions)) {
+    throw new Error(
+      `[DataGrid] \`pageSizeOptions\` debe ser un Array. Recibido: ${describeReceived(pageSizeOptions)}.`,
+    );
+  }
+
+  return pageSizeOptions as number[];
 }
 
 function readKeyValue<T extends Record<string, unknown>>(
@@ -33,17 +110,21 @@ function readKeyValue<T extends Record<string, unknown>>(
 }
 
 /**
- * Normaliza `dataSource`, `keyExpr` y `paging` a la forma interna del controller.
+ * Normaliza `dataSource`, `keyExpr`, `columns`, `paging` y `pageSizeOptions`
+ * a la forma interna del controller.
  */
 export function normalizeDataGridProps<T extends Record<string, unknown>>(
   props: Readonly<
-    Pick<DataGridProps<T>, 'dataSource' | 'keyExpr' | 'paging'>
+    Pick<
+      DataGridProps<T>,
+      'dataSource' | 'keyExpr' | 'paging' | 'columns' | 'pageSizeOptions'
+    >
   >,
 ): NormalizedDataGridProps<T> {
-  const data = props.dataSource;
-  if (!data) {
-    throw new Error('[DataGrid] Se requiere `dataSource` con un array de filas.');
-  }
+  const data = assertDataSource<T>(props.dataSource);
+  const columns = assertColumns<T>(props.columns);
+  const pageSizeOptions =
+    assertPageSizeOptions(props.pageSizeOptions) ?? DEFAULT_PAGE_SIZE_OPTIONS;
 
   if (props.keyExpr == null || String(props.keyExpr).trim() === '') {
     throw new Error('[DataGrid] Se requiere `keyExpr` para identificar filas.');
@@ -83,6 +164,8 @@ export function normalizeDataGridProps<T extends Record<string, unknown>>(
 
   return {
     data,
+    columns,
+    pageSizeOptions,
     getRowId,
     pagination,
     page,
@@ -92,4 +175,9 @@ export function normalizeDataGridProps<T extends Record<string, unknown>>(
     pageControlled,
     pageSizeControlled,
   };
+}
+
+/** Evita `for…of` / spread sobre valores no iterables. */
+export function asArray<T>(value: unknown): T[] {
+  return Array.isArray(value) ? (value as T[]) : [];
 }

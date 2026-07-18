@@ -27,13 +27,18 @@ export function compareValues(a: unknown, b: unknown): number {
   });
 }
 
+function asRowArray<T>(rows: T[] | unknown): T[] {
+  return Array.isArray(rows) ? (rows as T[]) : [];
+}
+
 export function sortRows<T extends Record<string, unknown>>(
   rows: T[],
   sort: DataGridSortState<T> | null,
 ): T[] {
-  if (!sort) return rows;
+  const safeRows = asRowArray<T>(rows);
+  if (!sort) return safeRows;
 
-  const sorted = [...rows];
+  const sorted = [...safeRows];
   sorted.sort((rowA, rowB) => {
     const cmp = compareValues(rowA[sort.key], rowB[sort.key]);
     return sort.direction === 'asc' ? cmp : -cmp;
@@ -46,11 +51,15 @@ export function filterRowsBySearch<T extends Record<string, unknown>>(
   query: string,
   keys: Array<keyof T>,
 ): T[] {
+  const safeRows = asRowArray<T>(rows);
+  const safeKeys = Array.isArray(keys) ? keys : [];
   const normalized = query.trim().toLowerCase();
-  if (!normalized) return rows;
+  if (!normalized) return safeRows;
 
-  return rows.filter((row) =>
-    keys.some((key) => toComparableString(row[key]).toLowerCase().includes(normalized)),
+  return safeRows.filter((row) =>
+    safeKeys.some((key) =>
+      toComparableString(row[key]).toLowerCase().includes(normalized),
+    ),
   );
 }
 

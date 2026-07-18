@@ -19,6 +19,10 @@ export interface DocEntry {
   meta: ComponentMeta<object>;
   importPath: string;
   installNote: string;
+  /** Ejemplo de uso básico (reemplaza el snippet genérico en Getting Started) */
+  basicUsage?: string;
+  /** Notas / contrato de datos bajo Getting Started */
+  dataContract?: string;
 }
 
 export const componentDocEntries: Record<string, DocEntry> = {
@@ -136,11 +140,45 @@ export const componentDocEntries: Record<string, DocEntry> = {
     component: 'DataGrid',
     label: 'DataGrid',
     description:
-      'Tabla genérica con búsqueda con debounce, ordenamiento por columna, selección single/multiple, primera columna sticky y hook useDataGrid reutilizable.',
+      'Tabla empresarial con dataSource (T[] plano), keyExpr, columns, paging (pageIndex 0-based), búsqueda, selección y layout table/card/auto.',
     meta: dataGridMeta,
-    importPath: "import { DataGrid, useDataGrid } from 'glubox';",
+    importPath:
+      "import { DataGrid, useDataGrid, type ColumnDef, type DataGridCardRenderContext } from 'glubox';",
     installNote:
-      'DataGrid es genérico: definí ColumnDef<T> y getRowId. El hook useDataGrid expone filtrado, sort y selección para UIs custom.',
+      'Esperá dataSource: T[] (array plano de objetos), keyExpr (campo clave) y columns: ColumnDef<T>[]. No pasar { items } — usá response.items.',
+    basicUsage: `interface Employee extends Record<string, unknown> {
+  id: number;
+  name: string;
+  email: string;
+}
+
+const columns: ColumnDef<Employee>[] = [
+  { key: 'name', header: 'Nombre', sortable: true },
+  { key: 'email', header: 'Email' },
+];
+
+const rows: Employee[] = [
+  { id: 1, name: 'Ana', email: 'ana@corp.com' },
+];
+
+<DataGrid
+  dataSource={rows}
+  keyExpr="id"
+  columns={columns}
+  paging={{ enabled: true, pageIndex: 0, pageSize: 10 }}
+/>`,
+    dataContract: `Estructura esperada
+• dataSource: T[] — array plano de filas (objetos). [] es válido.
+• keyExpr: nombre del campo clave en cada fila (string | number).
+• columns: ColumnDef<T>[] — key debe existir en T.
+
+Desde API con envoltorio:
+  const { items, totalCount } = await api.getEmployees();
+  <DataGrid dataSource={items} keyExpr="id" columns={cols} totalRowCount={totalCount} />
+
+❌ dataSource={response}          // Object → error
+❌ dataSource={response.items} olvidado
+✅ dataSource={response.items}    // Array`,
   },
 };
 

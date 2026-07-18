@@ -16,7 +16,7 @@ Listado completo: [Componentes](/components/).
 
 ### Datos
 
-- **[DataGrid](/components/datagrid)** — Tabla / tarjetas con `dataSource`, `keyExpr` y `paging`, búsqueda, selección y altura auto.
+- **[DataGrid](/components/datagrid)** — Tabla / tarjetas: `dataSource: T[]` (objetos fila), `keyExpr`, `columns` y `paging`.
 
 ### Navegación
 
@@ -97,4 +97,4 @@ const columns: ColumnDef<Row>[] = [
 />
 ```
 
-Guía completa: [DataGrid](/components/datagrid).
+`dataSource` es un **array plano** de objetos (no `{ items }`). Guía: [estructura de datos](/components/datagrid#datos--estructura-esperada).
