@@ -14,6 +14,7 @@ export const dateBoxMeta: ComponentMeta<DateBoxProps> = {
     disabled: false,
     error: false,
     clearable: false,
+    showClearButton: false,
     fullWidth: false,
     displayMode: 'input',
   },
@@ -104,10 +105,10 @@ export const dateBoxMeta: ComponentMeta<DateBoxProps> = {
       title: 'Adornos',
       props: [
         {
-          name: 'clearable',
+          name: 'showClearButton',
           type: 'boolean',
           defaultValue: false,
-          description: 'Muestra un botón X para limpiar la fecha seleccionada.',
+          description: 'Muestra botón X para limpiar la fecha seleccionada.',
           control: 'boolean',
         },
       ],

@@ -1,4 +1,5 @@
 import type { SelectThemeInput } from '../theme/Select.theme.types';
+import type { FieldClearButtonProps } from '@/shared/fieldClear.types';
 
 export interface SelectOption {
   value: string;
@@ -16,7 +17,7 @@ export type SelectSize = 'sm' | 'md' | 'lg';
 
 export type SelectLabelPosition = 'top' | 'floating' | 'outlined' | 'left';
 
-export interface SelectProps {
+export interface SelectProps extends FieldClearButtonProps {
   /** Opciones del select */
   options: SelectOption[];
   /** Valor controlado */

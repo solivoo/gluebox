@@ -1,6 +1,7 @@
 import { useState, useRef, useId, useCallback } from 'react';
 import type { TextAreaProps } from './type/TextArea.types';
 import { resolveTheme, themeToStyle } from './theme/resolveTheme';
+import { resolveShowClearButton } from '@/shared/resolveShowClearButton';
 import '@/components/TextArea/css/TextArea.css';
 
 export function TextArea(props: Readonly<TextAreaProps>) {
@@ -14,6 +15,7 @@ export function TextArea(props: Readonly<TextAreaProps>) {
     error = false,
     errorMessage,
     clearable = false,
+    showClearButton,
     rows = 4,
     resize = 'vertical',
     disabled = false,
@@ -50,7 +52,8 @@ export function TextArea(props: Readonly<TextAreaProps>) {
 
   const hasError = error || Boolean(errorMessage);
   const displayMessage = hasError ? errorMessage : helperText;
-  const showClear = clearable && value.length > 0 && !disabled;
+  const canClear = resolveShowClearButton({ showClearButton, clearable });
+  const showClear = canClear && value.length > 0 && !disabled;
 
   const isFloating = labelPosition === 'floating';
   const isOutlined = labelPosition === 'outlined';
@@ -77,7 +80,7 @@ export function TextArea(props: Readonly<TextAreaProps>) {
     `glb-textarea--${variant}`,
     `glb-textarea--${size}`,
     fullWidth && 'glb-textarea--full-width',
-    clearable && 'glb-textarea--clearable',
+    canClear && 'glb-textarea--clearable',
     hasError && 'glb-textarea--error',
     isFloating && 'glb-textarea--floating',
     isOutlined && 'glb-textarea--outlined',
@@ -152,13 +155,20 @@ export function TextArea(props: Readonly<TextAreaProps>) {
         {...rest}
       />
 
-      {showClear && (
+      {canClear && (
         <button
           type="button"
-          className="glb-textarea__clear"
+          className={[
+            'glb-textarea__clear',
+            !showClear && 'glb-textarea__clear--hidden',
+          ]
+            .filter(Boolean)
+            .join(' ')}
           onClick={handleClear}
           aria-label="Limpiar campo"
-          tabIndex={-1}
+          aria-hidden={!showClear}
+          tabIndex={showClear ? -1 : undefined}
+          disabled={!showClear}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

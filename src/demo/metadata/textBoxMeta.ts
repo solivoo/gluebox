@@ -15,6 +15,7 @@ export const textBoxMeta: ComponentMeta<TextBoxProps> = {
     disabled: false,
     error: false,
     clearable: false,
+    showClearButton: false,
     fullWidth: false,
   },
   sections: [
@@ -111,10 +112,30 @@ export const textBoxMeta: ComponentMeta<TextBoxProps> = {
       title: 'Adornos',
       props: [
         {
-          name: 'clearable',
+          name: 'showClearButton',
           type: 'boolean',
           defaultValue: false,
-          description: 'Muestra un botón X para limpiar el campo cuando tiene texto.',
+          description: 'Muestra botón X para limpiar el campo cuando tiene texto.',
+          control: 'boolean',
+        },
+        {
+          name: 'type',
+          type: 'string',
+          defaultValue: 'text',
+          description: 'Tipo nativo del input. Con type="password" aparece el botón ojo.',
+          control: 'select',
+          options: [
+            { label: 'Text', value: 'text' },
+            { label: 'Password', value: 'password' },
+            { label: 'Email', value: 'email' },
+            { label: 'Search', value: 'search' },
+          ],
+        },
+        {
+          name: 'showPasswordToggle',
+          type: 'boolean',
+          defaultValue: undefined,
+          description: 'Muestra ojo para alternar visibilidad en type="password". Default: true.',
           control: 'boolean',
         },
       ],

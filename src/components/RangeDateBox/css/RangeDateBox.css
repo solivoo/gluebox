@@ -218,18 +218,96 @@
   width: auto;
 }
 
-/* ── Display Input ── */
+/* ── Control + adornos por campo ── */
+
+.glb-rangedatebox__control {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.glb-rangedatebox__control > .glb-rangedatebox__calendar-container {
+  width: 100%;
+}
+
 .glb-rangedatebox__display-input {
   width: 100%;
   font-family: inherit;
   font-size: inherit;
-  padding: 0.5rem 2.25rem 0.5rem 0.75rem;
+  padding-block: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 2.25rem;
   border-radius: var(--rangedatebox-radius, 0.5rem);
   transition: var(--rangedatebox-transition, all 0.15s ease);
   box-sizing: border-box;
   outline: none;
   cursor: pointer;
   user-select: none;
+}
+
+.glb-rangedatebox--clearable
+  .glb-rangedatebox__field--end
+  .glb-rangedatebox__display-input {
+  padding-right: 4rem;
+}
+
+.glb-rangedatebox__adornments {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.125rem;
+  pointer-events: none;
+}
+
+.glb-rangedatebox__adornments .glb-rangedatebox__clear {
+  pointer-events: auto;
+}
+
+.glb-rangedatebox__clear--hidden {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ── Calendar Icon ── */
+.glb-rangedatebox__calendar-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--rangedatebox-calendar-icon-color, #9ca3af);
+  pointer-events: none;
+}
+
+/* ── Clear Button ── */
+.glb-rangedatebox__clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: var(--rangedatebox-clear-color, #6b7280);
+  border-radius: 50%;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.glb-rangedatebox__clear:hover {
+  color: var(--rangedatebox-clear-hover-color, #9ca3af);
+  background-color: rgba(128, 128, 128, 0.15);
+}
+
+.glb-rangedatebox__clear svg {
+  width: 0.875em;
+  height: 0.875em;
 }
 
 .glb-rangedatebox__display-input::placeholder {
@@ -245,46 +323,6 @@
   font-size: 0.875rem;
   font-weight: 500;
   user-select: none;
-}
-
-/* ── Calendar Icon ── */
-.glb-rangedatebox__calendar-icon {
-  position: absolute;
-  right: 0.625rem;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--rangedatebox-calendar-icon-color, #9ca3af);
-  z-index: 1;
-}
-
-/* ── Clear Button ── */
-.glb-rangedatebox__clear {
-  position: absolute;
-  right: 2.25rem;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.125rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--rangedatebox-clear-color, #6b7280);
-  transition: color 0.15s ease;
-  z-index: 2;
-}
-
-.glb-rangedatebox__clear:hover {
-  color: var(--rangedatebox-clear-hover-color, #9ca3af);
-}
-
-.glb-rangedatebox--clearable .glb-rangedatebox__display-input {
-  padding-right: 3.75rem;
 }
 
 /* ── Helper Text ── */

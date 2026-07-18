@@ -368,6 +368,11 @@
   height: 0.875em;
 }
 
+.glb-textarea__clear--hidden {
+  visibility: hidden;
+  pointer-events: none;
+}
+
 /* ── Helper / Error text ── */
 
 .glb-textarea__helper {

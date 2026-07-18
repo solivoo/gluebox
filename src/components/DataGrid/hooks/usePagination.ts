@@ -59,12 +59,14 @@ export function usePagination(options: UsePaginationOptions): UsePaginationRetur
       const size = Math.max(1, nextSize);
       if (controlledPageSize === undefined) {
         setInternalPageSize(size);
+      }
+      if (controlledPage === undefined) {
         setInternalPage(1);
       }
       onPageSizeChange?.(size);
       onPageChange?.(1);
     },
-    [controlledPageSize, onPageChange, onPageSizeChange],
+    [controlledPage, controlledPageSize, onPageChange, onPageSizeChange],
   );
 
   const startIndex = enabled ? (safePage - 1) * pageSize : 0;

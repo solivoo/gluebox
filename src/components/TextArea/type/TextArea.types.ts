@@ -1,5 +1,6 @@
 import type { TextareaHTMLAttributes } from 'react';
 import type { TextAreaThemeInput } from '../theme/TextArea.theme.types';
+import type { FieldClearButtonProps } from '@/shared/fieldClear.types';
 
 export type TextAreaVariant =
   | 'primary'
@@ -15,7 +16,8 @@ export type TextAreaLabelPosition = 'top' | 'floating' | 'outlined' | 'left';
 export type TextAreaResize = 'none' | 'vertical' | 'horizontal' | 'both';
 
 export interface TextAreaProps
-  extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'size' | 'children'> {
+  extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'size' | 'children'>,
+    FieldClearButtonProps {
   /** Variante visual */
   variant?: TextAreaVariant;
   /** Tamaño */
@@ -32,8 +34,6 @@ export interface TextAreaProps
   error?: boolean;
   /** Mensaje de error debajo del campo (activa error implícitamente) */
   errorMessage?: string;
-  /** Muestra botón de limpiar (X) cuando hay texto */
-  clearable?: boolean;
   /** Filas visibles del textarea */
   rows?: number;
   /** Control del resize nativo del navegador */

@@ -54,20 +54,11 @@ export interface DataGridControllerViewModel<T extends Record<string, unknown>> 
   searchStyle: CSSProperties | undefined;
   classNames: string;
   surfaceClassNames: string;
+  viewportClassNames: string;
   scrollClassNames: string;
   renderCard: DataGridProps<T>['renderCard'];
   renderCardComponent: DataGridProps<T>['renderCardComponent'];
   rowHeight: number;
-}
-
-function parseHeightPx(height: string | number | undefined): number {
-  if (typeof height === 'number') return height;
-  if (typeof height === 'string') {
-    const trimmed = height.trim();
-    if (trimmed.endsWith('px')) return Number.parseFloat(trimmed);
-    if (trimmed.endsWith('rem')) return Number.parseFloat(trimmed) * 16;
-  }
-  return 420;
 }
 
 export function useDataGridController<T extends Record<string, unknown>>(
@@ -200,6 +191,8 @@ export function useDataGridController<T extends Record<string, unknown>>(
     onPageSizeChange,
   });
 
+  const { setPage: resetPaginationPage } = paginationState;
+
   const rowsToRender = useMemo(() => {
     let rows: T[];
     if (!pagination) {
@@ -284,7 +277,7 @@ export function useDataGridController<T extends Record<string, unknown>>(
   useEffect(() => {
     if (!pagination || paginationMode !== 'client') return;
     if (page === undefined) {
-      paginationState.setPage(1);
+      resetPaginationPage(1);
     } else {
       onPageChange?.(1);
     }
@@ -294,22 +287,18 @@ export function useDataGridController<T extends Record<string, unknown>>(
     pagination,
     paginationMode,
     page,
-    paginationState,
+    resetPaginationPage,
     onPageChange,
   ]);
 
   const themeStyle = themeToStyle(resolveTheme(theme));
-  const resolvedHeightPx = useMemo(() => parseHeightPx(height), [height]);
 
-  const compactViewportHeightPx = useMemo(() => {
-    const headerHeight = rowHeight;
-    const bodyHeight =
-      rowsToRender.length === 0 ? 80 : rowsToRender.length * rowHeight;
-    return headerHeight + bodyHeight;
-  }, [rowHeight, rowsToRender.length]);
-
-  const useCompactViewport =
-    !isCardLayout && pagination && compactViewportHeightPx < resolvedHeightPx;
+  /**
+   * Con pocas filas (o celdas más altas que rowHeight), estimar
+   * `rowHeight × n` recorta el contenido. Sin virtualización dejamos
+   * que el viewport crezca al contenido real y solo acotamos con maxHeight.
+   */
+  const useFitContentViewport = !isCardLayout && !shouldVirtualize;
 
   const rootStyle: CSSProperties = {
     ...themeStyle,
@@ -318,12 +307,14 @@ export function useDataGridController<T extends Record<string, unknown>>(
     ...(width != null ? { width: resolveDimension(width) } : {}),
   };
 
-  const viewportStyle: CSSProperties = {
-    height: useCompactViewport
-      ? compactViewportHeightPx
-      : resolveDimension(height),
-    ...(useCompactViewport ? { maxHeight: resolveDimension(height) } : {}),
-  };
+  const viewportStyle: CSSProperties = useFitContentViewport
+    ? {
+        height: 'auto',
+        maxHeight: resolveDimension(height),
+      }
+    : {
+        height: resolveDimension(height),
+      };
 
   const cardViewportStyle: CSSProperties = {
     height: resolveDimension(height),
@@ -379,6 +370,14 @@ export function useDataGridController<T extends Record<string, unknown>>(
   const scrollClassNames = [
     'glb-datagrid__scroll',
     isCardLayout && 'glb-datagrid__scroll--cards',
+    useFitContentViewport && 'glb-datagrid__scroll--fit-content',
+  ]
+    .filter(Boolean)
+    .join(' ');
+
+  const viewportClassNames = [
+    'glb-datagrid__viewport',
+    useFitContentViewport && 'glb-datagrid__viewport--fit-content',
   ]
     .filter(Boolean)
     .join(' ');
@@ -415,6 +414,7 @@ export function useDataGridController<T extends Record<string, unknown>>(
     rootStyle,
     viewportStyle,
     cardViewportStyle,
+    viewportClassNames,
     searchStyle,
     classNames,
     surfaceClassNames,

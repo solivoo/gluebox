@@ -1,5 +1,6 @@
 import type { InputHTMLAttributes, ReactNode } from 'react';
 import type { TextBoxThemeInput } from '../theme/TextBox.theme.types';
+import type { FieldClearButtonProps } from '@/shared/fieldClear.types';
 
 export type TextBoxVariant =
   | 'primary'
@@ -12,7 +13,8 @@ export type TextBoxSize = 'sm' | 'md' | 'lg';
 export type TextBoxLabelPosition = 'top' | 'floating' | 'outlined' | 'left';
 
 export interface TextBoxProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'children'> {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'children'>,
+    FieldClearButtonProps {
   /** Variante visual */
   variant?: TextBoxVariant;
   /** Tamaño */
@@ -31,10 +33,13 @@ export interface TextBoxProps
   errorMessage?: string;
   /** Ícono a la izquierda del input */
   iconLeft?: ReactNode;
-  /** Ícono a la derecha del input */
+  /** Ícono a la derecha del input (decorativo; no recibe clics) */
   iconRight?: ReactNode;
-  /** Muestra botón de limpiar (X) cuando hay texto */
-  clearable?: boolean;
+  /**
+   * Con `type="password"`, muestra el botón ojo para alternar visibilidad.
+   * Por defecto `true` en campos password; pasá `false` para desactivarlo.
+   */
+  showPasswordToggle?: boolean;
   /** Ocupa todo el ancho disponible */
   fullWidth?: boolean;
   /** Ancho fijo del campo (ej. '320px', 200, '100%'). Prevalece sobre fullWidth. */

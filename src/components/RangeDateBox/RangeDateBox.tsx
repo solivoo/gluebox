@@ -4,6 +4,7 @@ import { resolveTheme, themeToStyle } from './theme/resolveTheme';
 import { CalendarDropdown } from '../DateBox/CalendarDropdown';
 import { CalendarIcon } from '../DateBox/CalendarIcons';
 import { RangeCalendarDropdown } from './RangeCalendarDropdown';
+import { resolveShowClearButton } from '@/shared/resolveShowClearButton';
 import '@/components/RangeDateBox/css/RangeDateBox.css';
 
 export function RangeDateBox(props: Readonly<RangeDateBoxProps>) {
@@ -22,6 +23,7 @@ export function RangeDateBox(props: Readonly<RangeDateBoxProps>) {
     errorMessage,
     separator = '\u2014',
     clearable = false,
+    showClearButton,
     min,
     max,
     disabled = false,
@@ -50,7 +52,8 @@ export function RangeDateBox(props: Readonly<RangeDateBoxProps>) {
   const displayMessage = hasError ? errorMessage : helperText;
 
   const hasValue = currentStart.length > 0 || currentEnd.length > 0;
-  const showClear = clearable && hasValue && !disabled && !isIconMode;
+  const canClear = resolveShowClearButton({ showClearButton, clearable });
+  const showClear = canClear && hasValue && !disabled && !isIconMode;
 
   const isFloating = !isIconMode && labelPosition === 'floating';
   const isOutlined = !isIconMode && labelPosition === 'outlined';
@@ -77,7 +80,7 @@ export function RangeDateBox(props: Readonly<RangeDateBoxProps>) {
     `glb-rangedatebox--${size}`,
     isIconMode && 'glb-rangedatebox--icon-mode',
     fullWidth && !isIconMode && 'glb-rangedatebox--full-width',
-    clearable && 'glb-rangedatebox--clearable',
+    canClear && 'glb-rangedatebox--clearable',
     hasError && 'glb-rangedatebox--error',
     isFloating && 'glb-rangedatebox--floating',
     isOutlined && 'glb-rangedatebox--outlined',
@@ -111,7 +114,9 @@ export function RangeDateBox(props: Readonly<RangeDateBoxProps>) {
     [isStartControlled, isEndControlled, startValue, internalStart, emitChange],
   );
 
-  const handleClear = () => {
+  const handleClear = (event?: React.MouseEvent<HTMLButtonElement>) => {
+    event?.preventDefault();
+    event?.stopPropagation();
     if (!isStartControlled) setInternalStart('');
     if (!isEndControlled) setInternalEnd('');
     emitChange('', '');
@@ -150,69 +155,84 @@ export function RangeDateBox(props: Readonly<RangeDateBoxProps>) {
       ) : (
         <>
           <div className="glb-rangedatebox__field">
-            <CalendarDropdown
-              classPrefix="glb-rangedatebox"
-              value={currentStart}
-              onChange={handleStartChange}
-              min={min}
-              max={currentEnd || max}
-              disabled={disabled}
-              dropdownThemeStyle={themeStyle}
-              rangeStart={currentStart}
-              rangeEnd={currentEnd}
-            />
-            <span className="glb-rangedatebox__calendar-icon" aria-hidden="true">
-              <CalendarIcon />
-            </span>
+            <div className="glb-rangedatebox__control">
+              <CalendarDropdown
+                classPrefix="glb-rangedatebox"
+                value={currentStart}
+                onChange={handleStartChange}
+                min={min}
+                max={currentEnd || max}
+                disabled={disabled}
+                dropdownThemeStyle={themeStyle}
+                rangeStart={currentStart}
+                rangeEnd={currentEnd}
+              />
+              <div className="glb-rangedatebox__adornments">
+                <span className="glb-rangedatebox__calendar-icon">
+                  <CalendarIcon />
+                </span>
+              </div>
+            </div>
           </div>
 
           <span className="glb-rangedatebox__separator" aria-hidden="true">
             {separator}
           </span>
 
-          <div className="glb-rangedatebox__field">
-            <CalendarDropdown
-              classPrefix="glb-rangedatebox"
-              value={currentEnd}
-              onChange={handleEndChange}
-              min={currentStart || min}
-              max={max}
-              disabled={disabled}
-              dropdownThemeStyle={themeStyle}
-              rangeStart={currentStart}
-              rangeEnd={currentEnd}
-            />
-            <span className="glb-rangedatebox__calendar-icon" aria-hidden="true">
-              <CalendarIcon />
-            </span>
+          <div className="glb-rangedatebox__field glb-rangedatebox__field--end">
+            <div className="glb-rangedatebox__control">
+              <CalendarDropdown
+                classPrefix="glb-rangedatebox"
+                value={currentEnd}
+                onChange={handleEndChange}
+                min={currentStart || min}
+                max={max}
+                disabled={disabled}
+                dropdownThemeStyle={themeStyle}
+                rangeStart={currentStart}
+                rangeEnd={currentEnd}
+              />
+              <div className="glb-rangedatebox__adornments">
+                {canClear && (
+                  <button
+                    type="button"
+                    className={[
+                      'glb-rangedatebox__clear',
+                      !showClear && 'glb-rangedatebox__clear--hidden',
+                    ]
+                      .filter(Boolean)
+                      .join(' ')}
+                    onClick={handleClear}
+                    aria-label="Limpiar rango de fechas"
+                    aria-hidden={!showClear}
+                    tabIndex={showClear ? -1 : undefined}
+                    disabled={!showClear}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <line x1="18" y1="6" x2="6" y2="18" />
+                      <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                  </button>
+                )}
+                <span className="glb-rangedatebox__calendar-icon">
+                  <CalendarIcon />
+                </span>
+              </div>
+            </div>
           </div>
         </>
       )}
 
-      {showClear && (
-        <button
-          type="button"
-          className="glb-rangedatebox__clear"
-          onClick={handleClear}
-          aria-label="Limpiar rango de fechas"
-          tabIndex={-1}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <line x1="18" y1="6" x2="6" y2="18" />
-            <line x1="6" y1="6" x2="18" y2="18" />
-          </svg>
-        </button>
-      )}
     </div>
   );
 

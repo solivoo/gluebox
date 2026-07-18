@@ -22,6 +22,7 @@ export const selectMeta: ComponentMeta<SelectProps> = {
     disabled: false,
     error: false,
     fullWidth: false,
+    showClearButton: false,
   },
   sections: [
     {
@@ -116,6 +117,18 @@ export const selectMeta: ComponentMeta<SelectProps> = {
             { label: 'Outlined', value: 'outlined' },
             { label: 'Left', value: 'left' },
           ],
+        },
+      ],
+    },
+    {
+      title: 'Adornos',
+      props: [
+        {
+          name: 'showClearButton',
+          type: 'boolean',
+          defaultValue: false,
+          description: 'Muestra botón X para limpiar la selección cuando hay valor.',
+          control: 'boolean',
         },
       ],
     },

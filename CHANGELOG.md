@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.1.6] — 2026-07-18
+
+### Añadido
+
+- **`showClearButton`** en TextBox, TextArea, Select, DateBox y RangeDateBox (espacio reservado fijo; botón oculto con `visibility` para no desplazar el layout).
+- TextBox: toggle de contraseña (`showPasswordToggle`) usable con clic.
+- Helpers compartidos de clear button (`resolveShowClearButton`, tipos de campo).
+
+### Corregido
+
+- **DataGrid**: paginación controlada (`page` / `pageSize`); los botones ya no resetean a página 1 en cada render.
+- **DataGrid**: viewport con pocas filas — `height: auto` + `maxHeight` para no recortar celdas más altas que `rowHeight`.
+- Select/DateBox: botón clear sin solaparse con el icono de flecha/calendario.
+
+### Cambiado
+
+- Demo DataGrid: paginación controlada, caso de 2 operadores y controles `page` / `pageSize` en el playground.
+
 ## [0.1.5] — 2026-06-15
 
 ### Añadido

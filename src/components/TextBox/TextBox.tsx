@@ -1,6 +1,10 @@
 import { useState, useRef, useId, useCallback } from 'react';
+import type { ChangeEvent } from 'react';
 import type { TextBoxProps } from './type/TextBox.types';
 import { resolveTheme, themeToStyle } from './theme/resolveTheme';
+import { resolveShowClearButton } from '@/shared/resolveShowClearButton';
+import { inputValueLength } from '@/shared/inputValueLength';
+import { EyeIcon, EyeOffIcon } from './PasswordToggleIcons';
 import '@/components/TextBox/css/TextBox.css';
 
 export function TextBox(props: Readonly<TextBoxProps>) {
@@ -16,6 +20,8 @@ export function TextBox(props: Readonly<TextBoxProps>) {
     iconLeft,
     iconRight,
     clearable = false,
+    showClearButton,
+    showPasswordToggle,
     disabled = false,
     fullWidth = false,
     width,
@@ -38,19 +44,27 @@ export function TextBox(props: Readonly<TextBoxProps>) {
   const isControlled = controlledValue !== undefined;
   const [internalValue, setInternalValue] = useState(defaultValue ?? '');
   const [isFocused, setIsFocused] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const value = isControlled ? (controlledValue ?? '') : internalValue;
+  const valueLength = inputValueLength(value);
 
   const hasError = error || Boolean(errorMessage);
   const displayMessage = hasError ? errorMessage : helperText;
 
+  const canClear = resolveShowClearButton({ showClearButton, clearable });
   const hasLeftIcon = Boolean(iconLeft);
   const hasRightIcon = Boolean(iconRight);
-  const showClear = clearable && value.length > 0 && !disabled;
+  const showClear = canClear && valueLength > 0 && !disabled;
+  const isPasswordField = type === 'password';
+  const showPasswordToggleBtn =
+    isPasswordField && showPasswordToggle !== false && !disabled;
+  const inputType =
+    isPasswordField && passwordVisible ? 'text' : type;
 
   const isFloating = labelPosition === 'floating';
   const isOutlined = labelPosition === 'outlined';
   const isLeft = labelPosition === 'left';
-  const isLabelFloated = isFloating && (isFocused || value.length > 0);
+  const isLabelFloated = isFloating && (isFocused || valueLength > 0);
 
   const themeStyle = themeToStyle(resolveTheme(theme));
 
@@ -73,7 +87,8 @@ export function TextBox(props: Readonly<TextBoxProps>) {
     fullWidth && 'glb-textbox--full-width',
     hasLeftIcon && 'glb-textbox--has-left-icon',
     hasRightIcon && 'glb-textbox--has-right-icon',
-    clearable && 'glb-textbox--clearable',
+    canClear && 'glb-textbox--clearable',
+    showPasswordToggleBtn && 'glb-textbox--password-toggle',
     hasError && 'glb-textbox--error',
     isFloating && 'glb-textbox--floating',
     isOutlined && 'glb-textbox--outlined',
@@ -84,6 +99,18 @@ export function TextBox(props: Readonly<TextBoxProps>) {
     .filter(Boolean)
     .join(' ');
 
+  const emitChange = useCallback(
+    (newValue: string) => {
+      const input = inputRef.current;
+      if (!input) return;
+      onChange?.({
+        target: { ...input, value: newValue },
+        currentTarget: { ...input, value: newValue },
+      } as ChangeEvent<HTMLInputElement>);
+    },
+    [onChange],
+  );
+
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const newValue = e.target.value;
@@ -93,7 +120,8 @@ export function TextBox(props: Readonly<TextBoxProps>) {
     [isControlled, onChange],
   );
 
-  const handleClear = () => {
+  const handleClear = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     if (!isControlled) setInternalValue('');
     const input = inputRef.current;
     if (input) {
@@ -103,8 +131,15 @@ export function TextBox(props: Readonly<TextBoxProps>) {
       )?.set;
       nativeInputValueSetter?.call(input, '');
       input.dispatchEvent(new Event('input', { bubbles: true }));
+      emitChange('');
       input.focus();
     }
+  };
+
+  const handlePasswordToggle = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    setPasswordVisible((visible) => !visible);
+    inputRef.current?.focus();
   };
 
   const labelElement = label && (
@@ -134,7 +169,7 @@ export function TextBox(props: Readonly<TextBoxProps>) {
       <input
         ref={inputRef}
         id={inputId}
-        type={type}
+        type={inputType}
         className="glb-textbox__input"
         value={value}
         placeholder={isFloating ? undefined : placeholder}
@@ -153,13 +188,20 @@ export function TextBox(props: Readonly<TextBoxProps>) {
         {...rest}
       />
 
-      {showClear && (
+      {canClear && (
         <button
           type="button"
-          className="glb-textbox__clear"
+          className={[
+            'glb-textbox__clear',
+            !showClear && 'glb-textbox__clear--hidden',
+          ]
+            .filter(Boolean)
+            .join(' ')}
           onClick={handleClear}
           aria-label="Limpiar campo"
-          tabIndex={-1}
+          aria-hidden={!showClear}
+          tabIndex={showClear ? -1 : undefined}
+          disabled={!showClear}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -175,6 +217,19 @@ export function TextBox(props: Readonly<TextBoxProps>) {
             <line x1="18" y1="6" x2="6" y2="18" />
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
+        </button>
+      )}
+
+      {showPasswordToggleBtn && (
+        <button
+          type="button"
+          className="glb-textbox__password-toggle"
+          onClick={handlePasswordToggle}
+          aria-label={passwordVisible ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+          aria-pressed={passwordVisible}
+          tabIndex={-1}
+        >
+          {passwordVisible ? <EyeOffIcon /> : <EyeIcon />}
         </button>
       )}
 

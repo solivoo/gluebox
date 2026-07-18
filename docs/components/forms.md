@@ -77,18 +77,42 @@ Si el formulario está dentro de una card con otro color:
 }
 ```
 
+## Botón limpiar (`showClearButton`)
+
+Todos los controles de formulario que admiten valor seleccionado o escrito comparten la prop **`showClearButton`**. El alias legacy `clearable` sigue funcionando.
+
+| Componente | Limpia |
+|------------|--------|
+| `TextBox` | Texto del input |
+| `TextArea` | Contenido multilínea |
+| `Select` | Opción seleccionada |
+| `DateBox` | Fecha (`YYYY-MM-DD`) |
+| `RangeDateBox` | Rango inicio y fin |
+
+```tsx
+<TextBox label="Búsqueda" showClearButton />
+<Select options={opts} showClearButton onChange={setValue} />
+<DateBox label="Vencimiento" showClearButton onChange={handleDate} />
+<RangeDateBox label="Período" showClearButton onChange={setRange} />
+```
+
 ## TextBox
 
 ```tsx
 <TextBox
   label="Email"
   placeholder="nombre@correo.com"
-  clearable
+  showClearButton
   helperText="Usaremos este correo para notificaciones"
 />
 ```
 
-Props destacadas: `iconLeft`, `iconRight`, `clearable`, `error`, `errorMessage`, `fullWidth`, `width`, `theme`.
+Props destacadas: `iconLeft`, `iconRight`, `showClearButton`, `showPasswordToggle` con `type="password"`, `error`, `errorMessage`, `fullWidth`, `width`, `theme`.
+
+```tsx
+<TextBox label="Contraseña" type="password" placeholder="••••••••" />
+<TextBox label="Búsqueda" showClearButton />
+```
 
 ## TextArea
 
@@ -102,7 +126,7 @@ Props destacadas: `iconLeft`, `iconRight`, `clearable`, `error`, `errorMessage`,
 />
 ```
 
-Props destacadas: `rows`, `resize` (`none` | `vertical` | `horizontal` | `both`), `clearable`, `error`, `errorMessage`, `fullWidth`, `width`, `theme`. Comparte las mismas variantes y posiciones de label que TextBox.
+Props destacadas: `rows`, `resize` (`none` | `vertical` | `horizontal` | `both`), `showClearButton`, `error`, `errorMessage`, `fullWidth`, `width`, `theme`. Comparte las mismas variantes y posiciones de label que TextBox.
 
 ## Select
 
@@ -117,6 +141,7 @@ Props destacadas: `rows`, `resize` (`none` | `vertical` | `horizontal` | `both`)
   ]}
   placeholder="Seleccionar..."
   onChange={(value) => console.log(value)}
+  showClearButton
 />
 ```
 
@@ -129,6 +154,7 @@ Soporta navegación por teclado y type-ahead. `options` es requerido.
   label="Vencimiento"
   labelPosition="outlined"
   displayMode="input"
+  showClearButton
   onChange={(event) => setDate(event.target.value)}
 />
 ```
@@ -141,6 +167,7 @@ Soporta navegación por teclado y type-ahead. `options` es requerido.
 <RangeDateBox
   label="Período"
   labelPosition="top"
+  showClearButton
   onChange={(range) => console.log(range)}
 />
 ```

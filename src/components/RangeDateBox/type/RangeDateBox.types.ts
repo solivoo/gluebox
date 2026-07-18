@@ -1,4 +1,5 @@
 import type { RangeDateBoxThemeInput } from '../theme/RangeDateBox.theme.types';
+import type { FieldClearButtonProps } from '@/shared/fieldClear.types';
 
 export type RangeDateBoxVariant =
   | 'primary'
@@ -21,7 +22,7 @@ export interface DateRange {
   end: string;
 }
 
-export interface RangeDateBoxProps {
+export interface RangeDateBoxProps extends FieldClearButtonProps {
   /** Variante visual */
   variant?: RangeDateBoxVariant;
   /** Tamaño */
@@ -48,8 +49,6 @@ export interface RangeDateBoxProps {
   errorMessage?: string;
   /** Texto separador entre los dos campos de fecha */
   separator?: string;
-  /** Muestra botón de limpiar (X) cuando hay fechas seleccionadas */
-  clearable?: boolean;
   /** Fecha mínima seleccionable (YYYY-MM-DD) */
   min?: string;
   /** Fecha máxima seleccionable (YYYY-MM-DD) */

@@ -237,6 +237,8 @@ export type {
   EventHandlerPayload,
 } from '@/shared/eventHandlerTypes';
 
+export type { FieldClearButtonProps } from '@/shared/fieldClear.types';
+
 export type {
   DataGridProps,
   ColumnDef,

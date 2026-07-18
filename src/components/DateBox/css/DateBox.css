@@ -245,11 +245,25 @@
 }
 
 /* ── Display Input (replaces native date input) ── */
+/* ── Control (input + adornos) ── */
+
+.glb-datebox__control {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.glb-datebox__control > .glb-datebox__calendar-container {
+  width: 100%;
+}
+
 .glb-datebox__display-input {
   width: 100%;
   font-family: inherit;
   font-size: inherit;
-  padding: 0.5rem 2.25rem 0.5rem 0.75rem;
+  padding-block: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 2.25rem;
   border-radius: var(--datebox-radius, 0.5rem);
   transition: var(--datebox-transition, all 0.15s ease);
   box-sizing: border-box;
@@ -258,49 +272,72 @@
   user-select: none;
 }
 
+.glb-datebox--clearable .glb-datebox__display-input {
+  padding-right: 4rem;
+}
+
+.glb-datebox__adornments {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.125rem;
+  pointer-events: none;
+}
+
+.glb-datebox__adornments .glb-datebox__clear {
+  pointer-events: auto;
+}
+
+.glb-datebox__clear--hidden {
+  visibility: hidden;
+  pointer-events: none;
+}
+
 .glb-datebox__display-input::placeholder {
   color: var(--datebox-primary-placeholder, #6b7280);
   opacity: 1;
 }
 
-/* ── Calendar Icon (inside wrapper, outside the container) ── */
+/* ── Calendar Icon ── */
 .glb-datebox__calendar-icon {
-  position: absolute;
-  right: 0.625rem;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
   color: var(--datebox-calendar-icon-color, #9ca3af);
-  z-index: 1;
+  pointer-events: none;
 }
 
 /* ── Clear Button ── */
 .glb-datebox__clear {
-  position: absolute;
-  right: 2rem;
-  top: 50%;
-  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0.125rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 0;
   color: var(--datebox-clear-color, #6b7280);
-  transition: color 0.15s ease;
-  z-index: 2;
+  border-radius: 50%;
+  transition: color 0.15s ease, background-color 0.15s ease;
 }
 
 .glb-datebox__clear:hover {
   color: var(--datebox-clear-hover-color, #9ca3af);
+  background-color: rgba(128, 128, 128, 0.15);
 }
 
-.glb-datebox--clearable .glb-datebox__display-input {
-  padding-right: 3.75rem;
+.glb-datebox__clear svg {
+  width: 0.875em;
+  height: 0.875em;
 }
 
 /* ── Helper Text ── */

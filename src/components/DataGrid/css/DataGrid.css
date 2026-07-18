@@ -126,6 +126,16 @@
   -webkit-overflow-scrolling: touch;
 }
 
+/* Sin virtualización: crece al contenido real y solo acota con maxHeight */
+.glb-datagrid__viewport--fit-content {
+  height: auto;
+}
+
+.glb-datagrid__viewport--fit-content .glb-datagrid__scroll--fit-content {
+  height: auto;
+  max-height: inherit;
+}
+
 .glb-datagrid__table {
   width: 100%;
   min-width: max-content;
@@ -289,9 +299,15 @@
   padding: 0.625rem 0.75rem;
   border-bottom: 1px solid var(--datagrid-border);
   vertical-align: middle;
-  height: var(--datagrid-row-height, 44px);
+  min-height: var(--datagrid-row-height, 44px);
+  height: auto;
   box-sizing: border-box;
   white-space: nowrap;
+}
+
+.glb-datagrid--virtualized .glb-datagrid__cell {
+  height: var(--datagrid-row-height, 44px);
+  overflow: hidden;
 }
 
 /* ── Virtualización (spacer rows) ── */

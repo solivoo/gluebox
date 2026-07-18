@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback, useId } from 'react';
 import type { SelectProps, SelectOption } from './type/Select.types';
 import { resolveTheme, themeToStyle } from './theme/resolveTheme';
+import { resolveShowClearButton } from '@/shared/resolveShowClearButton';
 import '@/components/Select/css/Select.css';
 
 export function Select(props: Readonly<SelectProps>) {
@@ -24,6 +25,8 @@ export function Select(props: Readonly<SelectProps>) {
     className,
     id: idProp,
     name,
+    showClearButton = false,
+    clearable = false,
   } = props;
 
   const autoId = useId();
@@ -56,6 +59,9 @@ export function Select(props: Readonly<SelectProps>) {
 
   const selectedOption = options.find((o) => o.value === selectedValue);
 
+  const canClear = resolveShowClearButton({ showClearButton, clearable });
+  const showClear = canClear && Boolean(selectedValue) && !disabled;
+
   const isFloating = labelPosition === 'floating';
   const isOutlined = labelPosition === 'outlined';
   const isLeft = labelPosition === 'left';
@@ -70,6 +76,7 @@ export function Select(props: Readonly<SelectProps>) {
     isOutlined && 'glb-select--outlined',
     isLeft && 'glb-select--left',
     isLabelFloated && 'glb-select--label-floated',
+    canClear && 'glb-select--clearable',
     className,
   ]
     .filter(Boolean)
@@ -108,6 +115,16 @@ export function Select(props: Readonly<SelectProps>) {
     (option: SelectOption) => {
       if (option.disabled) return;
       setValue(option.value);
+      closeDropdown();
+    },
+    [setValue, closeDropdown],
+  );
+
+  const handleClear = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      event.stopPropagation();
+      setValue('');
       closeDropdown();
     },
     [setValue, closeDropdown],
@@ -232,7 +249,7 @@ export function Select(props: Readonly<SelectProps>) {
   );
 
   const triggerBlock = (
-    <div style={{ position: 'relative' }}>
+    <div className="glb-select__trigger-wrap">
       <button
         ref={triggerRef}
         id={selectId}
@@ -254,7 +271,42 @@ export function Select(props: Readonly<SelectProps>) {
         >
           {selectedOption ? selectedOption.label : (isFloating ? '' : placeholder)}
         </span>
-        <span className="glb-select__icon" aria-hidden="true">
+      </button>
+
+      <div className="glb-select__adornments">
+        {canClear && (
+          <button
+            type="button"
+            className={[
+              'glb-select__clear',
+              !showClear && 'glb-select__clear--hidden',
+            ]
+              .filter(Boolean)
+              .join(' ')}
+            onClick={handleClear}
+            aria-label="Limpiar selección"
+            aria-hidden={!showClear}
+            tabIndex={showClear ? -1 : undefined}
+            disabled={!showClear}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        )}
+
+        <span className="glb-select__icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -269,7 +321,7 @@ export function Select(props: Readonly<SelectProps>) {
             <polyline points="6 9 12 15 18 9" />
           </svg>
         </span>
-      </button>
+      </div>
 
       {name && <input type="hidden" name={name} value={selectedValue} />}
 

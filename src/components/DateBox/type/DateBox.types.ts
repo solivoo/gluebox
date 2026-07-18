@@ -1,5 +1,6 @@
 import type { InputHTMLAttributes } from 'react';
 import type { DateBoxThemeInput } from '../theme/DateBox.theme.types';
+import type { FieldClearButtonProps } from '@/shared/fieldClear.types';
 
 export type DateBoxVariant =
   | 'primary'
@@ -15,7 +16,8 @@ export type DateBoxLabelPosition = 'top' | 'floating' | 'outlined' | 'left';
 export type DateBoxDisplayMode = 'input' | 'icon';
 
 export interface DateBoxProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'children' | 'type'> {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'children' | 'type'>,
+    FieldClearButtonProps {
   /** Variante visual */
   variant?: DateBoxVariant;
   /** Tamaño */
@@ -36,8 +38,6 @@ export interface DateBoxProps
   error?: boolean;
   /** Mensaje de error debajo del campo (activa error implícitamente) */
   errorMessage?: string;
-  /** Muestra botón de limpiar (X) cuando hay fecha seleccionada */
-  clearable?: boolean;
   /** Ocupa todo el ancho disponible */
   fullWidth?: boolean;
   /** Ancho fijo del campo (ej. '320px', 200, '100%'). Prevalece sobre fullWidth. */

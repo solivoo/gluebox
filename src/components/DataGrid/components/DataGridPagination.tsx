@@ -1,3 +1,4 @@
+import { useId } from 'react';
 import type { DataGridMessages } from '../i18n/DataGrid.messages.types';
 import type { UsePaginationReturn } from '../type/DataGrid.types';
 
@@ -12,6 +13,8 @@ export function DataGridPagination({
   disabled = false,
   messages,
 }: DataGridPaginationProps) {
+  const pageSizeSelectId = useId();
+
   const {
     page,
     pageSize,
@@ -46,12 +49,12 @@ export function DataGridPagination({
       <div className="glb-datagrid__pagination-size">
         <label
           className="glb-datagrid__pagination-size-label"
-          htmlFor="glb-datagrid-page-size"
+          htmlFor={pageSizeSelectId}
         >
           {messages.rowsPerPage}
         </label>
         <select
-          id="glb-datagrid-page-size"
+          id={pageSizeSelectId}
           className="glb-datagrid__pagination-select"
           value={pageSize}
           disabled={disabled}

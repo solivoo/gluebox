@@ -17,6 +17,7 @@ export const textAreaMeta: ComponentMeta<TextAreaProps> = {
     disabled: false,
     error: false,
     clearable: false,
+    showClearButton: false,
     fullWidth: false,
   },
   sections: [
@@ -133,10 +134,10 @@ export const textAreaMeta: ComponentMeta<TextAreaProps> = {
       title: 'Adornos',
       props: [
         {
-          name: 'clearable',
+          name: 'showClearButton',
           type: 'boolean',
           defaultValue: false,
-          description: 'Muestra un botón X para limpiar el campo cuando tiene texto.',
+          description: 'Muestra botón X para limpiar el campo cuando tiene texto.',
           control: 'boolean',
         },
       ],

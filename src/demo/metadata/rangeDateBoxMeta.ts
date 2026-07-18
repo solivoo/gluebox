@@ -14,6 +14,7 @@ export const rangeDateBoxMeta: ComponentMeta<RangeDateBoxProps> = {
     disabled: false,
     error: false,
     clearable: false,
+    showClearButton: false,
     fullWidth: false,
     separator: '\u2014',
     displayMode: 'input',
@@ -113,10 +114,10 @@ export const rangeDateBoxMeta: ComponentMeta<RangeDateBoxProps> = {
       title: 'Adornos',
       props: [
         {
-          name: 'clearable',
+          name: 'showClearButton',
           type: 'boolean',
           defaultValue: false,
-          description: 'Muestra un botón X para limpiar ambas fechas.',
+          description: 'Muestra botón X para limpiar ambas fechas del rango.',
           control: 'boolean',
         },
       ],

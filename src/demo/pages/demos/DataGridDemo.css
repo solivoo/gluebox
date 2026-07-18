@@ -58,6 +58,54 @@
   color: var(--glb-muted, #94a3b8);
 }
 
+.dg-demo-operator {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.dg-demo-operator__avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  background: #16a34a;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.dg-demo-operator__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0;
+}
+
+.dg-demo-operator__name {
+  font-weight: 600;
+  color: var(--glb-text, #e2e8f0);
+}
+
+.dg-demo-operator__email {
+  font-size: 0.75rem;
+  color: var(--glb-muted, #94a3b8);
+}
+
+.dg-demo-role {
+  display: inline-flex;
+  padding: 0.25rem 0.625rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(139, 92, 246, 0.18);
+  color: #c4b5fd;
+}
+
 .dg-employee-card__body {
   display: flex;
   align-items: flex-start;

@@ -3,6 +3,7 @@ import type { DateBoxProps } from './type/DateBox.types';
 import { resolveTheme, themeToStyle } from './theme/resolveTheme';
 import { CalendarDropdown } from './CalendarDropdown';
 import { CalendarIcon } from './CalendarIcons';
+import { resolveShowClearButton } from '@/shared/resolveShowClearButton';
 import '@/components/DateBox/css/DateBox.css';
 
 export function DateBox(props: Readonly<DateBoxProps>) {
@@ -16,6 +17,7 @@ export function DateBox(props: Readonly<DateBoxProps>) {
     error = false,
     errorMessage,
     clearable = false,
+    showClearButton,
     disabled = false,
     fullWidth = false,
     width,
@@ -44,7 +46,8 @@ export function DateBox(props: Readonly<DateBoxProps>) {
   const hasError = error || Boolean(errorMessage);
   const displayMessage = hasError ? errorMessage : helperText;
 
-  const showClear = clearable && value.length > 0 && !disabled && !isIconMode;
+  const canClear = resolveShowClearButton({ showClearButton, clearable });
+  const showClear = canClear && value.length > 0 && !disabled && !isIconMode;
 
   const isFloating = !isIconMode && labelPosition === 'floating';
   const isOutlined = !isIconMode && labelPosition === 'outlined';
@@ -71,7 +74,7 @@ export function DateBox(props: Readonly<DateBoxProps>) {
     `glb-datebox--${size}`,
     isIconMode && 'glb-datebox--icon-mode',
     fullWidth && !isIconMode && 'glb-datebox--full-width',
-    clearable && 'glb-datebox--clearable',
+    canClear && 'glb-datebox--clearable',
     hasError && 'glb-datebox--error',
     isFloating && 'glb-datebox--floating',
     isOutlined && 'glb-datebox--outlined',
@@ -94,7 +97,9 @@ export function DateBox(props: Readonly<DateBoxProps>) {
     [isControlled, onChange, rest.name],
   );
 
-  const handleClear = () => {
+  const handleClear = (event?: React.MouseEvent<HTMLButtonElement>) => {
+    event?.preventDefault();
+    event?.stopPropagation();
     if (!isControlled) setInternalValue('');
     const syntheticEvent = {
       target: { value: '', name: rest.name },
@@ -137,47 +142,58 @@ export function DateBox(props: Readonly<DateBoxProps>) {
     <div className="glb-datebox__wrapper">
       {label && isFloating && labelElement}
 
-      <CalendarDropdown
-        value={value}
-        onChange={handleDateChange}
-        min={min}
-        max={max}
-        disabled={disabled}
-        triggerMode={isIconMode ? 'icon' : 'input'}
-        dropdownThemeStyle={themeStyle}
-        iconAriaLabel={label ?? 'Seleccionar fecha'}
-      />
+      <div className="glb-datebox__control">
+        <CalendarDropdown
+          value={value}
+          onChange={handleDateChange}
+          min={min}
+          max={max}
+          disabled={disabled}
+          triggerMode={isIconMode ? 'icon' : 'input'}
+          dropdownThemeStyle={themeStyle}
+          iconAriaLabel={label ?? 'Seleccionar fecha'}
+        />
 
-      {!isIconMode && (
-        <span className="glb-datebox__calendar-icon" aria-hidden="true">
-          <CalendarIcon />
-        </span>
-      )}
+        {!isIconMode && (
+          <div className="glb-datebox__adornments">
+            {canClear && (
+              <button
+                type="button"
+                className={[
+                  'glb-datebox__clear',
+                  !showClear && 'glb-datebox__clear--hidden',
+                ]
+                  .filter(Boolean)
+                  .join(' ')}
+                onClick={handleClear}
+                aria-label="Limpiar fecha"
+                aria-hidden={!showClear}
+                tabIndex={showClear ? -1 : undefined}
+                disabled={!showClear}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+            )}
 
-      {showClear && (
-        <button
-          type="button"
-          className="glb-datebox__clear"
-          onClick={handleClear}
-          aria-label="Limpiar fecha"
-          tabIndex={-1}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <line x1="18" y1="6" x2="6" y2="18" />
-            <line x1="6" y1="6" x2="18" y2="18" />
-          </svg>
-        </button>
-      )}
+            <span className="glb-datebox__calendar-icon">
+              <CalendarIcon />
+            </span>
+          </div>
+        )}
+      </div>
     </div>
   );
 

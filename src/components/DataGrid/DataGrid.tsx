@@ -41,7 +41,7 @@ export function DataGrid<T extends Record<string, unknown>>(
 
       <div className={vm.surfaceClassNames}>
         <div
-          className="glb-datagrid__viewport"
+          className={vm.viewportClassNames}
           style={vm.isCardLayout ? vm.cardViewportStyle : vm.viewportStyle}
           data-virtual-row-height={vm.rowHeight}
           data-virtualized={vm.shouldVirtualize || undefined}
