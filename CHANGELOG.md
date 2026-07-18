@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.1.10] — 2026-07-18
+
+### Añadido
+
+- **`PageActionsMenu`** — menú hamburguesa de acciones de página (trigger + panel `role="menu"`).
+- Prop **`height`**: altura del trigger (prevalece sobre `size`, botón cuadrado).
+- Contrato **`NavigationNode`** (`surface`: sidebar \| content \| actions, `kind`: group \| view \| action).
+- Helpers: `filterBySurface`, `filterNodesBySurface`, `childrenOf`, `findNavigationNodeById`, `findNavigationNodeByRoute`, `pageActionsFromNode`, `contentTabsFromNode`.
+- Demo `/componentes/pageactionsmenu` (3 menús de ejemplo), docs VitePress y sección NavigationNode en [menu-api](/guide/menu-api).
+
 ## [0.1.9] — 2026-07-18
 
 ### Corregido

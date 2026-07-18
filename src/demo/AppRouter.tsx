@@ -14,6 +14,7 @@ import { OptionGroupDemo } from '@/demo/pages/demos/OptionGroupDemo';
 import { CheckButtonDemo } from '@/demo/pages/demos/CheckButtonDemo';
 import { PopupDemo } from '@/demo/pages/demos/PopupDemo';
 import { ToastDemo } from '@/demo/pages/demos/ToastDemo';
+import { PageActionsMenuDemo } from '@/demo/pages/demos/PageActionsMenuDemo';
 import { DataGridDemo } from '@/demo/pages/demos/DataGridDemo';
 import { defaultRoutePath } from '@/demo/routing/menuRouteRegistry';
 import '@/demo/pages/docs/ComponentDocPage.css';
@@ -42,6 +43,7 @@ function ComponentListPage() {
           { name: 'CheckButton', desc: 'Botón toggle con semántica de checkbox e ícono de check.', color: '#f97316' },
           { name: 'Popup', desc: 'Diálogo modal arrastrable con acciones en el pie y cierre flexible.', color: '#6366f1' },
           { name: 'Toast', desc: 'Notificaciones posicionables con título, variantes y useToast.', color: '#22c55e' },
+          { name: 'PageActionsMenu', desc: 'Menú hamburguesa de acciones de página (surface: actions).', color: '#0ea5e9' },
           { name: 'DataGrid', desc: 'Tabla genérica con búsqueda, sort, selección y sticky column.', color: '#a855f7' },
         ].map((c) => (
           <div
@@ -98,6 +100,7 @@ export function AppRouter() {
           <Route path="componentes/checkbutton" element={<CheckButtonDemo />} />
           <Route path="componentes/popup" element={<PopupDemo />} />
           <Route path="componentes/toast" element={<ToastDemo />} />
+          <Route path="componentes/pageactionsmenu" element={<PageActionsMenuDemo />} />
           <Route path="componentes/datagrid" element={<DataGridDemo />} />
 
           {/* ═══ Documentación de componentes ═══ */}

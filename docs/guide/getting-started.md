@@ -21,6 +21,7 @@ Listado completo: [Componentes](/components/).
 ### Navegación
 
 - **[Sidebar](/components/sidebar)** — Menú dinámico desde API, RBAC, 3 niveles, temas, modo colapsado e iconos personalizables.
+- **[PageActionsMenu](/components/page-actions-menu)** — Hamburguesa de acciones de página (`NavigationNode`, `surface: actions`).
 
 ### Formularios
 

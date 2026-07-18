@@ -702,6 +702,69 @@
           ]
         },
         {
+          "id": "componentes-pageactionsmenu",
+          "label": "PageActionsMenu",
+          "permissions": ["componentes:read"],
+          "children": [
+            {
+              "id": "componentes-pageactionsmenu-overview",
+              "label": "Overview",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-pageactionsmenu-overview-getting-started",
+                  "label": "Getting Started",
+                  "path": "/componentes/pageactionsmenu/overview/getting-started",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-pageactionsmenu-overview-how-to",
+                  "label": "How To",
+                  "path": "/componentes/pageactionsmenu/overview/how-to",
+                  "permissions": ["componentes:read"]
+                }
+              ]
+            },
+            {
+              "id": "componentes-pageactionsmenu-api",
+              "label": "API",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-pageactionsmenu-api-props",
+                  "label": "Props",
+                  "path": "/componentes/pageactionsmenu/api/props",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-pageactionsmenu-api-events",
+                  "label": "Events",
+                  "path": "/componentes/pageactionsmenu/api/events",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-pageactionsmenu-api-types",
+                  "label": "Types",
+                  "path": "/componentes/pageactionsmenu/api/types",
+                  "permissions": ["componentes:read"]
+                }
+              ]
+            },
+            {
+              "id": "componentes-pageactionsmenu-accessibility",
+              "label": "Accessibility",
+              "path": "/componentes/pageactionsmenu/accessibility",
+              "permissions": ["componentes:read"]
+            },
+            {
+              "id": "componentes-pageactionsmenu-demos",
+              "label": "Demos",
+              "path": "/componentes/pageactionsmenu",
+              "permissions": ["componentes:read"]
+            }
+          ]
+        },
+        {
           "id": "componentes-sidebar",
           "label": "Sidebar",
           "permissions": ["componentes:read"],

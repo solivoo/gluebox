@@ -216,6 +216,24 @@ const users: User[] = [
 
 // Hook headless (API interna distinta):
 const grid = useDataGrid({ data: users, columns, getRowId: (r) => r.id });`,
+    PageActionsMenu: `// navigation = respuesta del handshake (NavigationNode[])
+const active = findNavigationNodeByRoute(navigation, 'organizacion/empresas');
+const actions = pageActionsFromNode(active);
+
+<PageActionsMenu
+  items={actions}
+  align="end"
+  variant="ghost"
+  renderIcon={(name, className) => <Icon name={name} className={className} />}
+  onNavigate={(route) => navigate('/' + route)}
+  onActionSelect={(item) => {
+    if (item.id === 'sub-companies-refresh') refetch();
+  }}
+/>
+
+// Helpers relacionados
+const sidebarTree = filterBySurface(navigation, 'sidebar');
+const tabs = contentTabsFromNode(active);`,
     Sidebar: `// Con React Router
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -241,7 +259,7 @@ function App() {
       <h2>How To</h2>
       <h3>Casos de uso comunes</h3>
       <pre className="dcd__code">
-        {examples[entry.label] ?? '// Próximamente más ejemplos'}
+        {examples[entry.component] ?? '// Próximamente más ejemplos'}
       </pre>
     </section>
   );
@@ -463,6 +481,44 @@ export interface DataGridProps<T extends Record<string, unknown>> {
   onSelectionChange?: (selectedRows: T[]) => void;
   onPageChange?: (pageIndex: number) => void;
 }`,
+    PageActionsMenu: `export type NavSurface = 'sidebar' | 'content' | 'actions';
+export type NavKind = 'group' | 'view' | 'action';
+
+export interface NavigationNode {
+  id: string;
+  label: string;
+  route: string | null;
+  icon: string | null;
+  surface: NavSurface;
+  kind: NavKind;
+  disabled: boolean;
+  disabledReason: string | null;
+  placeholder: boolean;
+  children: NavigationNode[];
+}
+
+export interface PageActionItem {
+  id: string;
+  label: string;
+  icon?: string | null;
+  route?: string | null;
+  disabled?: boolean;
+  disabledReason?: string | null;
+}
+
+export interface PageActionsMenuProps {
+  items: ReadonlyArray<PageActionItem | NavigationNode>;
+  onActionSelect?: (item: PageActionItem) => void;
+  onNavigate?: (route: string, item: PageActionItem) => void;
+  renderIcon?: (name: string, className: string) => ReactElement | null;
+  align?: 'start' | 'end';
+  variant?: 'ghost' | 'outline' | 'primary';
+  size?: 'sm' | 'md' | 'lg';
+  theme?: PageActionsMenuThemeInput;
+}
+
+// Helpers: filterBySurface, pageActionsFromNode, contentTabsFromNode,
+// findNavigationNodeByRoute, childrenOf`,
     Sidebar: `export interface MenuConfig { items: MenuItem[]; }
 
 export interface MenuItem {
@@ -504,7 +560,7 @@ export interface SidebarProps {
 
       <h3>Props y tipos del componente</h3>
       <pre className="dcd__code">
-        {types[entry.label] ?? '// Tipos definidos en el módulo del componente'}
+        {types[entry.component] ?? '// Tipos definidos en el módulo del componente'}
       </pre>
 
       {eventTypesDoc && (
@@ -585,6 +641,11 @@ function AccessibilitySection({ entry }: { entry: DocEntry }) {
 - Ítem activo: aria-current="page" en la página actual.
 - Ancestro activo: aria-current="true" en padres con hijo activo.
 - Colapsado: labels ocultos con display: none.`,
+    PageActionsMenu: `- Trigger: button con aria-haspopup="menu", aria-expanded, aria-controls.
+- Panel: role="menu"; ítems role="menuitem".
+- Escape y clic fuera cierran el menú.
+- ArrowDown en el trigger abre el menú.
+- Ítems disabled: disabled + title con disabledReason.`,
   };
 
   return (
@@ -596,7 +657,7 @@ function AccessibilitySection({ entry }: { entry: DocEntry }) {
       </p>
       <div className="dcd__a11y">
         <pre className="dcd__code">
-          {a11y[entry.label] ?? '- Información de accesibilidad próximamente.'}
+          {a11y[entry.component] ?? '- Información de accesibilidad próximamente.'}
         </pre>
       </div>
     </section>

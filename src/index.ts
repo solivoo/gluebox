@@ -10,6 +10,7 @@ import '@/components/OptionGroup/css/OptionGroup.css';
 import '@/components/CheckButton/css/CheckButton.css';
 import '@/components/Popup/css/Popup.css';
 import '@/components/Toast/css/Toast.css';
+import '@/components/PageActionsMenu/css/PageActionsMenu.css';
 import '@/components/DataGrid/css/DataGrid.css';
 
 export type {
@@ -230,6 +231,42 @@ export {
   useToast,
   toastThemes,
 } from '@/components/Toast';
+
+export type {
+  NavSurface,
+  NavKind,
+  NavigationNode,
+} from '@/components/navigation';
+
+export {
+  filterBySurface,
+  filterNodesBySurface,
+  childrenOf,
+  findNavigationNodeById,
+  findNavigationNodeByRoute,
+  pageActionsFromNode,
+  contentTabsFromNode,
+} from '@/components/navigation';
+
+export type {
+  PageActionsMenuProps,
+  PageActionItem,
+  PageActionsMenuSize,
+  PageActionsMenuVariant,
+  PageActionsMenuAlign,
+  PageActionsMenuTheme,
+  PageActionsMenuVariantTheme,
+  PageActionsMenuThemePreset,
+  PageActionsMenuThemeInput,
+  PageActionsMenuOnActionSelectHandler,
+  PageActionsMenuOnNavigateHandler,
+  PageActionsMenuOnOpenChangeHandler,
+} from '@/components/PageActionsMenu';
+
+export {
+  PageActionsMenu,
+  pageActionsMenuThemes,
+} from '@/components/PageActionsMenu';
 
 export type {
   RequiredEventHandler,

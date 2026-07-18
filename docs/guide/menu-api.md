@@ -203,4 +203,39 @@ return (
 );
 ```
 
+---
+
+## NavigationNode (árbol del handshake)
+
+Contrato recomendado para session / navegación multi-superficie. Complementa (no reemplaza) el `MenuConfig` del Sidebar actual.
+
+### De filas planas a árbol
+
+1. **BD** (`menu_items`): filas con `parent_id`, `surface` (`sidebar` \| `content` \| `actions`), `kind` (`group` \| `view` \| `action`), permisos, `module_code`, etc.
+2. **API**: arma `NavigationNode[]` anidados.
+3. **SPA / gluBox**: filtra por `surface`.
+
+```ts
+import type { NavigationNode } from 'glubox';
+import {
+  filterBySurface,
+  pageActionsFromNode,
+  contentTabsFromNode,
+  findNavigationNodeByRoute,
+} from 'glubox';
+
+const sidebarTree = filterBySurface(navigation, 'sidebar');
+const active = findNavigationNodeByRoute(navigation, route);
+const tabs = contentTabsFromNode(active);
+const actions = pageActionsFromNode(active);
+```
+
+| Surface | Consumidor |
+|---------|------------|
+| `sidebar` | `<Sidebar menu={…} />` (adaptá o mapeá a `MenuConfig`) |
+| `content` | Tabs / SectionNav (próximo) |
+| `actions` | [`PageActionsMenu`](/components/page-actions-menu) |
+
+Ver guía completa: [PageActionsMenu](/components/page-actions-menu).
+
 Siguiente paso: [Integración con routing](/guide/routing).

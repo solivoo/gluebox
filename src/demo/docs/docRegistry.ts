@@ -11,6 +11,7 @@ import { checkButtonMeta } from '@/demo/metadata/checkButtonMeta';
 import { popupMeta } from '@/demo/metadata/popupMeta';
 import { toastMeta } from '@/demo/metadata/toastMeta';
 import { dataGridMeta } from '@/demo/metadata/dataGridMeta';
+import { pageActionsMenuMeta } from '@/demo/metadata/pageActionsMenuMeta';
 
 export interface DocEntry {
   component: string;
@@ -179,6 +180,37 @@ Desde API con envoltorio:
 ❌ dataSource={response}          // Object → error
 ❌ dataSource={response.items} olvidado
 ✅ dataSource={response.items}    // Array`,
+  },
+  pageactionsmenu: {
+    component: 'PageActionsMenu',
+    label: 'PageActionsMenu',
+    description:
+      'Menú hamburguesa de acciones de página (hijos surface: actions del nodo activo).',
+    meta: pageActionsMenuMeta,
+    importPath:
+      "import { PageActionsMenu, pageActionsFromNode, findNavigationNodeByRoute } from 'glubox';",
+    installNote:
+      'El API entrega NavigationNode[]. Resolvé el nodo activo por route, luego pageActionsFromNode(node) → items del menú.',
+    basicUsage: `const active = findNavigationNodeByRoute(navigation, location.pathname);
+const actions = pageActionsFromNode(active);
+
+<PageActionsMenu
+  items={actions}
+  renderIcon={renderIcon}
+  onNavigate={(route) => navigate(route)}
+  onActionSelect={(item) => {
+    if (!item.route) refresh();
+  }}
+/>`,
+    dataContract: `NavigationNode (handshake)
+• surface: 'sidebar' | 'content' | 'actions'
+• kind: 'group' | 'view' | 'action'
+• children: NavigationNode[]
+
+PageActionsMenu solo pinta surface: 'actions'
+• Sidebar ← filterBySurface(tree, 'sidebar')
+• Content tabs ← contentTabsFromNode(active)
+• Acciones ← pageActionsFromNode(active)`,
   },
 };
 

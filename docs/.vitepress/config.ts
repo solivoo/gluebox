@@ -15,6 +15,7 @@ export default defineConfig({
       { text: 'Temas', link: '/guide/themes' },
       { text: 'Formularios', link: '/components/forms' },
       { text: 'Sidebar', link: '/components/sidebar' },
+      { text: 'PageActionsMenu', link: '/components/page-actions-menu' },
       { text: 'GitHub', link: 'https://github.com/solivoo/gluebox' },
     ],
     sidebar: [
@@ -38,6 +39,7 @@ export default defineConfig({
           { text: 'Botones y selección', link: '/components/buttons' },
           { text: 'Overlays (Popup / Toast)', link: '/components/overlays' },
           { text: 'Sidebar', link: '/components/sidebar' },
+          { text: 'PageActionsMenu', link: '/components/page-actions-menu' },
         ],
       },
     ],

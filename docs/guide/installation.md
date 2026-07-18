@@ -214,10 +214,12 @@ import type {
 - `filterVisibleMenu(menu, userPermissions)` — misma lógica que aplica el Sidebar internamente.
 - Tipos `*OnChangeHandler`, `*OnCloseHandler`, etc. — ver [Tipos de eventos](/guide/event-types).
 - DataGrid: `dataSource`, `keyExpr`, `paging` — ver [guía de uso](/components/datagrid).
+- PageActionsMenu + `NavigationNode` / `pageActionsFromNode` — ver [PageActionsMenu](/components/page-actions-menu).
 
 ## Siguiente paso
 
 - [DataGrid — guía de uso](/components/datagrid)
+- [PageActionsMenu](/components/page-actions-menu)
 - [Tipos de eventos](/guide/event-types)
 - [Formularios](/components/forms)
 - [Overlays (Popup / Toast)](/components/overlays)

@@ -1,6 +1,6 @@
 # gluBox
 
-Librería de componentes React para aplicaciones empresariales: **Sidebar** con RBAC, **DataGrid**, controles de formulario, botones y 3 temas globales (Indigo / Emerald / Blue) en modo claro y oscuro.
+Librería de componentes React para aplicaciones empresariales: **Sidebar** con RBAC, **PageActionsMenu**, **DataGrid**, controles de formulario, botones y 3 temas globales (Indigo / Emerald / Blue) en modo claro y oscuro.
 
 - **Documentación:** https://solivoo.github.io/gluebox/
 - **Repositorio:** https://github.com/solivoo/gluebox
@@ -16,6 +16,9 @@ pnpm add glubox
 import {
   DataGrid,
   Sidebar,
+  PageActionsMenu,
+  pageActionsFromNode,
+  findNavigationNodeByRoute,
   Button,
   Select,
   TextBox,
@@ -29,7 +32,7 @@ import {
   hasPermission,
   filterVisibleMenu,
 } from 'glubox';
-import type { ColumnDef } from 'glubox';
+import type { ColumnDef, NavigationNode } from 'glubox';
 import 'glubox/style.css';
 import 'glubox/themes/default.css'; // o modern.css, enterprise.css, index.css
 ```
@@ -51,6 +54,7 @@ import type {
 |------------|-------------|
 | **DataGrid** | Tabla/cards: `dataSource: T[]` plano + `keyExpr` + `columns` + `paging` |
 | **Sidebar** | Navegación lateral, menú desde API, RBAC, 3 niveles |
+| **PageActionsMenu** | Hamburguesa de acciones (`NavigationNode` / `surface: actions`) |
 | **Button** | Botón con variantes y temas |
 | **TextBox** | Campo de texto con label top / floating / outlined / left |
 | **TextArea** | Multilínea |
@@ -101,6 +105,21 @@ Estructura: cada fila es un objeto; `dataSource` es el array; `keyExpr` nombra e
   collapseOthersOnSelect
 />
 ```
+
+### PageActionsMenu
+
+```tsx
+const active = findNavigationNodeByRoute(navigation, pathname);
+const actions = pageActionsFromNode(active);
+
+<PageActionsMenu
+  items={actions}
+  renderIcon={renderMenuIcon}
+  onNavigate={(route) => navigate('/' + route)}
+/>
+```
+
+Guía: [PageActionsMenu](https://solivoo.github.io/gluebox/components/page-actions-menu).
 
 ### Formularios
 
