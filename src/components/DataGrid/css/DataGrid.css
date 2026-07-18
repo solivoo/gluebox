@@ -644,6 +644,23 @@
   scrollbar-color: var(--datagrid-border) transparent;
 }
 
+/* Sin height: cards se encogen al contenido (mismo fit-content que table) */
+.glb-datagrid--card-layout.glb-datagrid--fit-content .glb-datagrid__viewport,
+.glb-datagrid--card-layout .glb-datagrid__viewport--fit-content {
+  height: auto;
+}
+
+.glb-datagrid--card-layout.glb-datagrid--fit-content .glb-datagrid__scroll--cards,
+.glb-datagrid--card-layout .glb-datagrid__scroll--fit-content {
+  height: auto;
+  max-height: inherit;
+}
+
+.glb-datagrid--card-layout .glb-datagrid__surface--fit-content
+  .glb-datagrid__scroll--fit-content {
+  max-height: 100%;
+}
+
 .glb-datagrid--card-layout .glb-datagrid__scroll--cards::-webkit-scrollbar {
   width: 4px;
 }
@@ -664,7 +681,7 @@
 .glb-datagrid--card-layout .glb-datagrid__cards {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0 0 0.5rem;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -677,6 +694,7 @@
   box-sizing: border-box;
   border: 1px solid var(--datagrid-border);
   border-radius: var(--datagrid-radius, 0.5rem);
+  padding: 0.75rem;
 }
 
 .glb-datagrid--card-layout .glb-datagrid__cards-empty {
@@ -708,22 +726,14 @@
   color: var(--datagrid-row-selected-text);
 }
 
-.glb-datagrid__card--custom {
-  padding: 0;
-}
-
-.glb-datagrid__card--custom .glb-datagrid__card-content {
-  padding: 0;
-}
-
 .glb-datagrid__card-actions {
   display: flex;
   justify-content: flex-end;
-  padding: 0.5rem 0.75rem 0;
+  padding: 0 0 0.5rem;
 }
 
 .glb-datagrid__card-content {
-  padding: 0.75rem;
+  padding: 0;
 }
 
 .glb-datagrid__card--custom .glb-datagrid__card-actions {

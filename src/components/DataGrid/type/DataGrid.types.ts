@@ -73,13 +73,23 @@ export type DataGridCardComponent<T extends Record<string, unknown>> = Component
   Readonly<DataGridCardRenderContext<T>>
 >;
 
+/** Configuración de paginación del DataGrid. */
+export interface DataGridPaging {
+  /** Habilita el pager. Default `true` cuando se pasa el objeto `paging`. */
+  enabled?: boolean;
+  /** Página actual (**0-based**). */
+  pageIndex?: number;
+  /** Filas por página. Default `20` si no se indica. */
+  pageSize?: number;
+}
+
 export interface DataGridProps<T extends Record<string, unknown>> {
-  /** Filas de datos */
-  data: T[];
+  /** Fuente de datos: array de filas. */
+  dataSource: T[];
   /** Definición de columnas */
   columns: ColumnDef<T>[];
-  /** Identificador único estable por fila (requerido para selección) */
-  getRowId: (row: T) => string | number;
+  /** Nombre del campo clave único. Ej: `"id"`. */
+  keyExpr: keyof T | string;
   /** Modo de selección: ninguna, única o múltiple */
   selectionMode?: DataGridSelectionMode;
   /** IDs seleccionados (modo controlado) */
@@ -150,24 +160,16 @@ export interface DataGridProps<T extends Record<string, unknown>> {
   cardBreakpoint?: number;
   /** Cantidad máxima de registros visibles por página o vista (limita pageSize y opciones) */
   maxRecords?: number;
-  /** Habilita paginación en el pie del grid */
-  pagination?: boolean;
-  /** Modo de paginación: client (slice local) o server (data = página actual) */
+  /** Paginación: `enabled`, `pageIndex` (0-based), `pageSize`. */
+  paging?: DataGridPaging;
+  /** Modo de paginación: client (slice local) o server (dataSource = página actual) */
   paginationMode?: DataGridPaginationMode;
-  /** Página actual controlada (1-based) */
-  page?: number;
-  /** Página inicial no controlada */
-  defaultPage?: number;
-  /** Tamaño de página controlado */
-  pageSize?: number;
-  /** Tamaño de página inicial no controlado */
-  defaultPageSize?: number;
   /** Opciones del selector de filas por página */
   pageSizeOptions?: number[];
   /** Total de registros en modo server (requerido si paginationMode="server") */
   totalRowCount?: number;
-  /** Se dispara al cambiar de página */
-  onPageChange?: (page: number) => void;
+  /** Se dispara al cambiar de página (`pageIndex` **0-based**) */
+  onPageChange?: (pageIndex: number) => void;
   /** Se dispara al cambiar el tamaño de página */
   onPageSizeChange?: (pageSize: number) => void;
   /** Habilita redimensionar columnas arrastrando el borde del header */
@@ -222,8 +224,8 @@ export type DataGridOnCardSelectHandler<T extends Record<string, unknown>> = (
   row: T,
 ) => void;
 
-/** Handler de onPageChange */
-export type DataGridOnPageChangeHandler = (page: number) => void;
+/** Handler de onPageChange (`pageIndex` 0-based) */
+export type DataGridOnPageChangeHandler = (pageIndex: number) => void;
 
 /** Handler de onPageSizeChange */
 export type DataGridOnPageSizeChangeHandler = (pageSize: number) => void;

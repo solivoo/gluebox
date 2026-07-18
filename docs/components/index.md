@@ -1,16 +1,16 @@
 # Componentes
 
-Inventario de lo publicado en npm (`glubox` v0.1.4+).
+Inventario de lo publicado en npm (`glubox` v0.1.8+).
 
 ## Todos los componentes
 
 | Componente | Categoría | Presets `*Themes` |
 |------------|-----------|-------------------|
 | **Sidebar** | Navegación | `sidebarThemes` |
+| **DataGrid** | Datos | `dataGridThemes` |
 | **Button** | Acción | `buttonThemes` |
 | **TextBox** | Formulario | `textBoxThemes` |
 | **TextArea** | Formulario | `textAreaThemes` |
-| **DataGrid** | Datos | `dataGridThemes` |
 | **Select** | Formulario | `selectThemes` |
 | **DateBox** | Formulario | `dateBoxThemes` |
 | **RangeDateBox** | Formulario | `rangeDateBoxThemes` |
@@ -23,9 +23,9 @@ Inventario de lo publicado en npm (`glubox` v0.1.4+).
 
 | Página | Componentes |
 |--------|-------------|
+| [DataGrid](/components/datagrid) | Guía: `dataSource`, `keyExpr`, `paging`, altura, table/card |
 | [Sidebar](/components/sidebar) | Sidebar |
 | [Formularios](/components/forms) | TextBox, TextArea, Select, DateBox, RangeDateBox |
-| [DataGrid](/components/datagrid) | Tabla genérica con búsqueda, sort y selección |
 | [Botones y selección](/components/buttons) | Button, CheckButton, OptionGroup |
 | [Overlays](/components/overlays) | Popup, Toast |
 | [Temas](/guide/themes) | Sistema global + prop `theme` |
@@ -35,6 +35,7 @@ Inventario de lo publicado en npm (`glubox` v0.1.4+).
 
 En el repo, `pnpm dev` abre el playground en rutas como:
 
+- `/componentes/datagrid`
 - `/componentes/button`
 - `/componentes/popup`
 - `/componentes/toast`
@@ -44,3 +45,4 @@ En el repo, `pnpm dev` abre el playground en rutas como:
 
 - [Introducción](/guide/getting-started)
 - [Instalación](/guide/installation)
+- [DataGrid — guía de uso](/components/datagrid)

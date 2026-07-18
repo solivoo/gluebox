@@ -1,37 +1,16 @@
-# DataGrid
+# DataGrid — guía de uso
 
-Tabla empresarial con tipado estricto, búsqueda con debounce, ordenamiento, selección, paginación client/server, virtualización de filas y layout responsive (tabla o tarjetas).
+Tabla / tarjetas empresariales tipadas con `dataSource`, `keyExpr` y `paging`.
 
-## Arquitectura
-
-| Capa | Responsabilidad |
-|------|-----------------|
-| `<DataGrid />` | Presentación: ensambla toolbar, viewport, resumen y paginación |
-| `useDataGridController` | Orquestación: layout, filas visibles, efectos, estilos derivados |
-| `useDataGrid` | Pipeline de datos: filtrado, orden y selección (headless) |
-| `usePagination` / `useColumnLayout` / `useVirtualRows` | Features reutilizables para UIs custom |
-
-## Importación
+## Instalación rápida
 
 ```tsx
-import {
-  DataGrid,
-  useDataGrid,
-  useDataGridController,
-  dataGridThemes,
-  defaultDataGridMessages,
-} from 'glubox';
-
-import type {
-  ColumnDef,
-  DataGridProps,
-  DataGridMessages,
-} from 'glubox';
-
+import { DataGrid } from 'glubox';
+import type { ColumnDef } from 'glubox';
 import 'glubox/style.css';
 ```
 
-## Uso básico
+## Primer grid
 
 ```tsx
 interface Employee extends Record<string, unknown> {
@@ -47,179 +26,256 @@ const columns: ColumnDef<Employee>[] = [
   { key: 'department', header: 'Departamento', sortable: true },
 ];
 
-const data: Employee[] = [
+const employees: Employee[] = [
   { id: 1, name: 'Ana García', email: 'ana@corp.com', department: 'Ventas' },
+  { id: 2, name: 'Bruno López', email: 'bruno@corp.com', department: 'IT' },
 ];
 
+export function EmployeesGrid() {
+  return (
+    <DataGrid
+      dataSource={employees}
+      keyExpr="id"
+      columns={columns}
+      paging={{ enabled: true, pageIndex: 0, pageSize: 10 }}
+      selectionMode="multiple"
+      showSearch
+      searchPlaceholder="Buscar..."
+      onSelectionChange={(rows) => console.log(rows)}
+    />
+  );
+}
+```
+
+Sin `height` ni `maxHeight`, el grid **se encoge** a las filas de la página (table y card).
+
+---
+
+## Datos
+
+| Prop | Rol |
+|------|-----|
+| `dataSource` | Array de filas (**requerido**) |
+| `keyExpr` | Nombre del campo clave, ej. `"id"` (**requerido**) |
+| `columns` | Definición de columnas |
+
+```tsx
+<DataGrid dataSource={rows} keyExpr="id" columns={columns} />
+```
+
+---
+
+## Paginación: `paging`
+
+```tsx
+paging={{
+  enabled: true,   // default true si pasás el objeto paging
+  pageIndex: 0,    // 0-based
+  pageSize: 20,    // filas por página
+}}
+```
+
+| Prop | Default | Descripción |
+|------|---------|-------------|
+| `paging.enabled` | `true` (si hay `paging`) | Muestra el pager |
+| `paging.pageIndex` | no controlado | Página **0-based** |
+| `paging.pageSize` | `20` (inicial) | Filas visibles por página |
+| `pageSizeOptions` | `[10, 25, 50, 100]` | Opciones del selector |
+| `paginationMode` | `'client'` | `'client'` slice local · `'server'` vos traés la página |
+| `totalRowCount` | — | Total en modo **server** |
+
+### Controlado
+
+`onPageChange` recibe `pageIndex` **0-based**:
+
+```tsx
+const [pageIndex, setPageIndex] = useState(0);
+const [pageSize, setPageSize] = useState(10);
+
 <DataGrid
-  data={data}
+  dataSource={rows}
+  keyExpr="id"
   columns={columns}
-  getRowId={(row) => row.id}
-  selectionMode="multiple"
-  onSelectionChange={(rows) => console.log(rows)}
+  paging={{ enabled: true, pageIndex, pageSize }}
+  onPageChange={setPageIndex}
+  onPageSizeChange={(size) => {
+    setPageSize(size);
+    setPageIndex(0);
+  }}
 />
 ```
 
-## Layout: tabla, tarjetas o automático
+### Modo server
+
+```tsx
+<DataGrid
+  dataSource={pageRows}
+  keyExpr="id"
+  columns={columns}
+  paginationMode="server"
+  totalRowCount={totalFromApi}
+  paging={{ enabled: true, pageIndex, pageSize }}
+  onPageChange={(index) => fetchPage(index, pageSize)}
+/>
+```
+
+Sin objeto `paging`, la paginación queda **desactivada**.
+
+---
+
+## Altura
+
+| Situación | Comportamiento |
+|-----------|----------------|
+| Sin `height` / `maxHeight` | Crece con las filas visibles (contenido real de celdas) |
+| `height={500}` o `maxHeight={500}` | Techo; scroll interno si hay más filas |
+| Virtualización activa | Necesita `height` o `maxHeight`; usa `rowHeight` fijo |
+
+```tsx
+<DataGrid dataSource={twoRows} keyExpr="id" columns={cols} paging={{ pageSize: 10 }} />
+
+<DataGrid dataSource={many} keyExpr="id" columns={cols} height={480} paging={{ pageSize: 25 }} />
+```
+
+| Prop | Default | Uso |
+|------|---------|-----|
+| `autoRowHeight` | `true` | Filas según contenido (nombre + email, etc.) |
+| `rowHeight` | `44` | Solo virtualización (`number` o `'auto'`) |
+
+---
+
+## Layout: tabla y tarjetas
 
 | `layout` | Comportamiento |
 |----------|----------------|
-| `auto` (default) | Tabla en contenedores anchos; tarjetas si el ancho del grid ≤ `cardBreakpoint` (640px) |
+| `auto` (default) | Tabla ancha; cards si el ancho ≤ `cardBreakpoint` (640) |
 | `table` | Siempre tabla |
 | `card` | Siempre tarjetas |
 
 ```tsx
 <DataGrid
+  dataSource={rows}
+  keyExpr="id"
+  columns={columns}
   layout="auto"
-  cardBreakpoint={640}
+  paging={{ enabled: true, pageSize: 8 }}
   renderCardComponent={EmployeeCard}
-  onCardSelect={(row) => console.log('activada', row)}
-  ...
+  onCardSelect={(row) => console.log(row)}
 />
 ```
 
-Con `renderCard` o `renderCardComponent` personalizás cada tarjeta. Los datos están en `context.row`, no en un evento `e.data`.
+`paging`, `dataSource` y `keyExpr` aplican igual en **table** y **card**.
 
-## Internacionalización
+---
 
-Pasá `messages` para sobreescribir textos (paginación, resumen, loading). Las props `searchPlaceholder` y `emptyMessage` tienen prioridad.
-
-```tsx
-<DataGrid
-  messages={{
-  ...defaultDataGridMessages,
-  rowsPerPage: 'Rows per page',
-  rowCount: (n) => `${n} record${n === 1 ? '' : 's'}`,
-  }}
-  searchPlaceholder="Search employees..."
-  ...
-/>
-```
-
-## ColumnDef
-
-| Campo | Tipo | Descripción |
-|-------|------|-------------|
-| `key` | `keyof T` | Propiedad del objeto de datos |
-| `header` | `string` | Título del encabezado |
-| `sortable` | `boolean` | Habilita orden asc/desc al clic |
-| `width` / `minWidth` | `string \| number` | Dimensiones de columna |
-| `align` | `'left' \| 'center' \| 'right'` | Alineación |
-| `renderCell` | `(value, row, index) => ReactNode` | UI personalizada con tipado estricto |
-| `resizable` / `reorderable` | `boolean` | Por columna, si el grid lo permite |
-
-## Búsqueda
-
-El buscador integrado filtra con **debounce** (`debounceMs`, default 300 ms). Por defecto busca en todas las columnas; limitá con `searchKeys`.
-
-| Prop | Default | Descripción |
-|------|---------|-------------|
-| `showSearch` | `true` | Muestra el buscador |
-| `searchPosition` | `'left'` | `'left'` o `'right'` |
-| `searchWidth` | — | Ancho fijo del campo |
-
-## Selección
-
-| `selectionMode` | Comportamiento |
-|-----------------|----------------|
-| `none` | Sin selección |
-| `single` | Clic en fila → `onRowSelect(row)` |
-| `multiple` | Checkboxes por página + `onSelectionChange(rows[])` |
-
-Modo controlado: `selectedRowIds` + `onSelectionChange`. El “seleccionar todo” del header afecta **solo la página visible**.
-
-## Hooks headless
-
-### `useDataGrid`
-
-Pipeline de filtrado, orden y selección (sin layout ni paginación):
+## Columnas
 
 ```tsx
-const grid = useDataGrid({
-  data,
-  columns,
-  getRowId: (row) => row.id,
-  selectionMode: 'multiple',
-});
-
-// grid.displayRows, grid.toggleSort, grid.selectedRows
+const columns: ColumnDef<Employee>[] = [
+  {
+    key: 'name',
+    header: 'Operador',
+    sortable: true,
+    minWidth: 220,
+    renderCell: (_value, row) => (
+      <div>
+        <strong>{row.name}</strong>
+        <div>{row.email}</div>
+      </div>
+    ),
+  },
+  { key: 'department', header: 'Depto', sortable: true },
+];
 ```
 
-### `useDataGridController`
+| Campo | Descripción |
+|-------|-------------|
+| `key` | Propiedad de `T` |
+| `header` | Título |
+| `sortable` | Orden al clic |
+| `width` / `minWidth` | Dimensiones |
+| `align` | `left` \| `center` \| `right` |
+| `renderCell` | UI custom tipada |
 
-Equivalente a montar `<DataGrid />` sin JSX — devuelve view-model listo para render custom:
+`resizableColumns` / `reorderableColumns` / `stickyFirstColumn` en el grid.
 
-```tsx
-const vm = useDataGridController({
-  data,
-  columns,
-  getRowId: (row) => row.id,
-  pagination: true,
-});
+---
 
-// vm.rowsToRender, vm.selection.handleToggleRow, vm.paginationState, ...
-```
-
-## Altura (fit-content)
-
-Por defecto el grid **crece con las filas visibles** y con la **altura real del contenido** de cada celda (no hace falta adivinar `rowHeight`).
-
-| Prop | Default | Descripción |
-|------|---------|-------------|
-| `height` | — | En fit-content: **techo** (`max-height`). Con virtualización: altura fija del viewport. |
-| `maxHeight` | — | Tope alternativo. Si hay `height`, prevalece `height` como techo. |
-| `autoRowHeight` | `true` | Filas según contenido real (ignorado si hay virtualización). |
-| `rowHeight` | `44` | Estimación en **px solo para virtualización**. También `'auto'`. |
-
-```tsx
-// 2 filas con celda custom (nombre + email): crece solo
-<DataGrid data={rows} columns={cols} getRowId={...} pagination pageSize={10} />
-
-// Techo opcional (scroll interno si el contenido lo supera)
-<DataGrid height={500} ... />
-```
-
-Prioridad del techo: `height` > `maxHeight` > sin límite. Con paginación/summary, el techo aplica al bloque completo (tabla + pie). La virtualización solo se activa si hay `height` o `maxHeight`.
-
-## Virtualización
-
-| Prop | Default | Descripción |
-|------|---------|-------------|
-| `virtualized` | `true` | Habilita virtualización (solo layout tabla, con altura acotada) |
-| `virtualThreshold` | `30` | Mínimo de filas para activarla |
-| `rowHeight` | `44` | **Solo modo virtual**: altura estimada por fila (px) |
-| `overscan` | `5` | Buffer fuera del viewport |
-| `showRowCount` | `true` | Contador en barra de resumen |
-
-Con virtualización activa, `autoRowHeight` no aplica: las filas usan `rowHeight` fijo para el cálculo del scroll.
-
-## Paginación
-
-| Prop | Default | Descripción |
-|------|---------|-------------|
-| `pagination` | `false` | Controles en el pie |
-| `paginationMode` | `'client'` | `'client'` o `'server'` |
-| `maxRecords` | — | Límite de registros visibles / opciones de pageSize |
-| `totalRowCount` | — | Total en modo **server** |
-
-En modo **client**, al buscar u ordenar la página vuelve a **1**. En **server**, `data` es solo la página actual y el padre gestiona el fetch.
-
-## Columnas: resize y reordenamiento
+## Búsqueda y selección
 
 | Prop | Default |
 |------|---------|
-| `resizableColumns` | `false` |
-| `reorderableColumns` | `false` |
-| `stickyFirstColumn` | `true` |
+| `showSearch` | `true` |
+| `searchPosition` | `'left'` |
+| `debounceMs` | `300` |
+| `searchKeys` | todas las columnas |
 
-Hook exportado: `useColumnLayout`.
+| `selectionMode` | Eventos |
+|-----------------|---------|
+| `none` | — |
+| `single` | `onRowSelect(row)` |
+| `multiple` | checkboxes + `onSelectionChange(rows[])` |
 
-## Temas
+Controlado: `selectedRowIds` + `onSelectionChange`. “Seleccionar todo” afecta solo la **página visible**.
+
+---
+
+## Virtualización
+
+Solo layout **table**, y solo si hay `height` o `maxHeight` y suficientes filas (`virtualThreshold`, default 30).
+
+| Prop | Default |
+|------|---------|
+| `virtualized` | `true` |
+| `virtualThreshold` | `30` |
+| `rowHeight` | `44` (estimado fijo) |
+| `overscan` | `5` |
+
+Con virtualización, `autoRowHeight` no aplica.
+
+---
+
+## Temas e i18n
 
 ```tsx
-<DataGrid theme="enterprise-dark" ... />
-<DataGrid theme={dataGridThemes['modern-light']} ... />
+import { DataGrid, dataGridThemes, defaultDataGridMessages } from 'glubox';
+
+<DataGrid
+  theme="enterprise-dark"
+  messages={{
+    ...defaultDataGridMessages,
+    rowsPerPage: 'Filas por página',
+    rowCount: (n) => (n === 1 ? '1 registro' : `${n} registros`),
+  }}
+  dataSource={rows}
+  keyExpr="id"
+  columns={columns}
+/>
 ```
+
+---
+
+## Arquitectura (avanzado)
+
+| Capa | Rol |
+|------|-----|
+| `<DataGrid />` | Presentación |
+| `normalizeDataGridProps` | `dataSource` / `keyExpr` / `paging` → forma interna |
+| `useDataGridController` | Orquestación (layout, filas, estilos) |
+| `useDataGrid` | Filtro, orden, selección headless |
+
+```tsx
+import { useDataGridController } from 'glubox';
+
+const vm = useDataGridController({
+  dataSource: rows,
+  keyExpr: 'id',
+  columns,
+  paging: { enabled: true, pageSize: 10 },
+});
+```
+
+---
 
 ## Tipos de eventos
 
@@ -228,5 +284,11 @@ Hook exportado: `useColumnLayout`.
 | `DataGridOnRowSelectHandler<T>` | `(row: T) => void` |
 | `DataGridOnSelectionChangeHandler<T>` | `(selectedRows: T[]) => void` |
 | `DataGridOnCardSelectHandler<T>` | `(row: T) => void` |
+| `DataGridOnPageChangeHandler` | `(pageIndex: number) => void` — **0-based** |
+| `DataGridOnPageSizeChangeHandler` | `(pageSize: number) => void` |
 
 Ver [Tipos de eventos](/guide/event-types).
+
+## Demo
+
+`pnpm dev` → `/componentes/datagrid`

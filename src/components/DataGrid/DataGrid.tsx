@@ -51,7 +51,7 @@ export function DataGrid<T extends Record<string, unknown>>(
               <DataGridCardList
                 rows={vm.rowsToRender}
                 columns={vm.orderedColumns}
-                getRowId={props.getRowId}
+                getRowId={vm.getRowId}
                 selectionMode={vm.selectionMode ?? 'none'}
                 emptyMessage={vm.emptyMessage}
                 isRowSelected={vm.grid.isRowSelected}
@@ -78,7 +78,7 @@ export function DataGrid<T extends Record<string, unknown>>(
                   rows={vm.rowsToRender}
                   columns={vm.orderedColumns}
                   getColumnStyle={vm.columnLayout.getColumnStyle}
-                  getRowId={props.getRowId}
+                  getRowId={vm.getRowId}
                   selectionMode={vm.selectionMode ?? 'none'}
                   stickyFirstColumn={vm.stickyFirstColumn}
                   emptyMessage={vm.emptyMessage}

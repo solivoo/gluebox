@@ -214,6 +214,12 @@ export function Select(props: Readonly<SelectProps>) {
         closeDropdown();
         break;
       }
+      default: {
+        if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+          handleTypeAhead(e.key);
+        }
+        break;
+      }
     }
   }
 

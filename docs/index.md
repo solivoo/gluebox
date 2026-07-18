@@ -4,16 +4,18 @@ layout: home
 hero:
   name: gluBox
   text: Componentes React empresariales
-  tagline: Sidebar con RBAC, formularios temáticos, calendarios y demo interactiva con playground
+  tagline: DataGrid, Sidebar RBAC, formularios temáticos y playground interactivo
   actions:
     - theme: brand
       text: Empezar
       link: /guide/getting-started
     - theme: alt
-      text: Formularios
-      link: /components/forms
+      text: DataGrid
+      link: /components/datagrid
 
 features:
+  - title: DataGrid
+    details: dataSource + keyExpr + paging, table/card, altura auto y selección tipada.
   - title: Menú desde API
     details: Contrato JSON documentado — módulos, opciones y acciones hasta 3 niveles con RBAC.
   - title: Controles de formulario
@@ -33,15 +35,25 @@ pnpm add glubox
 ```
 
 ```tsx
-import { Sidebar, TextBox } from 'glubox';
+import { DataGrid, Sidebar } from 'glubox';
 import 'glubox/style.css';
 import 'glubox/themes/default.css';
+```
+
+```tsx
+<DataGrid
+  dataSource={rows}
+  keyExpr="id"
+  columns={columns}
+  paging={{ enabled: true, pageIndex: 0, pageSize: 10 }}
+/>
 ```
 
 ## Documentación
 
 - [Introducción](/guide/getting-started)
 - [Instalación](/guide/installation)
+- [DataGrid — guía de uso](/components/datagrid)
 - [Temas y apariencia](/guide/themes)
 - [Tipos de eventos](/guide/event-types)
 - [Componentes (índice)](/components/)

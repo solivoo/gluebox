@@ -251,6 +251,7 @@ export type {
   DataGridOnRowSelectHandler,
   DataGridOnSelectionChangeHandler,
   DataGridPaginationMode,
+  DataGridPaging,
   DataGridColumnWidths,
   DataGridSearchPosition,
   DataGridLayout,
@@ -288,7 +289,10 @@ export {
   computeVirtualRowsRange,
   resolveDataGridHeight,
   estimateViewportHeightPx,
+  normalizeDataGridProps,
   dataGridThemes,
   defaultDataGridMessages,
   resolveDataGridMessages,
 } from '@/components/DataGrid';
+
+export type { NormalizedDataGridProps } from '@/components/DataGrid';

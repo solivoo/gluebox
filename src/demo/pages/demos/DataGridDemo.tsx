@@ -19,21 +19,18 @@ import {
 } from '@/demo/data/DemoEmployeeCard';
 import './DataGridDemo.css';
 
-function resolvePageSize(props: DataGridPlaygroundDefaults): number {
-  if (typeof props.pageSize === 'number' && !Number.isNaN(props.pageSize)) {
-    return props.pageSize;
+function resolvePageIndex(props: DataGridPlaygroundDefaults): number {
+  if (typeof props.pageIndex === 'number' && !Number.isNaN(props.pageIndex)) {
+    return Math.max(0, props.pageIndex);
   }
-  if (typeof props.defaultPageSize === 'number' && !Number.isNaN(props.defaultPageSize)) {
-    return props.defaultPageSize;
-  }
-  return 25;
+  return 0;
 }
 
-function resolvePage(props: DataGridPlaygroundDefaults): number {
-  if (typeof props.page === 'number' && !Number.isNaN(props.page)) {
-    return Math.max(1, props.page);
+function resolvePageSize(props: DataGridPlaygroundDefaults): number {
+  if (typeof props.pageSize === 'number' && !Number.isNaN(props.pageSize) && props.pageSize > 0) {
+    return props.pageSize;
   }
-  return 1;
+  return 20;
 }
 
 function resolvePageSizeOptions(props: DataGridPlaygroundDefaults): number[] {
@@ -41,7 +38,7 @@ function resolvePageSizeOptions(props: DataGridPlaygroundDefaults): number[] {
   if (Array.isArray(raw) && raw.length > 0) {
     return raw.map((n) => Number(n)).filter((n) => !Number.isNaN(n) && n > 0);
   }
-  return [10, 25, 50, 100];
+  return [10, 20, 50, 100];
 }
 
 interface DataGridPlaygroundPreviewProps {
@@ -70,45 +67,42 @@ function DataGridPlaygroundPreview({
   const layout = (props.layout as DataGridLayout) ?? 'auto';
   const showCardExample = layout === 'card' || layout === 'auto';
   const isCardLayoutProp = layout === 'card';
+  const pagingEnabled = Boolean(props.pagingEnabled ?? true);
 
-  const pageFromProps = resolvePage(props);
+  const pageIndexFromProps = resolvePageIndex(props);
   const pageSizeFromProps = resolvePageSize(props);
   const pageSizeOptions = resolvePageSizeOptions(props);
 
-  const [currentPage, setCurrentPage] = useState(pageFromProps);
-  const [currentPageSize, setCurrentPageSize] = useState(pageSizeFromProps);
-  const [prevPageProp, setPrevPageProp] = useState(pageFromProps);
+  const [pageIndex, setPageIndex] = useState(pageIndexFromProps);
+  const [pageSize, setPageSize] = useState(pageSizeFromProps);
+  const [prevPageIndexProp, setPrevPageIndexProp] = useState(pageIndexFromProps);
   const [prevPageSizeProp, setPrevPageSizeProp] = useState(pageSizeFromProps);
 
-  // Sincronizar con el actuador sin useEffect (evita renders en cascada).
   if (pageSizeFromProps !== prevPageSizeProp) {
     setPrevPageSizeProp(pageSizeFromProps);
-    setCurrentPageSize(pageSizeFromProps);
-    setCurrentPage(1);
-    setPrevPageProp(pageFromProps);
-  } else if (pageFromProps !== prevPageProp) {
-    setPrevPageProp(pageFromProps);
-    setCurrentPage(pageFromProps);
+    setPageSize(pageSizeFromProps);
+    setPageIndex(0);
+    setPrevPageIndexProp(pageIndexFromProps);
+  } else if (pageIndexFromProps !== prevPageIndexProp) {
+    setPrevPageIndexProp(pageIndexFromProps);
+    setPageIndex(pageIndexFromProps);
   }
 
   const serverData = isServer
-    ? demoEmployees.slice(
-        (currentPage - 1) * currentPageSize,
-        currentPage * currentPageSize,
-      )
+    ? demoEmployees.slice(pageIndex * pageSize, pageIndex * pageSize + pageSize)
     : demoEmployees;
 
   const handlePageSizeChange = (size: number) => {
-    setCurrentPageSize(size);
-    setCurrentPage(1);
+    setPageSize(size);
+    setPageIndex(0);
   };
 
   return (
     <div className="dg-demo">
       <DataGrid<DemoEmployee>
-        data={isServer ? serverData : demoEmployees}
+        dataSource={isServer ? serverData : demoEmployees}
+        keyExpr="id"
         columns={demoEmployeeColumns}
-        getRowId={(row) => row.id}
         selectionMode={selectionMode}
         showSearch={Boolean(props.showSearch ?? true)}
         searchPosition={(props.searchPosition as DataGridSearchPosition) ?? 'left'}
@@ -157,12 +151,14 @@ function DataGridPlaygroundPreview({
         overscan={(props.overscan as number) ?? 5}
         showRowCount={Boolean(props.showRowCount ?? true)}
         showSelectionCount={Boolean(props.showSelectionCount ?? true)}
-        pagination={Boolean(props.pagination ?? true)}
+        paging={{
+          enabled: pagingEnabled,
+          pageIndex,
+          pageSize,
+        }}
         paginationMode={paginationMode}
-        page={currentPage}
-        pageSize={currentPageSize}
         pageSizeOptions={pageSizeOptions}
-        onPageChange={setCurrentPage}
+        onPageChange={setPageIndex}
         onPageSizeChange={handlePageSizeChange}
         totalRowCount={isServer ? demoEmployees.length : undefined}
         resizableColumns={Boolean(props.resizableColumns ?? true)}
@@ -184,16 +180,15 @@ function DataGridPlaygroundPreview({
           Caso pocas filas (2 registros)
         </h3>
         <p className="dg-demo__card-example-desc">
-          Celda de 2 líneas (nombre + email + avatar) con{' '}
-          <code>autoRowHeight</code> (default). Responde al actuador
-          (paginación, pageSize, height, etc.).
+          <code>dataSource</code> + <code>keyExpr</code> + <code>paging</code>.
+          Sin <code>height</code> se encoge a las filas. Responde al actuador.
         </p>
         <FewRowsExampleGrid
-          pagination={Boolean(props.pagination ?? true)}
-          page={currentPage}
-          pageSize={currentPageSize}
+          pagingEnabled={pagingEnabled}
+          pageIndex={pageIndex}
+          pageSize={pageSize}
           pageSizeOptions={pageSizeOptions}
-          onPageChange={setCurrentPage}
+          onPageChange={setPageIndex}
           onPageSizeChange={handlePageSizeChange}
           showSearch={Boolean(props.showSearch ?? true)}
           showRowCount={Boolean(props.showRowCount ?? true)}
@@ -230,8 +225,9 @@ function DataGridPlaygroundPreview({
       <aside className="dg-demo__panel" aria-live="polite">
         <h3 className="dg-demo__panel-title">Eventos</h3>
         <p>
-          <strong>Paginación:</strong> página {currentPage}, {currentPageSize} filas/página
+          <strong>Paginación:</strong> pageIndex {pageIndex}, {pageSize} filas/página
           {isServer ? ' (server)' : ' (client)'}
+          {pagingEnabled ? '' : ' — off'}
         </p>
         {isCardLayoutProp && lastCard && (
           <p>
@@ -311,11 +307,11 @@ const fewOperatorColumns: ColumnDef<DemoEmployee>[] = [
 ];
 
 interface FewRowsExampleGridProps {
-  pagination: boolean;
-  page: number;
+  pagingEnabled: boolean;
+  pageIndex: number;
   pageSize: number;
   pageSizeOptions: number[];
-  onPageChange: (page: number) => void;
+  onPageChange: (pageIndex: number) => void;
   onPageSizeChange: (size: number) => void;
   showSearch: boolean;
   showRowCount: boolean;
@@ -326,8 +322,8 @@ interface FewRowsExampleGridProps {
 }
 
 function FewRowsExampleGrid({
-  pagination,
-  page,
+  pagingEnabled,
+  pageIndex,
   pageSize,
   pageSizeOptions,
   onPageChange,
@@ -341,15 +337,17 @@ function FewRowsExampleGrid({
 }: FewRowsExampleGridProps) {
   return (
     <DataGrid<DemoEmployee>
-      data={fewOperators}
+      dataSource={fewOperators}
+      keyExpr="id"
       columns={fewOperatorColumns}
-      getRowId={(row) => row.id}
       selectionMode="none"
       showSearch={showSearch}
       searchPlaceholder="Buscar operadores..."
-      pagination={pagination}
-      page={page}
-      pageSize={pageSize}
+      paging={{
+        enabled: pagingEnabled,
+        pageIndex,
+        pageSize,
+      }}
       pageSizeOptions={pageSizeOptions}
       onPageChange={onPageChange}
       onPageSizeChange={onPageSizeChange}
@@ -375,14 +373,14 @@ function CardExampleGrid({
   onCardSelect: (row: DemoEmployee) => void;
   onRowSelect: (row: DemoEmployee) => void;
 }) {
-  const [page, setPage] = useState(1);
+  const [pageIndex, setPageIndex] = useState(0);
   const [pageSize, setPageSize] = useState(5);
 
   return (
     <DataGrid<DemoEmployee>
-      data={demoEmployees.slice(0, 120)}
+      dataSource={demoEmployees.slice(0, 120)}
+      keyExpr="id"
       columns={demoEmployeeCardColumns}
-      getRowId={(row) => row.id}
       layout="card"
       selectionMode="single"
       renderCardComponent={DemoEmployeeCard}
@@ -390,14 +388,16 @@ function CardExampleGrid({
       onRowSelect={onRowSelect}
       showSearch
       searchPlaceholder="Buscar en cards personalizadas..."
-      pagination
-      page={page}
-      pageSize={pageSize}
+      paging={{
+        enabled: true,
+        pageIndex,
+        pageSize,
+      }}
       pageSizeOptions={[5, 10]}
-      onPageChange={setPage}
+      onPageChange={setPageIndex}
       onPageSizeChange={(size) => {
         setPageSize(size);
-        setPage(1);
+        setPageIndex(0);
       }}
       maxRecords={10}
       virtualized={false}

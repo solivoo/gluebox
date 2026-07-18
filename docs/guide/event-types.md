@@ -79,8 +79,11 @@ const handleClick: ButtonOnClickHandler = (event) => {
 |------|-----------|
 | `DataGridOnRowSelectHandler<T>` | `(row: T) => void` |
 | `DataGridOnSelectionChangeHandler<T>` | `(selectedRows: T[]) => void` |
-| `DataGridOnPageChangeHandler` | `(page: number) => void` |
+| `DataGridOnCardSelectHandler<T>` | `(row: T) => void` |
+| `DataGridOnPageChangeHandler` | `(pageIndex: number) => void` — **0-based** |
 | `DataGridOnPageSizeChangeHandler` | `(pageSize: number) => void` |
+
+Guía de uso: [DataGrid](/components/datagrid).
 
 ### DateBox
 

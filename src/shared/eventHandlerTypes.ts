@@ -19,4 +19,6 @@ export type OptionalEventHandler<
 export type EventHandlerPayload<
   Props extends object,
   Key extends keyof Props,
-> = Parameters<NonNullable<Props[Key]>>[0];
+> = NonNullable<Props[Key]> extends (...args: never[]) => unknown
+  ? Parameters<Extract<NonNullable<Props[Key]>, (...args: never[]) => unknown>>[0]
+  : never;

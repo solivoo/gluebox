@@ -7,6 +7,7 @@ import { usePagination } from '../hooks/usePagination';
 import { useColumnLayout } from '../hooks/useColumnLayout';
 import { useEffectiveLayout } from '../layout/useEffectiveLayout';
 import { useDerivedPaginationConfig } from './derivePaginationConfig';
+import { normalizeDataGridProps } from './normalizeDataGridProps';
 import { useDataGridSelection } from './useDataGridSelection';
 import { resolveTheme, themeToStyle } from '../theme/resolveTheme';
 import {
@@ -32,6 +33,7 @@ export interface DataGridControllerViewModel<T extends Record<string, unknown>> 
   orderedColumns: UseColumnLayoutReturn<T>['orderedColumns'];
   paginationState: UsePaginationReturn;
   rowsToRender: T[];
+  getRowId: (row: T) => string | number;
   effectiveLayout: 'table' | 'card';
   isCardLayout: boolean;
   useResponsiveCard: boolean;
@@ -70,10 +72,19 @@ export interface DataGridControllerViewModel<T extends Record<string, unknown>> 
 export function useDataGridController<T extends Record<string, unknown>>(
   props: Readonly<DataGridProps<T>>,
 ): DataGridControllerViewModel<T> {
+  const normalized = normalizeDataGridProps(props);
   const {
     data,
-    columns,
     getRowId,
+    pagination,
+    page,
+    defaultPage,
+    pageSize,
+    defaultPageSize,
+  } = normalized;
+
+  const {
+    columns,
     selectionMode = 'none',
     selectedRowIds,
     onRowSelect,
@@ -101,12 +112,7 @@ export function useDataGridController<T extends Record<string, unknown>>(
     cardOnMobile = false,
     cardBreakpoint = 640,
     maxRecords,
-    pagination = false,
     paginationMode = 'client',
-    page,
-    defaultPage = 1,
-    pageSize,
-    defaultPageSize = 25,
     pageSizeOptions = [10, 25, 50, 100],
     totalRowCount,
     onPageChange,
@@ -187,6 +193,15 @@ export function useDataGridController<T extends Record<string, unknown>>(
       ? (totalRowCount ?? data.length)
       : grid.displayRows.length;
 
+  /** API pública: pageIndex 0-based; internamente usePagination es 1-based. */
+  const emitPageChange = useMemo(
+    () =>
+      onPageChange
+        ? (page1Based: number) => onPageChange(Math.max(0, page1Based - 1))
+        : undefined,
+    [onPageChange],
+  );
+
   const paginationState = usePagination({
     totalItems: filteredTotal,
     enabled: pagination,
@@ -195,7 +210,7 @@ export function useDataGridController<T extends Record<string, unknown>>(
     pageSize: paginationConfig.effectiveControlledPageSize,
     defaultPageSize: paginationConfig.effectiveDefaultPageSize,
     pageSizeOptions: paginationConfig.effectivePageSizeOptions,
-    onPageChange,
+    onPageChange: emitPageChange,
     onPageSizeChange,
   });
 
@@ -309,7 +324,7 @@ export function useDataGridController<T extends Record<string, unknown>>(
     if (page === undefined) {
       resetPaginationPage(1);
     } else {
-      onPageChange?.(1);
+      emitPageChange?.(1);
     }
   }, [
     grid.debouncedSearch,
@@ -318,7 +333,7 @@ export function useDataGridController<T extends Record<string, unknown>>(
     paginationMode,
     page,
     resetPaginationPage,
-    onPageChange,
+    emitPageChange,
   ]);
 
   const themeStyle = themeToStyle(resolveTheme(theme));
@@ -327,16 +342,16 @@ export function useDataGridController<T extends Record<string, unknown>>(
     showRowCount || (showSelectionCount && selectionMode !== 'none');
 
   /**
-   * Fit-content (no virtual): crece con altura REAL de filas; height/maxHeight = techo.
-   * Virtualizado: altura fija; rowHeight solo para el scroll virtual.
+   * Fit-content (table y card, no virtual): crece con altura REAL;
+   * height/maxHeight = techo. Virtualizado: altura fija.
    */
-  const useFitContent = !isCardLayout && !shouldVirtualize;
+  const useFitContent = !shouldVirtualize;
   const hasChrome = Boolean(pagination || showSummary);
   const resolvedHeight = resolveDataGridHeight({
     height,
     maxHeight,
     virtualized: shouldVirtualize,
-    hasChrome: hasChrome && !isCardLayout,
+    hasChrome,
   });
 
   const rootStyle: CSSProperties = {
@@ -347,7 +362,7 @@ export function useDataGridController<T extends Record<string, unknown>>(
   };
 
   const surfaceStyle: CSSProperties | undefined = (() => {
-    if (isCardLayout || resolvedHeight.applyTo !== 'surface') return undefined;
+    if (resolvedHeight.applyTo !== 'surface') return undefined;
     if (resolvedHeight.mode === 'fixed') {
       return { height: resolvedHeight.height };
     }
@@ -358,8 +373,6 @@ export function useDataGridController<T extends Record<string, unknown>>(
   })();
 
   const viewportStyle: CSSProperties = (() => {
-    if (isCardLayout) return {};
-
     if (resolvedHeight.applyTo === 'surface') {
       if (resolvedHeight.mode === 'auto') {
         return { height: 'auto' };
@@ -380,21 +393,8 @@ export function useDataGridController<T extends Record<string, unknown>>(
     return { height: 'auto' };
   })();
 
-  const cardViewportStyle: CSSProperties = (() => {
-    const cardResolved = resolveDataGridHeight({
-      height,
-      maxHeight,
-      virtualized: false,
-      hasChrome: false,
-    });
-    if (cardResolved.mode === 'fixed') {
-      return { height: cardResolved.height };
-    }
-    if (cardResolved.mode === 'max') {
-      return { height: 'auto', maxHeight: cardResolved.maxHeight };
-    }
-    return { height: 'auto' };
-  })();
+  /** Misma lógica de altura para layout card (sin forzar viewport fijo). */
+  const cardViewportStyle: CSSProperties = viewportStyle;
 
   const searchStyle: CSSProperties | undefined =
     searchWidth != null
@@ -434,7 +434,6 @@ export function useDataGridController<T extends Record<string, unknown>>(
 
   const surfaceConstrained =
     hasChrome &&
-    !isCardLayout &&
     (resolvedHeight.mode === 'fixed' || resolvedHeight.mode === 'max');
 
   const surfaceClassNames = [
@@ -446,6 +445,7 @@ export function useDataGridController<T extends Record<string, unknown>>(
     surfaceConstrained &&
       resolvedHeight.mode === 'max' &&
       'glb-datagrid__surface--fit-content',
+    useFitContent && !surfaceConstrained && 'glb-datagrid__surface--fit-content',
   ]
     .filter(Boolean)
     .join(' ');
@@ -473,6 +473,7 @@ export function useDataGridController<T extends Record<string, unknown>>(
     orderedColumns,
     paginationState,
     rowsToRender,
+    getRowId,
     effectiveLayout,
     isCardLayout,
     useResponsiveCard,

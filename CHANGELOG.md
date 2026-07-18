@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.1.8] — 2026-07-18
+
+### Añadido
+
+- **DataGrid:** API `dataSource` + `keyExpr` + `paging: { enabled, pageIndex` (0-based), `pageSize }`
+- `normalizeDataGridProps` exportado + tests
+- Guía de uso actualizada (docs + README)
+
+### Cambiado
+
+- Sin `height`/`maxHeight`, table **y card** se encogen a las filas visibles (fit-content).
+- `onPageChange` entrega `pageIndex` **0-based**.
+- Layout card: padding interno en cada tarjeta para que el contenido no quede pegado al borde.
+
+### Eliminado (breaking)
+
+- Props legacy del DataGrid: `data`, `getRowId`, `pagination`, `page`, `defaultPage`, `pageSize`, `defaultPageSize`. Usá `dataSource`, `keyExpr` y `paging`.
+
 ## [0.1.7] — 2026-07-18
 
 ### Añadido

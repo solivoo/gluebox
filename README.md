@@ -14,6 +14,7 @@ pnpm add glubox
 
 ```tsx
 import {
+  DataGrid,
   Sidebar,
   Button,
   Select,
@@ -28,6 +29,7 @@ import {
   hasPermission,
   filterVisibleMenu,
 } from 'glubox';
+import type { ColumnDef } from 'glubox';
 import 'glubox/style.css';
 import 'glubox/themes/default.css'; // o modern.css, enterprise.css, index.css
 ```
@@ -39,6 +41,7 @@ import type {
   SelectOnChangeHandler,
   PopupOnCloseHandler,
   ToastShowHandler,
+  DataGridOnPageChangeHandler,
 } from 'glubox';
 ```
 
@@ -46,9 +49,11 @@ import type {
 
 | Componente | Descripción |
 |------------|-------------|
+| **DataGrid** | Tabla/cards: `dataSource`, `keyExpr`, `paging` |
 | **Sidebar** | Navegación lateral, menú desde API, RBAC, 3 niveles |
 | **Button** | Botón con variantes y temas |
 | **TextBox** | Campo de texto con label top / floating / outlined / left |
+| **TextArea** | Multilínea |
 | **Select** | Desplegable con teclado y búsqueda type-ahead |
 | **DateBox** | Selector de fecha con calendario |
 | **RangeDateBox** | Rango de fechas en un solo control |
@@ -57,9 +62,31 @@ import type {
 | **Popup** | Diálogo modal arrastrable con acciones en el pie |
 | **Toast** | Notificaciones con posicionamiento, timer y animaciones |
 
-Documentación de tipos de eventos: ver `docs/guide/event-types.md` o la demo → API → Events.
+Documentación: https://solivoo.github.io/gluebox/ · tipos de eventos en `docs/guide/event-types.md`.
 
 ## Uso rápido
+
+### DataGrid
+
+```tsx
+interface Row extends Record<string, unknown> {
+  id: number;
+  name: string;
+}
+
+const columns: ColumnDef<Row>[] = [
+  { key: 'name', header: 'Nombre', sortable: true },
+];
+
+<DataGrid
+  dataSource={[{ id: 1, name: 'Ana' }]}
+  keyExpr="id"
+  columns={columns}
+  paging={{ enabled: true, pageIndex: 0, pageSize: 10 }}
+/>
+```
+
+Guía completa: [DataGrid](https://solivoo.github.io/gluebox/components/datagrid).
 
 ### Sidebar
 

@@ -7,11 +7,16 @@ gluBox es una librería de componentes React para dashboards y aplicaciones inte
 | Componente | Documentación |
 |------------|---------------|
 | Sidebar | [sidebar](/components/sidebar) |
-| TextBox, Select, DateBox, RangeDateBox | [formularios](/components/forms) |
+| DataGrid | [DataGrid — guía de uso](/components/datagrid) |
+| TextBox, TextArea, Select, DateBox, RangeDateBox | [formularios](/components/forms) |
 | Button, CheckButton, OptionGroup | [botones](/components/buttons) |
 | Popup, Toast | [overlays](/components/overlays) |
 
 Listado completo: [Componentes](/components/).
+
+### Datos
+
+- **[DataGrid](/components/datagrid)** — Tabla / tarjetas con `dataSource`, `keyExpr` y `paging`, búsqueda, selección y altura auto.
 
 ### Navegación
 
@@ -19,7 +24,7 @@ Listado completo: [Componentes](/components/).
 
 ### Formularios
 
-- **[TextBox, Select, DateBox, RangeDateBox](/components/forms)** — Campos con variantes visuales, estados de error, label outlined (sobre el borde) y temas.
+- **[TextBox, TextArea, Select, DateBox, RangeDateBox](/components/forms)** — Campos con variantes, clear button, label outlined y temas.
 
 ### Botones y selección
 
@@ -36,6 +41,7 @@ Listado completo: [Componentes](/components/).
 | [Instalación](/guide/installation) | npm, CSS, temas, TypeScript |
 | [Temas y apariencia](/guide/themes) | `data-theme`, `data-mode`, prop `theme`, presets |
 | [Tipos de eventos](/guide/event-types) | Handlers exportados (`*OnChangeHandler`, etc.) |
+| [DataGrid](/components/datagrid) | Guía de uso: dataSource, paging, altura, cards |
 | [Esquema del menú (API)](/guide/menu-api) | Contrato JSON para backend |
 | [Integración con routing](/guide/routing) | React Router, guards, registro de rutas |
 | [Formularios](/components/forms) | TextBox, Select, fechas, label outlined |
@@ -64,5 +70,31 @@ pnpm docs:dev     # Esta documentación
 2. Configurar `data-theme` y `data-mode` en `<html>`.
 3. Consumir `MenuConfig` desde tu API ([esquema](/guide/menu-api)).
 4. Conectar Sidebar con `activePath` / `onNavigate` ([routing](/guide/routing)).
-5. Usar controles de formulario con el mismo sistema de temas.
-6. Validar permisos en rutas (403) y en el backend.
+5. Listar datos con [DataGrid](/components/datagrid) (`dataSource` + `keyExpr` + `paging`).
+6. Usar controles de formulario con el mismo sistema de temas.
+7. Validar permisos en rutas (403) y en el backend.
+
+## DataGrid en 30 segundos
+
+```tsx
+import { DataGrid } from 'glubox';
+import type { ColumnDef } from 'glubox';
+
+interface Row extends Record<string, unknown> {
+  id: number;
+  name: string;
+}
+
+const columns: ColumnDef<Row>[] = [
+  { key: 'name', header: 'Nombre', sortable: true },
+];
+
+<DataGrid
+  dataSource={[{ id: 1, name: 'Ana' }]}
+  keyExpr="id"
+  columns={columns}
+  paging={{ enabled: true, pageIndex: 0, pageSize: 10 }}
+/>
+```
+
+Guía completa: [DataGrid](/components/datagrid).

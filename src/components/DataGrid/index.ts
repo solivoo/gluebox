@@ -24,6 +24,9 @@ export type {
   ResolvedDataGridHeight,
 } from './utils/resolveDataGridHeight';
 
+export { normalizeDataGridProps } from './controller/normalizeDataGridProps';
+export type { NormalizedDataGridProps } from './controller/normalizeDataGridProps';
+
 export { defaultDataGridMessages, resolveDataGridMessages } from './i18n/defaultMessages';
 
 export type { VirtualRowsRange } from './utils/virtualRows';
@@ -40,6 +43,7 @@ export type {
   DataGridOnPageChangeHandler,
   DataGridOnPageSizeChangeHandler,
   DataGridPaginationMode,
+  DataGridPaging,
   DataGridColumnWidths,
   DataGridSearchPosition,
   DataGridLayout,

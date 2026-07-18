@@ -184,15 +184,16 @@ const columns: ColumnDef<User>[] = [
 ];
 
 <DataGrid
-  data={users}
+  dataSource={users}
+  keyExpr="id"
   columns={columns}
-  getRowId={(row) => row.id}
+  paging={{ enabled: true, pageIndex: 0, pageSize: 10 }}
   selectionMode="multiple"
   onSelectionChange={(rows) => setSelected(rows)}
 />
 
 // Hook standalone
-const grid = useDataGrid({ data, columns, getRowId: (r) => r.id });`,
+const grid = useDataGrid({ data: users, columns, getRowId: (r) => r.id });`,
     Sidebar: `// Con React Router
 import { useLocation, useNavigate } from 'react-router-dom';
 

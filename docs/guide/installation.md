@@ -154,10 +154,12 @@ Tipos y utilidades exportados:
 
 ```tsx
 import {
+  DataGrid,
   Sidebar,
   Button,
   Select,
   TextBox,
+  TextArea,
   DateBox,
   RangeDateBox,
   OptionGroup,
@@ -165,10 +167,12 @@ import {
   Popup,
   ToastProvider,
   useToast,
+  dataGridThemes,
   sidebarThemes,
   buttonThemes,
   selectThemes,
   textBoxThemes,
+  textAreaThemes,
   dateBoxThemes,
   rangeDateBoxThemes,
   optionGroupThemes,
@@ -193,10 +197,14 @@ import type {
   ShowToastOptions,
   Permission,
   IconResolver,
+  ColumnDef,
+  DataGridProps,
+  DataGridPaging,
   // Handlers de eventos (tipado de callbacks)
   SelectOnChangeHandler,
   PopupOnCloseHandler,
   ToastShowHandler,
+  DataGridOnPageChangeHandler,
   OptionalEventHandler,
   EventHandlerPayload,
 } from 'glubox';
@@ -205,9 +213,11 @@ import type {
 - `hasPermission(userPermissions, required?)` — regla OR para guards de ruta.
 - `filterVisibleMenu(menu, userPermissions)` — misma lógica que aplica el Sidebar internamente.
 - Tipos `*OnChangeHandler`, `*OnCloseHandler`, etc. — ver [Tipos de eventos](/guide/event-types).
+- DataGrid: `dataSource`, `keyExpr`, `paging` — ver [guía de uso](/components/datagrid).
 
 ## Siguiente paso
 
+- [DataGrid — guía de uso](/components/datagrid)
 - [Tipos de eventos](/guide/event-types)
 - [Formularios](/components/forms)
 - [Overlays (Popup / Toast)](/components/overlays)

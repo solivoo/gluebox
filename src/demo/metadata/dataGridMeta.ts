@@ -2,15 +2,25 @@ import type { ComponentMeta } from '@/demo/playground/types';
 import type { DataGridProps } from '@/components/DataGrid';
 import type { DemoEmployee } from '@/demo/data/dataGridDemoData';
 
-/** Props expuestas en el playground (data/columns/getRowId los inyecta el demo). */
+/** Controles del playground (dataSource/columns/keyExpr los inyecta el demo). */
 export type DataGridPlaygroundDefaults = Partial<
-  Omit<DataGridProps<DemoEmployee>, 'data' | 'columns' | 'getRowId'>
->;
+  Omit<
+    DataGridProps<DemoEmployee>,
+    'dataSource' | 'columns' | 'keyExpr' | 'paging' | 'onPageChange' | 'onPageSizeChange'
+  >
+> & {
+  /** Control plano → paging.enabled */
+  pagingEnabled?: boolean;
+  /** Control plano → paging.pageIndex (0-based) */
+  pageIndex?: number;
+  /** Control plano → paging.pageSize */
+  pageSize?: number;
+};
 
 export const dataGridMeta: ComponentMeta<DataGridPlaygroundDefaults> = {
   name: 'DataGrid',
   description:
-    'Tabla empresarial con búsqueda, ordenamiento, selección, paginación, virtualización y layout auto (tabla/tarjetas). Lógica en useDataGridController.',
+    'Tabla empresarial con dataSource, keyExpr, paging, búsqueda, selección, virtualización y layout auto (tabla/tarjetas).',
   sourcePath: 'src/components/DataGrid/DataGrid.tsx',
   fullWidthPreview: true,
   defaults: {
@@ -33,11 +43,11 @@ export const dataGridMeta: ComponentMeta<DataGridPlaygroundDefaults> = {
     overscan: 5,
     showRowCount: true,
     showSelectionCount: true,
-    pagination: true,
+    pagingEnabled: true,
     paginationMode: 'client',
-    page: 1,
-    pageSize: 25,
-    pageSizeOptions: [10, 25, 50, 100],
+    pageIndex: 0,
+    pageSize: 20,
+    pageSizeOptions: [10, 20, 50, 100],
     resizableColumns: true,
     reorderableColumns: true,
     layout: 'auto',
@@ -109,17 +119,18 @@ export const dataGridMeta: ComponentMeta<DataGridPlaygroundDefaults> = {
           control: 'boolean',
         },
         {
-          name: 'pagination',
+          name: 'pagingEnabled',
           type: 'boolean',
           defaultValue: true,
-          description: 'Muestra paginación en el pie del grid.',
+          description: 'Activa paging.enabled (muestra el pager).',
           control: 'boolean',
         },
         {
           name: 'paginationMode',
           type: 'DataGridPaginationMode',
           defaultValue: 'client',
-          description: 'client: pagina datos filtrados localmente. server: data es la página actual.',
+          description:
+            'client: pagina datos filtrados localmente. server: dataSource es la página actual.',
           control: 'select',
           options: [
             { label: 'Client', value: 'client' },
@@ -129,40 +140,31 @@ export const dataGridMeta: ComponentMeta<DataGridPlaygroundDefaults> = {
       ],
     },
     {
-      title: 'Paginación',
+      title: 'Paginación (paging)',
       props: [
         {
-          name: 'page',
+          name: 'pageIndex',
           type: 'number',
-          defaultValue: 1,
-          description: 'Página actual controlada (1-based).',
+          defaultValue: 0,
+          description: 'Página actual (0-based) → paging.pageIndex.',
           control: 'number',
-          dependsOn: { prop: 'pagination', value: true },
+          dependsOn: { prop: 'pagingEnabled', value: true },
         },
         {
           name: 'pageSize',
           type: 'number',
-          defaultValue: 25,
-          description: 'Cantidad de filas por página (controlado).',
+          defaultValue: 20,
+          description: 'Filas por página → paging.pageSize.',
           control: 'number',
-          dependsOn: { prop: 'pagination', value: true },
+          dependsOn: { prop: 'pagingEnabled', value: true },
         },
         {
           name: 'pageSizeOptions',
           type: 'number[]',
-          defaultValue: [10, 25, 50, 100],
+          defaultValue: [10, 20, 50, 100],
           description: 'Opciones del selector de filas por página.',
           control: 'slot',
-          dependsOn: { prop: 'pagination', value: true },
-        },
-        {
-          name: 'defaultPageSize',
-          type: 'number',
-          defaultValue: 25,
-          description:
-            'Solo si no pasás pageSize: tamaño inicial no controlado.',
-          control: 'number',
-          dependsOn: { prop: 'pagination', value: true },
+          dependsOn: { prop: 'pagingEnabled', value: true },
         },
         {
           name: 'resizableColumns',
@@ -179,35 +181,6 @@ export const dataGridMeta: ComponentMeta<DataGridPlaygroundDefaults> = {
           control: 'boolean',
         },
         {
-          name: 'layout',
-          type: 'DataGridLayout',
-          defaultValue: 'auto',
-          description:
-            'table, card o auto (recomendado: card si el ancho del grid ≤ cardBreakpoint).',
-          control: 'select',
-          options: [
-            { label: 'Auto (responsive)', value: 'auto' },
-            { label: 'Tabla', value: 'table' },
-            { label: 'Card', value: 'card' },
-          ],
-        },
-        {
-          name: 'cardOnMobile',
-          type: 'boolean',
-          defaultValue: true,
-          description:
-            'Solo con layout table: pasa a card si el grid es estrecho. Con auto no hace falta.',
-          control: 'boolean',
-        },
-        {
-          name: 'cardBreakpoint',
-          type: 'number',
-          defaultValue: 640,
-          description:
-            'Ancho máximo del contenedor del grid (px) para usar cards en auto / cardOnMobile.',
-          control: 'number',
-        },
-        {
           name: 'maxRecords',
           type: 'number',
           defaultValue: undefined,
@@ -215,26 +188,43 @@ export const dataGridMeta: ComponentMeta<DataGridPlaygroundDefaults> = {
             'Máximo de registros por vista/página. Limita pageSize y opciones del selector.',
           control: 'number',
         },
-        {
-          name: 'showRowCount',
-          type: 'boolean',
-          defaultValue: true,
-          description:
-            'Muestra el total de registros en la barra de resumen (sobre la paginación).',
-          control: 'boolean',
-        },
-        {
-          name: 'showSelectionCount',
-          type: 'boolean',
-          defaultValue: true,
-          description:
-            'Muestra cuántas filas están seleccionadas en la barra de resumen.',
-          control: 'boolean',
-        },
       ],
     },
     {
       title: 'Layout',
+      props: [
+        {
+          name: 'layout',
+          type: 'DataGridLayout',
+          defaultValue: 'auto',
+          description:
+            'table: siempre tabla. card: siempre tarjetas. auto: card si el contenedor es estrecho.',
+          control: 'select',
+          options: [
+            { label: 'Auto', value: 'auto' },
+            { label: 'Tabla', value: 'table' },
+            { label: 'Tarjetas', value: 'card' },
+          ],
+        },
+        {
+          name: 'cardOnMobile',
+          type: 'boolean',
+          defaultValue: true,
+          description:
+            'Con layout table: fuerza cards bajo cardBreakpoint (preferí layout=auto).',
+          control: 'boolean',
+        },
+        {
+          name: 'cardBreakpoint',
+          type: 'number',
+          defaultValue: 640,
+          description: 'Ancho máximo (px) para activar layout card en auto / cardOnMobile.',
+          control: 'number',
+        },
+      ],
+    },
+    {
+      title: 'Apariencia',
       props: [
         {
           name: 'fullWidth',
@@ -256,7 +246,7 @@ export const dataGridMeta: ComponentMeta<DataGridPlaygroundDefaults> = {
           type: 'string | number',
           defaultValue: undefined,
           description:
-            'Fit-content: techo (max-height). Virtualizado: altura fija. Con paginación incluye el pie.',
+            'Sin valor: se encoge a las filas. Con valor: techo (max-height) en fit-content.',
           control: 'text',
         },
         {
@@ -264,7 +254,7 @@ export const dataGridMeta: ComponentMeta<DataGridPlaygroundDefaults> = {
           type: 'string | number',
           defaultValue: undefined,
           description:
-            'Tope alternativo. Si hay height, height prevalece como techo en fit-content.',
+            'Tope de crecimiento. Si hay height, height prevalece como techo.',
           control: 'text',
         },
         {
@@ -302,35 +292,44 @@ export const dataGridMeta: ComponentMeta<DataGridPlaygroundDefaults> = {
           name: 'overscan',
           type: 'number',
           defaultValue: 5,
-          description: 'Filas extra renderizadas como buffer fuera del viewport.',
+          description: 'Filas extra renderizadas fuera del viewport (buffer).',
           control: 'number',
+        },
+        {
+          name: 'showRowCount',
+          type: 'boolean',
+          defaultValue: true,
+          description: 'Muestra el contador total de registros.',
+          control: 'boolean',
+        },
+        {
+          name: 'showSelectionCount',
+          type: 'boolean',
+          defaultValue: true,
+          description: 'Muestra cuántas filas hay seleccionadas.',
+          control: 'boolean',
         },
         {
           name: 'loading',
           type: 'boolean',
           defaultValue: false,
-          description: 'Muestra overlay de carga sobre la tabla.',
+          description: 'Estado de carga (overlay sobre la tabla).',
           control: 'boolean',
         },
-      ],
-    },
-    {
-      title: 'Tema',
-      props: [
         {
           name: 'theme',
-          type: 'DataGridThemeInput',
+          type: 'DataGridThemePreset | DataGridTheme',
           defaultValue: undefined,
-          description: 'Preset o tema personalizado del grid.',
+          description: 'Preset (ej. enterprise-dark) o tema parcial personalizado.',
           control: 'select',
           options: [
-            { label: 'Default (sin override)', value: '' },
-            { label: 'Dark', value: 'dark' },
-            { label: 'Light', value: 'light' },
-            { label: 'Modern Dark', value: 'modern-dark' },
-            { label: 'Modern Light', value: 'modern-light' },
-            { label: 'Enterprise Dark', value: 'enterprise-dark' },
-            { label: 'Enterprise Light', value: 'enterprise-light' },
+            { label: 'Auto (contexto)', value: undefined },
+            { label: 'Default light', value: 'default-light' },
+            { label: 'Default dark', value: 'default-dark' },
+            { label: 'Modern light', value: 'modern-light' },
+            { label: 'Modern dark', value: 'modern-dark' },
+            { label: 'Enterprise light', value: 'enterprise-light' },
+            { label: 'Enterprise dark', value: 'enterprise-dark' },
           ],
         },
       ],
@@ -339,34 +338,33 @@ export const dataGridMeta: ComponentMeta<DataGridPlaygroundDefaults> = {
   events: [
     {
       name: 'onRowSelect',
+      type: 'DataGridOnRowSelectHandler<T>',
       signature: '(row: T) => void',
       description: 'Se dispara al seleccionar una fila en modo single.',
-      handlerType: 'DataGridOnRowSelectHandler',
     },
     {
       name: 'onSelectionChange',
+      type: 'DataGridOnSelectionChangeHandler<T>',
       signature: '(selectedRows: T[]) => void',
       description: 'Se dispara cuando cambia el conjunto de filas seleccionadas.',
-      handlerType: 'DataGridOnSelectionChangeHandler',
     },
     {
       name: 'onCardSelect',
+      type: 'DataGridOnCardSelectHandler<T>',
       signature: '(row: T) => void',
-      description:
-        'Se dispara al activar una tarjeta en layout card. Entrega la fila seleccionada o pulsada.',
-      handlerType: 'DataGridOnCardSelectHandler',
+      description: 'Se dispara al activar una tarjeta en layout card.',
     },
     {
       name: 'onPageChange',
-      signature: '(page: number) => void',
-      description: 'Se dispara al cambiar de página (1-based).',
-      handlerType: 'DataGridOnPageChangeHandler',
+      type: 'DataGridOnPageChangeHandler',
+      signature: '(pageIndex: number) => void',
+      description: 'Cambio de página (pageIndex 0-based).',
     },
     {
       name: 'onPageSizeChange',
+      type: 'DataGridOnPageSizeChangeHandler',
       signature: '(pageSize: number) => void',
-      description: 'Se dispara al cambiar el tamaño de página.',
-      handlerType: 'DataGridOnPageSizeChangeHandler',
+      description: 'Cambio del tamaño de página.',
     },
   ],
 };
