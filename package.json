@@ -1,6 +1,6 @@
 {
   "name": "glubox",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Librería de componentes React para aplicaciones empresariales — Sidebar RBAC, DataGrid, formularios, Popup, Toast, botones y temas pastel",
   "type": "module",
   "license": "MIT",
@@ -63,6 +63,8 @@
     "prepublishOnly": "pnpm clean:dist && pnpm build:lib",
     "publish:lib": "npm publish --access public",
     "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "preview": "vite preview",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",

@@ -21,8 +21,10 @@ export const dataGridMeta: ComponentMeta<DataGridPlaygroundDefaults> = {
     loading: false,
     searchPlaceholder: 'Buscar empleados...',
     searchWidth: undefined,
-    height: 380,
+    height: undefined,
+    maxHeight: undefined,
     rowHeight: 44,
+    autoRowHeight: true,
     fullWidth: true,
     width: undefined,
     debounceMs: 300,
@@ -252,23 +254,41 @@ export const dataGridMeta: ComponentMeta<DataGridPlaygroundDefaults> = {
         {
           name: 'height',
           type: 'string | number',
-          defaultValue: 380,
+          defaultValue: undefined,
           description:
-            'Altura del viewport con scroll. En table y card controla el área desplazable.',
-          control: 'number',
+            'Fit-content: techo (max-height). Virtualizado: altura fija. Con paginación incluye el pie.',
+          control: 'text',
+        },
+        {
+          name: 'maxHeight',
+          type: 'string | number',
+          defaultValue: undefined,
+          description:
+            'Tope alternativo. Si hay height, height prevalece como techo en fit-content.',
+          control: 'text',
+        },
+        {
+          name: 'autoRowHeight',
+          type: 'boolean',
+          defaultValue: true,
+          description:
+            'Filas según contenido real (celdas de 2+ líneas). Ignorado con virtualización.',
+          control: 'boolean',
         },
         {
           name: 'rowHeight',
-          type: 'number',
+          type: 'number | "auto"',
           defaultValue: 44,
-          description: 'Altura fija de cada fila en px (usada por la virtualización).',
+          description:
+            'Solo virtualización: estimación en px. Usá auto / autoRowHeight para fit-content.',
           control: 'number',
         },
         {
           name: 'virtualized',
           type: 'boolean',
           defaultValue: true,
-          description: 'Activa virtualización cuando hay suficientes filas.',
+          description:
+            'Activa virtualización cuando hay suficientes filas y height/maxHeight.',
           control: 'boolean',
         },
         {

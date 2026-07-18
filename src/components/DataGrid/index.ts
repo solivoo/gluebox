@@ -14,6 +14,15 @@ export { useVirtualRows } from './hooks/useVirtualRows';
 export { usePagination } from './hooks/usePagination';
 export { useColumnLayout } from './hooks/useColumnLayout';
 export { computeVirtualRowsRange } from './utils/virtualRows';
+export {
+  resolveDataGridHeight,
+  estimateViewportHeightPx,
+} from './utils/resolveDataGridHeight';
+export type {
+  DataGridHeightMode,
+  ResolveDataGridHeightOptions,
+  ResolvedDataGridHeight,
+} from './utils/resolveDataGridHeight';
 
 export { defaultDataGridMessages, resolveDataGridMessages } from './i18n/defaultMessages';
 

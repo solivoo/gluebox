@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ComponentPlayground } from '@/demo/playground/ComponentPlayground';
 import { DataGrid } from '@/components/DataGrid';
 import type {
@@ -77,15 +77,19 @@ function DataGridPlaygroundPreview({
 
   const [currentPage, setCurrentPage] = useState(pageFromProps);
   const [currentPageSize, setCurrentPageSize] = useState(pageSizeFromProps);
+  const [prevPageProp, setPrevPageProp] = useState(pageFromProps);
+  const [prevPageSizeProp, setPrevPageSizeProp] = useState(pageSizeFromProps);
 
-  useEffect(() => {
-    setCurrentPage(pageFromProps);
-  }, [pageFromProps]);
-
-  useEffect(() => {
+  // Sincronizar con el actuador sin useEffect (evita renders en cascada).
+  if (pageSizeFromProps !== prevPageSizeProp) {
+    setPrevPageSizeProp(pageSizeFromProps);
     setCurrentPageSize(pageSizeFromProps);
     setCurrentPage(1);
-  }, [pageSizeFromProps]);
+    setPrevPageProp(pageFromProps);
+  } else if (pageFromProps !== prevPageProp) {
+    setPrevPageProp(pageFromProps);
+    setCurrentPage(pageFromProps);
+  }
 
   const serverData = isServer
     ? demoEmployees.slice(
@@ -110,7 +114,16 @@ function DataGridPlaygroundPreview({
         searchPosition={(props.searchPosition as DataGridSearchPosition) ?? 'left'}
         stickyFirstColumn={Boolean(props.stickyFirstColumn ?? true)}
         loading={Boolean(props.loading)}
-        height={props.height as string | number | undefined}
+        height={
+          props.height != null && String(props.height).trim() !== ''
+            ? (props.height as string | number)
+            : undefined
+        }
+        maxHeight={
+          props.maxHeight != null && String(props.maxHeight).trim() !== ''
+            ? (props.maxHeight as string | number)
+            : undefined
+        }
         fullWidth={Boolean(props.fullWidth ?? true)}
         width={
           props.width != null && String(props.width).trim() !== ''
@@ -127,7 +140,18 @@ function DataGridPlaygroundPreview({
         onRowSelect={(row) => setLastSingle(row)}
         onSelectionChange={setSelectedRows}
         debounceMs={(props.debounceMs as number) ?? 300}
-        rowHeight={(props.rowHeight as number) ?? 44}
+        rowHeight={
+          props.rowHeight === 'auto'
+            ? 'auto'
+            : typeof props.rowHeight === 'number'
+              ? props.rowHeight
+              : 44
+        }
+        autoRowHeight={
+          props.autoRowHeight === undefined
+            ? true
+            : Boolean(props.autoRowHeight)
+        }
         virtualized={Boolean(props.virtualized ?? true)}
         virtualThreshold={(props.virtualThreshold as number) ?? 30}
         overscan={(props.overscan as number) ?? 5}
@@ -160,10 +184,36 @@ function DataGridPlaygroundPreview({
           Caso pocas filas (2 registros)
         </h3>
         <p className="dg-demo__card-example-desc">
-          Con <code>height={'{500}'}</code> y solo 2 operadores: el viewport debe
-          ajustarse al contenido real sin recortar filas ni mostrar scroll innecesario.
+          Celda de 2 líneas (nombre + email + avatar) con{' '}
+          <code>autoRowHeight</code> (default). Responde al actuador
+          (paginación, pageSize, height, etc.).
         </p>
-        <FewRowsExampleGrid />
+        <FewRowsExampleGrid
+          pagination={Boolean(props.pagination ?? true)}
+          page={currentPage}
+          pageSize={currentPageSize}
+          pageSizeOptions={pageSizeOptions}
+          onPageChange={setCurrentPage}
+          onPageSizeChange={handlePageSizeChange}
+          showSearch={Boolean(props.showSearch ?? true)}
+          showRowCount={Boolean(props.showRowCount ?? true)}
+          height={
+            props.height != null && String(props.height).trim() !== ''
+              ? (props.height as string | number)
+              : undefined
+          }
+          maxHeight={
+            props.maxHeight != null && String(props.maxHeight).trim() !== ''
+              ? (props.maxHeight as string | number)
+              : undefined
+          }
+          autoRowHeight={
+            props.autoRowHeight === undefined
+              ? true
+              : Boolean(props.autoRowHeight)
+          }
+          theme={props.theme as never}
+        />
       </section>
 
       {showCardExample && (
@@ -260,31 +310,56 @@ const fewOperatorColumns: ColumnDef<DemoEmployee>[] = [
   },
 ];
 
-function FewRowsExampleGrid() {
-  const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+interface FewRowsExampleGridProps {
+  pagination: boolean;
+  page: number;
+  pageSize: number;
+  pageSizeOptions: number[];
+  onPageChange: (page: number) => void;
+  onPageSizeChange: (size: number) => void;
+  showSearch: boolean;
+  showRowCount: boolean;
+  height?: string | number;
+  maxHeight?: string | number;
+  autoRowHeight: boolean;
+  theme?: DataGridPlaygroundDefaults['theme'];
+}
 
+function FewRowsExampleGrid({
+  pagination,
+  page,
+  pageSize,
+  pageSizeOptions,
+  onPageChange,
+  onPageSizeChange,
+  showSearch,
+  showRowCount,
+  height,
+  maxHeight,
+  autoRowHeight,
+  theme,
+}: FewRowsExampleGridProps) {
   return (
     <DataGrid<DemoEmployee>
       data={fewOperators}
       columns={fewOperatorColumns}
       getRowId={(row) => row.id}
       selectionMode="none"
-      showSearch
+      showSearch={showSearch}
       searchPlaceholder="Buscar operadores..."
-      height={500}
-      pagination
+      pagination={pagination}
       page={page}
       pageSize={pageSize}
-      pageSizeOptions={[10, 25]}
-      onPageChange={setPage}
-      onPageSizeChange={(size) => {
-        setPageSize(size);
-        setPage(1);
-      }}
+      pageSizeOptions={pageSizeOptions}
+      onPageChange={onPageChange}
+      onPageSizeChange={onPageSizeChange}
+      height={height}
+      maxHeight={maxHeight}
+      autoRowHeight={autoRowHeight}
       virtualized={false}
-      showRowCount
+      showRowCount={showRowCount}
       showSelectionCount={false}
+      theme={theme as never}
       messages={{
         rowCount: (count) =>
           count === 1 ? '1 operador' : `${count} operadores`,

@@ -39,7 +39,7 @@ export function DataGrid<T extends Record<string, unknown>>(
         onChange={vm.grid.setSearchQuery}
       />
 
-      <div className={vm.surfaceClassNames}>
+      <div className={vm.surfaceClassNames} style={vm.surfaceStyle}>
         <div
           className={vm.viewportClassNames}
           style={vm.isCardLayout ? vm.cardViewportStyle : vm.viewportStyle}

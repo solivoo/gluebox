@@ -102,10 +102,27 @@ export interface DataGridProps<T extends Record<string, unknown>> {
   debounceMs?: number;
   /** Fija la primera columna de datos al hacer scroll horizontal */
   stickyFirstColumn?: boolean;
-  /** Altura del viewport con scroll. En card: scroll interno y cards a ancho completo sin marco. */
+  /**
+   * Sin virtualización (fit-content): techo del grid (`max-height`). El cuerpo
+   * crece con la altura real de las filas. Con virtualización: altura fija del viewport.
+   * Con paginación/summary, aplica al bloque completo (tabla + pie).
+   */
   height?: string | number;
-  /** Altura estimada de fila en px (requerida para virtualización) */
-  rowHeight?: number;
+  /**
+   * Tope de crecimiento en fit-content. Si también hay `height`, prevalece `height` como techo.
+   * Con virtualización, se usa como altura fija si no hay `height`.
+   */
+  maxHeight?: string | number;
+  /**
+   * Altura estimada de fila en px (solo modo virtual). Usá `'auto'` o
+   * `autoRowHeight` para que en fit-content las filas midan su contenido real.
+   */
+  rowHeight?: number | 'auto';
+  /**
+   * En modo no virtualizado, las filas crecen con el contenido de las celdas
+   * (nombre + email, etc.). Default `true`. Ignorado con virtualización activa.
+   */
+  autoRowHeight?: boolean;
   /** Activa virtualización de filas cuando hay muchos registros */
   virtualized?: boolean;
   /** Cantidad mínima de filas para activar virtualización automática */

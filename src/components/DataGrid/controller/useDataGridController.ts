@@ -9,7 +9,12 @@ import { useEffectiveLayout } from '../layout/useEffectiveLayout';
 import { useDerivedPaginationConfig } from './derivePaginationConfig';
 import { useDataGridSelection } from './useDataGridSelection';
 import { resolveTheme, themeToStyle } from '../theme/resolveTheme';
-import { normalizeId, resolveDimension } from '../utils/gridUtils';
+import {
+  isDimensionSet,
+  normalizeId,
+  resolveDimension,
+} from '../utils/gridUtils';
+import { resolveDataGridHeight } from '../utils/resolveDataGridHeight';
 import {
   resolveDataGridMessages,
 } from '../i18n/defaultMessages';
@@ -49,6 +54,7 @@ export interface DataGridControllerViewModel<T extends Record<string, unknown>> 
   virtualHint?: string;
   rowCount: number;
   rootStyle: CSSProperties;
+  surfaceStyle: CSSProperties | undefined;
   viewportStyle: CSSProperties;
   cardViewportStyle: CSSProperties;
   searchStyle: CSSProperties | undefined;
@@ -79,8 +85,10 @@ export function useDataGridController<T extends Record<string, unknown>>(
     searchKeys,
     debounceMs = 300,
     stickyFirstColumn = true,
-    height = 420,
-    rowHeight = 44,
+    height,
+    maxHeight,
+    rowHeight: rowHeightProp = 44,
+    autoRowHeight: autoRowHeightProp,
     virtualized = true,
     virtualThreshold = 30,
     overscan = 5,
@@ -229,8 +237,30 @@ export function useDataGridController<T extends Record<string, unknown>>(
   });
 
   const rowCount = grid.displayRows.length;
+
+  const numericRowHeight =
+    typeof rowHeightProp === 'number' && !Number.isNaN(rowHeightProp)
+      ? rowHeightProp
+      : 44;
+
+  const isHeightConstrained =
+    isDimensionSet(height) || isDimensionSet(maxHeight);
+
+  // Virtualización solo con altura acotada (necesita viewport medible).
   const shouldVirtualize =
-    !isCardLayout && virtualized && rowsToRender.length >= virtualThreshold;
+    !isCardLayout &&
+    virtualized &&
+    rowsToRender.length >= virtualThreshold &&
+    isHeightConstrained;
+
+  const autoRowHeight =
+    !shouldVirtualize &&
+    (rowHeightProp === 'auto' ||
+      (autoRowHeightProp !== undefined
+        ? autoRowHeightProp
+        : true));
+
+  const rowHeight = numericRowHeight;
 
   const virtualRange = useVirtualRows({
     scrollRef,
@@ -293,12 +323,21 @@ export function useDataGridController<T extends Record<string, unknown>>(
 
   const themeStyle = themeToStyle(resolveTheme(theme));
 
+  const showSummary =
+    showRowCount || (showSelectionCount && selectionMode !== 'none');
+
   /**
-   * Con pocas filas (o celdas más altas que rowHeight), estimar
-   * `rowHeight × n` recorta el contenido. Sin virtualización dejamos
-   * que el viewport crezca al contenido real y solo acotamos con maxHeight.
+   * Fit-content (no virtual): crece con altura REAL de filas; height/maxHeight = techo.
+   * Virtualizado: altura fija; rowHeight solo para el scroll virtual.
    */
-  const useFitContentViewport = !isCardLayout && !shouldVirtualize;
+  const useFitContent = !isCardLayout && !shouldVirtualize;
+  const hasChrome = Boolean(pagination || showSummary);
+  const resolvedHeight = resolveDataGridHeight({
+    height,
+    maxHeight,
+    virtualized: shouldVirtualize,
+    hasChrome: hasChrome && !isCardLayout,
+  });
 
   const rootStyle: CSSProperties = {
     ...themeStyle,
@@ -307,19 +346,55 @@ export function useDataGridController<T extends Record<string, unknown>>(
     ...(width != null ? { width: resolveDimension(width) } : {}),
   };
 
-  const viewportStyle: CSSProperties = useFitContentViewport
-    ? {
-        height: 'auto',
-        maxHeight: resolveDimension(height),
-      }
-    : {
-        height: resolveDimension(height),
-      };
+  const surfaceStyle: CSSProperties | undefined = (() => {
+    if (isCardLayout || resolvedHeight.applyTo !== 'surface') return undefined;
+    if (resolvedHeight.mode === 'fixed') {
+      return { height: resolvedHeight.height };
+    }
+    if (resolvedHeight.mode === 'max') {
+      return { height: 'auto', maxHeight: resolvedHeight.maxHeight };
+    }
+    return undefined;
+  })();
 
-  const cardViewportStyle: CSSProperties = {
-    height: resolveDimension(height),
-    maxHeight: resolveDimension(height),
-  };
+  const viewportStyle: CSSProperties = (() => {
+    if (isCardLayout) return {};
+
+    if (resolvedHeight.applyTo === 'surface') {
+      if (resolvedHeight.mode === 'auto') {
+        return { height: 'auto' };
+      }
+      return {
+        height: 'auto',
+        flex: resolvedHeight.mode === 'fixed' ? '1 1 0%' : '1 1 auto',
+        minHeight: 0,
+      };
+    }
+
+    if (resolvedHeight.mode === 'fixed') {
+      return { height: resolvedHeight.height };
+    }
+    if (resolvedHeight.mode === 'max') {
+      return { height: 'auto', maxHeight: resolvedHeight.maxHeight };
+    }
+    return { height: 'auto' };
+  })();
+
+  const cardViewportStyle: CSSProperties = (() => {
+    const cardResolved = resolveDataGridHeight({
+      height,
+      maxHeight,
+      virtualized: false,
+      hasChrome: false,
+    });
+    if (cardResolved.mode === 'fixed') {
+      return { height: cardResolved.height };
+    }
+    if (cardResolved.mode === 'max') {
+      return { height: 'auto', maxHeight: cardResolved.maxHeight };
+    }
+    return { height: 'auto' };
+  })();
 
   const searchStyle: CSSProperties | undefined =
     searchWidth != null
@@ -336,6 +411,8 @@ export function useDataGridController<T extends Record<string, unknown>>(
     fullWidth && 'glb-datagrid--full-width',
     stickyFirstColumn && !isCardLayout && 'glb-datagrid--sticky-first',
     shouldVirtualize && 'glb-datagrid--virtualized',
+    autoRowHeight && 'glb-datagrid--auto-row-height',
+    useFitContent && 'glb-datagrid--fit-content',
     pagination && 'glb-datagrid--paginated',
     isCardLayout && 'glb-datagrid--card-layout',
     useResponsiveCard && isCardLayout && 'glb-datagrid--responsive-card',
@@ -344,9 +421,6 @@ export function useDataGridController<T extends Record<string, unknown>>(
   ]
     .filter(Boolean)
     .join(' ');
-
-  const showSummary =
-    showRowCount || (showSelectionCount && selectionMode !== 'none');
 
   const renderedCount =
     virtualRange.endIndex >= virtualRange.startIndex
@@ -358,11 +432,20 @@ export function useDataGridController<T extends Record<string, unknown>>(
       ? messages.virtualHint(renderedCount)
       : undefined;
 
+  const surfaceConstrained =
+    hasChrome &&
+    !isCardLayout &&
+    (resolvedHeight.mode === 'fixed' || resolvedHeight.mode === 'max');
+
   const surfaceClassNames = [
     'glb-datagrid__surface',
     pagination && 'glb-datagrid__surface--paginated',
     showSummary && 'glb-datagrid__surface--with-summary',
     showSummary && !pagination && 'glb-datagrid__surface--summary-only',
+    surfaceConstrained && 'glb-datagrid__surface--sized',
+    surfaceConstrained &&
+      resolvedHeight.mode === 'max' &&
+      'glb-datagrid__surface--fit-content',
   ]
     .filter(Boolean)
     .join(' ');
@@ -370,14 +453,14 @@ export function useDataGridController<T extends Record<string, unknown>>(
   const scrollClassNames = [
     'glb-datagrid__scroll',
     isCardLayout && 'glb-datagrid__scroll--cards',
-    useFitContentViewport && 'glb-datagrid__scroll--fit-content',
+    useFitContent && 'glb-datagrid__scroll--fit-content',
   ]
     .filter(Boolean)
     .join(' ');
 
   const viewportClassNames = [
     'glb-datagrid__viewport',
-    useFitContentViewport && 'glb-datagrid__viewport--fit-content',
+    useFitContent && 'glb-datagrid__viewport--fit-content',
   ]
     .filter(Boolean)
     .join(' ');
@@ -412,6 +495,7 @@ export function useDataGridController<T extends Record<string, unknown>>(
     virtualHint,
     rowCount,
     rootStyle,
+    surfaceStyle,
     viewportStyle,
     cardViewportStyle,
     viewportClassNames,

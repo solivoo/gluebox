@@ -273,6 +273,9 @@ export type {
   VirtualRowsRange,
   UseVirtualRowsOptions,
   UseVirtualRowsReturn,
+  DataGridHeightMode,
+  ResolveDataGridHeightOptions,
+  ResolvedDataGridHeight,
 } from '@/components/DataGrid';
 
 export {
@@ -283,6 +286,8 @@ export {
   usePagination,
   useColumnLayout,
   computeVirtualRowsRange,
+  resolveDataGridHeight,
+  estimateViewportHeightPx,
   dataGridThemes,
   defaultDataGridMessages,
   resolveDataGridMessages,

@@ -160,15 +160,38 @@ const vm = useDataGridController({
 // vm.rowsToRender, vm.selection.handleToggleRow, vm.paginationState, ...
 ```
 
+## Altura (fit-content)
+
+Por defecto el grid **crece con las filas visibles** y con la **altura real del contenido** de cada celda (no hace falta adivinar `rowHeight`).
+
+| Prop | Default | Descripción |
+|------|---------|-------------|
+| `height` | — | En fit-content: **techo** (`max-height`). Con virtualización: altura fija del viewport. |
+| `maxHeight` | — | Tope alternativo. Si hay `height`, prevalece `height` como techo. |
+| `autoRowHeight` | `true` | Filas según contenido real (ignorado si hay virtualización). |
+| `rowHeight` | `44` | Estimación en **px solo para virtualización**. También `'auto'`. |
+
+```tsx
+// 2 filas con celda custom (nombre + email): crece solo
+<DataGrid data={rows} columns={cols} getRowId={...} pagination pageSize={10} />
+
+// Techo opcional (scroll interno si el contenido lo supera)
+<DataGrid height={500} ... />
+```
+
+Prioridad del techo: `height` > `maxHeight` > sin límite. Con paginación/summary, el techo aplica al bloque completo (tabla + pie). La virtualización solo se activa si hay `height` o `maxHeight`.
+
 ## Virtualización
 
 | Prop | Default | Descripción |
 |------|---------|-------------|
-| `virtualized` | `true` | Habilita virtualización (solo layout tabla) |
+| `virtualized` | `true` | Habilita virtualización (solo layout tabla, con altura acotada) |
 | `virtualThreshold` | `30` | Mínimo de filas para activarla |
-| `rowHeight` | `44` | Altura fija por fila (px) |
+| `rowHeight` | `44` | **Solo modo virtual**: altura estimada por fila (px) |
 | `overscan` | `5` | Buffer fuera del viewport |
 | `showRowCount` | `true` | Contador en barra de resumen |
+
+Con virtualización activa, `autoRowHeight` no aplica: las filas usan `rowHeight` fijo para el cálculo del scroll.
 
 ## Paginación
 

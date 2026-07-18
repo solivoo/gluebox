@@ -61,3 +61,10 @@ export function resolveDimension(value: string | number | undefined): string | u
   }
   return String(value);
 }
+
+/** True si el valor define una dimensión usable (no vacío). */
+export function isDimensionSet(value: string | number | undefined): boolean {
+  if (value == null) return false;
+  if (typeof value === 'string' && value.trim() === '') return false;
+  return true;
+}

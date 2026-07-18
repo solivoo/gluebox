@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.1.7] — 2026-07-18
+
+### Añadido
+
+- **DataGrid `autoRowHeight`** (default `true` en modo no virtual): las filas miden su contenido real (p. ej. nombre + email + avatar).
+- **`rowHeight: 'auto' | number`**: `'auto'` equivale a filas por contenido; el número solo aplica a virtualización (o como piso si `autoRowHeight={false}`).
+- Util exportado `resolveDataGridHeight` + tests unitarios del cálculo fit-content / techo.
+
+### Corregido
+
+- Fit-content con celdas de 2+ líneas: no se recorta la última fila; el body crece con el DOM, no con `rowHeight × n`.
+- Con paginación, el techo de altura aplica al bloque completo (tabla + pie).
+
+### Cambiado
+
+- En fit-content, `height` actúa como **techo** (`max-height`), no como altura fija (compat. 0.1.6). Con virtualización sigue siendo altura fija.
+- Docs: modelo de altura, `rowHeight` solo para modo virtual, demo con celda de 2 líneas.
+
 ## [0.1.6] — 2026-07-18
 
 ### Añadido
@@ -7,16 +25,18 @@
 - **`showClearButton`** en TextBox, TextArea, Select, DateBox y RangeDateBox (espacio reservado fijo; botón oculto con `visibility` para no desplazar el layout).
 - TextBox: toggle de contraseña (`showPasswordToggle`) usable con clic.
 - Helpers compartidos de clear button (`resolveShowClearButton`, tipos de campo).
+- **DataGrid `maxHeight`**: tope de crecimiento; el grid crece con las filas visibles hasta ese valor.
 
 ### Corregido
 
 - **DataGrid**: paginación controlada (`page` / `pageSize`); los botones ya no resetean a página 1 en cada render.
-- **DataGrid**: viewport con pocas filas — `height: auto` + `maxHeight` para no recortar celdas más altas que `rowHeight`.
+- **DataGrid**: con pocas filas no se recortan celdas; el pie de paginación no tapa la última fila.
 - Select/DateBox: botón clear sin solaparse con el icono de flecha/calendario.
 
 ### Cambiado
 
-- Demo DataGrid: paginación controlada, caso de 2 operadores y controles `page` / `pageSize` en el playground.
+- **DataGrid altura**: sin default `420`. Por defecto crece con filas visibles; `height` (fija) y `maxHeight` (tope) son opcionales y tienen prioridad. Virtualización solo con altura acotada.
+- Demo DataGrid: paginación controlada, caso de 2 operadores y controles `page` / `pageSize` / `maxHeight` en el playground.
 
 ## [0.1.5] — 2026-06-15
 
