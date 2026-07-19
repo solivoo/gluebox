@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.11] — 2026-07-18
+
+### Corregido
+
+- **DataGrid paginación:** al ir a la página 2+ ya no vuelve a la 1. El reset a página 1 solo corre cuando cambian búsqueda u orden, no al navegar.
+- **Demo DataGrid:** el ejemplo de “pocas filas” ya no comparte `pageIndex` con el grid principal (con 1 sola página el clamp empujaba siempre a la página 0).
+
 ## [0.1.10] — 2026-07-18
 
 ### Añadido

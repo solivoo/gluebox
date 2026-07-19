@@ -319,8 +319,41 @@ export function useDataGridController<T extends Record<string, unknown>>(
     paginationState.pageSize,
   ]);
 
+  // Solo resetear a página 1 cuando cambian búsqueda u orden — no al navegar de página.
+  const prevSearchSortRef = useRef<{
+    search: string;
+    sortKey: string;
+    primed: boolean;
+  }>({ search: '', sortKey: '', primed: false });
+
   useEffect(() => {
     if (!pagination || paginationMode !== 'client') return;
+
+    const sortKey = grid.sort
+      ? `${String(grid.sort.key)}:${grid.sort.direction}`
+      : '';
+    const prev = prevSearchSortRef.current;
+
+    if (!prev.primed) {
+      prevSearchSortRef.current = {
+        search: grid.debouncedSearch,
+        sortKey,
+        primed: true,
+      };
+      return;
+    }
+
+    const filterChanged =
+      prev.search !== grid.debouncedSearch || prev.sortKey !== sortKey;
+
+    prevSearchSortRef.current = {
+      search: grid.debouncedSearch,
+      sortKey,
+      primed: true,
+    };
+
+    if (!filterChanged) return;
+
     if (page === undefined) {
       resetPaginationPage(1);
     } else {

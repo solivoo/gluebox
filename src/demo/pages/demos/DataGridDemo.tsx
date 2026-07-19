@@ -185,11 +185,7 @@ function DataGridPlaygroundPreview({
         </p>
         <FewRowsExampleGrid
           pagingEnabled={pagingEnabled}
-          pageIndex={pageIndex}
-          pageSize={pageSize}
           pageSizeOptions={pageSizeOptions}
-          onPageChange={setPageIndex}
-          onPageSizeChange={handlePageSizeChange}
           showSearch={Boolean(props.showSearch ?? true)}
           showRowCount={Boolean(props.showRowCount ?? true)}
           height={
@@ -308,11 +304,7 @@ const fewOperatorColumns: ColumnDef<DemoEmployee>[] = [
 
 interface FewRowsExampleGridProps {
   pagingEnabled: boolean;
-  pageIndex: number;
-  pageSize: number;
   pageSizeOptions: number[];
-  onPageChange: (pageIndex: number) => void;
-  onPageSizeChange: (size: number) => void;
   showSearch: boolean;
   showRowCount: boolean;
   height?: string | number;
@@ -323,11 +315,7 @@ interface FewRowsExampleGridProps {
 
 function FewRowsExampleGrid({
   pagingEnabled,
-  pageIndex,
-  pageSize,
   pageSizeOptions,
-  onPageChange,
-  onPageSizeChange,
   showSearch,
   showRowCount,
   height,
@@ -335,6 +323,11 @@ function FewRowsExampleGrid({
   autoRowHeight,
   theme,
 }: FewRowsExampleGridProps) {
+  // Paginación propia: no compartir pageIndex con el grid principal
+  // (con 2 filas, totalPages=1 y el clamp forzaba volver a página 0).
+  const [pageIndex, setPageIndex] = useState(0);
+  const [pageSize, setPageSize] = useState(10);
+
   return (
     <DataGrid<DemoEmployee>
       dataSource={fewOperators}
@@ -349,8 +342,11 @@ function FewRowsExampleGrid({
         pageSize,
       }}
       pageSizeOptions={pageSizeOptions}
-      onPageChange={onPageChange}
-      onPageSizeChange={onPageSizeChange}
+      onPageChange={setPageIndex}
+      onPageSizeChange={(size) => {
+        setPageSize(size);
+        setPageIndex(0);
+      }}
       height={height}
       maxHeight={maxHeight}
       autoRowHeight={autoRowHeight}
