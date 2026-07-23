@@ -2,14 +2,15 @@ import type { CSSProperties } from 'react';
 import type { SelectTheme, SelectThemeInput } from './Select.theme.types';
 import { selectThemes } from './defaultThemes';
 
-export function resolveTheme(theme?: SelectThemeInput): SelectTheme {
-  if (!theme) return selectThemes.light;
+export function resolveTheme(theme?: SelectThemeInput): SelectTheme | undefined {
+  if (!theme) return undefined;
   if (typeof theme === 'string') return selectThemes[theme];
   return theme;
 }
 
-/** Convierte el tema en CSS variables para el root del Select */
-export function themeToStyle(theme: SelectTheme): CSSProperties {
+/** Convierte el tema en CSS variables. Sin tema, el CSS global (data-theme/data-mode) controla el aspecto. */
+export function themeToStyle(theme: SelectTheme | undefined): CSSProperties | undefined {
+  if (!theme) return undefined;
   const v = theme.variants;
   return {
     '--select-font-size': theme.fontSize,

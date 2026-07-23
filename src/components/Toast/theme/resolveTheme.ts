@@ -3,20 +3,8 @@ import type { ToastTheme, ToastThemeInput } from './Toast.theme.types';
 import type { ToastVariant } from '../type/Toast.types';
 import { toastThemes } from './defaultThemes';
 
-function resolveDefaultPreset(): keyof typeof toastThemes {
-  if (typeof document === 'undefined') return 'light';
-
-  const mode = document.documentElement.getAttribute('data-mode');
-  const family = document.documentElement.getAttribute('data-theme') ?? 'default';
-  const isDark = mode === 'dark';
-
-  if (family === 'modern') return isDark ? 'modern-dark' : 'modern-light';
-  if (family === 'enterprise') return isDark ? 'enterprise-dark' : 'enterprise-light';
-  return isDark ? 'dark' : 'light';
-}
-
-export function resolveTheme(theme?: ToastThemeInput): ToastTheme {
-  if (!theme) return toastThemes[resolveDefaultPreset()];
+export function resolveTheme(theme?: ToastThemeInput): ToastTheme | undefined {
+  if (!theme) return undefined;
   if (typeof theme === 'string') return toastThemes[theme];
   return theme;
 }
@@ -33,7 +21,9 @@ function variantVars(prefix: string, v: ToastTheme['variants'][ToastVariant]): R
   };
 }
 
-export function themeToStyle(theme: ToastTheme): CSSProperties {
+/** Sin tema, el CSS global (data-theme/data-mode) controla el aspecto. */
+export function themeToStyle(theme: ToastTheme | undefined): CSSProperties | undefined {
+  if (!theme) return undefined;
   const v = theme.variants;
   return {
     '--toast-font-size': theme.fontSize,

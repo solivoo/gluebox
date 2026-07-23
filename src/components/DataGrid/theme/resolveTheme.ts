@@ -2,13 +2,15 @@ import type { CSSProperties } from 'react';
 import type { DataGridTheme, DataGridThemeInput } from './DataGrid.theme.types';
 import { dataGridThemes } from './defaultThemes';
 
-export function resolveTheme(theme?: DataGridThemeInput): DataGridTheme {
-  if (!theme) return dataGridThemes.light;
+export function resolveTheme(theme?: DataGridThemeInput): DataGridTheme | undefined {
+  if (!theme) return undefined;
   if (typeof theme === 'string') return dataGridThemes[theme];
   return theme;
 }
 
-export function themeToStyle(theme: DataGridTheme): CSSProperties {
+/** Sin tema, el CSS global (data-theme/data-mode) controla el aspecto. */
+export function themeToStyle(theme: DataGridTheme | undefined): CSSProperties | undefined {
+  if (!theme) return undefined;
   return {
     '--datagrid-font-size': theme.fontSize,
     '--datagrid-radius': theme.borderRadius,

@@ -2,14 +2,15 @@ import type { CSSProperties } from 'react';
 import type { ButtonTheme, ButtonThemeInput } from './Button.theme.types';
 import { buttonThemes } from './defaultThemes';
 
-export function resolveTheme(theme?: ButtonThemeInput): ButtonTheme {
-  if (!theme) return buttonThemes.light;
+export function resolveTheme(theme?: ButtonThemeInput): ButtonTheme | undefined {
+  if (!theme) return undefined;
   if (typeof theme === 'string') return buttonThemes[theme];
   return theme;
 }
 
-/** Convierte el tema en CSS variables para el root del Button */
-export function themeToStyle(theme: ButtonTheme): CSSProperties {
+/** Convierte el tema en CSS variables. Sin tema, el CSS global (data-theme/data-mode) controla el aspecto. */
+export function themeToStyle(theme: ButtonTheme | undefined): CSSProperties | undefined {
+  if (!theme) return undefined;
   const v = theme.variants;
   return {
     '--btn-font-size': theme.fontSize,

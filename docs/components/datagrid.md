@@ -326,6 +326,8 @@ Con virtualización, `autoRowHeight` no aplica.
 
 ## Temas e i18n
 
+Sin `theme`, DataGrid hereda el tema del sistema. La prop es un override opcional:
+
 ```tsx
 import { DataGrid, dataGridThemes, defaultDataGridMessages } from 'glubox';
 
@@ -341,6 +343,8 @@ import { DataGrid, dataGridThemes, defaultDataGridMessages } from 'glubox';
   columns={columns}
 />
 ```
+
+[Guía de temas](/guide/themes)
 
 ---
 

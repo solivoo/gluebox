@@ -91,7 +91,7 @@ const actions = pageActionsFromNode(active); // surface: actions
 | `variant` | `'ghost' \| 'outline' \| 'primary'` | Trigger |
 | `size` | `'sm' \| 'md' \| 'lg'` | Trigger (si no hay `height`) |
 | `height` | `string \| number` | Altura del trigger; prevalece sobre `size` y mantiene el botón cuadrado |
-| `theme` | preset \| objeto | 6 presets gluBox |
+| `theme` | preset \| objeto | Sin prop hereda el sistema; override con 6 presets |
 
 ## Ejemplo de árbol (Empresas)
 

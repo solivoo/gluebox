@@ -409,7 +409,7 @@ export const dataGridMeta: ComponentMeta<DataGridPlaygroundDefaults> = {
           description: 'Preset (ej. enterprise-dark) o tema parcial personalizado.',
           control: 'select',
           options: [
-            { label: 'Auto (contexto)', value: '' },
+            { label: 'Global (inherit)', value: '' },
             { label: 'Default light', value: 'default-light' },
             { label: 'Default dark', value: 'default-dark' },
             { label: 'Modern light', value: 'modern-light' },

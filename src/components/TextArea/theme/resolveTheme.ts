@@ -2,14 +2,15 @@ import type { CSSProperties } from 'react';
 import type { TextAreaTheme, TextAreaThemeInput } from './TextArea.theme.types';
 import { textAreaThemes } from './defaultThemes';
 
-export function resolveTheme(theme?: TextAreaThemeInput): TextAreaTheme {
-  if (!theme) return textAreaThemes.light;
+export function resolveTheme(theme?: TextAreaThemeInput): TextAreaTheme | undefined {
+  if (!theme) return undefined;
   if (typeof theme === 'string') return textAreaThemes[theme];
   return theme;
 }
 
-/** Convierte el tema en CSS variables para el root del TextArea */
-export function themeToStyle(theme: TextAreaTheme): CSSProperties {
+/** Convierte el tema en CSS variables. Sin tema, el CSS global (data-theme/data-mode) controla el aspecto. */
+export function themeToStyle(theme: TextAreaTheme | undefined): CSSProperties | undefined {
+  if (!theme) return undefined;
   const v = theme.variants;
   return {
     '--textarea-font-size': theme.fontSize,

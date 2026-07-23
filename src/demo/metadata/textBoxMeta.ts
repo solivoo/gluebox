@@ -184,7 +184,7 @@ export const textBoxMeta: ComponentMeta<TextBoxProps> = {
           description: 'Preset ("dark" | "light" | "modern-dark" | ...) o tema personalizado.',
           control: 'select',
           options: [
-            { label: 'Default (sin override)', value: '' },
+            { label: 'Global (inherit)', value: '' },
             { label: 'Dark', value: 'dark' },
             { label: 'Light', value: 'light' },
             { label: 'Modern Dark', value: 'modern-dark' },

@@ -2,14 +2,15 @@ import type { CSSProperties } from 'react';
 import type { RangeDateBoxTheme, RangeDateBoxThemeInput } from './RangeDateBox.theme.types';
 import { rangeDateBoxThemes } from './defaultThemes';
 
-export function resolveTheme(theme?: RangeDateBoxThemeInput): RangeDateBoxTheme {
-  if (!theme) return rangeDateBoxThemes.light;
+export function resolveTheme(theme?: RangeDateBoxThemeInput): RangeDateBoxTheme | undefined {
+  if (!theme) return undefined;
   if (typeof theme === 'string') return rangeDateBoxThemes[theme];
   return theme;
 }
 
-/** Convierte el tema en CSS variables para el root del RangeDateBox */
-export function themeToStyle(theme: RangeDateBoxTheme): CSSProperties {
+/** Convierte el tema en CSS variables. Sin tema, el CSS global (data-theme/data-mode) controla el aspecto. */
+export function themeToStyle(theme: RangeDateBoxTheme | undefined): CSSProperties | undefined {
+  if (!theme) return undefined;
   const v = theme.variants;
   return {
     '--rangedatebox-font-size': theme.fontSize,

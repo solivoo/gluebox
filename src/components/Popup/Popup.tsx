@@ -51,6 +51,7 @@ export function Popup(props: Readonly<PopupProps>) {
   const titleId = `${idProp ?? autoId}-title`;
   const panelRef = useRef<HTMLDivElement>(null);
   const themeStyle = themeToStyle(resolveTheme(theme));
+  const rootStyle = themeStyle;
   const { offset, onPointerDown, onPointerMove, onPointerUp } = useDraggablePanel(
     draggable,
     open,
@@ -85,7 +86,7 @@ export function Popup(props: Readonly<PopupProps>) {
   if (!open) return null;
 
   const panelStyle = {
-    ...themeStyle,
+    ...(themeStyle ?? {}),
     ...dimensionStyle(width, height),
     '--popup-drag-x': `${offset.x}px`,
     '--popup-drag-y': `${offset.y}px`,
@@ -100,7 +101,7 @@ export function Popup(props: Readonly<PopupProps>) {
   const showFooter = Boolean(footer) || actions.length > 0;
 
   return createPortal(
-    <div className={classNames} style={themeStyle}>
+    <div className={classNames} style={rootStyle}>
       <button
         type="button"
         className="glb-popup__overlay"

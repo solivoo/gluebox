@@ -34,7 +34,7 @@ import 'glubox/style.css';
 | `width` | `number \| string` | `240px` | Ancho expandido; en colapsado suele usarse `64`. |
 | `onCollapsedChange` | `(collapsed: boolean) => void` | — | Al pulsar el botón contraer/expandir. |
 | `showCollapseButton` | `boolean` | `true` si hay `onCollapsedChange` | Muestra u oculta el botón de colapsar. |
-| `theme` | `'dark' \| 'light' \| SidebarTheme` | `'dark'` | Preset o tokens de color personalizados. |
+| `theme` | preset \| `SidebarTheme` | hereda global | Sin prop sigue `data-theme` / `data-mode`. Override: `light`, `dark`, `modern-dark`, … |
 | `renderIcon` | `IconResolver` | — | Resuelve iconos del menú por nombre (Lucide, Iconify, etc.). |
 | `brand` | `SidebarBrandComponent` | — | Componente de logo / nombre de empresa. |
 | `collapseOthersOnSelect` | `boolean` | `false` | Acordeón al **expandir/contraer** módulos de nivel 1. |
@@ -217,11 +217,13 @@ export function AppBrand({ collapsed }: SidebarBrandProps) {
 
 ## Temas
 
-### Presets
+Sin prop `theme`, el Sidebar hereda `data-theme` / `data-mode` del documento (recomendado).
+
+### Override con presets
 
 ```tsx
 <Sidebar theme="dark" {...props} />
-<Sidebar theme="light" {...props} />
+<Sidebar theme="modern-light" {...props} />
 ```
 
 ### Tema personalizado

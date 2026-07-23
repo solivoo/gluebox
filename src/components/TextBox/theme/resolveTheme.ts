@@ -2,14 +2,15 @@ import type { CSSProperties } from 'react';
 import type { TextBoxTheme, TextBoxThemeInput } from './TextBox.theme.types';
 import { textBoxThemes } from './defaultThemes';
 
-export function resolveTheme(theme?: TextBoxThemeInput): TextBoxTheme {
-  if (!theme) return textBoxThemes.light;
+export function resolveTheme(theme?: TextBoxThemeInput): TextBoxTheme | undefined {
+  if (!theme) return undefined;
   if (typeof theme === 'string') return textBoxThemes[theme];
   return theme;
 }
 
-/** Convierte el tema en CSS variables para el root del TextBox */
-export function themeToStyle(theme: TextBoxTheme): CSSProperties {
+/** Convierte el tema en CSS variables. Sin tema, el CSS global (data-theme/data-mode) controla el aspecto. */
+export function themeToStyle(theme: TextBoxTheme | undefined): CSSProperties | undefined {
+  if (!theme) return undefined;
   const v = theme.variants;
   return {
     '--textbox-font-size': theme.fontSize,

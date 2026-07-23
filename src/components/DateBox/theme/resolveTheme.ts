@@ -2,14 +2,15 @@ import type { CSSProperties } from 'react';
 import type { DateBoxTheme, DateBoxThemeInput } from './DateBox.theme.types';
 import { dateBoxThemes } from './defaultThemes';
 
-export function resolveTheme(theme?: DateBoxThemeInput): DateBoxTheme {
-  if (!theme) return dateBoxThemes.light;
+export function resolveTheme(theme?: DateBoxThemeInput): DateBoxTheme | undefined {
+  if (!theme) return undefined;
   if (typeof theme === 'string') return dateBoxThemes[theme];
   return theme;
 }
 
-/** Convierte el tema en CSS variables para el root del DateBox */
-export function themeToStyle(theme: DateBoxTheme): CSSProperties {
+/** Convierte el tema en CSS variables. Sin tema, el CSS global (data-theme/data-mode) controla el aspecto. */
+export function themeToStyle(theme: DateBoxTheme | undefined): CSSProperties | undefined {
+  if (!theme) return undefined;
   const v = theme.variants;
   return {
     '--datebox-font-size': theme.fontSize,

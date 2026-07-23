@@ -68,9 +68,9 @@
   font-family: var(--glb-font-family, 'Poppins', sans-serif);
   font-size: var(--toast-font-size, 0.875rem);
   border-radius: var(--toast-radius, 0.625rem);
-  border: 1px solid var(--toast-item-border, var(--toast-default-border, #e4e7ee));
-  background: var(--toast-item-bg, var(--toast-default-bg, #ffffff));
-  color: var(--toast-item-text, var(--toast-default-text, #1e293b));
+  border: 1px solid var(--toast-item-border, var(--toast-default-border, var(--glb-border, #e4e7ee)));
+  background: var(--toast-item-bg, var(--toast-default-bg, var(--glb-surface, #ffffff)));
+  color: var(--toast-item-text, var(--toast-default-text, var(--glb-text, #0f172a)));
   box-shadow: var(--toast-shadow, 0 10px 28px rgba(15, 23, 42, 0.1));
   animation: glb-toast-enter 0.28s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -134,7 +134,7 @@
   height: 3px;
   width: 100%;
   transform-origin: left center;
-  background: var(--toast-item-accent, var(--toast-default-accent, #9dabce));
+  background: var(--toast-item-accent, var(--toast-default-accent, var(--glb-accent, #9dabce)));
   opacity: 0.9;
   animation: glb-toast-progress linear forwards;
 }
@@ -157,7 +157,7 @@
   width: 3px;
   align-self: stretch;
   border-radius: 999px;
-  background: var(--toast-item-accent, var(--toast-default-accent, #9dabce));
+  background: var(--toast-item-accent, var(--toast-default-accent, var(--glb-accent, #9dabce)));
 }
 
 .glb-toast__content {
@@ -169,13 +169,13 @@
   font-weight: 600;
   font-size: 0.9375rem;
   line-height: 1.35;
-  color: var(--toast-item-title, var(--toast-default-title, #0f172a));
+  color: var(--toast-item-title, var(--toast-default-title, var(--glb-text, #0f172a)));
   margin-bottom: 0.125rem;
 }
 
 .glb-toast__body {
   line-height: 1.45;
-  color: var(--toast-item-text, var(--toast-default-text, #475569));
+  color: var(--toast-item-text, var(--toast-default-text, var(--glb-muted, #64748b)));
 }
 
 .glb-toast__close {
@@ -189,18 +189,18 @@
   border: none;
   border-radius: 0.375rem;
   background: transparent;
-  color: var(--toast-item-close, var(--toast-default-close, #64748b));
+  color: var(--toast-item-close, var(--toast-default-close, var(--glb-muted, #64748b)));
   cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease;
 }
 
 .glb-toast__close:hover {
   background: var(--toast-item-close-hover-bg, var(--toast-default-close-hover-bg, rgba(15, 23, 42, 0.06)));
-  color: var(--toast-item-title, var(--toast-default-title, #0f172a));
+  color: var(--toast-item-title, var(--toast-default-title, var(--glb-text, #0f172a)));
 }
 
 .glb-toast__close:focus-visible {
-  outline: 2px solid var(--toast-item-accent, var(--toast-default-accent, #9dabce));
+  outline: 2px solid var(--toast-item-accent, var(--toast-default-accent, var(--glb-accent, #9dabce)));
   outline-offset: 2px;
 }
 

@@ -21,7 +21,7 @@ features:
   - title: Controles de formulario
     details: TextBox, Select, DateBox, RangeDateBox con label top, floating, outlined y left.
   - title: Temas globales
-    details: Default, Modern y Enterprise en dark/light más temas por componente.
+    details: Default, Modern y Enterprise × light/dark. Sin prop theme, toda la UI hereda el sistema.
   - title: Demo interactiva
     details: Playground en el repo para probar props y variantes sin Storybook.
   - title: Overlays
@@ -37,7 +37,10 @@ pnpm add glubox
 ```tsx
 import { DataGrid, Sidebar } from 'glubox';
 import 'glubox/style.css';
-import 'glubox/themes/default.css';
+import 'glubox/themes/index.css';
+
+document.documentElement.setAttribute('data-theme', 'default');
+document.documentElement.setAttribute('data-mode', 'dark');
 ```
 
 ```tsx

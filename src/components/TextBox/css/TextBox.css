@@ -21,7 +21,7 @@
 .glb-textbox__label {
   font-size: 0.8125rem;
   font-weight: 500;
-  color: var(--textbox-label-color, #4b5563);
+  color: var(--textbox-label-color, var(--glb-muted, #6b7280));
   line-height: 1.25;
 }
 

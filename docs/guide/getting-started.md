@@ -40,7 +40,7 @@ Listado completo: [Componentes](/components/).
 | Guía | Contenido |
 |------|-----------|
 | [Instalación](/guide/installation) | npm, CSS, temas, TypeScript |
-| [Temas y apariencia](/guide/themes) | `data-theme`, `data-mode`, prop `theme`, presets |
+| [Temas y apariencia](/guide/themes) | Tema del sistema (`data-theme` / `data-mode`), herencia y prop `theme` |
 | [Tipos de eventos](/guide/event-types) | Handlers exportados (`*OnChangeHandler`, etc.) |
 | [DataGrid](/components/datagrid) | Guía de uso: dataSource, paging, altura, cards |
 | [Esquema del menú (API)](/guide/menu-api) | Contrato JSON para backend |
@@ -67,12 +67,12 @@ pnpm docs:dev     # Esta documentación
 
 ## Flujo típico de integración
 
-1. Instalar `glubox` e importar `glubox/style.css` y un tema (`glubox/themes/default.css`).
-2. Configurar `data-theme` y `data-mode` en `<html>`.
+1. Instalar `glubox` e importar `glubox/style.css` + `glubox/themes/index.css` (o un tema suelto).
+2. Configurar `data-theme` y `data-mode` en `<html>` — los componentes heredan el tema sin props.
 3. Consumir `MenuConfig` desde tu API ([esquema](/guide/menu-api)).
 4. Conectar Sidebar con `activePath` / `onNavigate` ([routing](/guide/routing)).
 5. Listar datos con [DataGrid](/components/datagrid) (`dataSource` + `keyExpr` + `paging`).
-6. Usar controles de formulario con el mismo sistema de temas.
+6. Usar formularios y botones; solo pasá `theme` si necesitás un override puntual ([temas](/guide/themes)).
 7. Validar permisos en rutas (403) y en el backend.
 
 ## DataGrid en 30 segundos

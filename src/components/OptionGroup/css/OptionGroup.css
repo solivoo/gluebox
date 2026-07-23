@@ -38,18 +38,18 @@
 .glb-optiongroup__label {
   font-size: 0.8125rem;
   font-weight: 500;
-  color: var(--optiongroup-label-color, #4b5563);
+  color: var(--optiongroup-label-color, var(--glb-muted, #6b7280));
   line-height: 1.25;
 }
 
 .glb-optiongroup__helper {
   font-size: 0.75rem;
-  color: var(--optiongroup-helper-color, #6b7280);
+  color: var(--optiongroup-helper-color, var(--glb-muted, #6b7280));
   line-height: 1.35;
 }
 
 .glb-optiongroup--error .glb-optiongroup__helper {
-  color: var(--optiongroup-error-color, #dc2626);
+  color: var(--optiongroup-error-color, var(--glb-danger-on-fill, #dc2626));
 }
 
 /* ── Options container ── */

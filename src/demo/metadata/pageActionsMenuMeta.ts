@@ -115,7 +115,7 @@ export const pageActionsMenuMeta: ComponentMeta<PageActionsMenuPlaygroundDefault
           description: 'Preset o tema parcial.',
           control: 'select',
           options: [
-            { label: 'Auto (contexto)', value: '' },
+            { label: 'Global (inherit)', value: '' },
             { label: 'Default light', value: 'light' },
             { label: 'Default dark', value: 'dark' },
             { label: 'Modern light', value: 'modern-light' },

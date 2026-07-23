@@ -6,3 +6,4 @@
 @import './default.css';
 @import './modern.css';
 @import './enterprise.css';
+@import './_component-bridge.css';

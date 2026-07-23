@@ -108,7 +108,7 @@ export const checkButtonMeta: ComponentMeta<CheckButtonProps> = {
           description: 'Preset o tema personalizado.',
           control: 'select',
           options: [
-            { label: 'Default (sin override)', value: '' },
+            { label: 'Global (inherit)', value: '' },
             { label: 'Dark', value: 'dark' },
             { label: 'Light', value: 'light' },
             { label: 'Modern Dark', value: 'modern-dark' },

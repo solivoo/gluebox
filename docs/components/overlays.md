@@ -102,7 +102,9 @@ Ver la guía completa: [Tipos de eventos](/guide/event-types).
 </ToastProvider>
 ```
 
-Presets: `popupThemes`, `toastThemes` — mismos 6 nombres que el resto de componentes. Sin `theme` explícito, Toast sigue `data-theme` / `data-mode` del documento.
+Presets: `popupThemes`, `toastThemes` — mismos 6 nombres que el resto de componentes.
+
+Sin `theme` explícito, **Popup y Toast** heredan `data-theme` / `data-mode` del documento (igual que Button, Select, etc.).
 
 [Guía de temas](/guide/themes)
 

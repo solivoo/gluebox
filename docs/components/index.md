@@ -30,7 +30,7 @@ Inventario de lo publicado en npm (`glubox` v0.1.10+).
 | [Formularios](/components/forms) | TextBox, TextArea, Select, DateBox, RangeDateBox |
 | [Botones y selección](/components/buttons) | Button, CheckButton, OptionGroup |
 | [Overlays](/components/overlays) | Popup, Toast |
-| [Temas](/guide/themes) | Sistema global + prop `theme` |
+| [Temas](/guide/themes) | Tema del sistema + prop `theme` opcional |
 | [Tipos de eventos](/guide/event-types) | Handlers exportados |
 
 ## Demo interactiva

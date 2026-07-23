@@ -6,7 +6,10 @@ import {
   modernPastel,
 } from '@/styles/pastelPalette';
 
-function preset(isDark: boolean, family: 'default' | 'modern' | 'enterprise'): PopupTheme {
+function preset(
+  isDark: boolean,
+  family: 'default' | 'modern' | 'enterprise',
+): PopupTheme {
   const accent =
     family === 'modern'
       ? isDark
@@ -19,7 +22,7 @@ function preset(isDark: boolean, family: 'default' | 'modern' | 'enterprise'): P
         : isDark
           ? defaultPastel.dark
           : defaultPastel.light;
-  return buildOverlaySurfaceTheme(isDark, accent);
+  return buildOverlaySurfaceTheme(isDark, accent, family);
 }
 
 export const popupThemes: Record<PopupThemePreset, PopupTheme> = {

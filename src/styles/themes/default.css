@@ -2,9 +2,11 @@
    gluBox Default Theme — Periwinkle pastel
    ══════════════════════════════════════════════════ */
 
+@import "./_generated-default.css";
+
 /* ── Sidebar ── */
 [data-theme="default"] {
-  --sidebar-bg: #fafafa;
+  --sidebar-bg: #f5f4fa;
   --sidebar-text: #1e293b;
   --sidebar-icon: #64748b;
   --sidebar-hover-bg: rgba(15, 23, 42, 0.04);
@@ -12,24 +14,52 @@
   --sidebar-active-text: #0369a1;
   --sidebar-active-icon: #0369a1;
   --sidebar-muted-text: #64748b;
-  --sidebar-icon-fallback-bg: #f1f5f9;
+  --sidebar-icon-fallback-bg: #eceaf5;
   --sidebar-tree-line: rgba(15, 23, 42, 0.08);
   --sidebar-rail-active: var(--glb-accent-sidebar-muted);
 
-  --glb-toolbar-bg: #f8f9fc;
-  --glb-toolbar-border: #e8ebf2;
-  --glb-app-bg: #f4f5f8;
+  --glb-toolbar-bg: #f0eef8;
+  --glb-toolbar-border: #e0dceb;
+  --glb-app-bg: #ebe9f4;
   --glb-app-text: #1e1b2e;
   --glb-surface: #ffffff;
   --glb-surface-hover: #f3f0fa;
-  --glb-border: #e4e7ee;
+  --glb-border: #d8d4e6;
   --glb-input-bg: #ffffff;
   --glb-text: #1e1b2e;
-  --glb-muted: #9088a0;
+  --glb-muted: #7a7390;
+  --glb-muted-surface: #eeecf5;
+  --glb-preview-dot: rgba(99, 90, 140, 0.05);
+
+  /* Bridge: componentes heredan superficies del sistema */
+  --btn-secondary-bg: var(--glb-muted-surface); --btn-secondary-text: var(--glb-text); --btn-secondary-border: var(--glb-muted-surface);
+  --btn-secondary-hover-bg: var(--glb-surface-hover); --btn-secondary-hover-border: var(--glb-surface-hover);
+  --select-primary-bg: var(--glb-input-bg); --select-primary-text: var(--glb-text);
+  --select-dropdown-bg: var(--glb-surface); --select-dropdown-border: var(--glb-border);
+  --select-label-color: var(--glb-muted);
+  --textbox-primary-bg: var(--glb-input-bg); --textbox-primary-text: var(--glb-text);
+  --textbox-label-color: var(--glb-muted);
+  --textarea-primary-bg: var(--glb-input-bg); --textarea-primary-text: var(--glb-text);
+  --textarea-label-color: var(--glb-muted);
+  --datebox-primary-bg: var(--glb-input-bg); --datebox-primary-text: var(--glb-text);
+  --datebox-label-color: var(--glb-muted);
+  --datebox-dropdown-bg: var(--glb-surface); --datebox-dropdown-border: var(--glb-border); --datebox-dropdown-text: var(--glb-text);
+  --rangedatebox-primary-bg: var(--glb-input-bg); --rangedatebox-primary-text: var(--glb-text);
+  --rangedatebox-label-color: var(--glb-muted);
+  --rangedatebox-dropdown-bg: var(--glb-surface); --rangedatebox-dropdown-border: var(--glb-border); --rangedatebox-dropdown-text: var(--glb-text);
+  --popup-panel-bg: var(--glb-surface); --popup-panel-text: var(--glb-text); --popup-panel-border: var(--glb-border);
+  --popup-header-text: var(--glb-text); --popup-footer-bg: var(--glb-surface-hover);
+  --datagrid-row-bg: var(--glb-surface); --datagrid-row-text: var(--glb-text);
+  --datagrid-row-alt-bg: var(--glb-muted-surface); --datagrid-header-bg: var(--glb-muted-surface);
+  --datagrid-header-text: var(--glb-text); --datagrid-border: var(--glb-border);
+  --datagrid-search-bg: var(--glb-input-bg); --datagrid-search-text: var(--glb-text); --datagrid-search-border: var(--glb-border);
+  --pam-panel-bg: var(--glb-surface); --pam-panel-text: var(--glb-text); --pam-panel-border: var(--glb-border);
+  --glb-overlay-bg: rgba(30, 27, 46, 0.4);
+  --glb-overlay-shadow: 0 20px 40px rgba(30, 27, 46, 0.12);
 }
 
 [data-theme="default"][data-mode="dark"] {
-  --sidebar-bg: #1a1a24;
+  --sidebar-bg: #15131f;
   --sidebar-text: #e2e8f0;
   --sidebar-icon: #94a3b8;
   --sidebar-hover-bg: rgba(255, 255, 255, 0.05);
@@ -41,16 +71,44 @@
   --sidebar-tree-line: rgba(255, 255, 255, 0.08);
   --sidebar-rail-active: var(--glb-accent-sidebar-muted);
 
-  --glb-toolbar-bg: rgba(99, 102, 241, 0.06);
-  --glb-toolbar-border: rgba(99, 102, 241, 0.12);
-  --glb-app-bg: #12101a;
-  --glb-app-text: #e2e0e8;
-  --glb-surface: #1c1a26;
-  --glb-surface-hover: #23212e;
-  --glb-border: rgba(99, 102, 241, 0.12);
-  --glb-input-bg: #1c1a26;
-  --glb-text: #e2e0e8;
-  --glb-muted: #787480;
+  --glb-toolbar-bg: rgba(99, 102, 241, 0.08);
+  --glb-toolbar-border: rgba(99, 102, 241, 0.16);
+  --glb-app-bg: #0e0c14;
+  --glb-app-text: #e8e6f0;
+  --glb-surface: #1a1826;
+  --glb-surface-hover: #242230;
+  --glb-border: rgba(140, 130, 200, 0.22);
+  --glb-input-bg: #1a1826;
+  --glb-text: #e8e6f0;
+  --glb-muted: #8a8498;
+  --glb-muted-surface: #252234;
+  --glb-preview-dot: rgba(180, 170, 255, 0.04);
+
+  /* Bridge: componentes heredan superficies del sistema */
+  --btn-secondary-bg: var(--glb-muted-surface); --btn-secondary-text: var(--glb-text); --btn-secondary-border: var(--glb-muted-surface);
+  --btn-secondary-hover-bg: var(--glb-surface-hover); --btn-secondary-hover-border: var(--glb-surface-hover);
+  --select-primary-bg: var(--glb-input-bg); --select-primary-text: var(--glb-text);
+  --select-dropdown-bg: var(--glb-surface); --select-dropdown-border: var(--glb-border);
+  --select-label-color: var(--glb-muted);
+  --textbox-primary-bg: var(--glb-input-bg); --textbox-primary-text: var(--glb-text);
+  --textbox-label-color: var(--glb-muted);
+  --textarea-primary-bg: var(--glb-input-bg); --textarea-primary-text: var(--glb-text);
+  --textarea-label-color: var(--glb-muted);
+  --datebox-primary-bg: var(--glb-input-bg); --datebox-primary-text: var(--glb-text);
+  --datebox-label-color: var(--glb-muted);
+  --datebox-dropdown-bg: var(--glb-surface); --datebox-dropdown-border: var(--glb-border); --datebox-dropdown-text: var(--glb-text);
+  --rangedatebox-primary-bg: var(--glb-input-bg); --rangedatebox-primary-text: var(--glb-text);
+  --rangedatebox-label-color: var(--glb-muted);
+  --rangedatebox-dropdown-bg: var(--glb-surface); --rangedatebox-dropdown-border: var(--glb-border); --rangedatebox-dropdown-text: var(--glb-text);
+  --popup-panel-bg: var(--glb-surface); --popup-panel-text: var(--glb-text); --popup-panel-border: var(--glb-border);
+  --popup-header-text: var(--glb-text); --popup-footer-bg: var(--glb-surface-hover);
+  --datagrid-row-bg: var(--glb-surface); --datagrid-row-text: var(--glb-text);
+  --datagrid-row-alt-bg: var(--glb-muted-surface); --datagrid-header-bg: var(--glb-muted-surface);
+  --datagrid-header-text: var(--glb-text); --datagrid-border: var(--glb-border);
+  --datagrid-search-bg: var(--glb-input-bg); --datagrid-search-text: var(--glb-text); --datagrid-search-border: var(--glb-border);
+  --pam-panel-bg: var(--glb-surface); --pam-panel-text: var(--glb-text); --pam-panel-border: var(--glb-border);
+  --glb-overlay-bg: rgba(0, 0, 0, 0.6);
+  --glb-overlay-shadow: 0 24px 48px rgba(0, 0, 0, 0.45);
 }
 
 /* ── Button (light) ── */
@@ -68,7 +126,7 @@
   --btn-primary-disabled-bg: #e5e7eb; --btn-primary-disabled-text: #9ca3af; --btn-primary-disabled-border: #e5e7eb;
   --btn-primary-spinner: var(--glb-accent-on-fill);
 
-  --btn-secondary-bg: #f3f4f6; --btn-secondary-text: #1f2937; --btn-secondary-border: #f3f4f6;
+  --btn-secondary-bg: var(--glb-muted-surface); --btn-secondary-text: #1f2937; --btn-secondary-border: #f3f4f6;
   --btn-secondary-hover-bg: #e5e7eb; --btn-secondary-hover-border: #e5e7eb;
   --btn-secondary-active-bg: #d1d5db; --btn-secondary-active-border: #d1d5db;
   --btn-secondary-focus-ring: rgba(156,163,175,0.5);
@@ -112,7 +170,7 @@
   --btn-primary-disabled-bg: #374151; --btn-primary-disabled-text: #6b7280; --btn-primary-disabled-border: #374151;
   --btn-primary-spinner: var(--glb-accent-on-fill);
 
-  --btn-secondary-bg: #374151; --btn-secondary-text: #e5e7eb; --btn-secondary-border: #374151;
+  --btn-secondary-bg: var(--glb-muted-surface); --btn-secondary-text: #e5e7eb; --btn-secondary-border: #374151;
   --btn-secondary-hover-bg: #4b5563; --btn-secondary-hover-border: #4b5563;
   --btn-secondary-active-bg: #1f2937; --btn-secondary-active-border: #1f2937;
   --btn-secondary-focus-ring: rgba(107,114,128,0.5);
@@ -149,7 +207,7 @@
   --select-dropdown-border: #e5e7eb; --select-dropdown-bg: #fff;
   --select-helper-color: #9ca3af; --select-error-color: #dc2626; --select-label-color: #4b5563;
 
-  --select-primary-bg: #fff; --select-primary-text: #1f2937; --select-primary-border: #d1d5db;
+  --select-primary-bg: var(--glb-input-bg); --select-primary-text: #1f2937; --select-primary-border: #d1d5db;
   --select-primary-placeholder: #9ca3af; --select-primary-icon: #6b7280;
   --select-primary-hover-bg: #fff; --select-primary-hover-border: var(--glb-accent-border-strong);
   --select-primary-focus-bg: #fff; --select-primary-focus-border: var(--glb-accent-border-strong); --select-primary-focus-ring: var(--glb-accent-focus-ring);
@@ -202,7 +260,7 @@
   --select-dropdown-border: #374151; --select-dropdown-bg: #1f2937;
   --select-helper-color: #9ca3af; --select-error-color: #fca5a5; --select-label-color: #d1d5db;
 
-  --select-primary-bg: #1f2937; --select-primary-text: #e5e7eb; --select-primary-border: #4b5563;
+  --select-primary-bg: var(--glb-input-bg); --select-primary-text: #e5e7eb; --select-primary-border: #4b5563;
   --select-primary-placeholder: #6b7280; --select-primary-icon: #9ca3af;
   --select-primary-hover-bg: #1f2937; --select-primary-hover-border: var(--glb-accent-border-strong);
   --select-primary-focus-bg: #1f2937; --select-primary-focus-border: var(--glb-accent-border-strong); --select-primary-focus-ring: var(--glb-accent-focus-ring);
@@ -254,7 +312,7 @@
   --textbox-helper-color: #9ca3af; --textbox-error-color: #dc2626; --textbox-label-color: #4b5563;
   --textbox-clear-color: #9ca3af; --textbox-clear-hover-color: #6b7280;
 
-  --textbox-primary-bg: #fff; --textbox-primary-text: #1f2937; --textbox-primary-border: #d1d5db;
+  --textbox-primary-bg: var(--glb-input-bg); --textbox-primary-text: #1f2937; --textbox-primary-border: #d1d5db;
   --textbox-primary-placeholder: #9ca3af; --textbox-primary-icon: #6b7280;
   --textbox-primary-hover-bg: #fff; --textbox-primary-hover-border: var(--glb-accent-border-strong);
   --textbox-primary-focus-bg: #fff; --textbox-primary-focus-border: var(--glb-accent-border-strong); --textbox-primary-focus-ring: var(--glb-accent-focus-ring);
@@ -290,7 +348,7 @@
   --textbox-helper-color: #9ca3af; --textbox-error-color: #fca5a5; --textbox-label-color: #d1d5db;
   --textbox-clear-color: #6b7280; --textbox-clear-hover-color: #9ca3af;
 
-  --textbox-primary-bg: #1f2937; --textbox-primary-text: #e5e7eb; --textbox-primary-border: #4b5563;
+  --textbox-primary-bg: var(--glb-input-bg); --textbox-primary-text: #e5e7eb; --textbox-primary-border: #4b5563;
   --textbox-primary-placeholder: #6b7280; --textbox-primary-icon: #9ca3af;
   --textbox-primary-hover-bg: #1f2937; --textbox-primary-hover-border: var(--glb-accent-border-strong);
   --textbox-primary-focus-bg: #1f2937; --textbox-primary-focus-border: var(--glb-accent-border-strong); --textbox-primary-focus-ring: var(--glb-accent-focus-ring);
@@ -317,4 +375,407 @@
   --textbox-ghost-focus-bg: rgba(255,255,255,0.05); --textbox-ghost-focus-border: transparent; --textbox-ghost-focus-ring: rgba(107,114,128,0.3);
   --textbox-ghost-disabled-bg: transparent; --textbox-ghost-disabled-text: #4b5563; --textbox-ghost-disabled-border: transparent;
   --textbox-ghost-error-border: #ef4444; --textbox-ghost-error-focus-ring: rgba(239,68,68,0.3);
+}
+/* === component-bridge (appended; must win over _generated) === */
+
+/**
+ * Bridge: tokens de componentes → variables del sistema (--glb-*).
+ * Debe cargarse DESPUÉS de default/modern/enterprise para pisar los
+ * valores hardcodeados de _generated-*.css (misma o mayor especificidad).
+ */
+
+[data-theme="default"],
+[data-theme="modern"],
+[data-theme="enterprise"],
+[data-theme="default"][data-mode="dark"],
+[data-theme="modern"][data-mode="dark"],
+[data-theme="enterprise"][data-mode="dark"] {
+  /* ── Button ── */
+  --btn-secondary-bg: var(--glb-muted-surface);
+  --btn-secondary-text: var(--glb-text);
+  --btn-secondary-border: var(--glb-muted-surface);
+  --btn-secondary-hover-bg: var(--glb-surface-hover);
+  --btn-secondary-hover-border: var(--glb-surface-hover);
+  --btn-secondary-active-bg: var(--glb-surface-hover);
+  --btn-secondary-active-border: var(--glb-border);
+  --btn-outline-text: var(--glb-text);
+  --btn-outline-border: var(--glb-border);
+  --btn-ghost-text: var(--glb-text);
+
+  /* ── Select ── */
+  --select-primary-bg: var(--glb-input-bg);
+  --select-primary-text: var(--glb-text);
+  --select-primary-border: var(--glb-border);
+  --select-primary-placeholder: var(--glb-muted);
+  --select-primary-icon: var(--glb-muted);
+  --select-secondary-bg: var(--glb-muted-surface);
+  --select-secondary-text: var(--glb-text);
+  --select-secondary-border: var(--glb-border);
+  --select-dropdown-bg: var(--glb-surface);
+  --select-dropdown-border: var(--glb-border);
+  --select-label-color: var(--glb-muted);
+  --select-helper-color: var(--glb-muted);
+  --select-outline-text: var(--glb-text);
+  --select-outline-border: var(--glb-border);
+  --select-ghost-text: var(--glb-text);
+
+  /* ── TextBox / TextArea ── */
+  --textbox-primary-bg: var(--glb-input-bg);
+  --textbox-primary-text: var(--glb-text);
+  --textbox-primary-border: var(--glb-border);
+  --textbox-primary-placeholder: var(--glb-muted);
+  --textbox-primary-icon: var(--glb-muted);
+  --textbox-secondary-bg: var(--glb-muted-surface);
+  --textbox-secondary-text: var(--glb-text);
+  --textbox-secondary-border: var(--glb-border);
+  --textbox-label-color: var(--glb-muted);
+  --textbox-helper-color: var(--glb-muted);
+  --textbox-outline-text: var(--glb-text);
+  --textbox-outline-border: var(--glb-border);
+  --textbox-ghost-text: var(--glb-text);
+
+  --textarea-primary-bg: var(--glb-input-bg);
+  --textarea-primary-text: var(--glb-text);
+  --textarea-primary-border: var(--glb-border);
+  --textarea-primary-placeholder: var(--glb-muted);
+  --textarea-secondary-bg: var(--glb-muted-surface);
+  --textarea-secondary-text: var(--glb-text);
+  --textarea-label-color: var(--glb-muted);
+  --textarea-helper-color: var(--glb-muted);
+  --textarea-outline-text: var(--glb-text);
+  --textarea-outline-border: var(--glb-border);
+  --textarea-ghost-text: var(--glb-text);
+
+  /* ── DateBox / RangeDateBox ── */
+  --datebox-primary-bg: var(--glb-input-bg);
+  --datebox-primary-text: var(--glb-text);
+  --datebox-primary-border: var(--glb-border);
+  --datebox-primary-placeholder: var(--glb-muted);
+  --datebox-secondary-bg: var(--glb-muted-surface);
+  --datebox-secondary-text: var(--glb-text);
+  --datebox-label-color: var(--glb-muted);
+  --datebox-dropdown-bg: var(--glb-surface);
+  --datebox-dropdown-border: var(--glb-border);
+  --datebox-dropdown-text: var(--glb-text);
+  --datebox-dropdown-muted: var(--glb-muted);
+  --datebox-dropdown-hover-bg: var(--glb-surface-hover);
+  --datebox-dropdown-accent: var(--glb-accent-subtle-text);
+  --datebox-dropdown-today-bg: var(--glb-accent-subtle-bg);
+
+  --rangedatebox-primary-bg: var(--glb-input-bg);
+  --rangedatebox-primary-text: var(--glb-text);
+  --rangedatebox-primary-border: var(--glb-border);
+  --rangedatebox-secondary-bg: var(--glb-muted-surface);
+  --rangedatebox-secondary-text: var(--glb-text);
+  --rangedatebox-label-color: var(--glb-muted);
+  --rangedatebox-dropdown-bg: var(--glb-surface);
+  --rangedatebox-dropdown-border: var(--glb-border);
+  --rangedatebox-dropdown-text: var(--glb-text);
+  --rangedatebox-dropdown-muted: var(--glb-muted);
+  --rangedatebox-dropdown-hover-bg: var(--glb-surface-hover);
+  --rangedatebox-dropdown-accent: var(--glb-accent-subtle-text);
+  --rangedatebox-dropdown-today-bg: var(--glb-accent-subtle-bg);
+
+  /* ── CheckButton ── */
+  --checkbtn-primary-unchecked-bg: var(--glb-input-bg);
+  --checkbtn-primary-unchecked-text: var(--glb-text);
+  --checkbtn-primary-unchecked-border: var(--glb-border);
+  --checkbtn-primary-unchecked-hover-bg: var(--glb-surface-hover);
+  --checkbtn-primary-unchecked-hover-border: var(--glb-accent-border-strong);
+  --checkbtn-primary-unchecked-focus-ring: var(--glb-accent-focus-ring);
+  --checkbtn-primary-unchecked-icon: var(--glb-muted);
+  --checkbtn-primary-checked-bg: var(--glb-accent-surface);
+  --checkbtn-primary-checked-text: var(--glb-accent-on-fill);
+  --checkbtn-primary-checked-border: var(--glb-accent-border);
+  --checkbtn-primary-checked-hover-bg: var(--glb-accent-surface-hover);
+  --checkbtn-primary-checked-hover-border: var(--glb-accent-border-strong);
+  --checkbtn-primary-checked-focus-ring: var(--glb-accent-focus-ring);
+  --checkbtn-primary-checked-icon: var(--glb-accent-on-fill);
+
+  --checkbtn-outline-unchecked-bg: transparent;
+  --checkbtn-outline-unchecked-text: var(--glb-text);
+  --checkbtn-outline-unchecked-border: var(--glb-border);
+  --checkbtn-outline-unchecked-hover-bg: var(--glb-surface-hover);
+  --checkbtn-outline-unchecked-focus-ring: var(--glb-accent-focus-ring);
+  --checkbtn-outline-checked-bg: var(--glb-accent-subtle-bg);
+  --checkbtn-outline-checked-text: var(--glb-accent-subtle-text);
+  --checkbtn-outline-checked-border: var(--glb-accent-border-strong);
+  --checkbtn-outline-checked-icon: var(--glb-accent-subtle-text);
+
+  --checkbtn-ghost-unchecked-bg: transparent;
+  --checkbtn-ghost-unchecked-text: var(--glb-text);
+  --checkbtn-ghost-unchecked-border: transparent;
+  --checkbtn-ghost-unchecked-hover-bg: var(--glb-surface-hover);
+  --checkbtn-ghost-checked-bg: var(--glb-accent-subtle-bg);
+  --checkbtn-ghost-checked-text: var(--glb-accent-subtle-text);
+  --checkbtn-ghost-checked-border: transparent;
+  --checkbtn-ghost-checked-icon: var(--glb-accent-subtle-text);
+
+  /* ── OptionGroup ── */
+  --optiongroup-label-color: var(--glb-muted);
+  --optiongroup-helper-color: var(--glb-muted);
+  --optiongroup-error-color: var(--glb-danger-on-fill);
+  --optiongroup-primary-option-bg: var(--glb-input-bg);
+  --optiongroup-primary-option-text: var(--glb-text);
+  --optiongroup-primary-option-border: var(--glb-border);
+  --optiongroup-primary-selected-bg: var(--glb-accent-surface);
+  --optiongroup-primary-selected-text: var(--glb-accent-on-fill);
+  --optiongroup-primary-selected-border: var(--glb-accent-border);
+  --optiongroup-primary-hover-option-bg: var(--glb-surface-hover);
+  --optiongroup-primary-hover-option-border: var(--glb-accent-border-strong);
+  --optiongroup-primary-hover-selected-bg: var(--glb-accent-surface-hover);
+  --optiongroup-primary-hover-selected-border: var(--glb-accent-border-strong);
+  --optiongroup-primary-focus-ring: var(--glb-accent-focus-ring);
+  --optiongroup-primary-indicator-border: var(--glb-border);
+  --optiongroup-primary-indicator-selected: var(--glb-accent-on-fill);
+
+  --optiongroup-outline-option-bg: transparent;
+  --optiongroup-outline-option-text: var(--glb-text);
+  --optiongroup-outline-option-border: var(--glb-border);
+  --optiongroup-outline-selected-bg: var(--glb-accent-subtle-bg);
+  --optiongroup-outline-selected-text: var(--glb-accent-subtle-text);
+  --optiongroup-outline-selected-border: var(--glb-accent-border-strong);
+  --optiongroup-outline-focus-ring: var(--glb-accent-focus-ring);
+
+  --optiongroup-ghost-option-bg: transparent;
+  --optiongroup-ghost-option-text: var(--glb-text);
+  --optiongroup-ghost-option-border: transparent;
+  --optiongroup-ghost-selected-bg: var(--glb-accent-subtle-bg);
+  --optiongroup-ghost-selected-text: var(--glb-accent-subtle-text);
+  --optiongroup-ghost-focus-ring: var(--glb-accent-focus-ring);
+
+  /* ── Popup ── */
+  --popup-panel-bg: var(--glb-surface);
+  --popup-panel-text: var(--glb-text);
+  --popup-panel-border: var(--glb-border);
+  --popup-header-text: var(--glb-text);
+  --popup-footer-bg: var(--glb-surface-hover);
+  --popup-close-color: var(--glb-muted);
+  --popup-close-hover-bg: var(--glb-surface-hover);
+  --popup-accent-border: var(--glb-accent-border-strong);
+  --popup-overlay-bg: var(--glb-overlay-bg, rgba(15, 23, 42, 0.4));
+  --popup-shadow: var(--glb-overlay-shadow, 0 20px 40px rgba(15, 23, 42, 0.12));
+
+  /* ── Toast ── */
+  --toast-default-bg: var(--glb-surface);
+  --toast-default-text: var(--glb-text);
+  --toast-default-title: var(--glb-text);
+  --toast-default-border: var(--glb-border);
+  --toast-default-accent: var(--glb-accent-border-strong);
+  --toast-default-close: var(--glb-muted);
+  --toast-default-close-hover-bg: var(--glb-surface-hover);
+
+  /* ── DataGrid ── */
+  --datagrid-row-bg: var(--glb-surface);
+  --datagrid-row-text: var(--glb-text);
+  --datagrid-row-alt-bg: var(--glb-muted-surface);
+  --datagrid-row-hover-bg: var(--glb-accent-subtle-bg);
+  --datagrid-row-selected-bg: var(--glb-accent-subtle-bg);
+  --datagrid-row-selected-text: var(--glb-accent-subtle-text);
+  --datagrid-header-bg: var(--glb-muted-surface);
+  --datagrid-header-text: var(--glb-text);
+  --datagrid-header-border: var(--glb-border);
+  --datagrid-border: var(--glb-border);
+  --datagrid-search-bg: var(--glb-input-bg);
+  --datagrid-search-text: var(--glb-text);
+  --datagrid-search-border: var(--glb-border);
+  --datagrid-search-placeholder: var(--glb-muted);
+  --datagrid-search-focus-border: var(--glb-accent-border-strong);
+  --datagrid-search-focus-ring: var(--glb-accent-focus-ring);
+  --datagrid-empty-text: var(--glb-muted);
+  --datagrid-sort-icon: var(--glb-muted);
+  --datagrid-sort-icon-active: var(--glb-accent-subtle-text);
+  --datagrid-checkbox-border: var(--glb-border);
+  --datagrid-checkbox-checked-bg: var(--glb-accent-surface);
+  --datagrid-checkbox-checked-text: var(--glb-accent-on-fill);
+
+  /* ── PageActionsMenu ── */
+  --pam-panel-bg: var(--glb-surface);
+  --pam-panel-text: var(--glb-text);
+  --pam-panel-border: var(--glb-border);
+  --pam-item-hover-bg: var(--glb-surface-hover);
+  --pam-item-disabled-text: var(--glb-muted);
+  --pam-divider: var(--glb-border);
+  --pam-ghost-bg: transparent;
+  --pam-ghost-text: var(--glb-text);
+  --pam-ghost-border: transparent;
+  --pam-ghost-hover-bg: var(--glb-surface-hover);
+  --pam-outline-bg: transparent;
+  --pam-outline-text: var(--glb-text);
+  --pam-outline-border: var(--glb-border);
+  --pam-outline-hover-bg: var(--glb-surface-hover);
+  --pam-primary-bg: var(--glb-accent-surface);
+  --pam-primary-text: var(--glb-accent-on-fill);
+  --pam-primary-border: var(--glb-accent-border);
+  --pam-primary-hover-bg: var(--glb-accent-surface-hover);
+  --pam-primary-hover-border: var(--glb-accent-border-strong);
+  --pam-primary-focus-ring: var(--glb-accent-focus-ring);
+
+  /* ── Select (resto de variantes) ── */
+  --select-primary-hover-bg: var(--glb-input-bg);
+  --select-primary-focus-bg: var(--glb-input-bg);
+  --select-primary-focus-border: var(--glb-accent-border-strong);
+  --select-primary-focus-ring: var(--glb-accent-focus-ring);
+  --select-primary-disabled-bg: var(--glb-muted-surface);
+  --select-primary-disabled-text: var(--glb-muted);
+  --select-primary-disabled-border: var(--glb-border);
+  --select-primary-option-bg: var(--glb-surface);
+  --select-primary-option-text: var(--glb-text);
+  --select-primary-option-hover-bg: var(--glb-accent-option-hover-bg);
+  --select-primary-option-hover-text: var(--glb-accent-option-hover-text);
+  --select-primary-option-selected-bg: var(--glb-accent-subtle-bg);
+  --select-primary-option-selected-text: var(--glb-accent-subtle-text);
+  --select-primary-option-disabled-text: var(--glb-muted);
+  --select-secondary-hover-bg: var(--glb-muted-surface);
+  --select-secondary-focus-bg: var(--glb-muted-surface);
+  --select-secondary-placeholder: var(--glb-muted);
+  --select-secondary-icon: var(--glb-muted);
+  --select-outline-bg: transparent;
+  --select-outline-placeholder: var(--glb-muted);
+  --select-outline-icon: var(--glb-muted);
+  --select-outline-hover-bg: var(--glb-surface-hover);
+  --select-outline-hover-border: var(--glb-border);
+  --select-ghost-bg: transparent;
+  --select-ghost-border: transparent;
+  --select-ghost-placeholder: var(--glb-muted);
+  --select-ghost-icon: var(--glb-muted);
+  --select-ghost-hover-bg: var(--glb-surface-hover);
+  --select-error-color: var(--glb-danger-on-fill, #dc2626);
+  --select-clear-color: var(--glb-muted);
+  --select-clear-hover-color: var(--glb-text);
+
+  /* ── TextBox / TextArea (resto) ── */
+  --textbox-primary-hover-bg: var(--glb-input-bg);
+  --textbox-primary-hover-border: var(--glb-accent-border-strong);
+  --textbox-primary-focus-bg: var(--glb-input-bg);
+  --textbox-primary-focus-border: var(--glb-accent-border-strong);
+  --textbox-primary-focus-ring: var(--glb-accent-focus-ring);
+  --textbox-primary-disabled-bg: var(--glb-muted-surface);
+  --textbox-primary-disabled-text: var(--glb-muted);
+  --textbox-primary-disabled-border: var(--glb-border);
+  --textbox-secondary-placeholder: var(--glb-muted);
+  --textbox-secondary-icon: var(--glb-muted);
+  --textbox-secondary-hover-bg: var(--glb-muted-surface);
+  --textbox-secondary-focus-bg: var(--glb-muted-surface);
+  --textbox-outline-bg: transparent;
+  --textbox-outline-placeholder: var(--glb-muted);
+  --textbox-outline-icon: var(--glb-muted);
+  --textbox-outline-hover-bg: var(--glb-surface-hover);
+  --textbox-ghost-bg: transparent;
+  --textbox-ghost-border: transparent;
+  --textbox-ghost-placeholder: var(--glb-muted);
+  --textbox-ghost-icon: var(--glb-muted);
+  --textbox-ghost-hover-bg: var(--glb-surface-hover);
+  --textbox-clear-color: var(--glb-muted);
+  --textbox-clear-hover-color: var(--glb-text);
+  --textbox-error-color: var(--glb-danger-on-fill, #dc2626);
+
+  --textarea-primary-icon: var(--glb-muted);
+  --textarea-primary-hover-bg: var(--glb-input-bg);
+  --textarea-primary-hover-border: var(--glb-accent-border-strong);
+  --textarea-primary-focus-bg: var(--glb-input-bg);
+  --textarea-primary-focus-border: var(--glb-accent-border-strong);
+  --textarea-primary-focus-ring: var(--glb-accent-focus-ring);
+  --textarea-primary-disabled-bg: var(--glb-muted-surface);
+  --textarea-primary-disabled-text: var(--glb-muted);
+  --textarea-primary-disabled-border: var(--glb-border);
+  --textarea-secondary-border: var(--glb-border);
+  --textarea-secondary-placeholder: var(--glb-muted);
+  --textarea-secondary-icon: var(--glb-muted);
+  --textarea-outline-bg: transparent;
+  --textarea-outline-border: var(--glb-border);
+  --textarea-outline-placeholder: var(--glb-muted);
+  --textarea-ghost-bg: transparent;
+  --textarea-ghost-border: transparent;
+  --textarea-ghost-placeholder: var(--glb-muted);
+  --textarea-clear-color: var(--glb-muted);
+  --textarea-clear-hover-color: var(--glb-text);
+  --textarea-error-color: var(--glb-danger-on-fill, #dc2626);
+
+  /* ── DateBox / RangeDateBox (resto) ── */
+  --datebox-primary-icon: var(--glb-muted);
+  --datebox-primary-hover-bg: var(--glb-input-bg);
+  --datebox-primary-hover-border: var(--glb-accent-border-strong);
+  --datebox-primary-focus-bg: var(--glb-input-bg);
+  --datebox-primary-focus-border: var(--glb-accent-border-strong);
+  --datebox-primary-focus-ring: var(--glb-accent-focus-ring);
+  --datebox-primary-disabled-bg: var(--glb-muted-surface);
+  --datebox-primary-disabled-text: var(--glb-muted);
+  --datebox-primary-disabled-border: var(--glb-border);
+  --datebox-secondary-border: var(--glb-border);
+  --datebox-secondary-placeholder: var(--glb-muted);
+  --datebox-secondary-icon: var(--glb-muted);
+  --datebox-outline-bg: transparent;
+  --datebox-outline-text: var(--glb-text);
+  --datebox-outline-border: var(--glb-border);
+  --datebox-outline-placeholder: var(--glb-muted);
+  --datebox-ghost-bg: transparent;
+  --datebox-ghost-text: var(--glb-text);
+  --datebox-ghost-border: transparent;
+  --datebox-ghost-placeholder: var(--glb-muted);
+  --datebox-helper-color: var(--glb-muted);
+  --datebox-error-color: var(--glb-danger-on-fill, #dc2626);
+  --datebox-clear-color: var(--glb-muted);
+  --datebox-clear-hover-color: var(--glb-text);
+  --datebox-calendar-icon-color: var(--glb-muted);
+  --datebox-dropdown-disabled: var(--glb-muted);
+
+  --rangedatebox-primary-placeholder: var(--glb-muted);
+  --rangedatebox-primary-icon: var(--glb-muted);
+  --rangedatebox-primary-hover-bg: var(--glb-input-bg);
+  --rangedatebox-primary-hover-border: var(--glb-accent-border-strong);
+  --rangedatebox-primary-focus-bg: var(--glb-input-bg);
+  --rangedatebox-primary-focus-border: var(--glb-accent-border-strong);
+  --rangedatebox-primary-focus-ring: var(--glb-accent-focus-ring);
+  --rangedatebox-primary-disabled-bg: var(--glb-muted-surface);
+  --rangedatebox-primary-disabled-text: var(--glb-muted);
+  --rangedatebox-primary-disabled-border: var(--glb-border);
+  --rangedatebox-secondary-border: var(--glb-border);
+  --rangedatebox-secondary-placeholder: var(--glb-muted);
+  --rangedatebox-outline-bg: transparent;
+  --rangedatebox-outline-text: var(--glb-text);
+  --rangedatebox-outline-border: var(--glb-border);
+  --rangedatebox-ghost-bg: transparent;
+  --rangedatebox-ghost-text: var(--glb-text);
+  --rangedatebox-ghost-border: transparent;
+  --rangedatebox-helper-color: var(--glb-muted);
+  --rangedatebox-error-color: var(--glb-danger-on-fill, #dc2626);
+  --rangedatebox-clear-color: var(--glb-muted);
+  --rangedatebox-clear-hover-color: var(--glb-text);
+  --rangedatebox-calendar-icon-color: var(--glb-muted);
+  --rangedatebox-separator-color: var(--glb-muted);
+  --rangedatebox-dropdown-disabled: var(--glb-muted);
+
+  /* ── Toast variantes semánticas (superficies) ── */
+  --toast-success-bg: var(--glb-surface);
+  --toast-success-text: var(--glb-text);
+  --toast-success-title: var(--glb-text);
+  --toast-success-border: var(--glb-border);
+  --toast-success-close: var(--glb-muted);
+  --toast-success-close-hover-bg: var(--glb-surface-hover);
+  --toast-warning-bg: var(--glb-surface);
+  --toast-warning-text: var(--glb-text);
+  --toast-warning-title: var(--glb-text);
+  --toast-warning-border: var(--glb-border);
+  --toast-warning-close: var(--glb-muted);
+  --toast-warning-close-hover-bg: var(--glb-surface-hover);
+  --toast-error-bg: var(--glb-surface);
+  --toast-error-text: var(--glb-text);
+  --toast-error-title: var(--glb-text);
+  --toast-error-border: var(--glb-border);
+  --toast-error-close: var(--glb-muted);
+  --toast-error-close-hover-bg: var(--glb-surface-hover);
+  --toast-info-bg: var(--glb-surface);
+  --toast-info-text: var(--glb-text);
+  --toast-info-title: var(--glb-text);
+  --toast-info-border: var(--glb-border);
+  --toast-info-close: var(--glb-muted);
+  --toast-info-close-hover-bg: var(--glb-surface-hover);
+
+  /* ── PAM focus rings ── */
+  --pam-ghost-focus-ring: var(--glb-accent-focus-ring);
+  --pam-outline-focus-ring: var(--glb-accent-focus-ring);
+
+  /* ── DataGrid loading ── */
+  --datagrid-loading-overlay: color-mix(in srgb, var(--glb-app-bg) 72%, transparent);
 }

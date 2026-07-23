@@ -45,7 +45,7 @@
 .glb-datebox__label {
   font-size: 0.8125rem;
   font-weight: 500;
-  color: var(--datebox-label-color, #d1d5db);
+  color: var(--datebox-label-color, var(--glb-muted, #6b7280));
   margin-bottom: 0.25rem;
   transition: var(--datebox-transition, all 0.15s ease);
 }
@@ -62,7 +62,7 @@
   transform: translateY(-50%);
   margin-bottom: 0;
   pointer-events: none;
-  color: var(--datebox-primary-placeholder, #6b7280);
+  color: var(--datebox-primary-placeholder, var(--glb-muted, #6b7280));
   font-weight: 400;
   font-size: var(--datebox-font-size, 0.875rem);
   transition: all 0.2s ease;
@@ -73,7 +73,7 @@
   top: 0.375rem;
   transform: translateY(0) scale(0.75);
   transform-origin: left top;
-  color: var(--datebox-label-color, #d1d5db);
+  color: var(--datebox-label-color, var(--glb-muted, #6b7280));
   font-weight: 500;
 }
 
@@ -84,7 +84,7 @@
 }
 
 .glb-datebox--outlined .glb-datebox__outlined-field {
-  --glb-outlined-label-color: var(--datebox-label-color, #d1d5db);
+  --glb-outlined-label-color: var(--datebox-label-color, var(--glb-muted, #6b7280));
   --glb-outlined-radius: var(--datebox-radius, 0.5rem);
 }
 
@@ -164,12 +164,12 @@
   height: 2.25rem;
   padding: 0;
   border-radius: var(--datebox-radius, 0.5rem);
-  border: 1px solid var(--datebox-primary-border, #4b5563);
-  background-color: var(--datebox-primary-bg, #1f2937);
-  color: var(--datebox-calendar-icon-color, #9ca3af);
+  border: 1px solid var(--datebox-primary-border, var(--glb-border, #e4e7ee));
+  background-color: var(--datebox-primary-bg, var(--glb-input-bg, #ffffff));
+  color: var(--datebox-calendar-icon-color, var(--glb-muted, #6b7280));
   cursor: pointer;
   transition: var(--datebox-transition, all 0.15s ease);
-  box-shadow: var(--datebox-shadow, 0 1px 2px rgba(0, 0, 0, 0.3));
+  box-shadow: var(--datebox-shadow, 0 1px 2px rgba(0, 0, 0, 0.06));
 }
 
 .glb-datebox__icon-trigger:hover:not(:disabled) {
@@ -200,8 +200,8 @@
   width: 0.375rem;
   height: 0.375rem;
   border-radius: 50%;
-  background: var(--datebox-dropdown-accent, #6366f1);
-  box-shadow: 0 0 0 2px var(--datebox-primary-bg, #1f2937);
+  background: var(--datebox-dropdown-accent, var(--glb-accent-subtle-text, #6366f1));
+  box-shadow: 0 0 0 2px var(--datebox-primary-bg, var(--glb-input-bg, #ffffff));
 }
 
 .glb-datebox--icon-mode {
@@ -299,7 +299,7 @@
 }
 
 .glb-datebox__display-input::placeholder {
-  color: var(--datebox-primary-placeholder, #6b7280);
+  color: var(--datebox-primary-placeholder, var(--glb-muted, #6b7280));
   opacity: 1;
 }
 
@@ -310,7 +310,7 @@
   justify-content: center;
   width: 1.5rem;
   height: 1.5rem;
-  color: var(--datebox-calendar-icon-color, #9ca3af);
+  color: var(--datebox-calendar-icon-color, var(--glb-muted, #6b7280));
   pointer-events: none;
 }
 
@@ -325,13 +325,13 @@
   border: none;
   cursor: pointer;
   padding: 0;
-  color: var(--datebox-clear-color, #6b7280);
+  color: var(--datebox-clear-color, var(--glb-muted, #6b7280));
   border-radius: 50%;
   transition: color 0.15s ease, background-color 0.15s ease;
 }
 
 .glb-datebox__clear:hover {
-  color: var(--datebox-clear-hover-color, #9ca3af);
+  color: var(--datebox-clear-hover-color, var(--glb-text, #0f172a));
   background-color: rgba(128, 128, 128, 0.15);
 }
 
@@ -343,13 +343,13 @@
 /* ── Helper Text ── */
 .glb-datebox__helper {
   font-size: 0.75rem;
-  color: var(--datebox-helper-color, #9ca3af);
+  color: var(--datebox-helper-color, var(--glb-muted, #6b7280));
   min-height: 1rem;
   margin-top: 0.125rem;
 }
 
 .glb-datebox__helper--error {
-  color: var(--datebox-error-color, #fca5a5);
+  color: var(--datebox-error-color, var(--glb-danger-on-fill, #dc2626));
   font-weight: 500;
 }
 
@@ -372,10 +372,10 @@
 
 .glb-datebox__dropdown {
   min-width: 17.5rem;
-  background: var(--datebox-dropdown-bg, #1a1d27);
-  border: 1px solid var(--datebox-dropdown-border, #2d3139);
+  background: var(--datebox-dropdown-bg, var(--glb-surface, #ffffff));
+  border: 1px solid var(--datebox-dropdown-border, var(--glb-border, #e4e7ee));
   border-radius: 0.625rem;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--datebox-dropdown-border, #2d3139);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12), 0 0 0 1px var(--datebox-dropdown-border, var(--glb-border, #e4e7ee));
   padding: 0.75rem;
   font-family: var(--glb-font-family, 'Poppins', sans-serif);
   font-size: var(--datebox-font-size, 0.875rem);
@@ -406,7 +406,7 @@
 .glb-datebox__month-year {
   font-size: 0.9375rem;
   font-weight: 600;
-  color: var(--datebox-dropdown-text, #e5e7eb);
+  color: var(--datebox-dropdown-text, var(--glb-text, #0f172a));
   user-select: none;
 }
 
@@ -419,14 +419,14 @@
   border: none;
   border-radius: 0.375rem;
   background: transparent;
-  color: var(--datebox-dropdown-muted, #9ca3af);
+  color: var(--datebox-dropdown-muted, var(--glb-muted, #6b7280));
   cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease;
 }
 
 .glb-datebox__nav-btn:hover {
   background: var(--datebox-dropdown-hover-bg, rgba(255, 255, 255, 0.06));
-  color: var(--datebox-dropdown-text, #e5e7eb);
+  color: var(--datebox-dropdown-text, var(--glb-text, #0f172a));
 }
 
 /* ── Day Names Row ── */
@@ -442,7 +442,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: var(--datebox-dropdown-muted, #6b7280);
+  color: var(--datebox-dropdown-muted, var(--glb-muted, #6b7280));
   padding: 0.375rem 0;
   user-select: none;
 }
@@ -464,7 +464,7 @@
   border: none;
   border-radius: 0.375rem;
   background: transparent;
-  color: var(--datebox-dropdown-text, #e5e7eb);
+  color: var(--datebox-dropdown-text, var(--glb-text, #0f172a));
   font-family: inherit;
   font-size: 0.8125rem;
   cursor: pointer;
@@ -482,13 +482,13 @@
 
 /* ── Other Month ── */
 .glb-datebox__day--other-month {
-  color: var(--datebox-dropdown-muted, #4b5563);
+  color: var(--datebox-dropdown-muted, var(--glb-muted, #6b7280));
 }
 
 /* ── Today ── */
 .glb-datebox__day--today {
   font-weight: 700;
-  color: var(--datebox-dropdown-accent, #6366f1);
+  color: var(--datebox-dropdown-accent, var(--glb-accent-subtle-text, #6366f1));
   background: var(--datebox-dropdown-today-bg, rgba(99, 102, 241, 0.1));
 }
 
@@ -498,7 +498,7 @@
 
 /* ── Selected ── */
 .glb-datebox__day--selected {
-  background: var(--datebox-dropdown-accent, #6366f1) !important;
+  background: var(--datebox-dropdown-accent, var(--glb-accent-subtle-text, #6366f1)) !important;
   color: #ffffff !important;
   font-weight: 600;
   box-shadow: 0 2px 8px rgba(99, 102, 241, 0.35);
@@ -506,17 +506,17 @@
 
 /* ── Range highlight ── */
 .glb-datebox__day--in-range {
-  background: color-mix(in srgb, var(--datebox-dropdown-accent, #6366f1) 16%, transparent);
-  color: var(--datebox-dropdown-text, #e5e7eb);
+  background: color-mix(in srgb, var(--datebox-dropdown-accent, var(--glb-accent-subtle-text, #6366f1)) 16%, transparent);
+  color: var(--datebox-dropdown-text, var(--glb-text, #0f172a));
   border-radius: 0;
 }
 
 .glb-datebox__day--in-range:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--datebox-dropdown-accent, #6366f1) 26%, transparent);
+  background: color-mix(in srgb, var(--datebox-dropdown-accent, var(--glb-accent-subtle-text, #6366f1)) 26%, transparent);
 }
 
 .glb-datebox__day--range-endpoint {
-  background: var(--datebox-dropdown-accent, #6366f1) !important;
+  background: var(--datebox-dropdown-accent, var(--glb-accent-subtle-text, #6366f1)) !important;
   color: #ffffff !important;
   font-weight: 600;
   z-index: 1;
@@ -535,18 +535,18 @@
 }
 
 .glb-datebox__day--active-field {
-  box-shadow: 0 0 0 2px var(--datebox-dropdown-bg, #1f2937),
-    0 0 0 4px var(--datebox-dropdown-accent, #6366f1);
+  box-shadow: 0 0 0 2px var(--datebox-dropdown-bg, var(--glb-surface, #ffffff)),
+    0 0 0 4px var(--datebox-dropdown-accent, var(--glb-accent-subtle-text, #6366f1));
 }
 
 .glb-datebox__day--other-month.glb-datebox__day--in-range,
 .glb-datebox__day--other-month.glb-datebox__day--range-endpoint {
-  color: var(--datebox-dropdown-muted, #6b7280);
+  color: var(--datebox-dropdown-muted, var(--glb-muted, #6b7280));
 }
 
 /* ── Disabled ── */
 .glb-datebox__day--disabled {
-  color: var(--datebox-dropdown-disabled, #374151) !important;
+  color: var(--datebox-dropdown-disabled, var(--glb-muted, #6b7280)) !important;
   cursor: not-allowed;
   opacity: 0.4;
 }
@@ -555,7 +555,7 @@
 .glb-datebox__dropdown-footer {
   margin-top: 0.5rem;
   padding-top: 0.5rem;
-  border-top: 1px solid var(--datebox-dropdown-border, #2d3139);
+  border-top: 1px solid var(--datebox-dropdown-border, var(--glb-border, #e4e7ee));
   display: flex;
   justify-content: center;
 }
@@ -563,7 +563,7 @@
 .glb-datebox__today-btn {
   border: none;
   background: transparent;
-  color: var(--datebox-dropdown-accent, #6366f1);
+  color: var(--datebox-dropdown-accent, var(--glb-accent-subtle-text, #6366f1));
   font-family: inherit;
   font-size: 0.8125rem;
   font-weight: 500;
@@ -592,7 +592,7 @@
   background-color: var(--datebox-primary-bg);
   color: var(--datebox-primary-text);
   border: 1px solid var(--datebox-primary-border);
-  box-shadow: var(--datebox-shadow, 0 1px 2px rgba(0, 0, 0, 0.3));
+  box-shadow: var(--datebox-shadow, 0 1px 2px rgba(0, 0, 0, 0.06));
 }
 
 .glb-datebox--primary .glb-datebox__display-input:hover:not(:disabled) {
@@ -617,7 +617,7 @@
   background-color: var(--datebox-secondary-bg);
   color: var(--datebox-secondary-text);
   border: 1px solid var(--datebox-secondary-border);
-  box-shadow: var(--datebox-shadow, 0 1px 2px rgba(0, 0, 0, 0.3));
+  box-shadow: var(--datebox-shadow, 0 1px 2px rgba(0, 0, 0, 0.06));
 }
 
 .glb-datebox--secondary .glb-datebox__display-input:hover:not(:disabled) {

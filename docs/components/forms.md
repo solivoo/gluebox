@@ -174,29 +174,29 @@ Soporta navegación por teclado y type-ahead. `options` es requerido.
 
 Valor: `{ start: string; end: string }` (fechas `YYYY-MM-DD`).
 
-## Temas por componente
+## Temas
 
-Cada control acepta `theme` como preset (`'light'`, `'dark'`, `'modern-dark'`, …) o objeto de tokens:
+**Por defecto** (sin prop `theme`) los campos heredan el tema del sistema (`data-theme` / `data-mode` en `<html>`).
+
+Override puntual:
 
 ```tsx
 <TextBox theme="enterprise-dark" />
 <Select theme={selectThemes['modern-dark']} />
 ```
 
-Los presets están exportados: `textBoxThemes`, `textAreaThemes`, `selectThemes`, `dateBoxThemes`, `rangeDateBoxThemes`.
+Presets exportados: `textBoxThemes`, `textAreaThemes`, `selectThemes`, `dateBoxThemes`, `rangeDateBoxThemes`.
 
-## Temas globales de la app
-
-Además del tema del componente, importa un tema CSS global y activa modo claro/oscuro:
+Setup del sistema:
 
 ```tsx
-import 'glubox/themes/modern.css';
+import 'glubox/themes/index.css';
 
 document.documentElement.setAttribute('data-theme', 'modern');
 document.documentElement.setAttribute('data-mode', 'dark');
 ```
 
-Detalle de presets, `popupThemes`, `toastThemes` y prioridad global vs prop: [Guía de temas](/guide/themes).
+Herencia, presets y prioridad: [Guía de temas](/guide/themes).
 
 ## Tipos de eventos
 

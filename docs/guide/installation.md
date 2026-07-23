@@ -24,23 +24,25 @@ import 'glubox/style.css';
 
 Sin este import los componentes no tendrán layout ni tokens visuales.
 
-### Temas globales (opcional)
+### Temas globales (recomendado)
+
+Sin un tema CSS + `data-theme` / `data-mode`, los componentes usan solo fallbacks locales. Para que **toda** la librería responda al tema del sistema:
 
 ```tsx
-import 'glubox/themes/default.css';   // uno solo
-// import 'glubox/themes/index.css'; // los tres temas
+import 'glubox/themes/index.css'; // o default.css / modern.css / enterprise.css
 
-document.documentElement.setAttribute('data-theme', 'default');
-document.documentElement.setAttribute('data-mode', 'dark');
+document.documentElement.setAttribute('data-theme', 'default'); // default | modern | enterprise
+document.documentElement.setAttribute('data-mode', 'dark');     // light | dark
 ```
 
-| Archivo | Paleta pastel |
-|---------|---------------|
-| `glubox/themes/default.css` | Periwinkle (indigo suave) |
-| `glubox/themes/modern.css` | Sage (verde suave) |
-| `glubox/themes/enterprise.css` | Powder blue (azul suave) |
+| Archivo | Paleta |
+|---------|--------|
+| `glubox/themes/default.css` | Periwinkle (violeta / indigo) |
+| `glubox/themes/modern.css` | Sage (verde) |
+| `glubox/themes/enterprise.css` | Powder blue (azul) |
+| `glubox/themes/index.css` | Las tres (cambiar familia en runtime) |
 
-Guía completa: [Temas y apariencia](/guide/themes).
+No hace falta pasar `theme` a cada componente: sin esa prop heredan el sistema. Guía completa: [Temas y apariencia](/guide/themes).
 
 ### Label outlined en cards
 

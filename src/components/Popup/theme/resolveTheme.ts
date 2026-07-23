@@ -2,13 +2,15 @@ import type { CSSProperties } from 'react';
 import type { PopupTheme, PopupThemeInput } from './Popup.theme.types';
 import { popupThemes } from './defaultThemes';
 
-export function resolveTheme(theme?: PopupThemeInput): PopupTheme {
-  if (!theme) return popupThemes.light;
+export function resolveTheme(theme?: PopupThemeInput): PopupTheme | undefined {
+  if (!theme) return undefined;
   if (typeof theme === 'string') return popupThemes[theme];
   return theme;
 }
 
-export function themeToStyle(theme: PopupTheme): CSSProperties {
+/** Sin tema, el CSS global (data-theme/data-mode) controla el aspecto. */
+export function themeToStyle(theme: PopupTheme | undefined): CSSProperties | undefined {
+  if (!theme) return undefined;
   return {
     '--popup-font-size': theme.fontSize,
     '--popup-radius': theme.borderRadius,

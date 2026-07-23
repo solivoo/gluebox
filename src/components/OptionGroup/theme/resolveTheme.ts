@@ -2,8 +2,8 @@ import type { CSSProperties } from 'react';
 import type { OptionGroupTheme, OptionGroupThemeInput } from './OptionGroup.theme.types';
 import { optionGroupThemes } from './defaultThemes';
 
-export function resolveTheme(theme?: OptionGroupThemeInput): OptionGroupTheme {
-  if (!theme) return optionGroupThemes.light;
+export function resolveTheme(theme?: OptionGroupThemeInput): OptionGroupTheme | undefined {
+  if (!theme) return undefined;
   if (typeof theme === 'string') return optionGroupThemes[theme];
   return theme;
 }
@@ -29,7 +29,9 @@ function variantVars(prefix: string, v: OptionGroupTheme['variants']['primary'])
   };
 }
 
-export function themeToStyle(theme: OptionGroupTheme): CSSProperties {
+/** Sin tema, el CSS global (data-theme/data-mode) controla el aspecto. */
+export function themeToStyle(theme: OptionGroupTheme | undefined): CSSProperties | undefined {
+  if (!theme) return undefined;
   const v = theme.variants;
   return {
     '--optiongroup-font-size': theme.fontSize,

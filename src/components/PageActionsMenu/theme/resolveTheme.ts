@@ -7,13 +7,15 @@ import { pageActionsMenuThemes } from './defaultThemes';
 
 export function resolveTheme(
   theme?: PageActionsMenuThemeInput,
-): PageActionsMenuTheme {
-  if (!theme) return pageActionsMenuThemes.light;
+): PageActionsMenuTheme | undefined {
+  if (!theme) return undefined;
   if (typeof theme === 'string') return pageActionsMenuThemes[theme];
   return theme;
 }
 
-export function themeToStyle(theme: PageActionsMenuTheme): CSSProperties {
+/** Sin tema, el CSS global (data-theme/data-mode) controla el aspecto. */
+export function themeToStyle(theme: PageActionsMenuTheme | undefined): CSSProperties | undefined {
+  if (!theme) return undefined;
   const v = theme.variants;
   return {
     '--pam-font-size': theme.fontSize,

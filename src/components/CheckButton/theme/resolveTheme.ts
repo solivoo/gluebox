@@ -2,8 +2,8 @@ import type { CSSProperties } from 'react';
 import type { CheckButtonTheme, CheckButtonThemeInput } from './CheckButton.theme.types';
 import { checkButtonThemes } from './defaultThemes';
 
-export function resolveTheme(theme?: CheckButtonThemeInput): CheckButtonTheme {
-  if (!theme) return checkButtonThemes.light;
+export function resolveTheme(theme?: CheckButtonThemeInput): CheckButtonTheme | undefined {
+  if (!theme) return undefined;
   if (typeof theme === 'string') return checkButtonThemes[theme];
   return theme;
 }
@@ -29,7 +29,9 @@ function stateVars(
   };
 }
 
-export function themeToStyle(theme: CheckButtonTheme): CSSProperties {
+/** Sin tema, el CSS global (data-theme/data-mode) controla el aspecto. */
+export function themeToStyle(theme: CheckButtonTheme | undefined): CSSProperties | undefined {
+  if (!theme) return undefined;
   const vars: Record<string, string> = {
     '--checkbtn-font-size': theme.fontSize,
     '--checkbtn-radius': theme.borderRadius,

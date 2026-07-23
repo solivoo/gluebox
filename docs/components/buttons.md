@@ -97,14 +97,14 @@ Referencia completa: [Tipos de eventos](/guide/event-types).
 
 ## Temas
 
-Cada componente acepta `theme` con los 6 presets (`light`, `dark`, `modern-light`, `modern-dark`, `enterprise-light`, `enterprise-dark`) u objeto custom:
+Sin prop `theme`, Button / CheckButton / OptionGroup heredan el tema del sistema. La prop es un override opcional (6 presets u objeto custom):
 
 ```tsx
 <Button theme="modern-dark">Acción</Button>
 <OptionGroup theme={optionGroupThemes.dark} options={options} />
 ```
 
-Temas globales de la app (`data-theme` / `data-mode`) y prioridad con la prop `theme`: [Guía de temas](/guide/themes).
+Temas globales (`data-theme` / `data-mode`) y prioridad: [Guía de temas](/guide/themes).
 
 ## Siguiente paso
 

@@ -1,5 +1,29 @@
 # Changelog
 
+## [0.1.12] — 2026-07-23
+
+### Añadido
+
+- **Temas globales reales:** sin prop `theme`, todos los componentes heredan `data-theme` + `data-mode` del `<html>` (igual que Sidebar).
+- Bridge CSS (`_component-bridge.css`) que mapea tokens de componentes → `--glb-*` para que Button, Select, TextBox, TextArea, DateBox, RangeDateBox, CheckButton, OptionGroup, Popup, Toast, DataGrid y PageActionsMenu respondan al tema del sistema.
+- Tokens generados por familia (`_generated-{default,modern,enterprise}.css`) + script `pnpm themes:generate`.
+- Familias más diferenciadas (Default periwinkle, Modern sage, Enterprise powder blue) en light y dark.
+- Docs actualizadas: [Temas y apariencia](/guide/themes), installation y getting-started.
+
+### Cambiado
+
+- `resolveTheme` / `themeToStyle`: sin prop `theme` ya no fuerzan el preset `light`; devuelven `undefined` y dejan que el CSS global pinte.
+- Popup: superficies por familia (ya no genéricas iguales en todos los temas).
+- DateBox / RangeDateBox / Toast / OptionGroup: fallbacks CSS alineados a `--glb-*` (sin fondos oscuros “al aire”).
+- Sidebar: se quitó el `border-bottom` del header.
+
+### Migración (apps consumidoras)
+
+1. Actualizar a `glubox@0.1.12`.
+2. Importar temas: `import 'glubox/themes/index.css'` (además de `glubox/style.css`).
+3. Setear en `<html>`: `data-theme="default|modern|enterprise"` y `data-mode="light|dark"`.
+4. Quitar `theme="light"` / `theme={{...}}` repetidos en cada componente si querés heredar el global; dejá `theme` solo para overrides puntuales.
+
 ## [0.1.11] — 2026-07-18
 
 ### Corregido
