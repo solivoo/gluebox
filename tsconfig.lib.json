@@ -4,7 +4,14 @@
     "noEmit": false,
     "declaration": true,
     "emitDeclarationOnly": true,
-    "outDir": "./dist"
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
+    "types": [],
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
   },
-  "include": ["src/index.ts", "src/shared/**/*", "src/components/Sidebar/**/*", "src/components/Button/**/*", "src/components/Select/**/*", "src/components/TextBox/**/*", "src/components/TextArea/**/*", "src/components/DateBox/**/*", "src/components/RangeDateBox/**/*", "src/components/OptionGroup/**/*", "src/components/CheckButton/**/*", "src/components/Popup/**/*", "src/components/Toast/**/*", "src/components/PageActionsMenu/**/*", "src/components/navigation/**/*", "src/components/DataGrid/**/*", "src/components/shared/**/*"]
+  "include": ["src/index.ts", "src/shared/**/*", "src/styles/**/*", "src/components/Sidebar/**/*", "src/components/Button/**/*", "src/components/Select/**/*", "src/components/TextBox/**/*", "src/components/TextArea/**/*", "src/components/DateBox/**/*", "src/components/RangeDateBox/**/*", "src/components/OptionGroup/**/*", "src/components/CheckButton/**/*", "src/components/Popup/**/*", "src/components/Toast/**/*", "src/components/PageActionsMenu/**/*", "src/components/navigation/**/*", "src/components/DataGrid/**/*", "src/components/shared/**/*", "src/vite-env.d.ts"],
+  "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx", "src/components/Sidebar/data/**", "src/components/Sidebar/mock/**", "src/components/Sidebar/test/**", "src/components/brand/**", "src/icons/**", "src/App.tsx", "src/main.tsx"]
 }

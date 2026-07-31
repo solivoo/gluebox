@@ -19,12 +19,12 @@ import '@/components/DataGrid/css/DataGrid.css';
 export function DataGrid<T extends Record<string, unknown>>(
   props: Readonly<DataGridProps<T>>,
 ) {
-  const vm = useDataGridController(props);
+  const { rootRef, scrollRef, ...vm } = useDataGridController(props);
   const { selection } = vm;
 
   return (
     <div
-      ref={vm.rootRef}
+      ref={rootRef}
       className={vm.classNames}
       style={vm.rootStyle}
       data-layout={vm.effectiveLayout}
@@ -46,7 +46,7 @@ export function DataGrid<T extends Record<string, unknown>>(
           data-virtual-row-height={vm.rowHeight}
           data-virtualized={vm.shouldVirtualize || undefined}
         >
-          <div ref={vm.scrollRef} className={vm.scrollClassNames}>
+          <div ref={scrollRef} className={vm.scrollClassNames}>
             {vm.isCardLayout ? (
               <DataGridCardList
                 rows={vm.rowsToRender}

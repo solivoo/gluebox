@@ -29,14 +29,14 @@ export type {
   Permission,
   SidebarOnCollapsedChangeHandler,
   SidebarOnNavigateHandler,
-} from '@/components/Sidebar';
+} from './components/Sidebar';
 
 export {
   Sidebar,
   sidebarThemes,
   hasPermission,
   filterVisibleMenu,
-} from '@/components/Sidebar';
+} from './components/Sidebar';
 
 export type {
   ButtonProps,
@@ -47,12 +47,12 @@ export type {
   ButtonThemePreset,
   ButtonThemeInput,
   ButtonOnClickHandler,
-} from '@/components/Button';
+} from './components/Button';
 
 export {
   Button,
   buttonThemes,
-} from '@/components/Button';
+} from './components/Button';
 
 export type {
   SelectProps,
@@ -66,12 +66,12 @@ export type {
   SelectThemeInput,
   SelectChangeValue,
   SelectOnChangeHandler,
-} from '@/components/Select';
+} from './components/Select';
 
 export {
   Select,
   selectThemes,
-} from '@/components/Select';
+} from './components/Select';
 
 export type {
   TextBoxProps,
@@ -85,12 +85,12 @@ export type {
   TextBoxOnChangeHandler,
   TextBoxOnFocusHandler,
   TextBoxOnBlurHandler,
-} from '@/components/TextBox';
+} from './components/TextBox';
 
 export {
   TextBox,
   textBoxThemes,
-} from '@/components/TextBox';
+} from './components/TextBox';
 
 export type {
   TextAreaProps,
@@ -105,12 +105,12 @@ export type {
   TextAreaOnChangeHandler,
   TextAreaOnFocusHandler,
   TextAreaOnBlurHandler,
-} from '@/components/TextArea';
+} from './components/TextArea';
 
 export {
   TextArea,
   textAreaThemes,
-} from '@/components/TextArea';
+} from './components/TextArea';
 
 export type {
   DateBoxProps,
@@ -124,12 +124,12 @@ export type {
   DateBoxThemePreset,
   DateBoxThemeInput,
   DateBoxOnChangeHandler,
-} from '@/components/DateBox';
+} from './components/DateBox';
 
 export {
   DateBox,
   dateBoxThemes,
-} from '@/components/DateBox';
+} from './components/DateBox';
 
 export type {
   RangeDateBoxProps,
@@ -145,12 +145,12 @@ export type {
   RangeDateBoxThemeInput,
   RangeDateBoxChangeEvent,
   RangeDateBoxOnChangeHandler,
-} from '@/components/RangeDateBox';
+} from './components/RangeDateBox';
 
 export {
   RangeDateBox,
   rangeDateBoxThemes,
-} from '@/components/RangeDateBox';
+} from './components/RangeDateBox';
 
 export type {
   OptionGroupProps,
@@ -165,12 +165,12 @@ export type {
   OptionGroupThemeInput,
   OptionGroupChangeValue,
   OptionGroupOnChangeHandler,
-} from '@/components/OptionGroup';
+} from './components/OptionGroup';
 
 export {
   OptionGroup,
   optionGroupThemes,
-} from '@/components/OptionGroup';
+} from './components/OptionGroup';
 
 export type {
   CheckButtonProps,
@@ -183,12 +183,12 @@ export type {
   CheckButtonThemeInput,
   CheckButtonChangeValue,
   CheckButtonOnChangeHandler,
-} from '@/components/CheckButton';
+} from './components/CheckButton';
 
 export {
   CheckButton,
   checkButtonThemes,
-} from '@/components/CheckButton';
+} from './components/CheckButton';
 
 export type {
   PopupProps,
@@ -199,12 +199,12 @@ export type {
   PopupThemeInput,
   PopupOnCloseHandler,
   PopupActionOnClickHandler,
-} from '@/components/Popup';
+} from './components/Popup';
 
 export {
   Popup,
   popupThemes,
-} from '@/components/Popup';
+} from './components/Popup';
 
 export type {
   ToastProps,
@@ -222,7 +222,7 @@ export type {
   ToastShowHandler,
   ToastDismissHandler,
   ToastDismissAllHandler,
-} from '@/components/Toast';
+} from './components/Toast';
 
 export {
   Toast,
@@ -230,13 +230,13 @@ export {
   ToastProvider,
   useToast,
   toastThemes,
-} from '@/components/Toast';
+} from './components/Toast';
 
 export type {
   NavSurface,
   NavKind,
   NavigationNode,
-} from '@/components/navigation';
+} from './components/navigation';
 
 export {
   filterBySurface,
@@ -246,7 +246,7 @@ export {
   findNavigationNodeByRoute,
   pageActionsFromNode,
   contentTabsFromNode,
-} from '@/components/navigation';
+} from './components/navigation';
 
 export type {
   PageActionsMenuProps,
@@ -261,20 +261,20 @@ export type {
   PageActionsMenuOnActionSelectHandler,
   PageActionsMenuOnNavigateHandler,
   PageActionsMenuOnOpenChangeHandler,
-} from '@/components/PageActionsMenu';
+} from './components/PageActionsMenu';
 
 export {
   PageActionsMenu,
   pageActionsMenuThemes,
-} from '@/components/PageActionsMenu';
+} from './components/PageActionsMenu';
 
 export type {
   RequiredEventHandler,
   OptionalEventHandler,
   EventHandlerPayload,
-} from '@/shared/eventHandlerTypes';
+} from './shared/eventHandlerTypes';
 
-export type { FieldClearButtonProps } from '@/shared/fieldClear.types';
+export type { FieldClearButtonProps } from './shared/fieldClear.types';
 
 export type {
   DataGridProps,
@@ -305,7 +305,7 @@ export type {
   UseDataGridOptions,
   UseDataGridReturn,
   DataGridMessages,
-} from '@/components/DataGrid';
+} from './components/DataGrid';
 
 export type {
   VirtualRowsRange,
@@ -314,7 +314,7 @@ export type {
   DataGridHeightMode,
   ResolveDataGridHeightOptions,
   ResolvedDataGridHeight,
-} from '@/components/DataGrid';
+} from './components/DataGrid';
 
 export {
   DataGrid,
@@ -330,6 +330,6 @@ export {
   dataGridThemes,
   defaultDataGridMessages,
   resolveDataGridMessages,
-} from '@/components/DataGrid';
+} from './components/DataGrid';
 
-export type { NormalizedDataGridProps } from '@/components/DataGrid';
+export type { NormalizedDataGridProps } from './components/DataGrid';

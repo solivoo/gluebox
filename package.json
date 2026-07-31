@@ -1,6 +1,6 @@
 {
   "name": "glubox",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "Librería de componentes React para aplicaciones empresariales — Sidebar RBAC, PageActionsMenu, DataGrid, formularios, Popup, Toast, botones y temas pastel",
   "type": "module",
   "license": "MIT",
@@ -38,14 +38,17 @@
     "dist/glubox.js",
     "dist/glubox.css",
     "dist/themes",
-    "dist/src"
+    "dist/index.d.ts",
+    "dist/components",
+    "dist/shared",
+    "dist/styles"
   ],
   "main": "./dist/glubox.js",
   "module": "./dist/glubox.js",
-  "types": "./dist/src/index.d.ts",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/src/index.d.ts",
+      "types": "./dist/index.d.ts",
       "import": "./dist/glubox.js"
     },
     "./style.css": "./dist/glubox.css",
@@ -57,7 +60,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "build:lib": "vite build --config vite.config.lib.ts && node scripts/copy-themes.mjs",
+    "build:lib": "vite build --config vite.config.lib.ts && tsc -p tsconfig.lib.json && node scripts/copy-themes.mjs && node scripts/fix-dts-paths.mjs",
+    "build:types": "tsc -p tsconfig.lib.json && node scripts/fix-dts-paths.mjs",
     "clean:dist": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
     "prepublish:lib": "pnpm clean:dist && pnpm build:lib",
     "prepublishOnly": "pnpm clean:dist && pnpm build:lib",

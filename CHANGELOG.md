@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.1.13] — 2026-07-31
+
+### Corregido
+
+- **Tipos TypeScript en consumidores:** los `.d.ts` publicados ya no reexportan con rutas rotas (`../components/*` / `../shared/*`), que degradaban imports (`ToastShowHandler`, `ButtonProps`, `useToast`, etc.) a `any`.
+- El barrel público (`src/index.ts`) usa imports relativos (`./components/*`, `./shared/*`).
+- Las declaraciones se generan con `tsc -p tsconfig.lib.json` (entry en `dist/index.d.ts`) y un post-proceso (`scripts/fix-dts-paths.mjs`) que elimina imports CSS y reescribe aliases `@/` restantes a rutas relativas válidas.
+
+### Migración (apps consumidoras)
+
+1. Actualizar a `glubox@0.1.13`.
+2. No hay cambios de API de runtime; solo tipos.
+
 ## [0.1.12] — 2026-07-23
 
 ### Añadido
