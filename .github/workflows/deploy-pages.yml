@@ -33,6 +33,11 @@ jobs:
 
       - run: pnpm docs:build
 
+      # Playground interactivo servido bajo /gluebox/demo/
+      - run: pnpm demo:build
+
+      - run: cp -r dist-demo docs/.vitepress/dist/demo
+
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3

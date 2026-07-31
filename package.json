@@ -1,6 +1,6 @@
 {
   "name": "glubox",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "description": "Librería de componentes React para aplicaciones empresariales — Sidebar RBAC, PageActionsMenu, DataGrid, formularios, Popup, Toast, botones y temas pastel",
   "type": "module",
   "license": "MIT",
@@ -71,6 +71,7 @@
     "test:watch": "vitest",
     "themes:generate": "vitest run --config vitest.generate-themes.config.ts",
     "preview": "vite preview",
+    "demo:build": "vite build --base=/gluebox/demo/ --outDir dist-demo",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs"

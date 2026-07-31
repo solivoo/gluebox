@@ -1,4 +1,6 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+// HashRouter: GitHub Pages no soporta fallback de SPA, con hash los deep-links
+// (p. ej. /gluebox/demo/#/componentes/button) funcionan sin config del servidor.
+import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { AppLayout } from '@/demo/layout/AppLayout';
 import { MenuPage } from '@/demo/pages/MenuPage';
 import { ComponentDocPage } from '@/demo/pages/docs/ComponentDocPage';
@@ -80,7 +82,7 @@ function ComponentListPage() {
 
 export function AppRouter() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<AppLayout />}>
           <Route index element={<Navigate to={defaultRoutePath} replace />} />
@@ -114,6 +116,6 @@ export function AppRouter() {
           <Route path="*" element={<MenuPage />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }

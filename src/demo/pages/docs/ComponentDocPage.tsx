@@ -252,6 +252,154 @@ function App() {
     />
   );
 }`,
+    DateBox: `// Campo básico (no controlado)
+<DateBox label="Fecha de inicio" defaultValue="2026-01-15" />
+
+// Controlado
+const [fecha, setFecha] = useState('');
+<DateBox
+  label="Fecha"
+  value={fecha}
+  onChange={(e) => setFecha(e.target.value)}
+/>
+
+// Rango permitido
+<DateBox label="Turno" min="2026-01-01" max="2026-12-31" />
+
+// Solo icono de calendario
+<DateBox displayMode="icon" onChange={(e) => console.log(e.target.value)} />
+
+// Label flotante + limpiar
+<DateBox label="Vencimiento" labelPosition="floating" showClearButton />
+
+// Estado de error
+<DateBox label="Fecha" error errorMessage="Fecha requerida" />`,
+    RangeDateBox: `// Rango básico (no controlado)
+<RangeDateBox
+  label="Período"
+  startDefaultValue="2026-01-01"
+  endDefaultValue="2026-01-31"
+/>
+
+// Controlado — onChange recibe { start, end }
+const [rango, setRango] = useState<DateRange>({ start: '', end: '' });
+<RangeDateBox
+  label="Vigencia"
+  startValue={rango.start}
+  endValue={rango.end}
+  onChange={(range) => setRango(range)}
+/>
+
+// Con límites y separador custom
+<RangeDateBox
+  label="Reporte"
+  min="2026-01-01"
+  max="2026-12-31"
+  separator="hasta"
+/>
+
+// Solo icono
+<RangeDateBox displayMode="icon" onChange={(range) => filtrar(range)} />`,
+    OptionGroup: `// Radios verticales (default)
+<OptionGroup
+  label="Plan"
+  options={[
+    { value: 'free', label: 'Gratis' },
+    { value: 'pro', label: 'Pro' },
+    { value: 'enterprise', label: 'Enterprise', disabled: true },
+  ]}
+  defaultValue="free"
+/>
+
+// Controlado
+const [plan, setPlan] = useState('pro');
+<OptionGroup options={opciones} value={plan} onChange={setPlan} />
+
+// Horizontal o segmentado (tipo toggle)
+<OptionGroup layout="horizontal" options={opciones} />
+<OptionGroup layout="segmented" options={opciones} />
+
+// Estado de error
+<OptionGroup
+  label="Método de pago"
+  options={opciones}
+  error
+  errorMessage="Elegí una opción"
+/>`,
+    CheckButton: `// No controlado
+<CheckButton defaultChecked>Acepto los términos</CheckButton>
+
+// Controlado — onChange recibe boolean
+const [activo, setActivo] = useState(false);
+<CheckButton checked={activo} onChange={setActivo}>
+  Notificaciones
+</CheckButton>
+
+// Estado indeterminado (selección parcial)
+<CheckButton indeterminate onChange={toggleTodos}>
+  Seleccionar todos
+</CheckButton>
+
+// Variantes y tamaños
+<CheckButton variant="outline">Outline</CheckButton>
+<CheckButton variant="ghost" size="sm">Ghost sm</CheckButton>
+
+// Deshabilitado
+<CheckButton disabled>No disponible</CheckButton>`,
+    Popup: `// Confirmación con acciones
+const [open, setOpen] = useState(false);
+
+<Popup
+  open={open}
+  onClose={() => setOpen(false)}
+  title="Eliminar registro"
+  actions={[
+    { label: 'Cancelar', variant: 'ghost', onClick: () => setOpen(false) },
+    { label: 'Eliminar', variant: 'danger', onClick: handleDelete },
+  ]}
+>
+  ¿Seguro que querés eliminar este registro?
+</Popup>
+
+// Tamaño fijo + arrastrable
+<Popup open={open} onClose={cerrar} title="Detalle" width={560} draggable>
+  <DetalleEmpleado id={id} />
+</Popup>
+
+// Footer personalizado (reemplaza actions)
+<Popup open={open} onClose={cerrar} footer={<MiFooter />}>
+  Contenido
+</Popup>
+
+// Sin cierre por overlay ni Escape (flujo obligatorio)
+<Popup open={open} onClose={cerrar} closeOnOverlayClick={false} closeOnEscape={false}>
+  Completá el formulario para continuar.
+</Popup>`,
+    Toast: `// 1) Envolvé tu app con el provider
+<ToastProvider position="top-right" maxToasts={5}>
+  <App />
+</ToastProvider>
+
+// 2) Disparo desde cualquier componente
+const { show, dismiss, dismissAll } = useToast();
+
+show({ message: 'Guardado con éxito', variant: 'success' });
+
+// Con título y duración personalizada
+show({
+  title: 'Atención',
+  message: 'La sesión expira en 5 minutos',
+  variant: 'warning',
+  duration: 10000,
+});
+
+// Persistente (se cierra manualmente) — show devuelve el id
+const id = show({ message: 'Procesando...', duration: 0 });
+// ...al terminar:
+dismiss(id);
+
+// Con callback al cerrar
+show({ message: 'Correo enviado', variant: 'info', onClose: refetch });`,
   };
 
   return (
@@ -552,6 +700,185 @@ export interface SidebarProps {
   onCollapsedChange?: (collapsed: boolean) => void;
   onNavigate?: (path: string) => void;
 }`,
+    DateBox: `export type DateBoxVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
+export type DateBoxSize = 'sm' | 'md' | 'lg';
+export type DateBoxLabelPosition = 'top' | 'floating' | 'outlined' | 'left';
+export type DateBoxDisplayMode = 'input' | 'icon';
+
+export interface DateBoxProps extends InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
+  labelPosition?: DateBoxLabelPosition;
+  displayMode?: DateBoxDisplayMode;
+  value?: string;          // YYYY-MM-DD (controlado)
+  defaultValue?: string;   // YYYY-MM-DD (no controlado)
+  min?: string;            // fecha mínima seleccionable
+  max?: string;            // fecha máxima seleccionable
+  variant?: DateBoxVariant;
+  size?: DateBoxSize;
+  error?: boolean;
+  errorMessage?: string;
+  helperText?: string;
+  showClearButton?: boolean;
+  fullWidth?: boolean;
+  width?: string | number;
+  theme?: DateBoxThemeInput;
+}
+
+export type DateBoxOnChangeHandler = NonNullable<DateBoxProps['onChange']>;`,
+    RangeDateBox: `export type RangeDateBoxVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
+export type RangeDateBoxSize = 'sm' | 'md' | 'lg';
+export type RangeDateBoxLabelPosition = 'top' | 'floating' | 'outlined' | 'left';
+export type RangeDateBoxDisplayMode = 'input' | 'icon';
+
+export interface DateRange {
+  start: string; // YYYY-MM-DD
+  end: string;   // YYYY-MM-DD
+}
+
+export interface RangeDateBoxProps {
+  label?: string;
+  labelPosition?: RangeDateBoxLabelPosition;
+  displayMode?: RangeDateBoxDisplayMode;
+  startValue?: string;         // controlado
+  endValue?: string;           // controlado
+  startDefaultValue?: string;  // no controlado
+  endDefaultValue?: string;    // no controlado
+  separator?: string;
+  min?: string;
+  max?: string;
+  variant?: RangeDateBoxVariant;
+  size?: RangeDateBoxSize;
+  disabled?: boolean;
+  error?: boolean;
+  errorMessage?: string;
+  helperText?: string;
+  showClearButton?: boolean;
+  fullWidth?: boolean;
+  width?: string | number;
+  theme?: RangeDateBoxThemeInput;
+  onChange?: (range: DateRange) => void;
+}
+
+export type RangeDateBoxChangeEvent = DateRange;
+export type RangeDateBoxOnChangeHandler = NonNullable<RangeDateBoxProps['onChange']>;`,
+    OptionGroup: `export type OptionGroupLayout = 'vertical' | 'horizontal' | 'segmented';
+export type OptionGroupVariant = 'primary' | 'outline' | 'ghost';
+export type OptionGroupSize = 'sm' | 'md' | 'lg';
+export type OptionGroupLabelPosition = 'top' | 'left';
+
+export interface OptionGroupOption {
+  value: string;
+  label: string;
+  disabled?: boolean;
+}
+
+export interface OptionGroupProps {
+  options: OptionGroupOption[];   // selección exclusiva (radio)
+  value?: string;                 // controlado
+  defaultValue?: string;          // no controlado
+  onChange?: (value: string) => void;
+  name?: string;                  // formularios nativos
+  layout?: OptionGroupLayout;
+  variant?: OptionGroupVariant;
+  size?: OptionGroupSize;
+  label?: string;
+  labelPosition?: OptionGroupLabelPosition;
+  helperText?: string;
+  error?: boolean;
+  errorMessage?: string;
+  disabled?: boolean;
+  fullWidth?: boolean;
+  width?: string | number;
+  theme?: OptionGroupThemeInput;
+}
+
+export type OptionGroupChangeValue = string;
+export type OptionGroupOnChangeHandler = NonNullable<OptionGroupProps['onChange']>;`,
+    CheckButton: `export type CheckButtonVariant = 'primary' | 'outline' | 'ghost';
+export type CheckButtonSize = 'sm' | 'md' | 'lg';
+
+export interface CheckButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  children: ReactNode;
+  checked?: boolean;              // controlado
+  defaultChecked?: boolean;       // no controlado
+  onChange?: (checked: boolean) => void;
+  indeterminate?: boolean;        // selección parcial
+  variant?: CheckButtonVariant;
+  size?: CheckButtonSize;
+  disabled?: boolean;
+  fullWidth?: boolean;
+  width?: string | number;
+  theme?: CheckButtonThemeInput;
+}
+
+export type CheckButtonChangeValue = boolean;
+export type CheckButtonOnChangeHandler = NonNullable<CheckButtonProps['onChange']>;`,
+    Popup: `export type PopupFooterAlign = 'left' | 'center' | 'right';
+
+export interface PopupAction {
+  id?: string;
+  label: string;
+  variant?: ButtonVariant;   // reutiliza las variantes de Button
+  onClick?: () => void;
+  disabled?: boolean;
+  loading?: boolean;
+}
+
+export interface PopupProps {
+  open: boolean;             // requerido
+  onClose: () => void;       // requerido (overlay, Escape, botón cerrar)
+  title?: ReactNode;
+  children?: ReactNode;
+  width?: string | number;
+  height?: string | number;
+  actions?: PopupAction[];   // botones del pie
+  footer?: ReactNode;        // reemplaza actions si se define
+  footerAlign?: PopupFooterAlign;
+  draggable?: boolean;
+  showCloseButton?: boolean;
+  closeOnOverlayClick?: boolean;
+  closeOnEscape?: boolean;
+  theme?: PopupThemeInput;
+}
+
+export type PopupOnCloseHandler = PopupProps['onClose'];
+export type PopupActionOnClickHandler = NonNullable<PopupAction['onClick']>;`,
+    Toast: `export type ToastPosition =
+  | 'top-left' | 'top-center' | 'top-right'
+  | 'bottom-left' | 'bottom-center' | 'bottom-right';
+
+export type ToastVariant = 'default' | 'success' | 'warning' | 'error' | 'info';
+
+export interface ShowToastOptions {
+  id?: string;
+  title?: ReactNode;
+  message?: ReactNode;
+  variant?: ToastVariant;
+  duration?: number;         // ms; 0 = persistente
+  showCloseButton?: boolean;
+  showProgress?: boolean;
+  theme?: ToastThemeInput;
+  onClose?: () => void;
+}
+
+export interface ToastProviderProps {
+  children: ReactNode;
+  position?: ToastPosition;
+  maxToasts?: number;
+  defaultDuration?: number;
+  showProgress?: boolean;
+  theme?: ToastThemeInput;
+}
+
+export interface ToastContextValue {
+  show: (options: ShowToastOptions) => string;  // devuelve el id
+  dismiss: (id: string) => void;
+  dismissAll: () => void;
+}
+
+export type ToastShowHandler = ToastContextValue['show'];
+export type ToastDismissHandler = ToastContextValue['dismiss'];
+export type ToastDismissAllHandler = ToastContextValue['dismissAll'];`,
   };
 
   return (
@@ -646,6 +973,39 @@ function AccessibilitySection({ entry }: { entry: DocEntry }) {
 - Escape y clic fuera cierran el menú.
 - ArrowDown en el trigger abre el menú.
 - Ítems disabled: disabled + title con disabledReason.`,
+    DateBox: `- Contenedor: role="group" agrupa campo, calendario y botones.
+- Calendario: días con aria-label descriptivo ("15 de Enero de 2026").
+- Día seleccionado: aria-current="date".
+- Navegación de mes: botones con aria-label "Mes anterior" / "Mes siguiente".
+- Botón limpiar: aria-label "Limpiar fecha"; oculto (aria-hidden) si no hay valor.
+- Errores: mensaje visible debajo del campo asociado al estado error.`,
+    RangeDateBox: `- Contenedor: role="group" agrupa ambos campos y el calendario.
+- Separador entre fechas: aria-hidden (decorativo).
+- Calendario compartido: mismos aria-labels que DateBox por día y mes.
+- Botón limpiar: aria-label "Limpiar rango de fechas"; aria-hidden sin valor.
+- Deshabilitado: disabled se propaga a ambos campos.`,
+    OptionGroup: `- Grupo: role="radiogroup" con aria-labelledby al label del grupo.
+- Opciones: role="radio" + aria-checked según selección.
+- Error: aria-invalid en el grupo; mensaje con role="alert".
+- Deshabilitado: aria-disabled en grupo y opciones individuales.
+- Teclado: navegación entre opciones con Tab/flechas y selección con Space.`,
+    CheckButton: `- Rol: role="checkbox" sobre un <button> nativo.
+- Estado: aria-checked true/false, y "mixed" cuando indeterminate={true}.
+- Deshabilitado: disabled + aria-disabled.
+- Icono de check: aria-hidden (decorativo, el estado lo comunica aria-checked).
+- Foco: recibe foco por teclado (Tab). Alterna con Enter/Space.`,
+    Popup: `- Diálogo: role="dialog" + aria-modal="true".
+- Título: asociado vía aria-labelledby cuando se define title.
+- Botón cerrar: aria-label "Cerrar diálogo".
+- Escape cierra el diálogo (configurable con closeOnEscape).
+- Clic en overlay cierra (configurable con closeOnOverlayClick).
+- Overlay decorativo: aria-hidden.`,
+    Toast: `- Contenedor del stack: aria-label "Notificaciones".
+- Rol según variante: role="alert" para error/warning, role="status" para el resto.
+- Anuncio: aria-live="polite" + aria-atomic="true" (lectores leen el toast completo).
+- Título: asociado vía aria-labelledby cuando se define title.
+- Botón cerrar: aria-label "Cerrar notificación".
+- Persistencia: con duration={0} el toast no desaparece solo (no se pierde el mensaje).`,
   };
 
   return (

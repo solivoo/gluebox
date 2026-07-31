@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.1.14] — 2026-07-31
+
+### Añadido
+
+- **Demo online:** el playground interactivo se publica en GitHub Pages en [/gluebox/demo/](https://solivoo.github.io/gluebox/demo/) (nuevo script `demo:build` + paso en el workflow de Pages). Enlace "Demo" en el nav de los docs.
+- **Docs de la demo completas:** DateBox, RangeDateBox, OptionGroup, CheckButton, Popup y Toast ahora tienen How-To, Types y Accessibility (antes mostraban "próximamente").
+
+### Cambiado
+
+- La demo usa `HashRouter` en lugar de `BrowserRouter` para que los deep-links funcionen en GitHub Pages sin fallback de SPA.
+
+### Migración (apps consumidoras)
+
+- Sin cambios en la librería publicada; solo demo, docs y CI.
+
 ## [0.1.13] — 2026-07-31
 
 ### Corregido

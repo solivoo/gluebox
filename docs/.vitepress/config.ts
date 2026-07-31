@@ -16,6 +16,7 @@ export default defineConfig({
       { text: 'Formularios', link: '/components/forms' },
       { text: 'Sidebar', link: '/components/sidebar' },
       { text: 'PageActionsMenu', link: '/components/page-actions-menu' },
+      { text: 'Demo', link: 'https://solivoo.github.io/gluebox/demo/' },
       { text: 'GitHub', link: 'https://github.com/solivoo/gluebox' },
     ],
     sidebar: [
