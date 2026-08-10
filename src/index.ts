@@ -4,6 +4,7 @@ import '@/components/Button/css/Button.css';
 import '@/components/Select/css/Select.css';
 import '@/components/TextBox/css/TextBox.css';
 import '@/components/NumberBox/css/NumberBox.css';
+import '@/components/FileBox/css/FileBox.css';
 import '@/components/TextArea/css/TextArea.css';
 import '@/components/DateBox/css/DateBox.css';
 import '@/components/RangeDateBox/css/RangeDateBox.css';
@@ -108,6 +109,24 @@ export type {
 } from './components/NumberBox';
 
 export { NumberBox } from './components/NumberBox';
+
+export type {
+  FileBoxProps,
+  FileBoxVariant,
+  FileBoxSize,
+  FileBoxLabelPosition,
+  FileBoxDisplayMode,
+  FileBoxTheme,
+  FileBoxVariantTheme,
+  FileBoxThemePreset,
+  FileBoxThemeInput,
+  FileBoxChangeValue,
+  FileRejection,
+  FileBoxOnChangeHandler,
+  FileBoxOnRejectHandler,
+} from './components/FileBox';
+
+export { FileBox } from './components/FileBox';
 
 export type {
   TextAreaProps,

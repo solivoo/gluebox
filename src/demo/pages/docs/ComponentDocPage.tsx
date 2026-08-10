@@ -193,6 +193,42 @@ const [cantidad, setCantidad] = useState<number | null>(null);
 
 // Estado de error
 <NumberBox label="Edad" error errorMessage="Debe ser mayor a 18" min={18} />`,
+    FileBox: `// Campo compacto (default)
+<FileBox
+  label="Comprobante"
+  accept="image/*,.pdf"
+  showClearButton
+  onChange={(files) => setAdjunto(files[0] ?? null)}
+/>
+
+// Múltiple con límites
+<FileBox
+  label="Adjuntos"
+  multiple
+  maxFiles={5}
+  maxSize={5 * 1024 * 1024} // 5 MB
+  accept=".pdf,.docx"
+  onChange={setAdjuntos}
+  onReject={(rejected) => {
+    rejected.forEach(({ file, reason }) => console.warn(file.name, reason));
+  }}
+/>
+
+// Dropzone con lista
+<FileBox
+  displayMode="dropzone"
+  label="Arrastrá tus archivos"
+  multiple
+  fullWidth
+  onChange={setFiles}
+/>
+
+// Controlado
+const [files, setFiles] = useState<File[]>([]);
+<FileBox value={files} onChange={setFiles} showClearButton />
+
+// Estado de error
+<FileBox label="DNI" error errorMessage="Archivo requerido" />`,
     TextArea: `// Campo básico
 <TextArea placeholder="Escribí tu mensaje..." />
 
@@ -620,6 +656,45 @@ export interface NumberBoxProps
 export type NumberBoxOnChangeHandler = NonNullable<NumberBoxProps['onChange']>;
 export type NumberBoxOnFocusHandler = NonNullable<NumberBoxProps['onFocus']>;
 export type NumberBoxOnBlurHandler = NonNullable<NumberBoxProps['onBlur']>;`,
+    FileBox: `export type FileBoxVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
+export type FileBoxSize = 'sm' | 'md' | 'lg';
+export type FileBoxLabelPosition = 'top' | 'floating' | 'outlined' | 'left';
+export type FileBoxDisplayMode = 'field' | 'dropzone';
+export type FileBoxChangeValue = File[];
+
+export interface FileRejection {
+  file: File;
+  reason: 'type' | 'size' | 'max-files';
+}
+
+export interface FileBoxProps {
+  label?: string;
+  labelPosition?: FileBoxLabelPosition;
+  displayMode?: FileBoxDisplayMode; // 'field' (default) | 'dropzone'
+  placeholder?: string;
+  buttonLabel?: string;
+  value?: File[];            // controlado
+  defaultValue?: File[];     // no controlado
+  multiple?: boolean;
+  accept?: string;           // ej. "image/*,.pdf"
+  maxSize?: number;          // bytes por archivo
+  maxFiles?: number;         // solo con multiple
+  showClearButton?: boolean;
+  variant?: FileBoxVariant;
+  size?: FileBoxSize;
+  error?: boolean;
+  errorMessage?: string;
+  helperText?: string;
+  disabled?: boolean;
+  fullWidth?: boolean;
+  width?: string | number;
+  theme?: FileBoxThemeInput; // comparte presets con TextBox
+  onChange?: (files: File[]) => void;
+  onReject?: (rejected: FileRejection[]) => void;
+}
+
+export type FileBoxOnChangeHandler = NonNullable<FileBoxProps['onChange']>;
+export type FileBoxOnRejectHandler = NonNullable<FileBoxProps['onReject']>;`,
     TextArea: `export type TextAreaLabelPosition = 'top' | 'floating' | 'outlined' | 'left';
 export type TextAreaVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
 export type TextAreaSize = 'sm' | 'md' | 'lg';
@@ -1006,6 +1081,12 @@ function AccessibilitySection({ entry }: { entry: DocEntry }) {
 - Spin buttons: decorativos para AT (tabIndex -1); el teclado cubre la función.
 - Errores: aria-invalid="true" + aria-describedby al mensaje.
 - Botón limpiar: aria-label "Limpiar campo"; oculto sin valor.`,
+    FileBox: `- Input file nativo oculto (aria-hidden); la UI visible es el control estilado.
+- Contenedor: role="group" con aria-invalid y aria-describedby.
+- Label: asociado vía <label htmlFor> al input file (abre el picker).
+- Modo field: botón "Elegir archivo" y botón limpiar con aria-label.
+- Modo dropzone: botón con instrucciones; lista de archivos con remove por ítem.
+- Drag & drop: soportado en ambos modos; teclado vía el botón de selección.`,
     TextArea: `- Rol: textbox (implícito en <textarea>).
 - Label: asociado vía <label htmlFor> automático con prop label.
 - Errores: aria-invalid="true" + aria-describedby al mensaje.

@@ -3,6 +3,7 @@ import { buttonMeta } from '@/demo/metadata/buttonMeta';
 import { selectMeta } from '@/demo/metadata/selectMeta';
 import { textBoxMeta } from '@/demo/metadata/textBoxMeta';
 import { numberBoxMeta } from '@/demo/metadata/numberBoxMeta';
+import { fileBoxMeta } from '@/demo/metadata/fileBoxMeta';
 import { textAreaMeta } from '@/demo/metadata/textAreaMeta';
 import { sidebarMeta } from '@/demo/metadata/sidebarMeta';
 import { dateBoxMeta } from '@/demo/metadata/dateBoxMeta';
@@ -67,6 +68,28 @@ export const componentDocEntries: Record<string, DocEntry> = {
     importPath: "import { NumberBox } from 'glubox';",
     installNote:
       'NumberBox comparte apariencia y temas con TextBox. Reemplaza los spinners nativos del navegador por botones estilados acordes al tema.',
+  },
+  filebox: {
+    component: 'FileBox',
+    label: 'FileBox',
+    description:
+      'Selector de archivos con modo campo o dropzone, validación de tipo/tamaño, múltiple, clearable y el mismo sistema visual de TextBox.',
+    meta: fileBoxMeta,
+    importPath: "import { FileBox } from 'glubox';",
+    installNote:
+      'FileBox oculta el input file nativo y expone onChange con File[]. Comparte tokens de tema con TextBox.',
+    basicUsage: `import { FileBox } from 'glubox';
+
+function App() {
+  return (
+    <FileBox
+      label="Comprobante"
+      accept="image/*,.pdf"
+      showClearButton
+      onChange={(files) => console.log(files)}
+    />
+  );
+}`,
   },
   textarea: {
     component: 'TextArea',

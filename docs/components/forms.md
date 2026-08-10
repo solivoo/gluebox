@@ -7,6 +7,8 @@ Controles de entrada compartidos: variantes visuales, tamaños, estados de error
 ```tsx
 import {
   TextBox,
+  NumberBox,
+  FileBox,
   TextArea,
   Select,
   DateBox,
@@ -20,6 +22,8 @@ import {
 
 import type {
   TextBoxProps,
+  NumberBoxProps,
+  FileBoxProps,
   TextAreaProps,
   SelectProps,
   DateBoxProps,
@@ -114,6 +118,46 @@ Props destacadas: `iconLeft`, `iconRight`, `showClearButton`, `showPasswordToggl
 <TextBox label="Búsqueda" showClearButton />
 ```
 
+## NumberBox
+
+```tsx
+<NumberBox
+  label="Cantidad"
+  min={0}
+  max={100}
+  step={1}
+  showSpinButtons
+  showClearButton
+  onChange={(e) => setCantidad(Number(e.target.value))}
+/>
+```
+
+Campo numérico basado en TextBox. Oculta los spinners nativos y usa botones estilados. Props propias: `step`, `min`, `max`, `showSpinButtons`.
+
+## FileBox
+
+```tsx
+<FileBox
+  label="Comprobante"
+  accept="image/*,.pdf"
+  showClearButton
+  onChange={(files) => setAdjunto(files[0] ?? null)}
+/>
+```
+
+```tsx
+<FileBox
+  displayMode="dropzone"
+  multiple
+  maxFiles={5}
+  maxSize={5 * 1024 * 1024}
+  onChange={setAdjuntos}
+  onReject={(rejected) => console.warn(rejected)}
+/>
+```
+
+`displayMode`: `'field'` (campo compacto, default) o `'dropzone'` (área de arrastre + lista). `onChange` emite `File[]`. Validación de `accept`, `maxSize` y `maxFiles` vía `onReject`.
+
 ## TextArea
 
 ```tsx
@@ -203,6 +247,8 @@ Herencia, presets y prioridad: [Guía de temas](/guide/themes).
 | Componente | Tipos exportados |
 |------------|------------------|
 | `TextBox` | `TextBoxOnChangeHandler`, `TextBoxOnFocusHandler`, `TextBoxOnBlurHandler` |
+| `NumberBox` | `NumberBoxOnChangeHandler`, `NumberBoxOnFocusHandler`, `NumberBoxOnBlurHandler` |
+| `FileBox` | `FileBoxOnChangeHandler`, `FileBoxOnRejectHandler`, `FileBoxChangeValue`, `FileRejection` |
 | `TextArea` | `TextAreaOnChangeHandler`, `TextAreaOnFocusHandler`, `TextAreaOnBlurHandler` |
 | `Select` | `SelectOnChangeHandler`, `SelectChangeValue` |
 | `DateBox` | `DateBoxOnChangeHandler` |

@@ -128,6 +128,43 @@ export const componentEventTypesDocs: Record<string, ComponentEventTypesDoc> = {
   setCantidad(value);
 };`,
   },
+  filebox: {
+    importTypes: `import type {
+  FileBoxOnChangeHandler,
+  FileBoxOnRejectHandler,
+  FileBoxChangeValue,
+  FileRejection,
+} from 'glubox';`,
+    handlers: [
+      {
+        handlerType: 'FileBoxOnChangeHandler',
+        payloadType: 'FileBoxChangeValue',
+        signature: '(files: File[]) => void',
+        description: 'Handler de onChange con la lista aceptada de archivos.',
+      },
+      {
+        handlerType: 'FileBoxOnRejectHandler',
+        payloadType: 'FileRejection[]',
+        signature: '(rejected: FileRejection[]) => void',
+        description: 'Handler cuando archivos fallan accept / maxSize / maxFiles.',
+      },
+      {
+        handlerType: 'FileBoxChangeValue',
+        signature: 'File[]',
+        description: 'Alias del valor emitido por onChange.',
+      },
+    ],
+    usageExample: `const handleFiles: FileBoxOnChangeHandler = (files) => {
+  const next: FileBoxChangeValue = files;
+  setAdjuntos(next);
+};
+
+const handleReject: FileBoxOnRejectHandler = (rejected) => {
+  rejected.forEach(({ file, reason }) => {
+    console.warn(file.name, reason);
+  });
+};`,
+  },
   textarea: {
     importTypes: `import type {
   TextAreaOnChangeHandler,

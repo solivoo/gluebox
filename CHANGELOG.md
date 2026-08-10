@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.1.16] — 2026-08-10
+
+### Añadido
+
+- **`FileBox`** — selector de archivos con `displayMode` `'field'` (campo compacto + botón Elegir) o `'dropzone'` (arrastre + lista). Soporta `multiple`, `accept`, `maxSize`, `maxFiles`, `showClearButton`, variantes/tamaños/labels y los mismos tokens de tema que TextBox.
+- Eventos tipados: `onChange(files: File[])` y `onReject(rejected: FileRejection[])` con reasons `'type' | 'size' | 'max-files'`.
+- Tipos exportados: `FileBoxProps`, `FileBoxDisplayMode`, `FileBoxChangeValue`, `FileRejection`, `FileBoxOnChangeHandler`, `FileBoxOnRejectHandler`.
+- Demo `/componentes/filebox` + docs (Getting Started, How To, Props, Events, Types, Accessibility) y sección en [Formularios](/components/forms).
+
+### Migración (apps consumidoras)
+
+1. Actualizar a `glubox@0.1.16`.
+2. Sin breaking changes; `FileBox` es un componente nuevo.
+
 ## [0.1.15] — 2026-08-10
 
 ### Añadido

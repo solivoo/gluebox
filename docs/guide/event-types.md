@@ -65,6 +65,22 @@ const handleClick: ButtonOnClickHandler = (event) => {
 | `TextBoxOnFocusHandler` | `(event: FocusEvent<HTMLInputElement>) => void` |
 | `TextBoxOnBlurHandler` | `(event: FocusEvent<HTMLInputElement>) => void` |
 
+### NumberBox
+
+| Tipo | Signatura |
+|------|-----------|
+| `NumberBoxOnChangeHandler` | `(event: ChangeEvent<HTMLInputElement>) => void` |
+| `NumberBoxOnFocusHandler` | `(event: FocusEvent<HTMLInputElement>) => void` |
+| `NumberBoxOnBlurHandler` | `(event: FocusEvent<HTMLInputElement>) => void` |
+
+### FileBox
+
+| Tipo | Signatura |
+|------|-----------|
+| `FileBoxOnChangeHandler` | `(files: File[]) => void` |
+| `FileBoxOnRejectHandler` | `(rejected: FileRejection[]) => void` |
+| `FileBoxChangeValue` | `File[]` |
+
 ### TextArea
 
 | Tipo | Signatura |

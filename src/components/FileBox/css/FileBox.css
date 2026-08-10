@@ -1,0 +1,376 @@
+/* Reutiliza tokens --textbox-* del sistema de temas (igual que NumberBox). */
+
+.glb-filebox {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  font-family: var(--glb-font-family, 'Poppins', sans-serif);
+  font-size: var(--textbox-font-size, 0.875rem);
+  box-sizing: border-box;
+  color: var(--textbox-text);
+}
+
+.glb-filebox--full-width {
+  width: 100%;
+}
+
+.glb-filebox__row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  width: 100%;
+}
+
+.glb-filebox--left .glb-filebox__row {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.glb-filebox--left .glb-filebox__label {
+  flex-shrink: 0;
+  padding-top: 0.55rem;
+  min-width: 7rem;
+  text-align: right;
+}
+
+.glb-filebox--left .glb-filebox__control {
+  flex: 1;
+  min-width: 0;
+}
+
+.glb-filebox__label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--textbox-label-color, var(--glb-muted, #6b7280));
+  line-height: 1.25;
+}
+
+.glb-filebox__native {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.glb-filebox__control {
+  position: relative;
+  width: 100%;
+}
+
+/* ── Field mode ── */
+
+.glb-filebox__field {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: 2.5rem;
+  padding: 0.25rem 0.25rem 0.25rem 0.75rem;
+  border-radius: var(--textbox-radius, 0.5rem);
+  border: 1px solid var(--textbox-border);
+  background-color: var(--textbox-bg);
+  color: var(--textbox-text);
+  box-shadow: var(--textbox-shadow, none);
+  transition: var(--textbox-transition, all 0.15s ease);
+  box-sizing: border-box;
+}
+
+.glb-filebox__field:hover {
+  background-color: var(--textbox-hover-bg);
+  border-color: var(--textbox-hover-border);
+}
+
+.glb-filebox:focus-within .glb-filebox__field,
+.glb-filebox--dragging .glb-filebox__field {
+  border-color: var(--textbox-focus-border);
+  background-color: var(--textbox-focus-bg);
+  box-shadow: 0 0 0 3px var(--textbox-focus-ring);
+}
+
+.glb-filebox--error .glb-filebox__field {
+  border-color: var(--textbox-error-border);
+}
+
+.glb-filebox--error:focus-within .glb-filebox__field {
+  box-shadow: 0 0 0 3px var(--textbox-error-focus-ring);
+}
+
+.glb-filebox--disabled .glb-filebox__field {
+  background-color: var(--textbox-disabled-bg);
+  color: var(--textbox-disabled-text);
+  border-color: var(--textbox-disabled-border);
+  cursor: not-allowed;
+}
+
+.glb-filebox__icon {
+  display: inline-flex;
+  color: var(--textbox-icon);
+  flex-shrink: 0;
+}
+
+.glb-filebox__icon svg {
+  width: 1em;
+  height: 1em;
+}
+
+.glb-filebox__filename {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: inherit;
+}
+
+.glb-filebox__filename--empty {
+  color: var(--textbox-placeholder);
+}
+
+.glb-filebox__clear,
+.glb-filebox__item-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--textbox-clear-color);
+  border-radius: 50%;
+  font-size: 1.125rem;
+  line-height: 1;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.glb-filebox__clear:hover,
+.glb-filebox__item-remove:hover {
+  color: var(--textbox-clear-hover-color);
+  background-color: rgba(128, 128, 128, 0.15);
+}
+
+.glb-filebox__browse {
+  flex-shrink: 0;
+  border: none;
+  border-radius: calc(var(--textbox-radius, 0.5rem) - 0.125rem);
+  padding: 0.375rem 0.75rem;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  background: var(--glb-accent, #6366f1);
+  color: var(--glb-accent-on-fill, #fff);
+  transition: opacity 0.15s ease;
+}
+
+.glb-filebox__browse:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.glb-filebox__browse:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Dropzone mode ── */
+
+.glb-filebox__dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  width: 100%;
+  min-height: 8.5rem;
+  padding: 1.25rem;
+  border-radius: var(--textbox-radius, 0.5rem);
+  border: 1.5px dashed var(--textbox-border);
+  background-color: var(--textbox-bg);
+  color: var(--textbox-text);
+  cursor: pointer;
+  font-family: inherit;
+  transition: var(--textbox-transition, all 0.15s ease);
+  box-sizing: border-box;
+}
+
+.glb-filebox__dropzone:hover:not(:disabled),
+.glb-filebox--dragging .glb-filebox__dropzone {
+  border-color: var(--textbox-focus-border);
+  background-color: var(--textbox-focus-bg);
+  box-shadow: 0 0 0 3px var(--textbox-focus-ring);
+}
+
+.glb-filebox--error .glb-filebox__dropzone {
+  border-color: var(--textbox-error-border);
+}
+
+.glb-filebox__dropzone:disabled {
+  cursor: not-allowed;
+  background-color: var(--textbox-disabled-bg);
+  color: var(--textbox-disabled-text);
+  border-color: var(--textbox-disabled-border);
+}
+
+.glb-filebox__drop-icon {
+  display: inline-flex;
+  color: var(--textbox-icon);
+  margin-bottom: 0.25rem;
+}
+
+.glb-filebox__drop-icon svg {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.glb-filebox__drop-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.glb-filebox__drop-hint {
+  font-size: 0.8125rem;
+  color: var(--textbox-placeholder);
+}
+
+.glb-filebox__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.glb-filebox__item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.625rem;
+  border-radius: calc(var(--textbox-radius, 0.5rem) - 0.125rem);
+  border: 1px solid var(--textbox-border);
+  background: var(--textbox-bg);
+}
+
+.glb-filebox__item-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.8125rem;
+}
+
+.glb-filebox__item-size {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  color: var(--textbox-helper-color, var(--glb-muted, #9ca3af));
+}
+
+.glb-filebox__helper {
+  font-size: 0.75rem;
+  line-height: 1.25;
+  color: var(--textbox-helper-color);
+}
+
+.glb-filebox__helper--error {
+  color: var(--textbox-error-color);
+}
+
+/* ── Sizes ── */
+
+.glb-filebox--sm {
+  font-size: 0.8125rem;
+}
+
+.glb-filebox--sm .glb-filebox__field {
+  min-height: 2.125rem;
+}
+
+.glb-filebox--lg {
+  font-size: 1rem;
+}
+
+.glb-filebox--lg .glb-filebox__field {
+  min-height: 2.875rem;
+}
+
+/* ── Variants → tokens TextBox ── */
+
+.glb-filebox--primary {
+  --textbox-bg: var(--textbox-primary-bg);
+  --textbox-text: var(--textbox-primary-text);
+  --textbox-border: var(--textbox-primary-border);
+  --textbox-placeholder: var(--textbox-primary-placeholder);
+  --textbox-icon: var(--textbox-primary-icon);
+  --textbox-hover-bg: var(--textbox-primary-hover-bg);
+  --textbox-hover-border: var(--textbox-primary-hover-border);
+  --textbox-focus-bg: var(--textbox-primary-focus-bg);
+  --textbox-focus-border: var(--textbox-primary-focus-border);
+  --textbox-focus-ring: var(--textbox-primary-focus-ring);
+  --textbox-disabled-bg: var(--textbox-primary-disabled-bg);
+  --textbox-disabled-text: var(--textbox-primary-disabled-text);
+  --textbox-disabled-border: var(--textbox-primary-disabled-border);
+  --textbox-error-border: var(--textbox-primary-error-border);
+  --textbox-error-focus-ring: var(--textbox-primary-error-focus-ring);
+}
+
+.glb-filebox--secondary {
+  --textbox-bg: var(--textbox-secondary-bg);
+  --textbox-text: var(--textbox-secondary-text);
+  --textbox-border: var(--textbox-secondary-border);
+  --textbox-placeholder: var(--textbox-secondary-placeholder);
+  --textbox-icon: var(--textbox-secondary-icon);
+  --textbox-hover-bg: var(--textbox-secondary-hover-bg);
+  --textbox-hover-border: var(--textbox-secondary-hover-border);
+  --textbox-focus-bg: var(--textbox-secondary-focus-bg);
+  --textbox-focus-border: var(--textbox-secondary-focus-border);
+  --textbox-focus-ring: var(--textbox-secondary-focus-ring);
+  --textbox-disabled-bg: var(--textbox-secondary-disabled-bg);
+  --textbox-disabled-text: var(--textbox-secondary-disabled-text);
+  --textbox-disabled-border: var(--textbox-secondary-disabled-border);
+  --textbox-error-border: var(--textbox-secondary-error-border);
+  --textbox-error-focus-ring: var(--textbox-secondary-error-focus-ring);
+}
+
+.glb-filebox--outline {
+  --textbox-bg: var(--textbox-outline-bg);
+  --textbox-text: var(--textbox-outline-text);
+  --textbox-border: var(--textbox-outline-border);
+  --textbox-placeholder: var(--textbox-outline-placeholder);
+  --textbox-icon: var(--textbox-outline-icon);
+  --textbox-hover-bg: var(--textbox-outline-hover-bg);
+  --textbox-hover-border: var(--textbox-outline-hover-border);
+  --textbox-focus-bg: var(--textbox-outline-focus-bg);
+  --textbox-focus-border: var(--textbox-outline-focus-border);
+  --textbox-focus-ring: var(--textbox-outline-focus-ring);
+  --textbox-disabled-bg: var(--textbox-outline-disabled-bg);
+  --textbox-disabled-text: var(--textbox-outline-disabled-text);
+  --textbox-disabled-border: var(--textbox-outline-disabled-border);
+  --textbox-error-border: var(--textbox-outline-error-border);
+  --textbox-error-focus-ring: var(--textbox-outline-error-focus-ring);
+}
+
+.glb-filebox--ghost {
+  --textbox-bg: var(--textbox-ghost-bg);
+  --textbox-text: var(--textbox-ghost-text);
+  --textbox-border: var(--textbox-ghost-border);
+  --textbox-placeholder: var(--textbox-ghost-placeholder);
+  --textbox-icon: var(--textbox-ghost-icon);
+  --textbox-hover-bg: var(--textbox-ghost-hover-bg);
+  --textbox-hover-border: var(--textbox-ghost-hover-border);
+  --textbox-focus-bg: var(--textbox-ghost-focus-bg);
+  --textbox-focus-border: var(--textbox-ghost-focus-border);
+  --textbox-focus-ring: var(--textbox-ghost-focus-ring);
+  --textbox-disabled-bg: var(--textbox-ghost-disabled-bg);
+  --textbox-disabled-text: var(--textbox-ghost-disabled-text);
+  --textbox-disabled-border: var(--textbox-ghost-disabled-border);
+  --textbox-error-border: var(--textbox-ghost-error-border);
+  --textbox-error-focus-ring: var(--textbox-ghost-error-focus-ring);
+}

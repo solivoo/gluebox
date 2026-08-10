@@ -261,6 +261,69 @@
           ]
         },
         {
+          "id": "componentes-filebox",
+          "label": "FileBox",
+          "permissions": ["componentes:read"],
+          "children": [
+            {
+              "id": "componentes-filebox-overview",
+              "label": "Overview",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-filebox-overview-getting-started",
+                  "label": "Getting Started",
+                  "path": "/componentes/filebox/overview/getting-started",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-filebox-overview-how-to",
+                  "label": "How To",
+                  "path": "/componentes/filebox/overview/how-to",
+                  "permissions": ["componentes:read"]
+                }
+              ]
+            },
+            {
+              "id": "componentes-filebox-api",
+              "label": "API",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-filebox-api-props",
+                  "label": "Props",
+                  "path": "/componentes/filebox/api/props",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-filebox-api-events",
+                  "label": "Events",
+                  "path": "/componentes/filebox/api/events",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-filebox-api-types",
+                  "label": "Types",
+                  "path": "/componentes/filebox/api/types",
+                  "permissions": ["componentes:read"]
+                }
+              ]
+            },
+            {
+              "id": "componentes-filebox-accessibility",
+              "label": "Accessibility",
+              "path": "/componentes/filebox/accessibility",
+              "permissions": ["componentes:read"]
+            },
+            {
+              "id": "componentes-filebox-demos",
+              "label": "Demos",
+              "path": "/componentes/filebox",
+              "permissions": ["componentes:read"]
+            }
+          ]
+        },
+        {
           "id": "componentes-textarea",
           "label": "TextArea",
           "permissions": ["componentes:read"],
