@@ -166,6 +166,33 @@ function HowTo({ entry }: { entry: DocEntry }) {
 
 // Variante outline
 <TextBox variant="outline" />`,
+    NumberBox: `// Campo básico (no controlado)
+<NumberBox label="Cantidad" defaultValue={5} />
+
+// Controlado — event.target.value es string
+const [cantidad, setCantidad] = useState<number | null>(null);
+<NumberBox
+  label="Cantidad"
+  value={cantidad ?? ''}
+  onChange={(e) =>
+    setCantidad(e.target.value === '' ? null : Number(e.target.value))
+  }
+/>
+
+// Límites y step
+<NumberBox label="Porcentaje" min={0} max={100} step={5} />
+
+// Decimales
+<NumberBox label="Precio" min={0} step={0.01} defaultValue={19.99} />
+
+// Sin spin buttons
+<NumberBox label="DNI" showSpinButtons={false} />
+
+// Con botón de limpiar y label flotante
+<NumberBox label="Monto" labelPosition="floating" showClearButton />
+
+// Estado de error
+<NumberBox label="Edad" error errorMessage="Debe ser mayor a 18" min={18} />`,
     TextArea: `// Campo básico
 <TextArea placeholder="Escribí tu mensaje..." />
 
@@ -573,6 +600,26 @@ export interface TextBoxProps extends InputHTMLAttributes<HTMLInputElement> {
   width?: string | number;
   theme?: TextBoxThemeInput;
 }`,
+    NumberBox: `// NumberBox comparte apariencia y temas con TextBox
+export type NumberBoxVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
+export type NumberBoxSize = 'sm' | 'md' | 'lg';
+export type NumberBoxLabelPosition = 'top' | 'floating' | 'outlined' | 'left';
+export type NumberBoxThemeInput = NumberBoxTheme | NumberBoxThemePreset;
+
+export interface NumberBoxProps
+  extends Omit<TextBoxProps, 'type' | 'showPasswordToggle' | 'iconRight'> {
+  step?: number;             // incremento de spin buttons y flechas ↑/↓
+  min?: number;              // límite inferior (clamp en spin buttons)
+  max?: number;              // límite superior (clamp en spin buttons)
+  showSpinButtons?: boolean; // default true
+  // Heredado de TextBox: label, labelPosition, variant, size,
+  // error, errorMessage, helperText, showClearButton, iconLeft,
+  // fullWidth, width, theme, disabled...
+}
+
+export type NumberBoxOnChangeHandler = NonNullable<NumberBoxProps['onChange']>;
+export type NumberBoxOnFocusHandler = NonNullable<NumberBoxProps['onFocus']>;
+export type NumberBoxOnBlurHandler = NonNullable<NumberBoxProps['onBlur']>;`,
     TextArea: `export type TextAreaLabelPosition = 'top' | 'floating' | 'outlined' | 'left';
 export type TextAreaVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
 export type TextAreaSize = 'sm' | 'md' | 'lg';
@@ -953,6 +1000,12 @@ function AccessibilitySection({ entry }: { entry: DocEntry }) {
 - Errores: aria-invalid="true" + aria-describedby al mensaje.
 - Helper: aria-describedby también referencia helperText.
 - Placeholder: no sustituye al label. Usar label + placeholder.`,
+    NumberBox: `- Input nativo type="number": semántica de spinbutton para lectores.
+- Label: asociado vía <label htmlFor> automático con prop label.
+- Teclado: flechas ↑/↓ incrementan/decrementan (comportamiento nativo).
+- Spin buttons: decorativos para AT (tabIndex -1); el teclado cubre la función.
+- Errores: aria-invalid="true" + aria-describedby al mensaje.
+- Botón limpiar: aria-label "Limpiar campo"; oculto sin valor.`,
     TextArea: `- Rol: textbox (implícito en <textarea>).
 - Label: asociado vía <label htmlFor> automático con prop label.
 - Errores: aria-invalid="true" + aria-describedby al mensaje.

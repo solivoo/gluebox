@@ -6,6 +6,16 @@
   box-sizing: border-box;
 }
 
+/* Los widgets nativos (spinners de number, dropdowns, scrollbars) deben
+   seguir el modo del tema; sin esto el navegador los pinta siempre claros. */
+:root {
+  color-scheme: light;
+}
+
+[data-mode='dark'] {
+  color-scheme: dark;
+}
+
 body {
   margin: 0;
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;

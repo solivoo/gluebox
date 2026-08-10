@@ -198,6 +198,69 @@
           ]
         },
         {
+          "id": "componentes-numberbox",
+          "label": "NumberBox",
+          "permissions": ["componentes:read"],
+          "children": [
+            {
+              "id": "componentes-numberbox-overview",
+              "label": "Overview",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-numberbox-overview-getting-started",
+                  "label": "Getting Started",
+                  "path": "/componentes/numberbox/overview/getting-started",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-numberbox-overview-how-to",
+                  "label": "How To",
+                  "path": "/componentes/numberbox/overview/how-to",
+                  "permissions": ["componentes:read"]
+                }
+              ]
+            },
+            {
+              "id": "componentes-numberbox-api",
+              "label": "API",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-numberbox-api-props",
+                  "label": "Props",
+                  "path": "/componentes/numberbox/api/props",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-numberbox-api-events",
+                  "label": "Events",
+                  "path": "/componentes/numberbox/api/events",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-numberbox-api-types",
+                  "label": "Types",
+                  "path": "/componentes/numberbox/api/types",
+                  "permissions": ["componentes:read"]
+                }
+              ]
+            },
+            {
+              "id": "componentes-numberbox-accessibility",
+              "label": "Accessibility",
+              "path": "/componentes/numberbox/accessibility",
+              "permissions": ["componentes:read"]
+            },
+            {
+              "id": "componentes-numberbox-demos",
+              "label": "Demos",
+              "path": "/componentes/numberbox",
+              "permissions": ["componentes:read"]
+            }
+          ]
+        },
+        {
           "id": "componentes-textarea",
           "label": "TextArea",
           "permissions": ["componentes:read"],

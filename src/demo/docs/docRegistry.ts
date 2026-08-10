@@ -2,6 +2,7 @@ import type { ComponentMeta } from '@/demo/playground/types';
 import { buttonMeta } from '@/demo/metadata/buttonMeta';
 import { selectMeta } from '@/demo/metadata/selectMeta';
 import { textBoxMeta } from '@/demo/metadata/textBoxMeta';
+import { numberBoxMeta } from '@/demo/metadata/numberBoxMeta';
 import { textAreaMeta } from '@/demo/metadata/textAreaMeta';
 import { sidebarMeta } from '@/demo/metadata/sidebarMeta';
 import { dateBoxMeta } from '@/demo/metadata/dateBoxMeta';
@@ -56,6 +57,16 @@ export const componentDocEntries: Record<string, DocEntry> = {
     importPath: "import { TextBox } from 'glubox';",
     installNote:
       'TextBox extiende InputHTMLAttributes. Compatible con formularios controlados y no controlados.',
+  },
+  numberbox: {
+    component: 'NumberBox',
+    label: 'NumberBox',
+    description:
+      'Campo numérico basado en TextBox: spin buttons estilados, step configurable, límites min/max, variantes visuales, labels y temas.',
+    meta: numberBoxMeta,
+    importPath: "import { NumberBox } from 'glubox';",
+    installNote:
+      'NumberBox comparte apariencia y temas con TextBox. Reemplaza los spinners nativos del navegador por botones estilados acordes al tema.',
   },
   textarea: {
     component: 'TextArea',

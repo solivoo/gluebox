@@ -1,3 +1,4 @@
+import { NumberBox } from '@/components/NumberBox';
 import type { PropMeta } from './types';
 import './PropControl.css';
 
@@ -59,11 +60,14 @@ export function PropControl({ meta, value, onChange }: Readonly<PropControlProps
         )}
 
         {control === 'number' && (
-          <input
+          <NumberBox
             className="pc-control__number"
-            type="number"
-            value={Number(value)}
-            onChange={(e) => onChange(Number(e.target.value))}
+            size="sm"
+            fullWidth
+            value={value == null || value === '' ? '' : Number(value)}
+            onChange={(e) =>
+              onChange(e.target.value === '' ? undefined : Number(e.target.value))
+            }
           />
         )}
 

@@ -3,6 +3,7 @@ import '@/components/Sidebar/css/Sidebar.css';
 import '@/components/Button/css/Button.css';
 import '@/components/Select/css/Select.css';
 import '@/components/TextBox/css/TextBox.css';
+import '@/components/NumberBox/css/NumberBox.css';
 import '@/components/TextArea/css/TextArea.css';
 import '@/components/DateBox/css/DateBox.css';
 import '@/components/RangeDateBox/css/RangeDateBox.css';
@@ -91,6 +92,22 @@ export {
   TextBox,
   textBoxThemes,
 } from './components/TextBox';
+
+export type {
+  NumberBoxProps,
+  NumberBoxVariant,
+  NumberBoxSize,
+  NumberBoxLabelPosition,
+  NumberBoxTheme,
+  NumberBoxVariantTheme,
+  NumberBoxThemePreset,
+  NumberBoxThemeInput,
+  NumberBoxOnChangeHandler,
+  NumberBoxOnFocusHandler,
+  NumberBoxOnBlurHandler,
+} from './components/NumberBox';
+
+export { NumberBox } from './components/NumberBox';
 
 export type {
   TextAreaProps,

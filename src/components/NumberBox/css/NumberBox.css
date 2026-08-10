@@ -1,0 +1,79 @@
+/*
+ * NumberBox reutiliza las clases y tokens (--textbox-*) del TextBox,
+ * por lo que hereda temas, variantes y estados sin duplicar CSS.
+ * Acá solo viven los estilos propios: spin buttons y ocultado de
+ * spinners nativos.
+ */
+
+/* Host transparente: no participa del layout, solo ancla el stepping */
+.glb-numberbox-host {
+  display: contents;
+}
+
+/* Oculta los spinners nativos del navegador (los reemplazan los propios) */
+.glb-numberbox .glb-textbox__input::-webkit-outer-spin-button,
+.glb-numberbox .glb-textbox__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.glb-numberbox .glb-textbox__input {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* El slot iconRight del TextBox es decorativo; acá aloja botones reales */
+.glb-numberbox .glb-textbox__icon--right {
+  pointer-events: auto;
+}
+
+/* ── Spin buttons ── */
+
+.glb-numberbox__spin {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.0625rem;
+}
+
+.glb-numberbox__spin-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 0.8125rem;
+  padding: 0;
+  border: none;
+  background: none;
+  border-radius: 0.1875rem;
+  color: var(--textbox-icon);
+  cursor: pointer;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.glb-numberbox__spin-btn svg {
+  width: 0.75em;
+  height: 0.75em;
+}
+
+.glb-numberbox__spin-btn:hover:not(:disabled) {
+  color: var(--textbox-text);
+  background-color: rgba(128, 128, 128, 0.18);
+}
+
+.glb-numberbox__spin-btn:active:not(:disabled) {
+  background-color: rgba(128, 128, 128, 0.3);
+}
+
+.glb-numberbox__spin-btn:disabled {
+  color: var(--textbox-disabled-text);
+  cursor: not-allowed;
+}
+
+/* Con clearable: spin pegado al borde y la X a su izquierda */
+.glb-numberbox.glb-textbox--clearable .glb-textbox__icon--right {
+  right: 0.375rem;
+}
+
+.glb-numberbox.glb-textbox--clearable .glb-textbox__clear {
+  right: 2rem;
+}

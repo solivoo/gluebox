@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.1.15] — 2026-08-10
+
+### Añadido
+
+- **`NumberBox`** — campo numérico basado en TextBox: hereda variantes, labels (top/floating/outlined/left), estados de error/ayuda, clearable y todo el sistema de temas. Reemplaza los spinners nativos del navegador por spin buttons estilados acordes al tema, con `step` configurable y clamp a `min`/`max`.
+- Tipos exportados: `NumberBoxProps`, `NumberBoxVariant`, `NumberBoxSize`, `NumberBoxLabelPosition`, `NumberBoxTheme*` y handlers (`NumberBoxOnChangeHandler`, `NumberBoxOnFocusHandler`, `NumberBoxOnBlurHandler`).
+- Demo: playground `/componentes/numberbox` + docs (Getting Started, How To, Props, Events, Types, Accessibility).
+
+### Cambiado
+
+- **Demo:** el panel de props del playground usa `NumberBox` para los controles numéricos (antes `<input type="number">` nativo sin estilar).
+- **Demo:** `color-scheme` global acorde a `data-mode`, para que los widgets nativos (dropdowns, scrollbars) se dibujen correctamente en modo oscuro.
+
+### Migración (apps consumidoras)
+
+1. Actualizar a `glubox@0.1.15`.
+2. Sin breaking changes; `NumberBox` es un componente nuevo.
+
 ## [0.1.14] — 2026-07-31
 
 ### Añadido

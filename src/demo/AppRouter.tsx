@@ -8,6 +8,7 @@ import { AppearancePage } from '@/demo/pages/docs/AppearancePage';
 import { ButtonDemo } from '@/demo/pages/demos/ButtonDemo';
 import { SelectDemo } from '@/demo/pages/demos/SelectDemo';
 import { TextBoxDemo } from '@/demo/pages/demos/TextBoxDemo';
+import { NumberBoxDemo } from '@/demo/pages/demos/NumberBoxDemo';
 import { TextAreaDemo } from '@/demo/pages/demos/TextAreaDemo';
 import { SidebarDemo } from '@/demo/pages/demos/SidebarDemo';
 import { DateBoxDemo } from '@/demo/pages/demos/DateBoxDemo';
@@ -94,6 +95,7 @@ export function AppRouter() {
           <Route path="componentes/button" element={<ButtonDemo />} />
           <Route path="componentes/select" element={<SelectDemo />} />
           <Route path="componentes/textbox" element={<TextBoxDemo />} />
+          <Route path="componentes/numberbox" element={<NumberBoxDemo />} />
           <Route path="componentes/textarea" element={<TextAreaDemo />} />
           <Route path="componentes/sidebar" element={<SidebarDemo />} />
           <Route path="componentes/datebox" element={<DateBoxDemo />} />

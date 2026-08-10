@@ -99,6 +99,35 @@ export const componentEventTypesDocs: Record<string, ComponentEventTypesDoc> = {
   setEmail(event.target.value);
 };`,
   },
+  numberbox: {
+    importTypes: `import type {
+  NumberBoxOnChangeHandler,
+  NumberBoxOnFocusHandler,
+  NumberBoxOnBlurHandler,
+} from 'glubox';`,
+    handlers: [
+      {
+        handlerType: 'NumberBoxOnChangeHandler',
+        signature: '(event: ChangeEvent<HTMLInputElement>) => void',
+        description:
+          'Handler de onChange. Se dispara al tipear o usar los spin buttons; event.target.value es string.',
+      },
+      {
+        handlerType: 'NumberBoxOnFocusHandler',
+        signature: '(event: FocusEvent<HTMLInputElement>) => void',
+        description: 'Handler de onFocus.',
+      },
+      {
+        handlerType: 'NumberBoxOnBlurHandler',
+        signature: '(event: FocusEvent<HTMLInputElement>) => void',
+        description: 'Handler de onBlur.',
+      },
+    ],
+    usageExample: `const handleChange: NumberBoxOnChangeHandler = (event) => {
+  const value = event.target.value === '' ? null : Number(event.target.value);
+  setCantidad(value);
+};`,
+  },
   textarea: {
     importTypes: `import type {
   TextAreaOnChangeHandler,
