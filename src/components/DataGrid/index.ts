@@ -46,6 +46,8 @@ export type {
   DataGridPaging,
   DataGridColumnWidths,
   DataGridSearchPosition,
+  DataGridToolbarContext,
+  DataGridRenderToolbar,
   DataGridLayout,
   DataGridCardRenderContext,
   DataGridRenderCard,

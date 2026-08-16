@@ -30,13 +30,18 @@ export function DataGrid<T extends Record<string, unknown>>(
       data-layout={vm.effectiveLayout}
     >
       <DataGridToolbar
-        show={vm.showSearch}
+        show={vm.showToolbar}
+        showSearch={vm.showSearch}
         position={vm.searchPosition ?? 'left'}
         value={vm.grid.searchQuery}
         placeholder={vm.searchPlaceholder}
         searchWidth={vm.searchWidth}
         searchStyle={vm.searchStyle}
         onChange={vm.grid.setSearchQuery}
+        toolbarLeft={vm.toolbarLeft}
+        toolbarRight={vm.toolbarRight}
+        renderToolbar={vm.renderToolbar}
+        toolbarContext={vm.toolbarContext}
       />
 
       <div className={vm.surfaceClassNames} style={vm.surfaceStyle}>

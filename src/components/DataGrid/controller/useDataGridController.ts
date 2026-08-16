@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef } from 'react';
 import type { CSSProperties, RefObject } from 'react';
-import type { DataGridProps } from '../type/DataGrid.types';
+import type { DataGridProps, DataGridToolbarContext } from '../type/DataGrid.types';
 import { useDataGrid } from '../hooks/useDataGrid';
 import { useVirtualRows } from '../hooks/useVirtualRows';
 import { usePagination } from '../hooks/usePagination';
@@ -44,8 +44,13 @@ export interface DataGridControllerViewModel<T extends Record<string, unknown>> 
   searchPlaceholder: string;
   emptyMessage: string;
   showSearch: boolean;
+  showToolbar: boolean;
   searchPosition: DataGridProps<T>['searchPosition'];
   searchWidth: DataGridProps<T>['searchWidth'];
+  toolbarLeft: DataGridProps<T>['toolbarLeft'];
+  toolbarRight: DataGridProps<T>['toolbarRight'];
+  renderToolbar: DataGridProps<T>['renderToolbar'];
+  toolbarContext: DataGridToolbarContext<T>;
   showSummary: boolean;
   showRowCount: boolean;
   showSelectionCount: boolean;
@@ -94,6 +99,9 @@ export function useDataGridController<T extends Record<string, unknown>>(
     searchPosition = 'left',
     searchPlaceholder,
     searchWidth,
+    toolbarLeft,
+    toolbarRight,
+    renderToolbar,
     searchKeys,
     debounceMs = 300,
     stickyFirstColumn = true,
@@ -252,6 +260,43 @@ export function useDataGridController<T extends Record<string, unknown>>(
   });
 
   const rowCount = grid.displayRows.length;
+
+  const showToolbar = Boolean(
+    renderToolbar || showSearch || toolbarLeft || toolbarRight,
+  );
+
+  const toolbarContext = useMemo<DataGridToolbarContext<T>>(
+    () => ({
+      dataSource: data,
+      filteredData: grid.filteredData,
+      sortedData: grid.sortedData,
+      displayRows: rowsToRender,
+      searchQuery: grid.searchQuery,
+      setSearchQuery: grid.setSearchQuery,
+      selectedIds: grid.selectedIds,
+      selectedRows: grid.selectedRows,
+      isAllVisibleSelected: selection.isAllPageSelected,
+      selectAllVisible: selection.handleSelectAllVisible,
+      clearSelection: selection.handleClearSelection,
+      rowCount,
+      loading,
+    }),
+    [
+      data,
+      grid.filteredData,
+      grid.sortedData,
+      rowsToRender,
+      grid.searchQuery,
+      grid.setSearchQuery,
+      grid.selectedIds,
+      grid.selectedRows,
+      selection.isAllPageSelected,
+      selection.handleSelectAllVisible,
+      selection.handleClearSelection,
+      rowCount,
+      loading,
+    ],
+  );
 
   const numericRowHeight =
     typeof rowHeightProp === 'number' && !Number.isNaN(rowHeightProp)
@@ -517,8 +562,13 @@ export function useDataGridController<T extends Record<string, unknown>>(
     searchPlaceholder: resolvedSearchPlaceholder,
     emptyMessage: resolvedEmptyMessage,
     showSearch,
+    showToolbar,
     searchPosition,
     searchWidth,
+    toolbarLeft,
+    toolbarRight,
+    renderToolbar,
+    toolbarContext,
     showSummary,
     showRowCount,
     showSelectionCount,

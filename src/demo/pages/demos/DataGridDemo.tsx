@@ -17,6 +17,7 @@ import {
   DemoEmployeeCard,
   demoEmployeeCardColumns,
 } from '@/demo/data/DemoEmployeeCard';
+import { DataGridToolbarFiltersExample } from './DataGridToolbarFiltersExample';
 import './DataGridDemo.css';
 
 function resolvePageIndex(props: DataGridPlaygroundDefaults): number {
@@ -174,6 +175,16 @@ function DataGridPlaygroundPreview({
         }
         theme={props.theme as never}
       />
+
+      <section className="dg-demo__card-example">
+        <h3 className="dg-demo__card-example-title">Toolbar con filtros</h3>
+        <p className="dg-demo__card-example-desc">
+          <code>toolbarRight</code> con Select de módulo y OptionGroup segmented.
+          El padre filtra <code>dataSource</code>; el search interno filtra encima.
+          La selección múltiple no se pierde al ocultar filas con el filtro del padre.
+        </p>
+        <DataGridToolbarFiltersExample />
+      </section>
 
       <section className="dg-demo__card-example">
         <h3 className="dg-demo__card-example-title">

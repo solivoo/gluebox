@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.1.17] — 2026-08-16
+
+### Añadido
+
+- **DataGrid toolbar slots:** `toolbarLeft`, `toolbarRight` y `renderToolbar`. Layout `[left] [search] [right]`; con `renderToolbar` se sustituye todo el contenido (el consumidor decide si pinta el search).
+- Tipo exportado `DataGridToolbarContext<T>`: `dataSource`, `filteredData`, `sortedData`, `displayRows` (página visible), `searchQuery` / `setSearchQuery`, `selectedIds` / `selectedRows`, `isAllVisibleSelected`, `selectAllVisible`, `clearSelection`, `rowCount`, `loading`.
+- Demo `/componentes/datagrid`: Select de módulo + OptionGroup segmented (Todos / Solo asignados / Solo no asignados) filtrando `dataSource` desde el padre.
+
+### Cambiado
+
+- **FileBox:** en modo `field` con `multiple`, la lista de archivos (nombre, tamaño, quitar) se muestra igual que en dropzone.
+
+### Migración (apps consumidoras)
+
+1. Actualizar a `glubox@0.1.17`.
+2. Sin breaking changes. Los slots de toolbar **no filtran** solos: el padre sigue siendo dueño de `dataSource`; el search interno filtra encima.
+
 ## [0.1.16] — 2026-08-10
 
 ### Añadido

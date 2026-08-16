@@ -197,7 +197,11 @@ export function FileBox(props: Readonly<FileBoxProps>) {
                   .filter(Boolean)
                   .join(' ')}
               >
-                {files.length ? summarizeFiles(files) : placeholder}
+                {files.length === 0
+                  ? placeholder
+                  : multiple
+                    ? `${files.length} archivo${files.length === 1 ? '' : 's'} seleccionado${files.length === 1 ? '' : 's'}`
+                    : summarizeFiles(files)}
               </span>
               {showClear && (
                 <button
@@ -222,14 +226,17 @@ export function FileBox(props: Readonly<FileBoxProps>) {
         </div>
       </div>
 
-      {isDropzone && files.length > 0 && (
-        <ul className="glb-filebox__list">
+      {/* Lista de archivos: siempre en dropzone; en field solo si multiple */}
+      {(isDropzone || multiple) && files.length > 0 && (
+        <ul className="glb-filebox__list" aria-label="Archivos seleccionados">
           {files.map((file, index) => (
             <li
-              key={`${file.name}-${file.size}-${file.lastModified}`}
+              key={`${file.name}-${file.size}-${file.lastModified}-${index}`}
               className="glb-filebox__item"
             >
-              <span className="glb-filebox__item-name">{file.name}</span>
+              <span className="glb-filebox__item-name" title={file.name}>
+                {file.name}
+              </span>
               <span className="glb-filebox__item-size">{formatFileSize(file.size)}</span>
               {!disabled && (
                 <button

@@ -25,6 +25,10 @@ export interface UseDataGridSelectionReturn<T extends Record<string, unknown>> {
   handleRowClick: (row: T) => void;
   handleCardActivate: (row: T) => void;
   handleToggleSelectAll: () => void;
+  /** Agrega las filas de la página visible sin quitar el resto. */
+  handleSelectAllVisible: () => void;
+  /** Limpia toda la selección (controlada o interna). */
+  handleClearSelection: () => void;
 }
 
 function rowsFromIds<T extends Record<string, unknown>>(
@@ -163,6 +167,44 @@ export function useDataGridSelection<T extends Record<string, unknown>>(
     grid,
   ]);
 
+  const handleSelectAllVisible = useCallback(() => {
+    if (selectionMode !== 'multiple') return;
+
+    if (isControlled) {
+      const next = new Set(selectedRowIds.map(normalizeId));
+      for (const id of pageVisibleIds) {
+        next.add(id);
+      }
+      onSelectionChange?.(rowsFromIds(data, getRowId, next));
+      return;
+    }
+
+    for (const row of rowsToRender) {
+      if (!grid.isRowSelected(row)) grid.toggleRow(row);
+    }
+  }, [
+    selectionMode,
+    isControlled,
+    selectedRowIds,
+    pageVisibleIds,
+    data,
+    getRowId,
+    onSelectionChange,
+    rowsToRender,
+    grid,
+  ]);
+
+  const handleClearSelection = useCallback(() => {
+    if (selectionMode === 'none') return;
+
+    if (isControlled) {
+      onSelectionChange?.([]);
+      return;
+    }
+
+    grid.clearSelection();
+  }, [selectionMode, isControlled, onSelectionChange, grid]);
+
   return {
     pageVisibleIds,
     isAllPageSelected,
@@ -171,5 +213,7 @@ export function useDataGridSelection<T extends Record<string, unknown>>(
     handleRowClick,
     handleCardActivate,
     handleToggleSelectAll,
+    handleSelectAllVisible,
+    handleClearSelection,
   };
 }

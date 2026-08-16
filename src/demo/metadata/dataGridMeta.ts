@@ -139,7 +139,7 @@ export const dataGridMeta: ComponentMeta<DataGridPlaygroundDefaults> = {
           name: 'searchPosition',
           type: 'DataGridSearchPosition',
           defaultValue: 'left',
-          description: 'Posición del buscador en la toolbar: izquierda o derecha.',
+          description: 'Posición del buscador en la toolbar: izquierda o derecha (ignorado si hay renderToolbar).',
           control: 'select',
           options: [
             { label: 'Izquierda', value: 'left' },
@@ -166,6 +166,33 @@ export const dataGridMeta: ComponentMeta<DataGridPlaygroundDefaults> = {
           type: 'Array<keyof T>',
           defaultValue: undefined,
           description: 'Claves sobre las que filtrar; por defecto todas las columnas visibles.',
+          control: 'slot',
+          hideInPlayground: true,
+        },
+        {
+          name: 'toolbarLeft',
+          type: 'ReactNode',
+          defaultValue: undefined,
+          description:
+            'Slot a la izquierda del search. No filtra dataSource: el padre sigue siendo dueño del array.',
+          control: 'slot',
+          hideInPlayground: true,
+        },
+        {
+          name: 'toolbarRight',
+          type: 'ReactNode',
+          defaultValue: undefined,
+          description:
+            'Slot a la derecha del search (Select, OptionGroup, etc.). Filtrá en el padre y pasá el array como dataSource.',
+          control: 'slot',
+          hideInPlayground: true,
+        },
+        {
+          name: 'renderToolbar',
+          type: 'DataGridRenderToolbar<T>',
+          defaultValue: undefined,
+          description:
+            'Sustituye el contenido de la toolbar (search incluido). Recibe DataGridToolbarContext (filteredData, displayRows, selectAllVisible…).',
           control: 'slot',
           hideInPlayground: true,
         },

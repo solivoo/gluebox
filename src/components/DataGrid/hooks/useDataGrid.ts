@@ -98,10 +98,11 @@ export function useDataGrid<T extends Record<string, unknown>>(
   );
 
   const updateSelection = useCallback(
-    (next: Set<string>) => {
-      if (selectedRowIds === undefined) {
-        setInternalSelectedIds(next);
-      }
+    (next: Set<string> | ((current: Set<string>) => Set<string>)) => {
+      if (selectedRowIds !== undefined) return;
+      setInternalSelectedIds((current) =>
+        typeof next === 'function' ? next(current) : next,
+      );
     },
     [selectedRowIds],
   );
@@ -113,30 +114,33 @@ export function useDataGrid<T extends Record<string, unknown>>(
       const id = normalizeId(getRowId(row));
 
       if (selectionMode === 'single') {
-        const next = new Set<string>([id]);
-        updateSelection(next);
+        updateSelection(new Set<string>([id]));
         return;
       }
 
-      const next = new Set(selectedIds);
-      if (next.has(id)) {
-        next.delete(id);
-      } else {
-        next.add(id);
-      }
-      updateSelection(next);
+      updateSelection((current) => {
+        const next = new Set(current);
+        if (next.has(id)) {
+          next.delete(id);
+        } else {
+          next.add(id);
+        }
+        return next;
+      });
     },
-    [selectionMode, getRowId, selectedIds, updateSelection],
+    [selectionMode, getRowId, updateSelection],
   );
 
   const selectAllVisible = useCallback(() => {
     if (selectionMode !== 'multiple') return;
-    const next = new Set(selectedIds);
-    for (const row of displayRows) {
-      next.add(normalizeId(getRowId(row)));
-    }
-    updateSelection(next);
-  }, [selectionMode, selectedIds, displayRows, getRowId, updateSelection]);
+    updateSelection((current) => {
+      const next = new Set(current);
+      for (const row of displayRows) {
+        next.add(normalizeId(getRowId(row)));
+      }
+      return next;
+    });
+  }, [selectionMode, displayRows, getRowId, updateSelection]);
 
   const clearSelection = useCallback(() => {
     updateSelection(new Set());

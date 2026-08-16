@@ -83,6 +83,44 @@ export interface DataGridPaging {
   pageSize?: number;
 }
 
+/**
+ * Contexto de solo lectura (+ setters de search/selección) entregado a `renderToolbar`.
+ * Los slots **no filtran** por sí mismos: el padre sigue siendo dueño de `dataSource`.
+ */
+export interface DataGridToolbarContext<T extends Record<string, unknown>> {
+  /** `dataSource` actual (el array que pasó el padre). */
+  dataSource: T[];
+  /** Filas tras el search interno (encima de `dataSource`). */
+  filteredData: T[];
+  /** Filas filtradas y ordenadas. */
+  sortedData: T[];
+  /** Filas visibles de la página actual (search + paginación cliente). */
+  displayRows: T[];
+  /** Query del buscador interno (sin debounce). */
+  searchQuery: string;
+  /** Actualiza el buscador interno. */
+  setSearchQuery: (query: string) => void;
+  /** IDs seleccionados (incluye ids que el padre mantenga fuera del `dataSource` actual). */
+  selectedIds: ReadonlySet<string | number>;
+  /** Filas seleccionadas resueltas contra el `dataSource` actual. */
+  selectedRows: T[];
+  /** `true` si todas las filas visibles de la página están seleccionadas. */
+  isAllVisibleSelected: boolean;
+  /** Agrega a la selección las filas visibles de la página (no quita las ocultas). */
+  selectAllVisible: () => void;
+  /** Limpia toda la selección. */
+  clearSelection: () => void;
+  /** Cantidad de filas filtradas (search), no solo las de la página. */
+  rowCount: number;
+  /** Estado de carga del grid. */
+  loading: boolean;
+}
+
+/** Renderizado total de la toolbar (sustituye search y slots). */
+export type DataGridRenderToolbar<T extends Record<string, unknown>> = (
+  ctx: DataGridToolbarContext<T>,
+) => ReactNode;
+
 export interface DataGridProps<T extends Record<string, unknown>> {
   /** Fuente de datos: array de filas. */
   dataSource: T[];
@@ -100,8 +138,27 @@ export interface DataGridProps<T extends Record<string, unknown>> {
   onSelectionChange?: (selectedRows: T[]) => void;
   /** Muestra el buscador integrado en la cabecera */
   showSearch?: boolean;
-  /** Posición del buscador: izquierda o derecha de la toolbar */
+  /**
+   * Posición del buscador: izquierda o derecha de la toolbar.
+   * Solo aplica si no hay `renderToolbar`.
+   */
   searchPosition?: DataGridSearchPosition;
+  /**
+   * Contenido a la izquierda del buscador.
+   * No filtra `dataSource`: el padre sigue siendo dueño del array.
+   */
+  toolbarLeft?: ReactNode;
+  /**
+   * Contenido a la derecha del buscador.
+   * Patrón: filtrá en el padre (módulo, asignado/no) y pasá el array como `dataSource`.
+   * El search interno filtra encima de ese `dataSource`.
+   */
+  toolbarRight?: ReactNode;
+  /**
+   * Sustituye el contenido interno de la toolbar (incluido el search).
+   * El consumidor decide si pinta el buscador u otros controles.
+   */
+  renderToolbar?: DataGridRenderToolbar<T>;
   /** Placeholder del buscador */
   searchPlaceholder?: string;
   /** Ancho del campo de búsqueda (ej. "240px", 280, "100%") */

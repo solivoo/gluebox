@@ -290,7 +290,7 @@ const columns: ColumnDef<Employee>[] = [
 
 ---
 
-## Búsqueda y selección
+## Búsqueda, toolbar y selección
 
 | Prop | Default |
 |------|---------|
@@ -298,6 +298,72 @@ const columns: ColumnDef<Employee>[] = [
 | `searchPosition` | `'left'` |
 | `debounceMs` | `300` |
 | `searchKeys` | todas las columnas |
+| `toolbarLeft` / `toolbarRight` | — |
+| `renderToolbar` | — |
+
+La toolbar se muestra si hay search, slots o `renderToolbar`. Con `renderToolbar` se sustituye todo el contenido (el consumidor decide si pinta el search). `searchPosition` solo aplica sin `renderToolbar`.
+
+Los slots **no filtran** por magia. El padre sigue siendo dueño de `dataSource`:
+
+```tsx
+import { DataGrid, Select, OptionGroup } from 'glubox';
+import type { ColumnDef } from 'glubox';
+
+const [module, setModule] = useState('all');
+const [assignment, setAssignment] = useState('all');
+const [selectedIds, setSelectedIds] = useState<Array<string | number>>([]);
+
+const dataSource = rows.filter((row) => {
+  if (module !== 'all' && row.module !== module) return false;
+  if (assignment === 'assigned' && !row.assigned) return false;
+  if (assignment === 'unassigned' && row.assigned) return false;
+  return true;
+});
+
+<DataGrid
+  dataSource={dataSource}
+  keyExpr="id"
+  columns={columns}
+  showSearch
+  selectionMode="multiple"
+  selectedRowIds={selectedIds}
+  onSelectionChange={(visibleSelected) => {
+    const visibleIdSet = new Set(dataSource.map((row) => row.id));
+    const keptHidden = selectedIds.filter((id) => !visibleIdSet.has(Number(id)));
+    setSelectedIds([...keptHidden, ...visibleSelected.map((row) => row.id)]);
+  }}
+  paging={{ enabled: true, pageSize: 8 }}
+  toolbarRight={
+    <>
+      <Select
+        size="sm"
+        width={180}
+        value={module}
+        options={moduleOptions}
+        onChange={setModule}
+      />
+      <OptionGroup
+        size="sm"
+        layout="segmented"
+        value={assignment}
+        options={[
+          { value: 'all', label: 'Todos' },
+          { value: 'assigned', label: 'Solo asignados' },
+          { value: 'unassigned', label: 'Solo no asignados' },
+        ]}
+        onChange={setAssignment}
+      />
+    </>
+  }
+/>
+```
+
+1. El padre filtra el array (módulo, asignado/no) y lo pasa como `dataSource`.
+2. El search interno filtra **encima** de ese `dataSource` (`searchKeys`).
+3. `selectAllVisible` / el checkbox del header operan sobre las filas **visibles de la página**.
+4. Con `selectedRowIds` controlado, el padre puede conservar IDs ocultos por su filtro (el grid no los borra solo).
+
+`renderToolbar` recibe `DataGridToolbarContext`: `dataSource`, `filteredData`, `sortedData`, `displayRows` (página), `searchQuery` / `setSearchQuery`, `selectedIds` / `selectedRows`, `isAllVisibleSelected`, `selectAllVisible`, `clearSelection`, `rowCount`, `loading`.
 
 | `selectionMode` | Eventos |
 |-----------------|---------|

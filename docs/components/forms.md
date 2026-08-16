@@ -156,7 +156,7 @@ Campo numérico basado en TextBox. Oculta los spinners nativos y usa botones est
 />
 ```
 
-`displayMode`: `'field'` (campo compacto, default) o `'dropzone'` (área de arrastre + lista). `onChange` emite `File[]`. Validación de `accept`, `maxSize` y `maxFiles` vía `onReject`.
+`displayMode`: `'field'` (campo compacto, default) o `'dropzone'` (área de arrastre). Con `multiple` (o en dropzone) se lista cada archivo con tamaño y botón para quitarlo. `onChange` emite `File[]`. Validación de `accept`, `maxSize` y `maxFiles` vía `onReject`.
 
 ## TextArea
 

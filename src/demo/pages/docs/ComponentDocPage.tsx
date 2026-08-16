@@ -273,6 +273,20 @@ const users: User[] = [
   onSelectionChange={(rows) => setSelected(rows)}
 />
 
+// Toolbar: el padre filtra dataSource; el search interno filtra encima
+<DataGrid
+  dataSource={filteredRows}
+  keyExpr="id"
+  columns={columns}
+  showSearch
+  toolbarRight={
+    <>
+      <Select size="sm" width={180} value={module} options={modules} onChange={setModule} />
+      <OptionGroup size="sm" layout="segmented" value={assignment} options={assignmentOpts} onChange={setAssignment} />
+    </>
+  }
+/>
+
 // Desde API con envoltorio:
 // const { items, totalCount } = await api.list();
 // <DataGrid dataSource={items} keyExpr="id" columns={columns} totalRowCount={totalCount} />
@@ -747,6 +761,10 @@ export interface DataGridProps<T extends Record<string, unknown>> {
   paging?: DataGridPaging;
   pageSizeOptions?: number[];
   selectionMode?: 'none' | 'single' | 'multiple';
+  showSearch?: boolean;
+  toolbarLeft?: ReactNode;
+  toolbarRight?: ReactNode;
+  renderToolbar?: (ctx: DataGridToolbarContext<T>) => ReactNode;
   renderCardComponent?: DataGridCardComponent<T>;
   onSelectionChange?: (selectedRows: T[]) => void;
   onPageChange?: (pageIndex: number) => void;
@@ -1085,7 +1103,7 @@ function AccessibilitySection({ entry }: { entry: DocEntry }) {
 - Contenedor: role="group" con aria-invalid y aria-describedby.
 - Label: asociado vía <label htmlFor> al input file (abre el picker).
 - Modo field: botón "Elegir archivo" y botón limpiar con aria-label.
-- Modo dropzone: botón con instrucciones; lista de archivos con remove por ítem.
+- Con multiple={true} (o displayMode="dropzone"): lista de archivos con aria-label y remove por ítem.
 - Drag & drop: soportado en ambos modos; teclado vía el botón de selección.`,
     TextArea: `- Rol: textbox (implícito en <textarea>).
 - Label: asociado vía <label htmlFor> automático con prop label.
