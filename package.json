@@ -1,6 +1,6 @@
 {
   "name": "glubox",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "description": "Librería de componentes React para aplicaciones empresariales — Sidebar RBAC, PageActionsMenu, DataGrid, formularios, FileBox, Popup, Toast, botones y temas pastel",
   "type": "module",
   "license": "MIT",
@@ -95,6 +95,7 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.6.0",
+    "happy-dom": "^20.11.6",
     "lucide-react": "^1.17.0",
     "playwright": "^1.60.0",
     "react": "^19.2.6",

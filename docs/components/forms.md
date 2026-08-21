@@ -189,7 +189,7 @@ Props destacadas: `rows`, `resize` (`none` | `vertical` | `horizontal` | `both`)
 />
 ```
 
-Soporta navegación por teclado y type-ahead. `options` es requerido.
+Soporta navegación por teclado y type-ahead. `options` es requerido. El menú se porta a `document.body` (`position: fixed`) para no recortarse en contenedores con overflow.
 
 ## DateBox
 

@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.1.18] — 2026-08-21
+
+### Corregido
+
+- **Select:** el dropdown ya no se recorta con ancestros `overflow: auto|hidden|scroll` (p. ej. tablas). Se porta a `document.body` con `position: fixed`, flip y `maxHeight` vía `useFloatingPosition` (mismo patrón que DateBox). El menú hereda tokens/variante del Select y queda sobre modales (`z-index: 10000`). Teclado, type-ahead, Escape y click outside se mantienen.
+
+### Migración (apps consumidoras)
+
+1. Actualizar a `glubox@0.1.18`.
+2. Sin breaking changes de API. No hace falta `overflow: visible` en el consumidor.
+
 ## [0.1.17] — 2026-08-16
 
 ### Añadido

@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, useCallback, useId } from 'react';
 import type { SelectProps, SelectOption } from './type/Select.types';
 import { resolveTheme, themeToStyle } from './theme/resolveTheme';
 import { resolveShowClearButton } from '@/shared/resolveShowClearButton';
+import { SelectDropdown } from './SelectDropdown';
 import '@/components/Select/css/Select.css';
 
 export function Select(props: Readonly<SelectProps>) {
@@ -39,6 +40,7 @@ export function Select(props: Readonly<SelectProps>) {
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
 
+  const wrapRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const optionRefs = useRef<Map<number, HTMLDivElement>>(new Map());
@@ -137,7 +139,7 @@ export function Select(props: Readonly<SelectProps>) {
     function handleClickOutside(e: MouseEvent) {
       const target = e.target as Node;
       if (
-        triggerRef.current?.contains(target) ||
+        wrapRef.current?.contains(target) ||
         dropdownRef.current?.contains(target)
       ) {
         return;
@@ -255,7 +257,7 @@ export function Select(props: Readonly<SelectProps>) {
   );
 
   const triggerBlock = (
-    <div className="glb-select__trigger-wrap">
+    <div ref={wrapRef} className="glb-select__trigger-wrap">
       <button
         ref={triggerRef}
         id={selectId}
@@ -330,49 +332,6 @@ export function Select(props: Readonly<SelectProps>) {
       </div>
 
       {name && <input type="hidden" name={name} value={selectedValue} />}
-
-      {isOpen && (
-        <div
-          ref={dropdownRef}
-          id={`${selectId}-dropdown`}
-          className="glb-select__dropdown"
-          role="listbox"
-          aria-label={typeof label === 'string' ? label : 'Opciones'}
-        >
-          {options.map((option, index) => {
-            const isSelected = option.value === selectedValue;
-            const isHighlighted = index === highlightedIndex;
-            const isDisabled = option.disabled;
-
-            const optionClasses = [
-              'glb-select__option',
-              isSelected && 'glb-select__option--selected',
-              isHighlighted && 'glb-select__option--highlighted',
-              isDisabled && 'glb-select__option--disabled',
-            ]
-              .filter(Boolean)
-              .join(' ');
-
-            return (
-              <div
-                key={option.value}
-                ref={(el) => {
-                  if (el) optionRefs.current.set(index, el);
-                  else optionRefs.current.delete(index);
-                }}
-                className={optionClasses}
-                role="option"
-                aria-selected={isSelected}
-                aria-disabled={isDisabled}
-                onClick={() => selectOption(option)}
-                onMouseEnter={() => setHighlightedIndex(index)}
-              >
-                {option.label}
-              </div>
-            );
-          })}
-        </div>
-      )}
     </div>
   );
 
@@ -399,6 +358,23 @@ export function Select(props: Readonly<SelectProps>) {
           {error ? errorMessage : helperText}
         </span>
       )}
+
+      <SelectDropdown
+        isOpen={isOpen}
+        selectId={selectId}
+        label={label}
+        options={options}
+        selectedValue={selectedValue}
+        highlightedIndex={highlightedIndex}
+        variant={variant}
+        size={size}
+        themeStyle={themeStyle}
+        triggerRef={triggerRef}
+        dropdownRef={dropdownRef}
+        optionRefs={optionRefs}
+        onSelect={selectOption}
+        onHighlight={setHighlightedIndex}
+      />
     </div>
   );
 }
