@@ -324,6 +324,69 @@
           ]
         },
         {
+          "id": "componentes-colorpicker",
+          "label": "ColorPicker",
+          "permissions": ["componentes:read"],
+          "children": [
+            {
+              "id": "componentes-colorpicker-overview",
+              "label": "Overview",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-colorpicker-overview-getting-started",
+                  "label": "Getting Started",
+                  "path": "/componentes/colorpicker/overview/getting-started",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-colorpicker-overview-how-to",
+                  "label": "How To",
+                  "path": "/componentes/colorpicker/overview/how-to",
+                  "permissions": ["componentes:read"]
+                }
+              ]
+            },
+            {
+              "id": "componentes-colorpicker-api",
+              "label": "API",
+              "permissions": ["componentes:read"],
+              "children": [
+                {
+                  "id": "componentes-colorpicker-api-props",
+                  "label": "Props",
+                  "path": "/componentes/colorpicker/api/props",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-colorpicker-api-events",
+                  "label": "Events",
+                  "path": "/componentes/colorpicker/api/events",
+                  "permissions": ["componentes:read"]
+                },
+                {
+                  "id": "componentes-colorpicker-api-types",
+                  "label": "Types",
+                  "path": "/componentes/colorpicker/api/types",
+                  "permissions": ["componentes:read"]
+                }
+              ]
+            },
+            {
+              "id": "componentes-colorpicker-accessibility",
+              "label": "Accessibility",
+              "path": "/componentes/colorpicker/accessibility",
+              "permissions": ["componentes:read"]
+            },
+            {
+              "id": "componentes-colorpicker-demos",
+              "label": "Demos",
+              "path": "/componentes/colorpicker",
+              "permissions": ["componentes:read"]
+            }
+          ]
+        },
+        {
           "id": "componentes-textarea",
           "label": "TextArea",
           "permissions": ["componentes:read"],

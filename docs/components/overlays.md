@@ -92,6 +92,8 @@ Ver la guía completa: [Tipos de eventos](/guide/event-types).
 
 ## Temas
 
+Sin `theme` explícito, **Popup y Toast** heredan `data-theme` / `data-mode` del documento. Override puntual:
+
 ```tsx
 <Popup theme="enterprise-dark" open={open} onClose={onClose} title="Confirmar">
   ...
@@ -103,8 +105,6 @@ Ver la guía completa: [Tipos de eventos](/guide/event-types).
 ```
 
 Presets: `popupThemes`, `toastThemes` — mismos 6 nombres que el resto de componentes.
-
-Sin `theme` explícito, **Popup y Toast** heredan `data-theme` / `data-mode` del documento (igual que Button, Select, etc.).
 
 [Guía de temas](/guide/themes)
 

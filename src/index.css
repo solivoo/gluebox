@@ -8,7 +8,8 @@
 
 /* Los widgets nativos (spinners de number, dropdowns, scrollbars) deben
    seguir el modo del tema; sin esto el navegador los pinta siempre claros. */
-:root {
+:root,
+[data-mode='light'] {
   color-scheme: light;
 }
 

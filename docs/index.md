@@ -19,9 +19,9 @@ features:
   - title: Menú desde API
     details: Contrato JSON documentado — módulos, opciones y acciones hasta 3 niveles con RBAC.
   - title: Controles de formulario
-    details: TextBox, Select, DateBox, RangeDateBox con label top, floating, outlined y left.
+    details: TextBox, NumberBox, FileBox, ColorPicker, Select, DateBox con label top, floating, outlined y left.
   - title: Temas globales
-    details: Default, Modern y Enterprise × light/dark. Sin prop theme, toda la UI hereda el sistema.
+    details: Un solo lugar — data-theme y data-mode en html. Default, Modern y Enterprise × light/dark.
   - title: Demo interactiva
     details: Playground en el repo para probar props y variantes sin Storybook.
   - title: Overlays

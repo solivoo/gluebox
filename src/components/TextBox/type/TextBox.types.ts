@@ -12,6 +12,7 @@ export type TextBoxSize = 'sm' | 'md' | 'lg';
 
 export type TextBoxLabelPosition = 'top' | 'floating' | 'outlined' | 'left';
 
+/** Campo de texto. Con `type="number"` se ocultan los spinners nativos; para stepping usá NumberBox. */
 export interface TextBoxProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'children'>,
     FieldClearButtonProps {

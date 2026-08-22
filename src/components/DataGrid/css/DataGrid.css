@@ -603,19 +603,15 @@
 }
 
 .glb-datagrid__pagination-select {
-  padding: 0.25rem 0.5rem;
-  border-radius: calc(var(--datagrid-radius, 0.5rem) - 0.125rem);
-  border: 1px solid var(--datagrid-search-border);
-  background: var(--datagrid-search-bg);
-  color: var(--datagrid-search-text);
-  font: inherit;
-  cursor: pointer;
+  width: auto;
+  min-width: 5.5rem;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
-.glb-datagrid__pagination-select:focus {
-  outline: none;
-  border-color: var(--datagrid-search-focus-border);
-  box-shadow: 0 0 0 2px var(--datagrid-search-focus-ring);
+.glb-datagrid__pagination-select .glb-select__trigger {
+  min-height: 2rem;
+  padding-block: 0.25rem;
 }
 
 .glb-datagrid__pagination-nav {

@@ -81,6 +81,13 @@ const handleClick: ButtonOnClickHandler = (event) => {
 | `FileBoxOnRejectHandler` | `(rejected: FileRejection[]) => void` |
 | `FileBoxChangeValue` | `File[]` |
 
+### ColorPicker
+
+| Tipo | Signatura |
+|------|-----------|
+| `ColorPickerOnChangeHandler` | `(value: string) => void` |
+| `ColorPickerChangeValue` | `string` (`#rrggbb` o `''`) |
+
 ### TextArea
 
 | Tipo | Signatura |

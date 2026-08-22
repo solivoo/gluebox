@@ -9,12 +9,12 @@ Sin prop theme  →  el componente hereda data-theme + data-mode del <html>
 Con prop theme  →  ese componente ignora el global y usa el preset/objeto
 ```
 
-Para cambiar el look de **toda** la librería en runtime solo necesitás:
+El tema se aplica en **un solo lugar**: `data-theme` + `data-mode` en `<html>`. Eso cubre Button, Select, TextBox, NumberBox, DataGrid (incluido el pager), Popup, Toast, etc.
 
-1. Importar el CSS de temas.
+1. Importar `glubox/style.css` + `glubox/themes/index.css`.
 2. Setear `data-theme` y `data-mode` en `<html>`.
 
-No hace falta pasar `theme` a cada Button, Select, DataGrid, etc.
+No hace falta pasar `theme` a cada componente, ni redefinir `--select-*`, `--datagrid-*` o `--textbox-*` en tu CSS.
 
 ## Setup mínimo
 
@@ -56,6 +56,29 @@ Siempre importa también `glubox/style.css` (layout y estilos base de los compon
 | `dark` | Fondos oscuros, texto claro |
 
 Cada familia tiene superficies, sidebar, inputs y acentos propios. Cambiar `data-theme` o `data-mode` actualiza **todos** los componentes que no tengan prop `theme`.
+
+`data-mode` también setea `color-scheme: light | dark` (junto a `--glb-app-bg` / `--glb-surface`) para que widgets nativos (scrollbars, date pickers del SO) sigan el modo.
+
+## Qué no hace falta en el consumidor
+
+Los tokens de componente (`--select-*`, `--datagrid-*`, `--textbox-*`, `--btn-*`, …) ya apuntan a `var(--glb-surface)`, `var(--glb-input-bg)`, `var(--glb-text)`, `var(--glb-border)`, `var(--glb-muted)` y `var(--glb-accent-*)`.
+
+```css
+/* ❌ No hagas esto para “arreglar” dark mode */
+.mi-app {
+  --select-primary-bg: #1a1d27;
+  --datagrid-row-bg: #1a1d27;
+  --textbox-primary-text: #e2e8f0;
+}
+
+/* ✅ El chrome de tu app usa los tokens de sistema */
+.mi-app {
+  background: var(--glb-app-bg);
+  color: var(--glb-app-text);
+}
+```
+
+Tampoco estiles `.glb-datagrid__pagination-select`: el pager usa el Select de gluBox (portal / `position: fixed`), no un `<select>` nativo.
 
 ## Cambiar el tema del sistema (recomendado)
 
@@ -125,9 +148,9 @@ Sin prop `theme`, heredan `data-theme` / `data-mode`:
 | Área | Componentes |
 |------|-------------|
 | Navegación | Sidebar, PageActionsMenu |
-| Formularios | TextBox, TextArea, Select, DateBox, RangeDateBox |
+| Formularios | TextBox, NumberBox, FileBox, ColorPicker, TextArea, Select, DateBox, RangeDateBox |
 | Acciones | Button, CheckButton, OptionGroup |
-| Datos | DataGrid |
+| Datos | DataGrid (tabla, toolbar y pager) |
 | Overlays | Popup, Toast / ToastProvider |
 
 ## Override por componente (`theme` prop)
@@ -221,9 +244,10 @@ Tokens útiles:
 | `--glb-surface` / `--glb-surface-hover` | Cards, paneles |
 | `--glb-border` | Bordes |
 | `--glb-input-bg` | Campos |
-| `--glb-muted` | Texto secundario |
+| `--glb-muted` / `--glb-muted-surface` | Texto secundario y fondos alternativos |
 | `--glb-accent-*` | Acento de la familia activa |
 | `--glb-danger-*` | Estados de error / danger |
+| `color-scheme` | Lo setea gluBox según `data-mode` (no hace falta en el consumidor) |
 
 ## Label outlined y canvas
 
@@ -246,6 +270,8 @@ Ver [Formularios](/components/forms#label-outlined-y-fondo-del-contenedor).
 | Todo se ve sin estilo / roto | Falta `glubox/style.css` | Importalo en el entry |
 | Querés cambiar de familia en runtime | Solo importaste `default.css` | Usá `glubox/themes/index.css` |
 | Light y dark “iguales” en tu layout | Tu CSS hardcodea colores | Usá `--glb-app-bg`, `--glb-surface`, etc. |
+| Select / DataGrid / pager con chrome blanco en dark | Override de `--select-*` / `--datagrid-*` o CSS sobre `.glb-datagrid__pagination-select` | Quitá esos overrides; el pager usa el Select de gluBox |
+| Inputs `type="number"` con flechas del SO | TextBox nativo | Usá `NumberBox`; si dejás `type="number"` en TextBox, los spinners nativos ya están ocultos |
 
 ## Demo local
 

@@ -1,5 +1,38 @@
 # Changelog
 
+## [0.1.20] — 2026-08-21
+
+### Añadido
+
+- **`ColorPicker`** — campo de color con swatch, input hex y panel HSV en portal (`position: fixed`, mismo criterio que Select). No usa `<input type="color">` nativo. Hereda variantes, labels y temas de TextBox (`--textbox-*` / `--glb-*`).
+- Props: `value` / `defaultValue` / `onChange(hex)`, `presets`, `showClearButton`, `labelPosition` (top / floating / outlined / left).
+- Tipos: `ColorPickerProps`, `ColorPickerOnChangeHandler`, `ColorPickerChangeValue`, `ColorPickerThemeInput` (alias de TextBox). Export `DEFAULT_COLOR_PRESETS`.
+- El input hex solo confirma en vivo `#rrggbb` de 6 dígitos; el shorthand `#rgb` espera blur o Enter (evita que `#3b8` se vuelva `#33bb88` al escribir `#3b82f6`).
+- Panel operable con teclado: cuadro SV y matiz son `role="slider"` (flechas ±1, Shift+flechas ±10, Home/End a los extremos). Al abrir, el foco entra al panel; Escape cierra y lo devuelve al swatch.
+- El matiz se conserva al pasar por blanco o negro: el HSV vive en estado y no se re-deriva del hex, que no puede representarlo cuando la saturación o el brillo llegan a 0.
+- `presets` acepta `readonly string[]`, así `presets={DEFAULT_COLOR_PRESETS}` compila sin castear.
+
+### Migración (apps consumidoras)
+
+1. Actualizar a `glubox@0.1.20`.
+2. Sin breaking changes; `ColorPicker` es un componente nuevo.
+
+## [0.1.19] — 2026-08-21
+
+### Corregido
+
+- **Temas:** `pnpm themes:generate` emite `var(--glb-*)` (surface, input-bg, text, border, muted, accent-*) en `_generated-*.css` en lugar de hex por componente. `_component-bridge.css` deja de ser el parche sobre valores hardcodeados. El remap no trata `textbox`/`textarea` como token de texto: fondos hover/focus de outline/ghost/secondary usan `--glb-input-bg` / `--glb-surface-hover`, no `--glb-text`.
+- **DataGrid pager:** el page-size usa el Select de gluBox (portal/fixed), sin chrome nativo del SO en `data-mode=dark`.
+- **color-scheme:** `[data-mode=light|dark]` declara `color-scheme` junto a `--glb-app-bg` / `--glb-surface` para que widgets nativos hereden el modo.
+- **TextBox `type="number"`:** oculta los spinners nativos igual que NumberBox. Para stepping usá NumberBox.
+- **Docs:** setup de un solo lugar (`glubox/style.css` + `glubox/themes/index.css` + `data-theme`/`data-mode` en `<html>`). El consumidor no redefine `--select-*` / `--datagrid-*` / `--textbox-*`.
+
+### Migración (apps consumidoras)
+
+1. Actualizar a `glubox@0.1.19`.
+2. Importar solo `glubox/style.css` + `glubox/themes/index.css` y setear `data-theme` / `data-mode` en `<html>`.
+3. Quitá overrides de `--select-*`, `--datagrid-*`, `--textbox-*` y estilos de `.glb-datagrid__pagination-select` si los tenías para “arreglar” dark mode.
+
 ## [0.1.18] — 2026-08-21
 
 ### Corregido

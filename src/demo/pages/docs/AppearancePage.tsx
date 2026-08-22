@@ -70,12 +70,16 @@ function TemasContent() {
       </table>
 
       <h3>Cómo usar un tema</h3>
-      <p>Importá el CSS del tema en tu entry point:</p>
+      <p>
+        El tema se aplica en un solo lugar. Importá el CSS publicado (no existe{' '}
+        <code>glubox/styles/base.css</code>) y seteá atributos en{' '}
+        <code>&lt;html&gt;</code>:
+      </p>
       <pre className="apd__code">{`// main.tsx o App.tsx
-import 'glubox/styles/base.css';
-import 'glubox/styles/themes/index.css';  // Todos los temas
+import 'glubox/style.css';
+import 'glubox/themes/index.css';  // default + modern + enterprise
 // o solo uno:
-import 'glubox/styles/themes/default.css';`}</pre>
+import 'glubox/themes/default.css';`}</pre>
 
       <p>
         Luego aplicá los atributos <code>data-theme</code> y <code>data-mode</code> al{' '}
@@ -91,15 +95,14 @@ import 'glubox/styles/themes/default.css';`}</pre>
 
       <h3>Override por componente</h3>
       <p>
-        Cada componente acepta una prop <code>theme</code> que permite sobrescribir
-        el tema global para esa instancia específica:
+        La prop <code>theme</code> es opcional: usala solo si un control debe
+        ignorar el sistema. No redefinas <code>--select-*</code>,{' '}
+        <code>--datagrid-*</code> ni <code>--textbox-*</code> en tu CSS.
       </p>
       <pre className="apd__code">{`<Button theme="dark">Dark override</Button>
 <Select theme="modern-dark" options={[...]} />
 <TextBox theme="enterprise-light" />
-<Sidebar theme="dark" />
-// También aceptan objetos personalizados:
-<Button theme={{ background: '#333', text: '#fff', ... }} />`}</pre>
+<Sidebar theme="dark" />`}</pre>
     </section>
   );
 }
@@ -135,6 +138,16 @@ window.matchMedia('(prefers-color-scheme: dark)')
     document.documentElement.setAttribute('data-mode',
       e.matches ? 'dark' : 'light');
   });`}</pre>
+
+      <h3>color-scheme</h3>
+      <p>
+        gluBox declara <code>color-scheme</code> junto a{' '}
+        <code>--glb-app-bg</code> / <code>--glb-surface</code>. Los widgets
+        nativos (scrollbars, date pickers del SO) siguen el modo. El pager del
+        DataGrid usa el Select de gluBox, no un <code>&lt;select&gt;</code> nativo.
+      </p>
+      <pre className="apd__code">{`[data-mode="light"] { color-scheme: light; }
+[data-mode="dark"]  { color-scheme: dark; }`}</pre>
 
       <h3>Variables CSS que cambian</h3>
       <p>El modo oscuro redefine estas variables a nivel :root:</p>
@@ -189,10 +202,10 @@ yarn add glubox`}</pre>
         importar el archivo CSS en tu entry point:
       </p>
       <pre className="apd__code">{`// main.tsx
-import 'glubox/styles/base.css';              // Fuente + tokens base
-import 'glubox/styles/themes/index.css';      // Temas
+import 'glubox/style.css';
+import 'glubox/themes/index.css';
 // o
-import 'glubox/styles/themes/default.css';    // Un solo tema`}</pre>
+import 'glubox/themes/default.css';`}</pre>
     </section>
   );
 }
@@ -247,31 +260,27 @@ function PersonalizacionContent() {
       </p>
 
       <h3>Crear un tema propio</h3>
+      <p>
+        Personalizá los tokens de sistema (<code>--glb-*</code>). Los tokens de
+        componente (<code>--select-*</code>, <code>--datagrid-*</code>,{' '}
+        <code>--textbox-*</code>) ya apuntan a esas variables: no hace falta
+        redefinirlos.
+      </p>
       <pre className="apd__code">{`/* mi-tema.css */
 [data-theme="mi-tema"] {
-  /* Sidebar */
-  --sidebar-bg: #1a1a24;
-  --sidebar-text: #e2e8f0;
-  --sidebar-active-text: #f472b6;
-  --sidebar-rail-active: #f472b6;
-
-  /* Button */
-  --btn-primary-bg: #f472b6;
-  --btn-primary-hover-bg: #f9a8d4;
-
-  /* Shell tokens */
-  --glb-toolbar-bg: rgba(244, 114, 182, 0.06);
   --glb-app-bg: #1a1018;
   --glb-app-text: #e8e0e4;
   --glb-surface: #261a22;
+  --glb-surface-hover: #322028;
   --glb-border: rgba(244, 114, 182, 0.12);
+  --glb-input-bg: #261a22;
   --glb-text: #e8e0e4;
   --glb-muted: #786070;
 }
 
 [data-theme="mi-tema"][data-mode="dark"] {
-  --sidebar-bg: #12101a;
-  /* ... más overrides ... */
+  --glb-app-bg: #12101a;
+  /* el resto de --glb-* */
 }`}</pre>
 
       <h3>Fuente</h3>

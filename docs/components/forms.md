@@ -9,6 +9,7 @@ import {
   TextBox,
   NumberBox,
   FileBox,
+  ColorPicker,
   TextArea,
   Select,
   DateBox,
@@ -18,12 +19,14 @@ import {
   selectThemes,
   dateBoxThemes,
   rangeDateBoxThemes,
+  DEFAULT_COLOR_PRESETS,
 } from 'glubox';
 
 import type {
   TextBoxProps,
   NumberBoxProps,
   FileBoxProps,
+  ColorPickerProps,
   TextAreaProps,
   SelectProps,
   DateBoxProps,
@@ -34,6 +37,7 @@ import type {
 } from 'glubox';
 
 import 'glubox/style.css';
+import 'glubox/themes/index.css';
 ```
 
 ## Variantes visuales
@@ -88,6 +92,9 @@ Todos los controles de formulario que admiten valor seleccionado o escrito compa
 | Componente | Limpia |
 |------------|--------|
 | `TextBox` | Texto del input |
+| `NumberBox` | Valor numérico |
+| `FileBox` | Archivos seleccionados |
+| `ColorPicker` | Hex `#rrggbb` |
 | `TextArea` | Contenido multilínea |
 | `Select` | Opción seleccionada |
 | `DateBox` | Fecha (`YYYY-MM-DD`) |
@@ -113,6 +120,8 @@ Todos los controles de formulario que admiten valor seleccionado o escrito compa
 
 Props destacadas: `iconLeft`, `iconRight`, `showClearButton`, `showPasswordToggle` con `type="password"`, `error`, `errorMessage`, `fullWidth`, `width`, `theme`.
 
+Si usás `type="number"`, gluBox oculta los spinners nativos del navegador (mismo criterio que NumberBox). Para stepping, `min`/`max` y botones de incremento, usá **`NumberBox`**.
+
 ```tsx
 <TextBox label="Contraseña" type="password" placeholder="••••••••" />
 <TextBox label="Búsqueda" showClearButton />
@@ -132,7 +141,7 @@ Props destacadas: `iconLeft`, `iconRight`, `showClearButton`, `showPasswordToggl
 />
 ```
 
-Campo numérico basado en TextBox. Oculta los spinners nativos y usa botones estilados. Props propias: `step`, `min`, `max`, `showSpinButtons`.
+Campo numérico basado en TextBox. Oculta los spinners nativos y usa botones estilados acordes al tema. Props propias: `step`, `min`, `max`, `showSpinButtons`. Preferilo frente a `<TextBox type="number" />`.
 
 ## FileBox
 
@@ -157,6 +166,21 @@ Campo numérico basado en TextBox. Oculta los spinners nativos y usa botones est
 ```
 
 `displayMode`: `'field'` (campo compacto, default) o `'dropzone'` (área de arrastre). Con `multiple` (o en dropzone) se lista cada archivo con tamaño y botón para quitarlo. `onChange` emite `File[]`. Validación de `accept`, `maxSize` y `maxFiles` vía `onReject`.
+
+## ColorPicker
+
+```tsx
+<ColorPicker
+  label="Acento"
+  defaultValue="#3b82f6"
+  showClearButton
+  onChange={(hex) => setAccent(hex)}
+/>
+```
+
+Selector de color con swatch, input hex y panel HSV en portal (`position: fixed`, como Select). **No** usa `<input type="color">` nativo, así que en `data-mode="dark"` no aparece el chrome del SO. `onChange` emite `#rrggbb` (o `''` al limpiar). Presets: `presets={['#22c55e', '#ef4444']}` o `DEFAULT_COLOR_PRESETS`.
+
+Comparte variantes, tamaños, labels y temas con TextBox.
 
 ## TextArea
 
@@ -220,7 +244,7 @@ Valor: `{ start: string; end: string }` (fechas `YYYY-MM-DD`).
 
 ## Temas
 
-**Por defecto** (sin prop `theme`) los campos heredan el tema del sistema (`data-theme` / `data-mode` en `<html>`).
+**Por defecto** (sin prop `theme`) los campos heredan el tema del sistema (`data-theme` / `data-mode` en `<html>`). No redefinas `--textbox-*` ni `--select-*` en el consumidor.
 
 Override puntual:
 
@@ -249,6 +273,7 @@ Herencia, presets y prioridad: [Guía de temas](/guide/themes).
 | `TextBox` | `TextBoxOnChangeHandler`, `TextBoxOnFocusHandler`, `TextBoxOnBlurHandler` |
 | `NumberBox` | `NumberBoxOnChangeHandler`, `NumberBoxOnFocusHandler`, `NumberBoxOnBlurHandler` |
 | `FileBox` | `FileBoxOnChangeHandler`, `FileBoxOnRejectHandler`, `FileBoxChangeValue`, `FileRejection` |
+| `ColorPicker` | `ColorPickerOnChangeHandler`, `ColorPickerChangeValue` |
 | `TextArea` | `TextAreaOnChangeHandler`, `TextAreaOnFocusHandler`, `TextAreaOnBlurHandler` |
 | `Select` | `SelectOnChangeHandler`, `SelectChangeValue` |
 | `DateBox` | `DateBoxOnChangeHandler` |

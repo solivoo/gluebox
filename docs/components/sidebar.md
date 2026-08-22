@@ -305,7 +305,6 @@ export function AppLayout({ menu, userPermissions, brand, renderIcon }) {
         collapseOthersOnSelect
         renderIcon={renderIcon}
         brand={brand}
-        theme="dark"
       />
       {/* <Outlet /> o children */}
     </div>

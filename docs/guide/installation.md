@@ -42,7 +42,7 @@ document.documentElement.setAttribute('data-mode', 'dark');     // light | dark
 | `glubox/themes/enterprise.css` | Powder blue (azul) |
 | `glubox/themes/index.css` | Las tres (cambiar familia en runtime) |
 
-No hace falta pasar `theme` a cada componente: sin esa prop heredan el sistema. Guía completa: [Temas y apariencia](/guide/themes).
+No hace falta pasar `theme` a cada componente: sin esa prop heredan el sistema. Tampoco redefinas `--select-*`, `--datagrid-*` ni `--textbox-*` — ya resuelven a `var(--glb-*)`. Guía completa: [Temas y apariencia](/guide/themes).
 
 ### Label outlined en cards
 
@@ -125,7 +125,6 @@ export function AppShell() {
       collapsed={collapsed}
       onCollapsedChange={setCollapsed}
       renderIcon={renderMenuIcon}
-      theme="dark"
     />
   );
 }
@@ -161,6 +160,9 @@ import {
   Button,
   Select,
   TextBox,
+  NumberBox,
+  FileBox,
+  ColorPicker,
   TextArea,
   DateBox,
   RangeDateBox,
@@ -181,6 +183,7 @@ import {
   checkButtonThemes,
   popupThemes,
   toastThemes,
+  DEFAULT_COLOR_PRESETS,
   hasPermission,
   filterVisibleMenu,
 } from 'glubox';
@@ -191,6 +194,10 @@ import type {
   ButtonProps,
   SelectProps,
   TextBoxProps,
+  NumberBoxProps,
+  FileBoxProps,
+  ColorPickerProps,
+  ColorPickerThemeInput,
   DateBoxProps,
   RangeDateBoxProps,
   OptionGroupProps,

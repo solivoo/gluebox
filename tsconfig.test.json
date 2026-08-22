@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.test.tsbuildinfo",
+    /* Los tests leen CSS y tokens del repo con node:fs; el código de app no ve globales de Node. */
+    "types": ["node"]
+  },
+  "include": ["src/**/*.test.ts", "src/**/*.test.tsx", "src/vite-env.d.ts"],
+  "exclude": []
+}

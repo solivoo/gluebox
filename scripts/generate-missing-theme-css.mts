@@ -1,8 +1,9 @@
 /**
  * Genera tokens CSS por familia a partir de presets TS + themeToStyle.
+ * Los colores de componente se emiten como var(--glb-*), no como hex.
  * Uso: pnpm themes:generate
  */
-import { writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, it, expect } from 'vitest';
@@ -26,6 +27,17 @@ import { dataGridThemes } from '@/components/DataGrid/theme/defaultThemes';
 import { themeToStyle as dataGridToStyle } from '@/components/DataGrid/theme/resolveTheme';
 import { pageActionsMenuThemes } from '@/components/PageActionsMenu/theme/defaultThemes';
 import { themeToStyle as pamToStyle } from '@/components/PageActionsMenu/theme/resolveTheme';
+import { buttonThemes } from '@/components/Button/theme/defaultThemes';
+import { themeToStyle as buttonToStyle } from '@/components/Button/theme/resolveTheme';
+import { selectThemes } from '@/components/Select/theme/defaultThemes';
+import { themeToStyle as selectToStyle } from '@/components/Select/theme/resolveTheme';
+import { textBoxThemes } from '@/components/TextBox/theme/defaultThemes';
+import { themeToStyle as textBoxToStyle } from '@/components/TextBox/theme/resolveTheme';
+import {
+  parseBridgeTokenMap,
+  remapComponentToken,
+  whiteHexAsDirectValue,
+} from './remapComponentTokens';
 
 const themesDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../src/styles/themes');
 
@@ -39,11 +51,14 @@ interface ComponentSpec {
   darkKey: (family: Family) => string;
 }
 
+const bridgeCss = readFileSync(path.join(themesDir, '_component-bridge.css'), 'utf8');
+const bridgeMap = parseBridgeTokenMap(bridgeCss);
+
 function styleToDecls(style: CSSProperties | undefined): string {
   if (!style) return '';
   return Object.entries(style)
     .filter(([, value]) => value != null && value !== '')
-    .map(([key, value]) => `  ${key}: ${String(value)};`)
+    .map(([key, value]) => `  ${key}: ${remapComponentToken(key, String(value), bridgeMap)};`)
     .join('\n');
 }
 
@@ -55,6 +70,9 @@ const presetKey = (family: Family, mode: 'light' | 'dark'): string =>
   family === 'default' ? mode : `${family}-${mode}`;
 
 const components: ComponentSpec[] = [
+  { label: 'Button', toStyle: buttonToStyle as ComponentSpec['toStyle'], themes: buttonThemes, lightKey: (f) => presetKey(f, 'light'), darkKey: (f) => presetKey(f, 'dark') },
+  { label: 'Select', toStyle: selectToStyle as ComponentSpec['toStyle'], themes: selectThemes, lightKey: (f) => presetKey(f, 'light'), darkKey: (f) => presetKey(f, 'dark') },
+  { label: 'TextBox', toStyle: textBoxToStyle as ComponentSpec['toStyle'], themes: textBoxThemes, lightKey: (f) => presetKey(f, 'light'), darkKey: (f) => presetKey(f, 'dark') },
   { label: 'TextArea', toStyle: textAreaToStyle as ComponentSpec['toStyle'], themes: textAreaThemes, lightKey: (f) => presetKey(f, 'light'), darkKey: (f) => presetKey(f, 'dark') },
   { label: 'DateBox', toStyle: dateBoxToStyle as ComponentSpec['toStyle'], themes: dateBoxThemes, lightKey: (f) => presetKey(f, 'light'), darkKey: (f) => presetKey(f, 'dark') },
   { label: 'RangeDateBox', toStyle: rangeDateBoxToStyle as ComponentSpec['toStyle'], themes: rangeDateBoxThemes, lightKey: (f) => presetKey(f, 'light'), darkKey: (f) => presetKey(f, 'dark') },
@@ -70,6 +88,7 @@ function generateForFamily(family: Family): string {
   const parts: string[] = [
     `/* ══════════════════════════════════════════════════`,
     `   Generated component tokens — ${family}`,
+    `   Colores de componente: var(--glb-*). No editar a mano.`,
     `   Regenerate: pnpm themes:generate`,
     `   ══════════════════════════════════════════════════ */`,
     '',
@@ -86,12 +105,18 @@ function generateForFamily(family: Family): string {
 }
 
 describe('generate missing theme css', () => {
-  it('writes one generated file per theme family', () => {
+  it('writes one generated file per theme family using var(--glb-*)', () => {
     for (const family of ['default', 'modern', 'enterprise'] as const) {
       const css = generateForFamily(family);
       const outFile = path.join(themesDir, `_generated-${family}.css`);
       writeFileSync(outFile, css, 'utf8');
       expect(css.length).toBeGreaterThan(500);
+      expect(css).toContain('--btn-primary-bg: var(--glb-accent-surface)');
+      expect(css).toContain('--btn-primary-disabled-bg: var(--glb-muted-surface)');
+      expect(css).toContain('--datagrid-row-bg: var(--glb-surface)');
+      expect(css).toContain('--select-primary-bg: var(--glb-input-bg)');
+      expect(css).toContain('--textbox-primary-text: var(--glb-text)');
+      expect(whiteHexAsDirectValue(css)).toEqual([]);
     }
   });
 });

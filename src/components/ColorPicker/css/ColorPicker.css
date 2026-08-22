@@ -1,0 +1,457 @@
+@import '../../../styles/outlined-label.css';
+
+.glb-colorpicker {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  font-family: var(--glb-font-family, 'Poppins', sans-serif);
+  font-size: var(--textbox-font-size, 0.875rem);
+  box-sizing: border-box;
+  color: var(--textbox-text);
+}
+
+.glb-colorpicker--full-width {
+  width: 100%;
+}
+
+.glb-colorpicker__row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  width: 100%;
+}
+
+.glb-colorpicker--left .glb-colorpicker__row {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.glb-colorpicker--left .glb-colorpicker__label {
+  flex-shrink: 0;
+  padding-top: 0.55rem;
+  min-width: 7rem;
+  text-align: right;
+}
+
+.glb-colorpicker--left .glb-colorpicker__helper {
+  margin-left: 7.75rem;
+}
+
+.glb-colorpicker__label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--textbox-label-color, var(--glb-muted, #6b7280));
+  line-height: 1.25;
+}
+
+.glb-colorpicker__field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: 2.5rem;
+  padding: 0.25rem 0.5rem 0.25rem 0.375rem;
+  border-radius: var(--textbox-radius, 0.5rem);
+  border: 1px solid var(--textbox-border);
+  background-color: var(--textbox-bg);
+  color: var(--textbox-text);
+  box-shadow: var(--textbox-shadow, none);
+  transition: var(--textbox-transition, all 0.15s ease);
+  box-sizing: border-box;
+}
+
+.glb-colorpicker__field:hover {
+  background-color: var(--textbox-hover-bg);
+  border-color: var(--textbox-hover-border);
+}
+
+.glb-colorpicker:focus-within .glb-colorpicker__field {
+  border-color: var(--textbox-focus-border);
+  background-color: var(--textbox-focus-bg);
+  box-shadow: 0 0 0 3px var(--textbox-focus-ring);
+}
+
+.glb-colorpicker--error .glb-colorpicker__field {
+  border-color: var(--textbox-error-border);
+}
+
+.glb-colorpicker--error:focus-within .glb-colorpicker__field {
+  box-shadow: 0 0 0 3px var(--textbox-error-focus-ring);
+}
+
+.glb-colorpicker--outlined .glb-colorpicker__field {
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  min-height: 2.25rem;
+}
+
+.glb-colorpicker--outlined .glb-colorpicker__outlined-field {
+  --glb-outlined-label-color: var(--textbox-label-color);
+  --glb-outlined-radius: var(--textbox-radius);
+}
+
+.glb-colorpicker--outlined.glb-colorpicker--primary .glb-colorpicker__outlined-field {
+  --glb-outlined-border: var(--textbox-primary-border);
+  --glb-outlined-hover-border: var(--textbox-primary-hover-border);
+  --glb-outlined-focus-border: var(--textbox-primary-focus-border);
+  --glb-outlined-focus-ring: var(--textbox-primary-focus-ring);
+  --glb-outlined-disabled-border: var(--textbox-primary-disabled-border);
+}
+
+.glb-colorpicker--outlined.glb-colorpicker--secondary .glb-colorpicker__outlined-field {
+  --glb-outlined-border: var(--textbox-secondary-border);
+  --glb-outlined-hover-border: var(--textbox-secondary-hover-border);
+  --glb-outlined-focus-border: var(--textbox-secondary-focus-border);
+  --glb-outlined-focus-ring: var(--textbox-secondary-focus-ring);
+  --glb-outlined-disabled-border: var(--textbox-secondary-disabled-border);
+}
+
+.glb-colorpicker--outlined.glb-colorpicker--outline .glb-colorpicker__outlined-field {
+  --glb-outlined-focus-border: var(--textbox-outline-focus-border);
+  --glb-outlined-focus-ring: var(--textbox-outline-focus-ring);
+  --glb-outlined-disabled-border: var(--textbox-outline-disabled-border);
+}
+
+.glb-colorpicker--outlined.glb-colorpicker--ghost .glb-colorpicker__outlined-field {
+  --glb-outlined-focus-border: var(--textbox-ghost-focus-border);
+  --glb-outlined-focus-ring: var(--textbox-ghost-focus-ring);
+  --glb-outlined-disabled-border: var(--textbox-ghost-disabled-border);
+}
+
+.glb-colorpicker--outlined.glb-colorpicker--error .glb-colorpicker__outlined-field {
+  --glb-outlined-border: var(--textbox-error-border);
+  --glb-outlined-focus-border: var(--textbox-error-border);
+  --glb-outlined-focus-ring: var(--textbox-error-focus-ring);
+  --glb-outlined-label-color: var(--textbox-error-color, var(--textbox-label-color));
+}
+
+.glb-colorpicker__swatch {
+  position: relative;
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: 1px solid var(--textbox-border);
+  border-radius: 0.375rem;
+  cursor: pointer;
+  appearance: none;
+  background:
+    linear-gradient(45deg, #c4c4c4 25%, transparent 25%) 0 0 / 0.5rem 0.5rem,
+    linear-gradient(45deg, transparent 75%, #c4c4c4 75%) 0 0 / 0.5rem 0.5rem,
+    linear-gradient(45deg, #c4c4c4 25%, transparent 25%) 0.25rem 0.25rem / 0.5rem 0.5rem,
+    linear-gradient(45deg, transparent 75%, #c4c4c4 75%) 0.25rem 0.25rem / 0.5rem 0.5rem,
+    #fff;
+}
+
+.glb-colorpicker__swatch:focus-visible {
+  outline: 2px solid var(--textbox-focus-border);
+  outline-offset: 1px;
+}
+
+.glb-colorpicker__swatch:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.glb-colorpicker__swatch-fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+
+.glb-colorpicker__input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  letter-spacing: 0.02em;
+  outline: none;
+  padding: 0;
+}
+
+.glb-colorpicker__input::placeholder {
+  color: var(--textbox-placeholder);
+}
+
+.glb-colorpicker--floating .glb-colorpicker__input {
+  padding-top: 0.85rem;
+  padding-bottom: 0.1rem;
+}
+
+.glb-colorpicker--floating .glb-colorpicker__label {
+  position: absolute;
+  left: 2.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: top 0.15s ease, transform 0.15s ease, font-size 0.15s ease;
+}
+
+.glb-colorpicker--floating.glb-colorpicker--label-floated .glb-colorpicker__label {
+  top: 0.35rem;
+  transform: translateY(0) scale(0.75);
+  transform-origin: left top;
+}
+
+.glb-colorpicker--disabled .glb-colorpicker__field {
+  background-color: var(--textbox-disabled-bg);
+  color: var(--textbox-disabled-text);
+  border-color: var(--textbox-disabled-border);
+  cursor: not-allowed;
+}
+
+.glb-colorpicker__clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--textbox-clear-color, var(--glb-muted));
+  border-radius: 50%;
+  font-size: 1.125rem;
+  line-height: 1;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.glb-colorpicker__clear svg {
+  width: 0.875em;
+  height: 0.875em;
+}
+
+.glb-colorpicker__clear:hover {
+  color: var(--textbox-clear-hover-color, var(--glb-text));
+  background-color: rgba(128, 128, 128, 0.15);
+}
+
+.glb-colorpicker__clear--hidden {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.glb-colorpicker__helper {
+  font-size: 0.75rem;
+  line-height: 1.25;
+  color: var(--textbox-helper-color, var(--glb-muted));
+}
+
+.glb-colorpicker__helper--error {
+  color: var(--textbox-error-color);
+}
+
+.glb-colorpicker--sm {
+  font-size: 0.8125rem;
+}
+
+.glb-colorpicker--sm .glb-colorpicker__field {
+  min-height: 2rem;
+}
+
+.glb-colorpicker--sm .glb-colorpicker__swatch {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.glb-colorpicker--lg .glb-colorpicker__field {
+  min-height: 2.875rem;
+}
+
+.glb-colorpicker--lg .glb-colorpicker__swatch {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+/* ── Panel (portal) ── */
+
+.glb-colorpicker__panel {
+  width: 16rem;
+  padding: 0.75rem;
+  border-radius: var(--textbox-radius, 0.5rem);
+  border: 1px solid var(--glb-border, var(--textbox-border));
+  background: var(--glb-surface, var(--textbox-bg));
+  color: var(--glb-text, var(--textbox-text));
+  box-shadow: var(--glb-overlay-shadow, 0 12px 32px rgba(15, 23, 42, 0.18));
+  font-family: var(--glb-font-family, 'Poppins', sans-serif);
+  box-sizing: border-box;
+}
+
+.glb-colorpicker__sv {
+  position: relative;
+  width: 100%;
+  height: 8.5rem;
+  border-radius: 0.375rem;
+  cursor: crosshair;
+  touch-action: none;
+  background-image:
+    linear-gradient(to top, #000, transparent),
+    linear-gradient(to right, #fff, transparent);
+}
+
+.glb-colorpicker__sv:focus-visible,
+.glb-colorpicker__hue:focus-visible {
+  outline: 2px solid var(--glb-accent-border-strong, currentColor);
+  outline-offset: 2px;
+}
+
+.glb-colorpicker__sv-thumb,
+.glb-colorpicker__hue-thumb {
+  position: absolute;
+  width: 0.875rem;
+  height: 0.875rem;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.glb-colorpicker__hue {
+  position: relative;
+  margin-top: 0.75rem;
+  height: 0.75rem;
+  border-radius: 999px;
+  cursor: pointer;
+  touch-action: none;
+  background: linear-gradient(
+    to right,
+    #f00,
+    #ff0,
+    #0f0,
+    #0ff,
+    #00f,
+    #f0f,
+    #f00
+  );
+}
+
+.glb-colorpicker__hue-thumb {
+  top: 50%;
+}
+
+.glb-colorpicker__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.glb-colorpicker__swatch-lg {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 0.375rem;
+  border: 1px solid var(--glb-border);
+  flex-shrink: 0;
+}
+
+.glb-colorpicker__hex {
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  color: var(--glb-muted);
+}
+
+.glb-colorpicker__presets {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.375rem;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.glb-colorpicker__preset {
+  aspect-ratio: 1;
+  width: 100%;
+  border: 1px solid var(--glb-border);
+  border-radius: 0.25rem;
+  padding: 0;
+  cursor: pointer;
+}
+
+.glb-colorpicker__presets li {
+  min-width: 0;
+}
+
+.glb-colorpicker__preset:focus-visible {
+  outline: 2px solid var(--glb-accent-border-strong, currentColor);
+  outline-offset: 1px;
+}
+
+/* ── Variants → tokens TextBox ── */
+
+.glb-colorpicker--primary {
+  --textbox-bg: var(--textbox-primary-bg);
+  --textbox-text: var(--textbox-primary-text);
+  --textbox-border: var(--textbox-primary-border);
+  --textbox-placeholder: var(--textbox-primary-placeholder);
+  --textbox-hover-bg: var(--textbox-primary-hover-bg);
+  --textbox-hover-border: var(--textbox-primary-hover-border);
+  --textbox-focus-bg: var(--textbox-primary-focus-bg);
+  --textbox-focus-border: var(--textbox-primary-focus-border);
+  --textbox-focus-ring: var(--textbox-primary-focus-ring);
+  --textbox-disabled-bg: var(--textbox-primary-disabled-bg);
+  --textbox-disabled-text: var(--textbox-primary-disabled-text);
+  --textbox-disabled-border: var(--textbox-primary-disabled-border);
+  --textbox-error-border: var(--textbox-primary-error-border);
+  --textbox-error-focus-ring: var(--textbox-primary-error-focus-ring);
+}
+
+.glb-colorpicker--secondary {
+  --textbox-bg: var(--textbox-secondary-bg);
+  --textbox-text: var(--textbox-secondary-text);
+  --textbox-border: var(--textbox-secondary-border);
+  --textbox-placeholder: var(--textbox-secondary-placeholder);
+  --textbox-hover-bg: var(--textbox-secondary-hover-bg);
+  --textbox-hover-border: var(--textbox-secondary-hover-border);
+  --textbox-focus-bg: var(--textbox-secondary-focus-bg);
+  --textbox-focus-border: var(--textbox-secondary-focus-border);
+  --textbox-focus-ring: var(--textbox-secondary-focus-ring);
+  --textbox-disabled-bg: var(--textbox-secondary-disabled-bg);
+  --textbox-disabled-text: var(--textbox-secondary-disabled-text);
+  --textbox-disabled-border: var(--textbox-secondary-disabled-border);
+  --textbox-error-border: var(--textbox-secondary-error-border);
+  --textbox-error-focus-ring: var(--textbox-secondary-error-focus-ring);
+}
+
+.glb-colorpicker--outline {
+  --textbox-bg: var(--textbox-outline-bg);
+  --textbox-text: var(--textbox-outline-text);
+  --textbox-border: var(--textbox-outline-border);
+  --textbox-placeholder: var(--textbox-outline-placeholder);
+  --textbox-hover-bg: var(--textbox-outline-hover-bg);
+  --textbox-hover-border: var(--textbox-outline-hover-border);
+  --textbox-focus-bg: var(--textbox-outline-focus-bg);
+  --textbox-focus-border: var(--textbox-outline-focus-border);
+  --textbox-focus-ring: var(--textbox-outline-focus-ring);
+  --textbox-disabled-bg: var(--textbox-outline-disabled-bg);
+  --textbox-disabled-text: var(--textbox-outline-disabled-text);
+  --textbox-disabled-border: var(--textbox-outline-disabled-border);
+  --textbox-error-border: var(--textbox-outline-error-border);
+  --textbox-error-focus-ring: var(--textbox-outline-error-focus-ring);
+}
+
+.glb-colorpicker--ghost {
+  --textbox-bg: var(--textbox-ghost-bg);
+  --textbox-text: var(--textbox-ghost-text);
+  --textbox-border: var(--textbox-ghost-border);
+  --textbox-placeholder: var(--textbox-ghost-placeholder);
+  --textbox-hover-bg: var(--textbox-ghost-hover-bg);
+  --textbox-hover-border: var(--textbox-ghost-hover-border);
+  --textbox-focus-bg: var(--textbox-ghost-focus-bg);
+  --textbox-focus-border: var(--textbox-ghost-focus-border);
+  --textbox-focus-ring: var(--textbox-ghost-focus-ring);
+  --textbox-disabled-bg: var(--textbox-ghost-disabled-bg);
+  --textbox-disabled-text: var(--textbox-ghost-disabled-text);
+  --textbox-disabled-border: var(--textbox-ghost-disabled-border);
+  --textbox-error-border: var(--textbox-ghost-error-border);
+  --textbox-error-focus-ring: var(--textbox-ghost-error-focus-ring);
+}

@@ -254,6 +254,18 @@
   color: var(--textbox-disabled-text);
 }
 
+/* Oculta spinners nativos si type="number" (preferí NumberBox para stepping). */
+.glb-textbox__input[type='number']::-webkit-outer-spin-button,
+.glb-textbox__input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.glb-textbox__input[type='number'] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
 /* Error */
 .glb-textbox--error .glb-textbox__input {
   border-color: var(--textbox-error-border);

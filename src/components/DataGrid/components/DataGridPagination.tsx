@@ -1,4 +1,5 @@
-import { useId } from 'react';
+import { useId, useMemo } from 'react';
+import { Select } from '@/components/Select/Select';
 import type { DataGridMessages } from '../i18n/DataGrid.messages.types';
 import type { UsePaginationReturn } from '../type/DataGrid.types';
 
@@ -35,6 +36,15 @@ export function DataGridPagination({
   const rangeStart = totalItems === 0 ? 0 : startIndex + 1;
   const rangeEnd = endIndex;
 
+  const pageSizeSelectOptions = useMemo(
+    () =>
+      pageSizeOptions.map((option) => ({
+        value: String(option),
+        label: String(option),
+      })),
+    [pageSizeOptions],
+  );
+
   return (
     <footer
       className="glb-datagrid__pagination"
@@ -53,19 +63,16 @@ export function DataGridPagination({
         >
           {messages.rowsPerPage}
         </label>
-        <select
+        <Select
           id={pageSizeSelectId}
           className="glb-datagrid__pagination-select"
-          value={pageSize}
+          size="sm"
+          width="5.5rem"
+          value={String(pageSize)}
+          options={pageSizeSelectOptions}
           disabled={disabled}
-          onChange={(event) => setPageSize(Number(event.target.value))}
-        >
-          {pageSizeOptions.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
+          onChange={(value) => setPageSize(Number(value))}
+        />
       </div>
 
       <div className="glb-datagrid__pagination-nav">

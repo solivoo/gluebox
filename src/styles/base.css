@@ -8,6 +8,7 @@
 /* ── App-level tokens for the demo shell ── */
 :root,
 [data-mode="light"] {
+  color-scheme: light;
   --glb-app-bg: #f8fafc;
   --glb-app-text: #1e293b;
   --glb-toolbar-bg: #ffffff;
@@ -28,6 +29,7 @@
 }
 
 [data-mode="dark"] {
+  color-scheme: dark;
   --glb-app-bg: #0f1117;
   --glb-app-text: #e2e8f0;
   --glb-toolbar-bg: #11131a;

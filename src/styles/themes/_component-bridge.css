@@ -1,7 +1,7 @@
 /**
- * Bridge: tokens de componentes → variables del sistema (--glb-*).
- * Debe cargarse DESPUÉS de default/modern/enterprise para pisar los
- * valores hardcodeados de _generated-*.css (misma o mayor especificidad).
+ * Mapeo canónico componente → --glb-*. El generador (`pnpm themes:generate`)
+ * lo inlinea en _generated-*.css; este archivo se importa al final del barrel
+ * como overlay compartido, no como parche sobre hex.
  */
 
 [data-theme="default"],
@@ -11,6 +11,15 @@
 [data-theme="modern"][data-mode="dark"],
 [data-theme="enterprise"][data-mode="dark"] {
   /* ── Button ── */
+  --btn-primary-bg: var(--glb-accent-surface);
+  --btn-primary-text: var(--glb-accent-on-fill);
+  --btn-primary-border: var(--glb-accent-border);
+  --btn-primary-hover-bg: var(--glb-accent-surface-hover);
+  --btn-primary-hover-border: var(--glb-accent-border-strong);
+  --btn-primary-active-bg: var(--glb-accent-surface-active);
+  --btn-primary-active-border: var(--glb-accent-border-strong);
+  --btn-primary-focus-ring: var(--glb-accent-focus-ring);
+  --btn-primary-spinner: var(--glb-accent-on-fill);
   --btn-secondary-bg: var(--glb-muted-surface);
   --btn-secondary-text: var(--glb-text);
   --btn-secondary-border: var(--glb-muted-surface);
@@ -21,6 +30,15 @@
   --btn-outline-text: var(--glb-text);
   --btn-outline-border: var(--glb-border);
   --btn-ghost-text: var(--glb-text);
+  --btn-danger-bg: var(--glb-danger-surface);
+  --btn-danger-text: var(--glb-danger-on-fill);
+  --btn-danger-border: var(--glb-danger-border);
+  --btn-danger-hover-bg: var(--glb-danger-surface-hover);
+  --btn-danger-hover-border: var(--glb-danger-border);
+  --btn-danger-active-bg: var(--glb-danger-surface-active);
+  --btn-danger-active-border: var(--glb-danger-border);
+  --btn-danger-focus-ring: var(--glb-danger-focus-ring);
+  --btn-danger-spinner: var(--glb-danger-on-fill);
 
   /* ── Select ── */
   --select-primary-bg: var(--glb-input-bg);

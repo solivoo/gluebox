@@ -8,6 +8,7 @@ Tabla / tarjetas empresariales tipadas con `dataSource`, `keyExpr` y `paging`.
 import { DataGrid } from 'glubox';
 import type { ColumnDef } from 'glubox';
 import 'glubox/style.css';
+import 'glubox/themes/index.css';
 ```
 
 ## Primer grid
@@ -169,7 +170,9 @@ paging={{
 | `paging.enabled` | `true` (si hay `paging`) | Muestra el pager |
 | `paging.pageIndex` | no controlado | Página **0-based** |
 | `paging.pageSize` | `20` (inicial) | Filas visibles por página |
-| `pageSizeOptions` | `[10, 25, 50, 100]` | Opciones del selector |
+| `pageSizeOptions` | `[10, 25, 50, 100]` | Opciones del Select de gluBox (no un `<select>` nativo) |
+
+El pager **no usa** un `<select>` nativo: el page-size es el [Select](/components/forms#select) de gluBox (portal / `position: fixed`), así que en `data-mode="dark"` no aparece el chrome blanco del SO. No hace falta estilar `.glb-datagrid__pagination-select` ni redefinir `--datagrid-*` en el consumidor.
 | `paginationMode` | `'client'` | `'client'` slice local · `'server'` vos traés la página |
 | `totalRowCount` | — | Total en modo **server** |
 
@@ -392,7 +395,9 @@ Con virtualización, `autoRowHeight` no aplica.
 
 ## Temas e i18n
 
-Sin `theme`, DataGrid hereda el tema del sistema. La prop es un override opcional:
+Sin `theme`, DataGrid hereda `data-theme` / `data-mode` del `<html>` (filas, header, search y pager). No redefinas `--datagrid-*` en tu app.
+
+La prop `theme` es un override puntual:
 
 ```tsx
 import { DataGrid, dataGridThemes, defaultDataGridMessages } from 'glubox';

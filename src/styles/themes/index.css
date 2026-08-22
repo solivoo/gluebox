@@ -6,4 +6,5 @@
 @import './default.css';
 @import './modern.css';
 @import './enterprise.css';
+/* Overlay canónico componente → --glb-* (el generador ya inlinea lo mismo). */
 @import './_component-bridge.css';

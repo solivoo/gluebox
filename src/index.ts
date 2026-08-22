@@ -5,6 +5,7 @@ import '@/components/Select/css/Select.css';
 import '@/components/TextBox/css/TextBox.css';
 import '@/components/NumberBox/css/NumberBox.css';
 import '@/components/FileBox/css/FileBox.css';
+import '@/components/ColorPicker/css/ColorPicker.css';
 import '@/components/TextArea/css/TextArea.css';
 import '@/components/DateBox/css/DateBox.css';
 import '@/components/RangeDateBox/css/RangeDateBox.css';
@@ -127,6 +128,21 @@ export type {
 } from './components/FileBox';
 
 export { FileBox } from './components/FileBox';
+
+export type {
+  ColorPickerProps,
+  ColorPickerVariant,
+  ColorPickerSize,
+  ColorPickerLabelPosition,
+  ColorPickerTheme,
+  ColorPickerVariantTheme,
+  ColorPickerThemePreset,
+  ColorPickerThemeInput,
+  ColorPickerChangeValue,
+  ColorPickerOnChangeHandler,
+} from './components/ColorPicker';
+
+export { ColorPicker, DEFAULT_COLOR_PRESETS } from './components/ColorPicker';
 
 export type {
   TextAreaProps,

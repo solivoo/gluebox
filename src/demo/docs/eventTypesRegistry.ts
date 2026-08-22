@@ -165,6 +165,29 @@ const handleReject: FileBoxOnRejectHandler = (rejected) => {
   });
 };`,
   },
+  colorpicker: {
+    importTypes: `import type {
+  ColorPickerOnChangeHandler,
+  ColorPickerChangeValue,
+} from 'glubox';`,
+    handlers: [
+      {
+        handlerType: 'ColorPickerOnChangeHandler',
+        payloadType: 'ColorPickerChangeValue',
+        signature: '(value: string) => void',
+        description: 'Hex normalizado `#rrggbb`, o string vacío al limpiar.',
+      },
+      {
+        handlerType: 'ColorPickerChangeValue',
+        signature: 'string',
+        description: 'Alias del valor emitido por onChange.',
+      },
+    ],
+    usageExample: `const handleColor: ColorPickerOnChangeHandler = (hex) => {
+  const next: ColorPickerChangeValue = hex;
+  setAccent(next);
+};`,
+  },
   textarea: {
     importTypes: `import type {
   TextAreaOnChangeHandler,

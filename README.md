@@ -22,6 +22,9 @@ import {
   Button,
   Select,
   TextBox,
+  NumberBox,
+  FileBox,
+  ColorPicker,
   DateBox,
   RangeDateBox,
   OptionGroup,
@@ -57,6 +60,9 @@ import type {
 | **PageActionsMenu** | Hamburguesa de acciones (`NavigationNode` / `surface: actions`) |
 | **Button** | Botón con variantes y temas |
 | **TextBox** | Campo de texto con label top / floating / outlined / left |
+| **NumberBox** | Campo numérico con spin buttons del tema (`min` / `max` / `step`) |
+| **FileBox** | Selector de archivos (campo o dropzone) |
+| **ColorPicker** | Color HSV + hex (`#rrggbb`), panel en portal |
 | **TextArea** | Multilínea |
 | **Select** | Desplegable con teclado y búsqueda type-ahead |
 | **DateBox** | Selector de fecha con calendario |
@@ -101,7 +107,6 @@ Estructura: cada fila es un objeto; `dataSource` es el array; `keyExpr` nombra e
   activePath={pathname}
   onNavigate={navigate}
   renderIcon={renderMenuIcon}
-  theme="dark"
   collapseOthersOnSelect
 />
 ```
@@ -124,7 +129,11 @@ Guía: [PageActionsMenu](https://solivoo.github.io/gluebox/components/page-actio
 ### Formularios
 
 ```tsx
-<TextBox label="Email" placeholder="nombre@correo.com" clearable />
+<TextBox label="Email" placeholder="nombre@correo.com" showClearButton />
+
+<NumberBox label="Cantidad" min={0} max={100} step={1} />
+
+<ColorPicker label="Acento" defaultValue="#3b82f6" onChange={setAccent} />
 
 <Select
   options={[{ value: '1', label: 'Opción 1' }]}
@@ -169,8 +178,11 @@ Con `labelPosition="outlined"` el control es transparente y el label se apoya en
 
 ### Temas globales
 
+El tema se aplica **una sola vez** en `<html>` (`data-theme` + `data-mode`). Importá `glubox/style.css` + el CSS de temas; no redefinas `--select-*`, `--datagrid-*` ni `--textbox-*`.
+
 ```tsx
-import 'glubox/themes/enterprise.css';
+import 'glubox/style.css';
+import 'glubox/themes/index.css';
 
 document.documentElement.setAttribute('data-theme', 'enterprise');
 document.documentElement.setAttribute('data-mode', 'dark');

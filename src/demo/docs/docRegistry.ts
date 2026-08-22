@@ -4,6 +4,7 @@ import { selectMeta } from '@/demo/metadata/selectMeta';
 import { textBoxMeta } from '@/demo/metadata/textBoxMeta';
 import { numberBoxMeta } from '@/demo/metadata/numberBoxMeta';
 import { fileBoxMeta } from '@/demo/metadata/fileBoxMeta';
+import { colorPickerMeta } from '@/demo/metadata/colorPickerMeta';
 import { textAreaMeta } from '@/demo/metadata/textAreaMeta';
 import { sidebarMeta } from '@/demo/metadata/sidebarMeta';
 import { dateBoxMeta } from '@/demo/metadata/dateBoxMeta';
@@ -87,6 +88,28 @@ function App() {
       accept="image/*,.pdf"
       showClearButton
       onChange={(files) => console.log(files)}
+    />
+  );
+}`,
+  },
+  colorpicker: {
+    component: 'ColorPicker',
+    label: 'ColorPicker',
+    description:
+      'Selector de color con swatch, input hex y panel HSV en portal. Hereda variantes, labels y temas de TextBox; no usa el picker nativo del SO.',
+    meta: colorPickerMeta,
+    importPath: "import { ColorPicker } from 'glubox';",
+    installNote:
+      'ColorPicker emite hex `#rrggbb` en onChange. El panel se porta a document.body (mismo criterio que Select). Comparte tokens --textbox-* / --glb-*.',
+    basicUsage: `import { ColorPicker } from 'glubox';
+
+function App() {
+  return (
+    <ColorPicker
+      label="Acento"
+      defaultValue="#3b82f6"
+      showClearButton
+      onChange={(hex) => console.log(hex)}
     />
   );
 }`,

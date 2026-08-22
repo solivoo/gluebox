@@ -97,7 +97,9 @@ Referencia completa: [Tipos de eventos](/guide/event-types).
 
 ## Temas
 
-Sin prop `theme`, Button / CheckButton / OptionGroup heredan el tema del sistema. La prop es un override opcional (6 presets u objeto custom):
+Sin prop `theme`, Button / CheckButton / OptionGroup heredan `data-theme` / `data-mode` del `<html>`. No redefinas `--btn-*` en el consumidor.
+
+La prop `theme` es un override puntual (6 presets u objeto custom):
 
 ```tsx
 <Button theme="modern-dark">Acción</Button>

@@ -10,6 +10,7 @@ import { SelectDemo } from '@/demo/pages/demos/SelectDemo';
 import { TextBoxDemo } from '@/demo/pages/demos/TextBoxDemo';
 import { NumberBoxDemo } from '@/demo/pages/demos/NumberBoxDemo';
 import { FileBoxDemo } from '@/demo/pages/demos/FileBoxDemo';
+import { ColorPickerDemo } from '@/demo/pages/demos/ColorPickerDemo';
 import { TextAreaDemo } from '@/demo/pages/demos/TextAreaDemo';
 import { SidebarDemo } from '@/demo/pages/demos/SidebarDemo';
 import { DateBoxDemo } from '@/demo/pages/demos/DateBoxDemo';
@@ -41,6 +42,7 @@ function ComponentListPage() {
           { name: 'TextBox', desc: 'Campo de texto con adornos, clearable y validación.', color: '#0ea5e9' },
           { name: 'NumberBox', desc: 'Campo numérico con spin buttons estilados, step y min/max.', color: '#0284c7' },
           { name: 'FileBox', desc: 'Selector de archivos con modo campo o dropzone y validación.', color: '#0369a1' },
+          { name: 'ColorPicker', desc: 'Selector de color HSV + hex, sin chrome nativo del SO.', color: '#db2777' },
           { name: 'TextArea', desc: 'Texto multilínea con filas, resize y mismas variantes que TextBox.', color: '#38bdf8' },
           { name: 'Sidebar', desc: 'Navegación jerárquica RBAC/ABAC con colapsado.', color: '#f59e0b' },
           { name: 'DateBox', desc: 'Selector de fecha individual con calendario nativo y temas.', color: '#8b5cf6' },
@@ -100,6 +102,7 @@ export function AppRouter() {
           <Route path="componentes/textbox" element={<TextBoxDemo />} />
           <Route path="componentes/numberbox" element={<NumberBoxDemo />} />
           <Route path="componentes/filebox" element={<FileBoxDemo />} />
+          <Route path="componentes/colorpicker" element={<ColorPickerDemo />} />
           <Route path="componentes/textarea" element={<TextAreaDemo />} />
           <Route path="componentes/sidebar" element={<SidebarDemo />} />
           <Route path="componentes/datebox" element={<DateBoxDemo />} />

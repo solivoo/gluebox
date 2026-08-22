@@ -8,7 +8,7 @@ gluBox es una librería de componentes React para dashboards y aplicaciones inte
 |------------|---------------|
 | Sidebar | [sidebar](/components/sidebar) |
 | DataGrid | [DataGrid — guía de uso](/components/datagrid) |
-| TextBox, TextArea, Select, DateBox, RangeDateBox | [formularios](/components/forms) |
+| TextBox, NumberBox, FileBox, ColorPicker, TextArea, Select, DateBox, RangeDateBox | [formularios](/components/forms) |
 | Button, CheckButton, OptionGroup | [botones](/components/buttons) |
 | Popup, Toast | [overlays](/components/overlays) |
 
@@ -25,7 +25,7 @@ Listado completo: [Componentes](/components/).
 
 ### Formularios
 
-- **[TextBox, TextArea, Select, DateBox, RangeDateBox](/components/forms)** — Campos con variantes, clear button, label outlined y temas.
+- **[TextBox, NumberBox, FileBox, ColorPicker, TextArea, Select, DateBox, RangeDateBox](/components/forms)** — Campos con variantes, clear button, label outlined y temas.
 
 ### Botones y selección
 
@@ -45,7 +45,7 @@ Listado completo: [Componentes](/components/).
 | [DataGrid](/components/datagrid) | Guía de uso: dataSource, paging, altura, cards |
 | [Esquema del menú (API)](/guide/menu-api) | Contrato JSON para backend |
 | [Integración con routing](/guide/routing) | React Router, guards, registro de rutas |
-| [Formularios](/components/forms) | TextBox, Select, fechas, label outlined |
+| [Formularios](/components/forms) | TextBox, NumberBox, FileBox, ColorPicker, Select, fechas, label outlined |
 | [Botones](/components/buttons) | Button, CheckButton, OptionGroup |
 | [Overlays](/components/overlays) | Popup, Toast |
 | [Sidebar (referencia)](/components/sidebar) | Props, temas, RBAC |
@@ -68,7 +68,7 @@ pnpm docs:dev     # Esta documentación
 ## Flujo típico de integración
 
 1. Instalar `glubox` e importar `glubox/style.css` + `glubox/themes/index.css` (o un tema suelto).
-2. Configurar `data-theme` y `data-mode` en `<html>` — los componentes heredan el tema sin props.
+2. Configurar `data-theme` y `data-mode` en `<html>` — los componentes heredan el tema sin props ni overrides de `--select-*` / `--datagrid-*`.
 3. Consumir `MenuConfig` desde tu API ([esquema](/guide/menu-api)).
 4. Conectar Sidebar con `activePath` / `onNavigate` ([routing](/guide/routing)).
 5. Listar datos con [DataGrid](/components/datagrid) (`dataSource` + `keyExpr` + `paging`).

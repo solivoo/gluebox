@@ -92,12 +92,16 @@ function App() {
 
       <h3>Configuración global</h3>
       <p>
-        Los componentes de <strong>gluBox</strong> usan variables CSS para su estilado.
-        Asegurate de importar los estilos base y el tema deseado:
+        Los componentes de <strong>gluBox</strong> heredan el tema del sistema.
+        Importá el CSS publicado y seteá <code>data-theme</code> / <code>data-mode</code> en{' '}
+        <code>&lt;html&gt;</code>:
       </p>
       <pre className="dcd__code">{`// En tu entry point (main.tsx / App.tsx)
-import 'glubox/styles/base.css';           // Fuente + tokens base
-import 'glubox/styles/themes/index.css';   // Temas`}</pre>
+import 'glubox/style.css';
+import 'glubox/themes/index.css';
+
+document.documentElement.setAttribute('data-theme', 'default');
+document.documentElement.setAttribute('data-mode', 'light');`}</pre>
     </section>
   );
 }
@@ -229,6 +233,24 @@ const [files, setFiles] = useState<File[]>([]);
 
 // Estado de error
 <FileBox label="DNI" error errorMessage="Archivo requerido" />`,
+    ColorPicker: `// Campo básico
+<ColorPicker label="Acento" defaultValue="#3b82f6" />
+
+// Controlado
+const [color, setColor] = useState('#22c55e');
+<ColorPicker label="Marca" value={color} onChange={setColor} showClearButton />
+
+// Presets propios
+<ColorPicker
+  label="Estado"
+  presets={['#22c55e', '#eab308', '#ef4444']}
+/>
+
+// Label outlined
+<ColorPicker label="Fondo" labelPosition="outlined" variant="outline" />
+
+// Error
+<ColorPicker label="Color" error errorMessage="Elegí un color" />`,
     TextArea: `// Campo básico
 <TextArea placeholder="Escribí tu mensaje..." />
 
@@ -670,6 +692,31 @@ export interface NumberBoxProps
 export type NumberBoxOnChangeHandler = NonNullable<NumberBoxProps['onChange']>;
 export type NumberBoxOnFocusHandler = NonNullable<NumberBoxProps['onFocus']>;
 export type NumberBoxOnBlurHandler = NonNullable<NumberBoxProps['onBlur']>;`,
+    ColorPicker: `export type ColorPickerVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
+export type ColorPickerSize = 'sm' | 'md' | 'lg';
+export type ColorPickerLabelPosition = 'top' | 'floating' | 'outlined' | 'left';
+export type ColorPickerThemeInput = TextBoxThemeInput;
+
+export interface ColorPickerProps {
+  value?: string;            // hex controlado #rrggbb
+  defaultValue?: string;
+  onChange?: (value: string) => void;
+  presets?: readonly string[]; // muestras del panel
+  label?: string;
+  labelPosition?: ColorPickerLabelPosition;
+  variant?: ColorPickerVariant;
+  size?: ColorPickerSize;
+  showClearButton?: boolean;
+  error?: boolean;
+  errorMessage?: string;
+  helperText?: string;
+  fullWidth?: boolean;
+  width?: string | number;
+  theme?: ColorPickerThemeInput;
+}
+
+export type ColorPickerChangeValue = string;
+export type ColorPickerOnChangeHandler = (value: string) => void;`,
     FileBox: `export type FileBoxVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
 export type FileBoxSize = 'sm' | 'md' | 'lg';
 export type FileBoxLabelPosition = 'top' | 'floating' | 'outlined' | 'left';
@@ -1092,13 +1139,22 @@ function AccessibilitySection({ entry }: { entry: DocEntry }) {
 - Label: asociado vía <label htmlFor> automático con prop label.
 - Errores: aria-invalid="true" + aria-describedby al mensaje.
 - Helper: aria-describedby también referencia helperText.
-- Placeholder: no sustituye al label. Usar label + placeholder.`,
-    NumberBox: `- Input nativo type="number": semántica de spinbutton para lectores.
+- Placeholder: no sustituye al label. Usar label + placeholder.
+- type="number": los spinners nativos están ocultos; para stepping usá NumberBox.`,
+    NumberBox: `- Input nativo type="number" con spinners del SO ocultos; los spin buttons son los de gluBox.
 - Label: asociado vía <label htmlFor> automático con prop label.
-- Teclado: flechas ↑/↓ incrementan/decrementan (comportamiento nativo).
+- Teclado: flechas ↑/↓ incrementan/decrementan.
 - Spin buttons: decorativos para AT (tabIndex -1); el teclado cubre la función.
 - Errores: aria-invalid="true" + aria-describedby al mensaje.
 - Botón limpiar: aria-label "Limpiar campo"; oculto sin valor.`,
+    ColorPicker: `- No usa <input type="color"> nativo (evita chrome del SO en dark).
+- Swatch: botón con aria-expanded / aria-haspopup="dialog".
+- Input hex asociado al label vía htmlFor.
+- Panel: role="dialog" en portal; al abrir el foco entra al cuadro SV.
+- Escape cierra y devuelve el foco al swatch; click fuera también cierra.
+- Cuadro SV y matiz: role="slider" con flechas (±1) y Shift+flechas (±10); Home/End van a los extremos.
+- Presets: botones con aria-label del hex.
+- Errores: aria-invalid + aria-describedby.`,
     FileBox: `- Input file nativo oculto (aria-hidden); la UI visible es el control estilado.
 - Contenedor: role="group" con aria-invalid y aria-describedby.
 - Label: asociado vía <label htmlFor> al input file (abre el picker).
@@ -1114,6 +1170,7 @@ function AccessibilitySection({ entry }: { entry: DocEntry }) {
 - Ordenamiento: aria-sort en encabezados sortables.
 - Selección: aria-selected en filas; checkboxes con labels en modo multiple.
 - Búsqueda: input type="search" con aria-label.
+- Pager: page-size es el Select de gluBox (combobox), no un <select> nativo.
 - Scroll: viewport dedicado; primera columna sticky en móvil.`,
     Sidebar: `- Rol: navigation en <nav>.
 - Ítems expandibles: aria-expanded en botones con hijos.
