@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import type {
   ColumnDef,
   DataGridCardComponent,
@@ -13,7 +14,7 @@ interface DataGridCardListProps<T extends Record<string, unknown>> {
   columns: ColumnDef<T>[];
   getRowId: (row: T) => string | number;
   selectionMode: DataGridSelectionMode;
-  emptyMessage: string;
+  emptyContent: ReactNode;
   isRowSelected: (row: T) => boolean;
   onCardActivate: (row: T) => void;
   onCheckboxChange: (row: T) => void;
@@ -66,7 +67,7 @@ export function DataGridCardList<T extends Record<string, unknown>>({
   columns,
   getRowId,
   selectionMode,
-  emptyMessage,
+  emptyContent,
   isRowSelected,
   onCardActivate,
   onCheckboxChange,
@@ -76,7 +77,7 @@ export function DataGridCardList<T extends Record<string, unknown>>({
   if (rows.length === 0) {
     return (
       <div className="glb-datagrid__cards-empty" role="status">
-        {emptyMessage}
+        {emptyContent}
       </div>
     );
   }

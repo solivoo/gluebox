@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import type { ColumnDef, DataGridSelectionMode } from '../type/DataGrid.types';
 import type { VirtualRowsRange } from '../utils/virtualRows';
 import { normalizeId } from '../utils/gridUtils';
@@ -11,7 +11,7 @@ interface DataGridBodyProps<T extends Record<string, unknown>> {
   getRowId: (row: T) => string | number;
   selectionMode: DataGridSelectionMode;
   stickyFirstColumn: boolean;
-  emptyMessage: string;
+  emptyContent: ReactNode;
   virtualRange: VirtualRowsRange;
   isVirtualized: boolean;
   isRowSelected: (row: T) => boolean;
@@ -26,7 +26,7 @@ export function DataGridBody<T extends Record<string, unknown>>({
   getRowId,
   selectionMode,
   stickyFirstColumn,
-  emptyMessage,
+  emptyContent,
   virtualRange,
   isVirtualized,
   isRowSelected,
@@ -40,7 +40,7 @@ export function DataGridBody<T extends Record<string, unknown>>({
       <tbody className="glb-datagrid__body">
         <tr>
           <td className="glb-datagrid__empty" colSpan={colSpan}>
-            {emptyMessage}
+            {emptyContent}
           </td>
         </tr>
       </tbody>

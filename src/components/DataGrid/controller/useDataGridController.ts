@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef } from 'react';
-import type { CSSProperties, RefObject } from 'react';
+import type { CSSProperties, ReactNode, RefObject } from 'react';
 import type { DataGridProps, DataGridToolbarContext } from '../type/DataGrid.types';
 import { useDataGrid } from '../hooks/useDataGrid';
 import { useVirtualRows } from '../hooks/useVirtualRows';
@@ -42,7 +42,7 @@ export interface DataGridControllerViewModel<T extends Record<string, unknown>> 
   selection: ReturnType<typeof useDataGridSelection<T>>;
   messages: DataGridMessages;
   searchPlaceholder: string;
-  emptyMessage: string;
+  emptyContent: ReactNode;
   showSearch: boolean;
   showToolbar: boolean;
   searchPosition: DataGridProps<T>['searchPosition'];
@@ -135,6 +135,7 @@ export function useDataGridController<T extends Record<string, unknown>>(
     onColumnOrderChange,
     minColumnWidth = 72,
     emptyMessage: emptyMessageProp,
+    emptyState,
     loading = false,
     fullWidth = true,
     width,
@@ -153,7 +154,7 @@ export function useDataGridController<T extends Record<string, unknown>>(
   );
 
   const resolvedSearchPlaceholder = searchPlaceholder ?? messages.searchPlaceholder;
-  const resolvedEmptyMessage = emptyMessageProp ?? messages.emptyMessage;
+  const emptyContent = emptyState ?? emptyMessageProp ?? messages.emptyMessage;
 
   const grid = useDataGrid({
     data,
@@ -560,7 +561,7 @@ export function useDataGridController<T extends Record<string, unknown>>(
     selection,
     messages,
     searchPlaceholder: resolvedSearchPlaceholder,
-    emptyMessage: resolvedEmptyMessage,
+    emptyContent,
     showSearch,
     showToolbar,
     searchPosition,

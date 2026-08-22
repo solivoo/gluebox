@@ -35,6 +35,7 @@ export type { UseVirtualRowsOptions, UseVirtualRowsReturn } from './hooks/useVir
 export type {
   DataGridProps,
   ColumnDef,
+  DataGridKnownKeys,
   DataGridSelectionMode,
   DataGridSortDirection,
   DataGridSortState,

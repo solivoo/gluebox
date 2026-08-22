@@ -58,7 +58,7 @@ export function DataGrid<T extends Record<string, unknown>>(
                 columns={vm.orderedColumns}
                 getRowId={vm.getRowId}
                 selectionMode={vm.selectionMode ?? 'none'}
-                emptyMessage={vm.emptyMessage}
+                emptyContent={vm.emptyContent}
                 isRowSelected={vm.grid.isRowSelected}
                 onCardActivate={selection.handleCardActivate}
                 onCheckboxChange={selection.handleToggleRow}
@@ -86,7 +86,7 @@ export function DataGrid<T extends Record<string, unknown>>(
                   getRowId={vm.getRowId}
                   selectionMode={vm.selectionMode ?? 'none'}
                   stickyFirstColumn={vm.stickyFirstColumn}
-                  emptyMessage={vm.emptyMessage}
+                  emptyContent={vm.emptyContent}
                   virtualRange={vm.virtualRange}
                   isVirtualized={vm.shouldVirtualize}
                   isRowSelected={vm.grid.isRowSelected}

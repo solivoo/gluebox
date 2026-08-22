@@ -12,7 +12,7 @@ export function normalizeColumnOrder<T extends Record<string, unknown>>(
   columns: ColumnDef<T>[],
   order?: Array<keyof T>,
 ): Array<keyof T> {
-  const keys = columns.map((column) => column.key);
+  const keys = columns.map((column) => column.key) as Array<keyof T>;
   if (!order?.length) return keys;
 
   const valid = order.filter((key) => keys.includes(key));

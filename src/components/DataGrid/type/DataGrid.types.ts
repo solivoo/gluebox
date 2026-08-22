@@ -15,10 +15,26 @@ export interface DataGridSortState<T extends Record<string, unknown>> {
 }
 
 /**
- * Definición de columna con inferencia estricta del key y del valor en renderCell.
+ * Quita el index signature (`string` / `number`) de T.
+ * `T & Record<string, unknown>` no debe contaminar el union de ColumnDef.
+ */
+type DataGridStripIndex<T> = {
+  [K in keyof T as string extends K ? never : number extends K ? never : K]: T[K];
+};
+
+/**
+ * Keys literales de T. Si T es solo `Record<string, unknown>`, cae a `string`.
+ */
+export type DataGridKnownKeys<T> = [keyof DataGridStripIndex<T> & string] extends [never]
+  ? Extract<keyof T, string>
+  : keyof DataGridStripIndex<T> & string;
+
+/**
+ * Definición de columna. Union discriminado por `key` literal: `renderCell`
+ * recibe `T[K]`, no `unknown`, aunque T tenga `Record<string, unknown>`.
  */
 export type ColumnDef<T extends Record<string, unknown>> = {
-  [K in keyof T]: {
+  [K in DataGridKnownKeys<T>]: {
     /** Propiedad del objeto de datos */
     key: K;
     /** Título visible en el encabezado */
@@ -31,14 +47,17 @@ export type ColumnDef<T extends Record<string, unknown>> = {
     minWidth?: string | number;
     /** Alineación del contenido */
     align?: 'left' | 'center' | 'right';
-    /** Renderizado personalizado de la celda */
-    renderCell?: (value: T[K], row: T, rowIndex: number) => ReactNode;
+    /**
+     * Renderizado de la celda. `rowIndex` es opcional: un callback de 2 args
+     * sigue siendo asignable.
+     */
+    renderCell?: (value: T[K], row: T, rowIndex?: number) => ReactNode;
     /** Permite redimensionar (si resizableColumns está activo) */
     resizable?: boolean;
     /** Permite reordenar por drag (si reorderableColumns está activo) */
     reorderable?: boolean;
   };
-}[keyof T];
+}[DataGridKnownKeys<T>];
 
 /** Anchos de columna en px por key */
 export type DataGridColumnWidths<T extends Record<string, unknown>> = Partial<
@@ -247,8 +266,14 @@ export interface DataGridProps<T extends Record<string, unknown>> {
   onColumnOrderChange?: (order: Array<keyof T>) => void;
   /** Ancho mínimo al redimensionar (px) */
   minColumnWidth?: number;
-  /** Mensaje cuando no hay filas visibles */
+  /** Mensaje cuando no hay filas visibles (string). */
   emptyMessage?: string;
+  /**
+   * Contenido cuando no hay filas visibles (nodo o string).
+   * Si también hay `emptyMessage`, `emptyState` gana.
+   * @deprecated En 0.2 usá `emptyMessage` o `messages.emptyMessage`. Sigue válido en 0.1.x.
+   */
+  emptyState?: ReactNode;
   /** Estado de carga */
   loading?: boolean;
   /** Ocupa todo el ancho disponible */
@@ -261,7 +286,7 @@ export interface DataGridProps<T extends Record<string, unknown>> {
   className?: string;
   /**
    * Textos del componente (i18n / white-label).
-   * Las props `searchPlaceholder` y `emptyMessage` tienen prioridad si se definen.
+   * Las props `searchPlaceholder`, `emptyState` y `emptyMessage` tienen prioridad si se definen.
    */
   messages?: Partial<DataGridMessages>;
 }

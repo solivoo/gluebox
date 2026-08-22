@@ -780,10 +780,10 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
 // dataSource: T[]  — array plano, no { items }
 
 export type ColumnDef<T> = {
-  key: keyof T;
+  key: keyof T & string;
   header: string;
   sortable?: boolean;
-  renderCell?: (value: T[keyof T], row: T, rowIndex: number) => ReactNode;
+  renderCell?: (value: /* T[key] */, row: T, rowIndex?: number) => ReactNode;
   // + width, minWidth, align…
 };
 

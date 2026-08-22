@@ -108,7 +108,9 @@ const columns: ColumnDef<Employee>[] = [
 | `header` | Título visible |
 | `sortable` | Orden al clic |
 | `width` / `minWidth` / `align` | Layout |
-| `renderCell` | UI custom: `(value, row, rowIndex) => ReactNode` |
+| `renderCell` | UI custom: `(value, row, rowIndex?) => ReactNode`. `value` es `T[key]`, no `unknown`, aunque `T` tenga `Record<string, unknown>`. |
+
+Estado vacío: `emptyState?: ReactNode` (válido en 0.1.x) o `emptyMessage?: string`. Si ambos, gana `emptyState`.
 
 ### Uso correcto
 

@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.21] — 2026-08-21
+
+### Corregido
+
+- **`ColumnDef<T>`:** el union ya no incluye la rama `key: string` de `Record<string, unknown>`. `renderCell` infiere `T[K]` (p. ej. `string` en `key: 'name'`) en filas `SomeDto & Record<string, unknown>`. `rowIndex` es opcional: un callback de 2 args sigue siendo asignable.
+- **`emptyState`:** se restaura `emptyState?: ReactNode` en `DataGridProps` (alias del vacío; si hay `emptyMessage`, `emptyState` gana). Deprecated hacia 0.2 a favor de `emptyMessage` / `messages.emptyMessage`.
+
+### Migración (apps consumidoras)
+
+1. Actualizar a `glubox@0.1.21`.
+2. Los grids 0.1.18 con `ColumnDef<T>[]` + `renderCell: (value: T['name'], row) =>` y `emptyState={...}` vuelven a typechequear. No hace falta reescribir columnas.
+
 ## [0.1.20] — 2026-08-21
 
 ### Añadido
