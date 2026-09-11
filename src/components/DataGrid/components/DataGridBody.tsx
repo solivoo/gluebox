@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode } from 'react';
-import type { ColumnDef, DataGridSelectionMode } from '../type/DataGrid.types';
+import type { ColumnDef, ColumnStickyMeta, DataGridSelectionMode } from '../type/DataGrid.types';
 import type { VirtualRowsRange } from '../utils/virtualRows';
 import { normalizeId } from '../utils/gridUtils';
 import { DataGridRow } from './DataGridRow';
@@ -8,6 +8,7 @@ interface DataGridBodyProps<T extends Record<string, unknown>> {
   rows: T[];
   columns: ColumnDef<T>[];
   getColumnStyle: (column: ColumnDef<T>) => CSSProperties;
+  getColumnStickyMeta?: (column: ColumnDef<T>) => ColumnStickyMeta | undefined;
   getRowId: (row: T) => string | number;
   selectionMode: DataGridSelectionMode;
   stickyFirstColumn: boolean;
@@ -23,6 +24,7 @@ export function DataGridBody<T extends Record<string, unknown>>({
   rows,
   columns,
   getColumnStyle,
+  getColumnStickyMeta,
   getRowId,
   selectionMode,
   stickyFirstColumn,
@@ -72,6 +74,7 @@ export function DataGridBody<T extends Record<string, unknown>>({
             rowIndex={rowIndex}
             columns={columns}
             getColumnStyle={getColumnStyle}
+            getColumnStickyMeta={getColumnStickyMeta}
             getRowId={getRowId}
             selectionMode={selectionMode}
             isSelected={isRowSelected(row)}

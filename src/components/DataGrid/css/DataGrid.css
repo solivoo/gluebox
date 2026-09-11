@@ -439,6 +439,14 @@
   left: 0;
 }
 
+.glb-datagrid__cell--sticky-edge-left {
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.06);
+}
+
+.glb-datagrid__cell--sticky-edge-right {
+  box-shadow: -2px 0 4px rgba(0, 0, 0, 0.06);
+}
+
 .glb-datagrid--sticky-first .glb-datagrid__cell--sticky-first {
   left: 0;
   box-shadow: 2px 0 4px rgba(0, 0, 0, 0.06);

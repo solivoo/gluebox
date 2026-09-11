@@ -8,6 +8,7 @@ import type {
 } from '../type/DataGrid.types';
 import {
   columnKeyString,
+  computeColumnStickyMeta,
   moveColumnInOrder,
   normalizeColumnOrder,
   orderColumns,
@@ -30,6 +31,8 @@ export function useColumnLayout<T extends Record<string, unknown>>(
     defaultColumnOrder,
     onColumnOrderChange,
     minColumnWidth = 72,
+    selectionMode = 'none',
+    stickyFirstColumn = true,
   } = options;
 
   const [internalOrder, setInternalOrder] = useState<Array<keyof T>>(() =>
@@ -73,12 +76,32 @@ export function useColumnLayout<T extends Record<string, unknown>>(
     [controlledOrder, onColumnOrderChange],
   );
 
+  const stickyMetaMap = useMemo(
+    () =>
+      computeColumnStickyMeta({
+        columns: orderedColumns,
+        columnWidths,
+        selectionMode,
+        stickyFirstColumn,
+        minColumnWidth,
+      }),
+    [orderedColumns, columnWidths, selectionMode, stickyFirstColumn, minColumnWidth],
+  );
+
+  const getColumnStickyMeta = useCallback(
+    (column: ColumnDef<T>) => {
+      return stickyMetaMap.get(columnKeyString(column.key));
+    },
+    [stickyMetaMap],
+  );
+
   const getColumnStyle = useCallback(
     (column: ColumnDef<T>): CSSProperties => {
       const widthPx = columnWidths[column.key];
-      return resolveColumnStyle(column, widthPx, minColumnWidth);
+      const stickyMeta = stickyMetaMap.get(columnKeyString(column.key));
+      return resolveColumnStyle(column, widthPx, minColumnWidth, stickyMeta);
     },
-    [columnWidths, minColumnWidth],
+    [columnWidths, minColumnWidth, stickyMetaMap],
   );
 
   const isColumnResizable = useCallback(
@@ -181,6 +204,7 @@ export function useColumnLayout<T extends Record<string, unknown>>(
   return {
     orderedColumns,
     getColumnStyle,
+    getColumnStickyMeta,
     isColumnResizable,
     isColumnReorderable,
     dragOverKey,

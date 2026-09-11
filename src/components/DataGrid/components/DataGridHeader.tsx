@@ -38,7 +38,7 @@ export function DataGridHeader<T extends Record<string, unknown>>({
   columns,
   columnLayout,
   selectionMode,
-  stickyFirstColumn,
+  stickyFirstColumn: _stickyFirstColumn,
   sort,
   isAllVisibleSelected,
   isSomeVisibleSelected,
@@ -47,6 +47,7 @@ export function DataGridHeader<T extends Record<string, unknown>>({
 }: DataGridHeaderProps<T>) {
   const {
     getColumnStyle,
+    getColumnStickyMeta,
     isColumnResizable,
     isColumnReorderable,
     dragOverKey,
@@ -82,12 +83,7 @@ export function DataGridHeader<T extends Record<string, unknown>>({
         {columns.map((column, columnIndex) => {
           const key = columnKeyString(column.key);
           const isSorted = sort?.key === column.key;
-          const sticky =
-            stickyFirstColumn &&
-            columnIndex === 0 &&
-            selectionMode !== 'multiple';
-          const stickyWithCheckbox =
-            stickyFirstColumn && columnIndex === 0 && selectionMode === 'multiple';
+          const stickyMeta = getColumnStickyMeta(column);
           const canResize = isColumnResizable(column);
           const canReorder = isColumnReorderable(column);
 
@@ -103,9 +99,20 @@ export function DataGridHeader<T extends Record<string, unknown>>({
                 canResize && 'glb-datagrid__header-cell--resizable',
                 canReorder && 'glb-datagrid__header-cell--reorderable',
                 dragOverKey === key && 'glb-datagrid__header-cell--drag-over',
-                sticky && 'glb-datagrid__cell--sticky glb-datagrid__cell--sticky-first',
-                stickyWithCheckbox &&
-                  'glb-datagrid__cell--sticky glb-datagrid__cell--sticky-first-with-checkbox',
+                stickyMeta?.isSticky && 'glb-datagrid__cell--sticky',
+                stickyMeta?.position === 'left' && 'glb-datagrid__cell--sticky-left',
+                stickyMeta?.position === 'right' && 'glb-datagrid__cell--sticky-right',
+                stickyMeta?.isEdge &&
+                  stickyMeta.position === 'left' &&
+                  'glb-datagrid__cell--sticky-edge-left',
+                stickyMeta?.isEdge &&
+                  stickyMeta.position === 'right' &&
+                  'glb-datagrid__cell--sticky-edge-right',
+                stickyMeta?.position === 'left' &&
+                  columnIndex === 0 &&
+                  (selectionMode === 'multiple'
+                    ? 'glb-datagrid__cell--sticky-first-with-checkbox'
+                    : 'glb-datagrid__cell--sticky-first'),
               ]
                 .filter(Boolean)
                 .join(' ')}

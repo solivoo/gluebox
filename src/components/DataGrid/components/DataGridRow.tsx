@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import type { CSSProperties } from 'react';
-import type { ColumnDef } from '../type/DataGrid.types';
+import type { ColumnDef, ColumnStickyMeta } from '../type/DataGrid.types';
 import { normalizeId } from '../utils/gridUtils';
 import { columnKeyString } from '../utils/columnLayoutUtils';
 
@@ -9,6 +9,7 @@ interface DataGridRowProps<T extends Record<string, unknown>> {
   rowIndex: number;
   columns: ColumnDef<T>[];
   getColumnStyle: (column: ColumnDef<T>) => CSSProperties;
+  getColumnStickyMeta?: (column: ColumnDef<T>) => ColumnStickyMeta | undefined;
   getRowId: (row: T) => string | number;
   selectionMode: 'none' | 'single' | 'multiple';
   isSelected: boolean;
@@ -22,10 +23,11 @@ function DataGridRowInner<T extends Record<string, unknown>>({
   rowIndex,
   columns,
   getColumnStyle,
+  getColumnStickyMeta,
   getRowId,
   selectionMode,
   isSelected,
-  stickyFirstColumn,
+  stickyFirstColumn: _stickyFirstColumn,
   onRowClick,
   onCheckboxChange,
 }: DataGridRowProps<T>) {
@@ -66,13 +68,7 @@ function DataGridRowInner<T extends Record<string, unknown>>({
           ? column.renderCell(value, row, rowIndex)
           : String(value ?? '');
 
-        const sticky =
-          stickyFirstColumn &&
-          columnIndex === 0 &&
-          selectionMode !== 'multiple';
-
-        const stickyWithCheckbox =
-          stickyFirstColumn && columnIndex === 0 && selectionMode === 'multiple';
+        const stickyMeta = getColumnStickyMeta?.(column);
 
         return (
           <td
@@ -80,9 +76,20 @@ function DataGridRowInner<T extends Record<string, unknown>>({
             className={[
               'glb-datagrid__cell',
               column.align && `glb-datagrid__cell--${column.align}`,
-              sticky && 'glb-datagrid__cell--sticky glb-datagrid__cell--sticky-first',
-              stickyWithCheckbox &&
-                'glb-datagrid__cell--sticky glb-datagrid__cell--sticky-first-with-checkbox',
+              stickyMeta?.isSticky && 'glb-datagrid__cell--sticky',
+              stickyMeta?.position === 'left' && 'glb-datagrid__cell--sticky-left',
+              stickyMeta?.position === 'right' && 'glb-datagrid__cell--sticky-right',
+              stickyMeta?.isEdge &&
+                stickyMeta.position === 'left' &&
+                'glb-datagrid__cell--sticky-edge-left',
+              stickyMeta?.isEdge &&
+                stickyMeta.position === 'right' &&
+                'glb-datagrid__cell--sticky-edge-right',
+              stickyMeta?.position === 'left' &&
+                columnIndex === 0 &&
+                (selectionMode === 'multiple'
+                  ? 'glb-datagrid__cell--sticky-first-with-checkbox'
+                  : 'glb-datagrid__cell--sticky-first'),
             ]
               .filter(Boolean)
               .join(' ')}

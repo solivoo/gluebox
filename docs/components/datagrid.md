@@ -289,9 +289,11 @@ const columns: ColumnDef<Employee>[] = [
 | `sortable` | Orden al clic |
 | `width` / `minWidth` | Dimensiones |
 | `align` | `left` \| `center` \| `right` |
+| `sticky` | `true` \| `'left'` \| `'right'` (fija columna en scroll horizontal) |
 | `renderCell` | UI custom tipada |
 
-`resizableColumns` / `reorderableColumns` / `stickyFirstColumn` en el grid.
+`resizableColumns` / `reorderableColumns` / `stickyFirstColumn` en el grid (por defecto la primera columna es sticky izquierda si ninguna declara `sticky`).
+
 
 ---
 

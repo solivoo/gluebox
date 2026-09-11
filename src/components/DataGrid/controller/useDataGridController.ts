@@ -177,6 +177,8 @@ export function useDataGridController<T extends Record<string, unknown>>(
     defaultColumnOrder,
     onColumnOrderChange,
     minColumnWidth,
+    selectionMode,
+    stickyFirstColumn,
   });
 
   const { orderedColumns } = columnLayout;
@@ -485,10 +487,15 @@ export function useDataGridController<T extends Record<string, unknown>>(
         }
       : undefined;
 
+  const hasStickyColumns =
+    (stickyFirstColumn && columns.length > 0) ||
+    columns.some((col) => col.sticky != null && col.sticky !== false);
+
   const classNames = [
     'glb-datagrid',
     fullWidth && 'glb-datagrid--full-width',
     stickyFirstColumn && !isCardLayout && 'glb-datagrid--sticky-first',
+    hasStickyColumns && !isCardLayout && 'glb-datagrid--has-sticky',
     shouldVirtualize && 'glb-datagrid--virtualized',
     autoRowHeight && 'glb-datagrid--auto-row-height',
     useFitContent && 'glb-datagrid--fit-content',

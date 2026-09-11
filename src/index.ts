@@ -331,6 +331,8 @@ export type { FieldClearButtonProps } from './shared/fieldClear.types';
 export type {
   DataGridProps,
   ColumnDef,
+  ColumnSticky,
+  ColumnStickyMeta,
   DataGridKnownKeys,
   DataGridSelectionMode,
   DataGridSortDirection,

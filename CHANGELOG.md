@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.1.22] — 2026-09-10
+
+### Añadido
+
+- **`DataGrid` columnas sticky completas:** Soporte para fijar múltiples columnas tanto a la izquierda como a la derecha al hacer scroll horizontal mediante la propiedad `sticky?: boolean | 'left' | 'right'` en `ColumnDef<T>`.
+- Cálculo acumulativo de offsets en tiempo real para columnas sticky (`left` y `right`), compatible con selección múltiple (checkbox inicial) y redimensionamiento dinámico de columnas (`resizableColumns`).
+- Nuevos tipos exportados: `ColumnSticky` y `ColumnStickyMeta`.
+- Clases CSS `.glb-datagrid__cell--sticky-edge-left` y `.glb-datagrid__cell--sticky-edge-right` con sombras divisorias en los bordes de grupos sticky.
+- Retrocompatibilidad total con `stickyFirstColumn?: boolean`.
+
+### Migración (apps consumidoras)
+
+1. Actualizar a `glubox@0.1.22`.
+2. Opcional: configurar `sticky: 'left'` o `sticky: 'right'` directamente en `ColumnDef`.
+
 ## [0.1.21] — 2026-08-21
 
 ### Corregido

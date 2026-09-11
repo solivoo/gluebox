@@ -83,6 +83,7 @@ export function DataGrid<T extends Record<string, unknown>>(
                   rows={vm.rowsToRender}
                   columns={vm.orderedColumns}
                   getColumnStyle={vm.columnLayout.getColumnStyle}
+                  getColumnStickyMeta={vm.columnLayout.getColumnStickyMeta}
                   getRowId={vm.getRowId}
                   selectionMode={vm.selectionMode ?? 'none'}
                   stickyFirstColumn={vm.stickyFirstColumn}

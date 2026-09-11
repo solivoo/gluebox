@@ -56,8 +56,21 @@ export type ColumnDef<T extends Record<string, unknown>> = {
     resizable?: boolean;
     /** Permite reordenar por drag (si reorderableColumns está activo) */
     reorderable?: boolean;
+    /** Fija la columna a la izquierda ('left' o true) o derecha ('right') al hacer scroll horizontal */
+    sticky?: ColumnSticky;
   };
 }[DataGridKnownKeys<T>];
+
+/** Posición o activación de columna fija (sticky) al hacer scroll horizontal */
+export type ColumnSticky = boolean | 'left' | 'right';
+
+/** Metadatos de posicionamiento sticky para una columna */
+export interface ColumnStickyMeta {
+  isSticky: boolean;
+  position?: 'left' | 'right';
+  offset: number;
+  isEdge: boolean;
+}
 
 /** Anchos de columna en px por key */
 export type DataGridColumnWidths<T extends Record<string, unknown>> = Partial<
@@ -356,11 +369,14 @@ export interface UseColumnLayoutOptions<T extends Record<string, unknown>> {
   defaultColumnOrder?: Array<keyof T>;
   onColumnOrderChange?: (order: Array<keyof T>) => void;
   minColumnWidth?: number;
+  selectionMode?: DataGridSelectionMode;
+  stickyFirstColumn?: boolean;
 }
 
 export interface UseColumnLayoutReturn<T extends Record<string, unknown>> {
   orderedColumns: ColumnDef<T>[];
   getColumnStyle: (column: ColumnDef<T>) => import('react').CSSProperties;
+  getColumnStickyMeta: (column: ColumnDef<T>) => ColumnStickyMeta | undefined;
   isColumnResizable: (column: ColumnDef<T>) => boolean;
   isColumnReorderable: (column: ColumnDef<T>) => boolean;
   dragOverKey: string | null;
