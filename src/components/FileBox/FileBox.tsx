@@ -53,6 +53,7 @@ export function FileBox(props: Readonly<FileBoxProps>) {
   const inputId = idProp ?? autoId;
   const inputRef = useRef<HTMLInputElement>(null);
   const [dragging, setDragging] = useState(false);
+  const dragDepthRef = useRef(0);
   const { files, ingest, clearAll, removeAt } = useFileBoxState({
     value: controlledValue,
     defaultValue,
@@ -114,20 +115,69 @@ export function FileBox(props: Readonly<FileBoxProps>) {
     if (inputRef.current) inputRef.current.value = '';
   };
 
+  const onDragEnter = (e: DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (disabled) return;
+    dragDepthRef.current += 1;
+    setDragging(true);
+  };
+
   const onDragOver = (e: DragEvent) => {
     e.preventDefault();
-    if (!disabled) setDragging(true);
+    e.stopPropagation();
+    if (disabled) return;
+    if (e.dataTransfer) {
+      e.dataTransfer.dropEffect = 'copy';
+    }
+    if (!dragging) {
+      setDragging(true);
+    }
   };
 
   const onDragLeave = (e: DragEvent) => {
     e.preventDefault();
-    setDragging(false);
+    e.stopPropagation();
+    if (disabled) return;
+    dragDepthRef.current -= 1;
+    if (dragDepthRef.current <= 0) {
+      dragDepthRef.current = 0;
+      setDragging(false);
+    }
   };
 
   const onDrop = (e: DragEvent) => {
     e.preventDefault();
+    e.stopPropagation();
+    dragDepthRef.current = 0;
     setDragging(false);
-    if (!disabled) ingest(Array.from(e.dataTransfer.files));
+    if (disabled) return;
+
+    const dropped: File[] = [];
+    if (e.dataTransfer?.files && e.dataTransfer.files.length > 0) {
+      dropped.push(...Array.from(e.dataTransfer.files));
+    } else if (e.dataTransfer?.items && e.dataTransfer.items.length > 0) {
+      for (let i = 0; i < e.dataTransfer.items.length; i++) {
+        const item = e.dataTransfer.items[i];
+        if (item.kind === 'file') {
+          const file = item.getAsFile();
+          if (file) dropped.push(file);
+        }
+      }
+    }
+
+    if (dropped.length > 0) {
+      if (inputRef.current && typeof DataTransfer !== 'undefined') {
+        try {
+          const dt = new DataTransfer();
+          dropped.forEach((f) => dt.items.add(f));
+          inputRef.current.files = dt.files;
+        } catch {
+          // ignore DataTransfer failure in unsupported environments
+        }
+      }
+      ingest(dropped);
+    }
   };
 
   const labelEl = label && (
@@ -147,6 +197,7 @@ export function FileBox(props: Readonly<FileBoxProps>) {
           role="group"
           aria-invalid={hasError || undefined}
           aria-describedby={displayMessage ? `${inputId}-helper` : undefined}
+          onDragEnter={onDragEnter}
           onDragOver={onDragOver}
           onDragLeave={onDragLeave}
           onDrop={onDrop}
@@ -166,11 +217,19 @@ export function FileBox(props: Readonly<FileBoxProps>) {
           />
 
           {isDropzone ? (
-            <button
-              type="button"
+            <div
+              role="button"
+              tabIndex={disabled ? -1 : 0}
               className="glb-filebox__dropzone"
-              disabled={disabled}
+              aria-disabled={disabled || undefined}
               onClick={openPicker}
+              onKeyDown={(e) => {
+                if (disabled) return;
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  openPicker();
+                }
+              }}
             >
               <span className="glb-filebox__drop-icon" aria-hidden="true">
                 <UploadIcon />
@@ -181,7 +240,7 @@ export function FileBox(props: Readonly<FileBoxProps>) {
               <span className="glb-filebox__drop-hint">
                 o hacé clic para seleccionar
               </span>
-            </button>
+            </div>
           ) : (
             <div className="glb-filebox__field">
               {iconLeft && (
@@ -264,3 +323,5 @@ export function FileBox(props: Readonly<FileBoxProps>) {
     </div>
   );
 }
+
+export const FileUploader = FileBox;

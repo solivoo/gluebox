@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.1.23] — 2026-09-13
+
+### Corregido
+
+- **`FileBox` / `FileUploader` drag & drop:** Corrección del comportamiento de arrastrar y soltar archivos.
+  - Implementado contador de profundidad `dragDepthRef` para evitar que los eventos `dragleave` sobre elementos hijos apaguen el estado activo de arrastre por valores `null` en `relatedTarget` al arrastrar archivos desde el explorador del sistema operativo.
+  - Reemplazado el elemento nativo `<button>` del dropzone por un contenedor `<div role="button" tabIndex={0} ...>` accesible con soporte para teclado (`Enter`, `Space`) y `:focus-visible`, eliminando el falso evento sintético de clic que abría el diálogo nativo del explorador tras soltar un archivo.
+  - Soporte para extracción de archivos mediante `dataTransfer.files` y `dataTransfer.items`, con sincronización al `<input type="file">` mediante `DataTransfer`.
+- **Alias `FileUploader`:** Exportado `FileUploader` y `FileUploaderProps` como alias directos de `FileBox` en `glubox`.
+
+### Añadido
+
+- **Skills de componentes y Contexto Activo:** Incorporadas skills en `.agents/skills/` para los 16 componentes de la librería y archivo `ACTIVE_CONTEXT.md` / `AGENTS.md` para persistencia de contexto entre sesiones de desarrollo.
+
+### Migración (apps consumidoras)
+
+1. Actualizar a `glubox@0.1.23`.
+2. Opcional: usar el alias `FileUploader` o `FileBox` de forma intercambiable.
+
 ## [0.1.22] — 2026-09-10
 
 ### Añadido

@@ -1,7 +1,8 @@
-export { FileBox } from './FileBox';
+export { FileBox, FileUploader } from './FileBox';
 
 export type {
   FileBoxProps,
+  FileBoxProps as FileUploaderProps,
   FileBoxVariant,
   FileBoxSize,
   FileBoxLabelPosition,

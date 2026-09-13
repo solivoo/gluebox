@@ -113,6 +113,7 @@ export { NumberBox } from './components/NumberBox';
 
 export type {
   FileBoxProps,
+  FileBoxProps as FileUploaderProps,
   FileBoxVariant,
   FileBoxSize,
   FileBoxLabelPosition,
@@ -127,7 +128,7 @@ export type {
   FileBoxOnRejectHandler,
 } from './components/FileBox';
 
-export { FileBox } from './components/FileBox';
+export { FileBox, FileUploader } from './components/FileBox';
 
 export type {
   ColorPickerProps,
