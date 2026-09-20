@@ -497,6 +497,7 @@ export function useDataGridController<T extends Record<string, unknown>>(
     stickyFirstColumn && !isCardLayout && 'glb-datagrid--sticky-first',
     hasStickyColumns && !isCardLayout && 'glb-datagrid--has-sticky',
     shouldVirtualize && 'glb-datagrid--virtualized',
+    isHeightConstrained && 'glb-datagrid--surface-sized',
     autoRowHeight && 'glb-datagrid--auto-row-height',
     useFitContent && 'glb-datagrid--fit-content',
     pagination && 'glb-datagrid--paginated',

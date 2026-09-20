@@ -205,6 +205,24 @@
   max-height: 100%;
 }
 
+/* Modo Tabla (Table Layout sin altura fija / no virtualizado):
+   Scroll horizontal libre en X (columnas), pero liberación total del scroll vertical en Y hacia la página */
+.glb-datagrid:not(.glb-datagrid--virtualized):not(.glb-datagrid--surface-sized):not(.glb-datagrid--card-layout) .glb-datagrid__viewport {
+  height: auto;
+  overflow: visible;
+}
+
+.glb-datagrid:not(.glb-datagrid--virtualized):not(.glb-datagrid--surface-sized):not(.glb-datagrid--card-layout) .glb-datagrid__scroll {
+  overflow-x: auto;
+  overflow-y: visible;
+  height: auto;
+  max-height: none;
+  overscroll-behavior-x: contain;
+  overscroll-behavior-y: auto;
+  touch-action: pan-x pan-y;
+  -webkit-overflow-scrolling: touch;
+}
+
 .glb-datagrid__table {
   width: 100%;
   min-width: max-content;
@@ -688,6 +706,23 @@
   scrollbar-color: var(--datagrid-border) transparent;
 }
 
+/* Modo Tarjetas sin altura fija (fit-content / flujo natural con la página) */
+/* Permitir que el viewport no recorte y deje fluir las tarjetas */
+.glb-datagrid--card-layout:not(.glb-datagrid--surface-sized) .glb-datagrid__viewport {
+  overflow: visible;
+  height: auto;
+}
+
+/* Permitir que el scroll vertical fluya hacia el contenedor padre */
+.glb-datagrid--card-layout:not(.glb-datagrid--surface-sized) .glb-datagrid__scroll--cards {
+  overflow: visible;
+  height: auto;
+  max-height: none;
+  overscroll-behavior: auto;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+}
+
 /* Sin height: cards se encogen al contenido (mismo fit-content que table) */
 .glb-datagrid--card-layout.glb-datagrid--fit-content .glb-datagrid__viewport,
 .glb-datagrid--card-layout .glb-datagrid__viewport--fit-content {
@@ -730,7 +765,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
-  touch-action: manipulation;
+  touch-action: pan-y;
 }
 
 .glb-datagrid--card-layout .glb-datagrid__card {
@@ -739,6 +774,7 @@
   border: 1px solid var(--datagrid-border);
   border-radius: var(--datagrid-radius, 0.5rem);
   padding: 0.75rem;
+  touch-action: pan-y;
 }
 
 .glb-datagrid--card-layout .glb-datagrid__cards-empty {
@@ -755,7 +791,7 @@
 
 .glb-datagrid__card--interactive {
   cursor: pointer;
-  touch-action: manipulation;
+  touch-action: pan-y;
   -webkit-tap-highlight-color: transparent;
 }
 

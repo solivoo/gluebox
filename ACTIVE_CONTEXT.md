@@ -6,7 +6,7 @@ Este archivo mantiene el contexto activo del proyecto para que ningún agente o 
 
 ## 1. Visión General del Proyecto
 
-- **Nombre del paquete**: `glubox` (repositorio `gluebox`), versión actual **0.1.23**.
+- **Nombre del paquete**: `glubox` (repositorio `gluebox`), versión actual **0.1.24**.
 - **Propósito**: Librería de componentes React para aplicaciones empresariales — Sidebar RBAC, PageActionsMenu, DataGrid, formularios (TextBox, NumberBox, FileBox / FileUploader, ColorPicker, TextArea, Select, DateBox, RangeDateBox), Overlays (Popup modal, Toast), botones y sistema de temas personalizable.
 - **Stack**: React 19, TypeScript (~6.0), Vite 8, Vitest 4 (happy-dom), CSS modular/BEM (sin Tailwind).
 - **Publicación / Build**:
@@ -40,7 +40,7 @@ Este archivo mantiene el contexto activo del proyecto para que ningún agente o 
 | `Button` | `src/components/Button` | Variantes: `primary`, `secondary`, `outline`, `ghost`, `danger`. Tamaños: `sm`, `md`, `lg`. |
 | `CheckButton` | `src/components/CheckButton` | Botón toggle tipo checkbox. |
 | `ColorPicker` | `src/components/ColorPicker` | Swatch + input hex + panel HSV en portal (`position: fixed`). No usa `type="color"` nativo para evitar chrome del SO. |
-| `DataGrid` | `src/components/DataGrid` | Tabla empresarial con paginación, filtros toolbar, columnas sticky, ordenamiento y selección. |
+| `DataGrid` | `src/components/DataGrid` | Tabla empresarial con paginación, filtros toolbar, columnas sticky, ordenamiento, selección y soporte touch scroll nativo (liberación de scroll vertical en modo natural/sin height fijo). |
 | `DateBox` | `src/components/DateBox` | Selector de fecha (`YYYY-MM-DD`), modo `input` o `icon`. |
 | `RangeDateBox` | `src/components/RangeDateBox` | Selector de rango de fechas `{ start, end }`. |
 | `FileBox` / `FileUploader` | `src/components/FileBox` | **CORREGIDO**: Drag & Drop con contador de profundidad (`dragDepthRef`), `DataTransfer` fallback, dropzone como `<div role="button">` (previene falsos clics de button nativo), alias `FileUploader` exportado. |
@@ -71,6 +71,23 @@ Este archivo mantiene el contexto activo del proyecto para que ningún agente o 
   5. **Estilos CSS**: Actualizado [FileBox.css](file:///home/solivo/Documentos/ecunexo/gluebox/src/components/FileBox/css/FileBox.css) con soporte para `:focus-visible`, `[aria-disabled="true"]` y estados hover/drag consistentes.
   6. **Tests**: Añadidos tests unitarios en [FileBox.test.tsx](file:///home/solivo/Documentos/ecunexo/gluebox/src/components/FileBox/FileBox.test.tsx) validando drag & drop en modo dropzone, en modo field y con `disabled=true`.
   7. **Vitest config**: Soporte de archivos `.test.tsx` habilitado en [vitest.config.ts](file:///home/solivo/Documentos/ecunexo/gluebox/vitest.config.ts).
+
+### Tarea: Corrección de Scroll Táctil en DataGrid en Vistas sin Altura Fija (Completada)
+- **Problema previo**:
+  1. En dispositivos táctiles (smartphones y tabletas iOS WebKit y Android Chromium), al deslizar verticalmente sobre filas o tarjetas en vistas donde `DataGrid` no tiene altura fija (`height` ni `maxHeight`), el gesto táctil quedaba congelado / bloqueado.
+  2. Causas: `overscroll-behavior: contain;` en `.glb-datagrid__scroll--cards`, anidamiento de `overflow: auto` dentro de `.glb-datagrid__viewport { overflow: hidden; }` sin altura fija en px, `touch-action: manipulation;` en tarjetas que interfería con el gesto `pan-y`, y en modo tabla `overflow: auto` vertical interceptaba el gesto en lugar de propagarlo al scroll de la página.
+- **Solución implementada**:
+  1. **Modo Tarjetas (sin altura fija)**:
+     - `.glb-datagrid--card-layout:not(.glb-datagrid--surface-sized) .glb-datagrid__viewport`: `overflow: visible; height: auto;`.
+     - `.glb-datagrid--card-layout:not(.glb-datagrid--surface-sized) .glb-datagrid__scroll--cards`: `overflow: visible; height: auto; max-height: none; overscroll-behavior: auto; touch-action: pan-y; -webkit-overflow-scrolling: touch;`.
+     - `.glb-datagrid--card-layout .glb-datagrid__cards` y `.glb-datagrid--card-layout .glb-datagrid__card`: `touch-action: pan-y;`.
+  2. **Modo Tabla (sin altura fija / no virtualizado)**:
+     - `.glb-datagrid:not(.glb-datagrid--virtualized):not(.glb-datagrid--surface-sized):not(.glb-datagrid--card-layout) .glb-datagrid__viewport`: `height: auto; overflow: visible;`.
+     - `.glb-datagrid:not(.glb-datagrid--virtualized):not(.glb-datagrid--surface-sized):not(.glb-datagrid--card-layout) .glb-datagrid__scroll`: `overflow-x: auto; overflow-y: visible; height: auto; max-height: none; overscroll-behavior-x: contain; overscroll-behavior-y: auto; touch-action: pan-x pan-y; -webkit-overflow-scrolling: touch;`.
+  3. **Discriminación por altura configurada**:
+     - Agregada la clase `isHeightConstrained && 'glb-datagrid--surface-sized'` al elemento raíz `.glb-datagrid` en [useDataGridController.ts](file:///home/solivo/Documentos/ecunexo/gluebox/src/components/DataGrid/controller/useDataGridController.ts). Cuando se proporciona `height` o `maxHeight`, se preserva íntegramente el comportamiento original con scroll interno contenido.
+  4. **Tests de verificación**:
+     - Añadido [DataGrid.touchScroll.test.tsx](file:///home/solivo/Documentos/ecunexo/gluebox/src/components/DataGrid/DataGrid.touchScroll.test.tsx) validando la presencia/ausencia de `glb-datagrid--surface-sized` según las props y verificando la consistencia de las reglas CSS.
 
 ---
 
