@@ -32,10 +32,16 @@ export function SidebarSubItem({
   const actionActive = level === 'action' && isActionActive(item.path, activePath);
   const optionActive = level === 'option' && isActionActive(item.path, activePath);
   const descendantActive = !actionActive && !optionActive && hasActiveDescendant(item, activePath);
+  const isDisabled = Boolean(item.disabled);
+  const showLock = Boolean(item.locked);
 
   const handleClick = () => {
     if (hasChildren) {
       onToggleExpand(item.id);
+      return;
+    }
+
+    if (isDisabled) {
       return;
     }
 
@@ -59,8 +65,12 @@ export function SidebarSubItem({
           optionActive && 'sidebar__link--option-active',
           descendantActive && level === 'option' && 'sidebar__link--option-ancestor',
           descendantActive && level === 'action' && 'sidebar__link--action-ancestor',
+          isDisabled && 'sidebar__link--disabled',
         )}
         onClick={handleClick}
+        disabled={isDisabled && !hasChildren}
+        aria-disabled={isDisabled || undefined}
+        title={item.disabledReason}
         aria-expanded={hasChildren ? expanded : undefined}
         aria-current={actionActive || optionActive ? 'page' : descendantActive ? 'true' : undefined}
         data-expanded={hasChildren ? expanded : undefined}
@@ -71,6 +81,9 @@ export function SidebarSubItem({
           >
             {item.label}
           </span>
+        )}
+        {showLock && !collapsed && (
+          <SidebarIcon name="lock" className="sidebar__lock" renderIcon={renderIcon} />
         )}
         {hasChildren && !collapsed && (
           <SidebarIcon

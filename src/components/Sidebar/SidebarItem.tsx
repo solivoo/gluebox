@@ -34,8 +34,16 @@ export function SidebarItem({
   const ancestorActive =
     hasActiveDescendant(item, activePath) && !moduleHomeActive;
   const hasModuleHome = Boolean(item.path && hasChildren);
+  const isDisabled = Boolean(item.disabled);
+  const showLock = Boolean(item.locked);
 
   const handleNavigate = () => {
+    if (isDisabled) {
+      if (hasChildren) {
+        onToggleExpand(item.id);
+      }
+      return;
+    }
     if (item.path) {
       onNavigate?.(item.path);
     }
@@ -50,6 +58,13 @@ export function SidebarItem({
   };
 
   const handleRowClick = () => {
+    if (isDisabled) {
+      if (hasChildren) {
+        onToggleExpand(item.id);
+      }
+      return;
+    }
+
     if (hasModuleHome) {
       handleNavigate();
       return;
@@ -70,6 +85,7 @@ export function SidebarItem({
     hasModuleHome && 'sidebar__link--module-split',
     ancestorActive && 'sidebar__link--module-ancestor',
     moduleHomeActive && 'sidebar__link--module-leaf-active',
+    isDisabled && 'sidebar__link--disabled',
   );
 
   return (
@@ -81,6 +97,9 @@ export function SidebarItem({
           type="button"
           className={linkClass}
           onClick={handleRowClick}
+          disabled={isDisabled && !hasChildren}
+          aria-disabled={isDisabled || undefined}
+          title={item.disabledReason}
           aria-expanded={hasChildren ? expanded : undefined}
           aria-current={moduleHomeActive ? 'page' : undefined}
           data-expanded={hasChildren ? expanded : undefined}
@@ -92,6 +111,9 @@ export function SidebarItem({
             <span className="sidebar__label sidebar__label--module">
               {item.label}
             </span>
+          )}
+          {showLock && !collapsed && (
+            <SidebarIcon name="lock" className="sidebar__lock" renderIcon={renderIcon} />
           )}
           {hasChildren && !collapsed && !hasModuleHome && (
             <SidebarIcon

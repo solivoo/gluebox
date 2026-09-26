@@ -23,6 +23,9 @@ Tipo TypeScript: `MenuConfig`.
 | `permissions` | `string[]` | No | Permisos requeridos (OR). Sin campo = visible para todos. |
 | `position` | `"top" \| "bottom"` | No | `"top"` por defecto. `"bottom"` para Ajustes, Ayuda, etc. |
 | `children` | `MenuSubItem[]` | No | Opciones y acciones anidadas. |
+| `disabled` | `boolean` | No | Ítem visible pero no navegable (atenuado, `aria-disabled`). |
+| `locked` | `boolean` | No | Muestra un candado a la derecha del label (módulo no incluido, próximamente). |
+| `disabledReason` | `string` | No | Motivo del bloqueo; se expone como tooltip nativo (`title`). |
 
 ## MenuSubItem (nivel 2 y 3)
 
@@ -33,6 +36,9 @@ Tipo TypeScript: `MenuConfig`.
 | `path` | `string` | Condicional | **Obligatorio en hojas (acciones).** Opcional en agrupadores. |
 | `permissions` | `string[]` | No | Misma regla OR que en módulos. |
 | `children` | `MenuSubItem[]` | No | Anidación recursiva (hasta 3 niveles en la práctica). |
+| `disabled` | `boolean` | No | Ítem visible pero no navegable (atenuado, `aria-disabled`). |
+| `locked` | `boolean` | No | Muestra un candado a la derecha del label. |
+| `disabledReason` | `string` | No | Motivo del bloqueo; se expone como tooltip nativo (`title`). |
 
 ## Convenciones de `path`
 

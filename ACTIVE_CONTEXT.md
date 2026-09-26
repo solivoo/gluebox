@@ -6,7 +6,7 @@ Este archivo mantiene el contexto activo del proyecto para que ningún agente o 
 
 ## 1. Visión General del Proyecto
 
-- **Nombre del paquete**: `glubox` (repositorio `gluebox`), versión actual **0.1.24**.
+- **Nombre del paquete**: `glubox` (repositorio `gluebox`), versión actual **0.1.25**.
 - **Propósito**: Librería de componentes React para aplicaciones empresariales — Sidebar RBAC, PageActionsMenu, DataGrid, formularios (TextBox, NumberBox, FileBox / FileUploader, ColorPicker, TextArea, Select, DateBox, RangeDateBox), Overlays (Popup modal, Toast), botones y sistema de temas personalizable.
 - **Stack**: React 19, TypeScript (~6.0), Vite 8, Vitest 4 (happy-dom), CSS modular/BEM (sin Tailwind).
 - **Publicación / Build**:
@@ -57,6 +57,16 @@ Este archivo mantiene el contexto activo del proyecto para que ningún agente o 
 ---
 
 ## 4. Trabajo Reciente y Tareas Activas
+
+### Tarea: Ítems bloqueados en Sidebar — `disabled`, `locked`, `disabledReason` (Completada, v0.1.25)
+- **Problema previo**: los módulos no contratados mostraban el motivo concatenado al label (`"Ítems · Módulo no incluido en tu plan."`), truncándose en el sidebar; no existía forma de renderizar un candado ni un estado deshabilitado real.
+- **Solución implementada**:
+  1. **Tipos**: `MenuItemLockable` en [menu.types.ts](file:///home/solivo/Documentos/ecunexo/gluebox/src/components/Sidebar/type/menu.types.ts) con `disabled`, `locked` y `disabledReason`; aplicado a `MenuItem` y `MenuSubItem`.
+  2. **Render**: [SidebarItem.tsx](file:///home/solivo/Documentos/ecunexo/gluebox/src/components/Sidebar/SidebarItem.tsx) y [SidebarSubItem.tsx](file:///home/solivo/Documentos/ecunexo/gluebox/src/components/Sidebar/SidebarSubItem.tsx) aplican `aria-disabled`, `title`, clase `sidebar__link--disabled`, bloquean la navegación y muestran el candado (`locked`). Los ítems con hijos siguen expandiéndose.
+  3. **Icono**: `lock` agregado a [SidebarBuiltinIcons.tsx](file:///home/solivo/Documentos/ecunexo/gluebox/src/components/Sidebar/SidebarBuiltinIcons.tsx) (SVG propio, sin Lucide).
+  4. **Estilos**: `sidebar__link--disabled` y `sidebar__lock` en [Sidebar.css](file:///home/solivo/Documentos/ecunexo/gluebox/src/components/Sidebar/css/Sidebar.css).
+  5. **Docs**: [menu-api.md](file:///home/solivo/Documentos/ecunexo/gluebox/docs/guide/menu-api.md) y [sidebar.md](file:///home/solivo/Documentos/ecunexo/gluebox/docs/components/sidebar.md).
+  6. **Tests**: [Sidebar.test.tsx](file:///home/solivo/Documentos/ecunexo/gluebox/src/components/Sidebar/Sidebar.test.tsx).
 
 ### Tarea: Corrección de Drag & Drop en FileBox / FileUploader (Completada)
 - **Problema previo**:

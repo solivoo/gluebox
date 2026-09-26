@@ -30,11 +30,21 @@ function PanelLeftOpenIcon(props: BuiltinIconProps) {
   );
 }
 
-/** Iconos de UI del sidebar (chevron, contraer). No dependen de Lucide en la app consumidora. */
+function LockIcon(props: BuiltinIconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true" {...props}>
+      <rect x="4" y="10" width="16" height="10" rx="2" />
+      <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+    </svg>
+  );
+}
+
+/** Iconos de UI del sidebar (chevron, contraer, candado). No dependen de Lucide en la app consumidora. */
 export const sidebarBuiltinIcons: Record<string, (props: BuiltinIconProps) => ReactElement> = {
   'chevron-down': ChevronDownIcon,
   'panel-left-close': PanelLeftCloseIcon,
   'panel-left-open': PanelLeftOpenIcon,
+  lock: LockIcon,
 };
 
 export const sidebarBuiltinIconNames = Object.keys(sidebarBuiltinIcons);

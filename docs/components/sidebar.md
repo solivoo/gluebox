@@ -161,6 +161,33 @@ const visibleMenu = filterVisibleMenu(menu, userPermissions);
 Ocultar un ítem en el Sidebar **no impide** escribir la URL manualmente. Valida permisos también en el router o en el backend. Ver [Routing](/guide/routing#guard-de-permisos).
 :::
 
+## Ítems bloqueados (candado)
+
+Para módulos no contratados o funciones próximas, mantén el **label limpio** y usa los campos de bloqueo en lugar de concatenar el motivo al texto:
+
+```json
+{
+  "id": "ecommerce",
+  "label": "Ecommerce",
+  "path": "/ecommerce",
+  "disabled": true,
+  "locked": true,
+  "disabledReason": "Módulo no incluido en tu plan."
+}
+```
+
+Comportamiento:
+
+| Campo | Efecto visual / funcional |
+|-------|---------------------------|
+| `disabled` | Atenúa el ítem, `cursor: not-allowed`, `aria-disabled="true"` y anula la navegación. Si tiene hijos, aún puede expandirse. |
+| `locked` | Renderiza un candado integrado a la derecha del label (sin depender de Lucide). |
+| `disabledReason` | Tooltip nativo (`title`) con el motivo del bloqueo. |
+
+::: tip Label corto
+No agregues el motivo al `label` (`"Ítems · Módulo no incluido..."`): se trunca en el sidebar. El motivo va en `disabledReason`.
+:::
+
 ## Iconos
 
 ### Iconos del menú (`renderIcon`)

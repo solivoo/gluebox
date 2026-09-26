@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.1.25] — 2026-09-26
+
+### Agregado
+
+- **Sidebar — ítems bloqueados por plan/módulo:** nuevos campos `disabled`, `locked` y `disabledReason` en `MenuItem` y `MenuSubItem`.
+  - `disabled`: atenúa el ítem, expone `aria-disabled`, anula la navegación y aplica `cursor: not-allowed`; los módulos con hijos siguen pudiendo expandirse para ver su contenido.
+  - `locked`: renderiza un candado SVG integrado (sin depender de Lucide) a la derecha del label.
+  - `disabledReason`: tooltip nativo (`title`) con el motivo del bloqueo, manteniendo el label limpio (ya no hay que concatenar el motivo al texto).
+  - Nuevo icono built-in `lock` (`sidebarBuiltinIcons`) y estilos `sidebar__link--disabled` / `sidebar__lock`.
+  - Pruebas de render y comportamiento en `src/components/Sidebar/Sidebar.test.tsx`.
+
 ## [0.1.23] — 2026-09-13
 
 ### Corregido
