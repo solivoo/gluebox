@@ -31,11 +31,6 @@ export interface OptionGroupTheme {
 }
 
 export type OptionGroupThemePreset =
-  | 'dark'
-  | 'light'
-  | 'modern-dark'
-  | 'modern-light'
-  | 'enterprise-dark'
-  | 'enterprise-light';
+  'commerce-dark' | 'commerce-light';
 
 export type OptionGroupThemeInput = OptionGroupTheme | OptionGroupThemePreset;

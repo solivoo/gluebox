@@ -9,7 +9,7 @@ const stylesDir = path.resolve(themesDir, '..');
 const srcDir = path.resolve(stylesDir, '..');
 
 describe('generated theme tokens', () => {
-  it.each(['default', 'modern', 'enterprise'] as const)(
+  it.each(['commerce'] as const)(
     '_generated-%s.css usa var(--glb-*) y no #ffffff directo',
     (family) => {
       const css = readFileSync(path.join(themesDir, `_generated-${family}.css`), 'utf8');

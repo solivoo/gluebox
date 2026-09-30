@@ -1,5 +1,46 @@
 # Changelog
 
+## [0.2.0] — 2026-09-30
+
+### Cambiado (Breaking Changes)
+
+- **Se eliminaron las familias de tema `default`, `modern` y `enterprise`.** gluBox adopta como familia única oficial **`commerce`** (Material Design / MUI), tanto en modo claro como en modo oscuro.
+  - Presets: la prop `theme` acepta exclusivamente `'commerce-light' | 'commerce-dark'`. Se eliminaron `'light'`, `'dark'`, `'modern-*'` y `'enterprise-*'`.
+  - CSS: se eliminaron `themes/default.css`, `themes/modern.css`, `themes/enterprise.css` y sus `_generated-*.css`. El CSS exportado se reduce a `./themes/commerce.css` e `./themes/index.css`.
+  - Atributos DOM: `data-theme` únicamente acepta `"commerce"`. El modo se controla mediante `data-mode="light" | "dark"`.
+  - Builders y generadores simplificados: paletas, `overlayThemeBuilder`, `toastThemeBuilder`, presets de los 16 componentes y `generate-missing-theme-css.mts` adaptados a `commerce`.
+  - Documentación de migración disponible en `/guide/migration-0.2.0`.
+
+### Agregado
+
+- **Switch (nuevo componente):** interruptor on/off con thumb deslizante estilo Material.
+  - Modo controlado (`checked` + `onChange(checked)`) y no controlado (`defaultChecked`); `<input type="checkbox" role="switch">` con **Space** nativo y label clickeable.
+  - `labelPosition` (`right` | `left` | `top` | `bottom`), tamaños `sm` | `md`, `loading` (spinner en el thumb + `aria-busy` y control deshabilitado), `disabled`, `helperText`, `error`/`errorMessage`, `fullWidth`, `width`.
+  - Tokens `--switch-*` con presets `commerce-light` / `commerce-dark` integrados a `pnpm themes:generate` y al bridge: checked usa el acento del tema (`--glb-accent-surface`/`--glb-accent-on-fill`), focus ring y colores neutros Material (`#9e9e9e`/`#4d4d4d` track, thumb `#fafafa`/`#bdbdbd`).
+  - Tests en `Switch.test.tsx` (controlado/no controlado, disabled/loading, label, helper/error, props nativas), demo/playground (`SwitchDemo` + `switchMeta`), registros (`docRegistry`, `eventTypesRegistry`, menú, rutas), secciones en `docs/components/forms.md`, `docs/guide/*` y skill `.agents/skills/gluebox-switch`.
+- **Tema `commerce` (Material Design / MUI):**
+  - Paleta `commercePastel` + `commerceDanger` en `src/styles/pastelPalette.ts`: primary `#1976D2` (dark `#90CAF9`), error `#D32F2F` (dark `#F44336`), texto `rgba(0,0,0,0.87)` / `#FFFFFF` y neutros Material (`#FAFAFA` / `#121212`).
+  - **Apariencia MUI**: shape `4px` en todos los presets, botones contained con elevación Material 2/4, label uppercase + `letter-spacing: 0.02857em` (nuevos tokens opcionales `textTransform` y `letterSpacing` en `ButtonTheme`), tipografía **Roboto** vía `--glb-font-family` y variantes outlined/text en color primario.
+  - `commerce.css` con tokens globales (`[data-theme="commerce"]` × `data-mode`), sidebar, superficies, overlays y elevación; `_generated-commerce.css` regenerado con `pnpm themes:generate`.
+- **Regresión visual en CI con Playwright:**
+  - Suite automatizada con 47 snapshots baseline que audita los 18 componentes base y layouts/estados críticos en temas claro y oscuro.
+  - Configurado en GitHub Actions (`.github/workflows/ci.yml`) con generación de reportes automáticos como artefacto ante fallos.
+- **Changesets**:
+  - Incorporado `@changesets/cli` para gestión automatizada y semántica de versiones y releases.
+
+### Calidad / Tooling
+
+- **CI**: `.github/workflows/ci.yml` ahora ejecuta `pnpm test`, `pnpm test:visual` y verifica que `pnpm themes:generate` no deje diffs en `src/styles/themes` (determinismo verificado).
+- **TypeScript `strict`**: activados `strict: true` y `noUncheckedIndexedAccess: true` en `tsconfig.app.json` (heredado por lib/test/visual). Se corrigieron 83 accesos a índices/valores posiblemente indefinidos en componentes (ColorPicker, DataGrid, DateBox, FileBox, Select), scripts y tests; la API pública se mantiene intacta.
+- **Lint 0 errores**: `ColorPicker` eliminó el `setState` dentro de `useEffect` (sincronización durante render, sin renders en cascada). `react-hooks/preserve-manual-memoization` sigue como error con dos excepciones documentadas en `useDataGridController`.
+
+### Corregido
+
+- **TagBox — borde/estados de variante rotos:** `TagBox.css` consumía tokens cortos `--tagbox-bg`, `--tagbox-border`, `--tagbox-text`, etc., que no estaban mapeados desde las variantes. Se agregaron los 4 bloques de variante en `TagBox.css`.
+
+  - Chrome de la demo tokenizado: tabs activas y firma de eventos (`--glb-accent-sidebar`), badges DEFAULT (`--glb-accent-subtle-*`), foco de controles (`--glb-accent-border-strong` / `--glb-accent-focus-ring`) y toggle (`--glb-accent-surface` / `--glb-accent-on-fill`) en `ComponentPlayground.css`, `PropControl.css` y `DataGridDemo.css`.
+  - Verificación: `pnpm test` (129 tests), `pnpm build`, `pnpm build:lib`, `pnpm demo:build` y detector impeccable sin hallazgos (salvo Roboto marcado como fuente popular, intencional por MUI).
+
 ## [0.1.26] — 2026-09-29
 
 ### Agregado

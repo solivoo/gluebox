@@ -1090,6 +1090,89 @@
           ]
         },
         {
+          "id": "componentes-switch",
+          "label": "Switch",
+          "permissions": [
+            "componentes:read"
+          ],
+          "children": [
+            {
+              "id": "componentes-switch-overview",
+              "label": "Overview",
+              "permissions": [
+                "componentes:read"
+              ],
+              "children": [
+                {
+                  "id": "componentes-switch-overview-getting-started",
+                  "label": "Getting Started",
+                  "path": "/componentes/switch/overview/getting-started",
+                  "permissions": [
+                    "componentes:read"
+                  ]
+                },
+                {
+                  "id": "componentes-switch-overview-how-to",
+                  "label": "How To",
+                  "path": "/componentes/switch/overview/how-to",
+                  "permissions": [
+                    "componentes:read"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "componentes-switch-api",
+              "label": "API",
+              "permissions": [
+                "componentes:read"
+              ],
+              "children": [
+                {
+                  "id": "componentes-switch-api-props",
+                  "label": "Props",
+                  "path": "/componentes/switch/api/props",
+                  "permissions": [
+                    "componentes:read"
+                  ]
+                },
+                {
+                  "id": "componentes-switch-api-events",
+                  "label": "Events",
+                  "path": "/componentes/switch/api/events",
+                  "permissions": [
+                    "componentes:read"
+                  ]
+                },
+                {
+                  "id": "componentes-switch-api-types",
+                  "label": "Types",
+                  "path": "/componentes/switch/api/types",
+                  "permissions": [
+                    "componentes:read"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "componentes-switch-accessibility",
+              "label": "Accessibility",
+              "path": "/componentes/switch/accessibility",
+              "permissions": [
+                "componentes:read"
+              ]
+            },
+            {
+              "id": "componentes-switch-demos",
+              "label": "Demos",
+              "path": "/componentes/switch",
+              "permissions": [
+                "componentes:read"
+              ]
+            }
+          ]
+        },
+        {
           "id": "componentes-popup",
           "label": "Popup",
           "permissions": [

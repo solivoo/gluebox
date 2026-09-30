@@ -1,0 +1,189 @@
+/* ── Base ── */
+
+.glb-switch {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-family: var(--glb-font-family, 'Poppins', sans-serif);
+  font-size: var(--switch-font-size, 0.875rem);
+  line-height: 1.4;
+}
+
+.glb-switch--full-width {
+  display: flex;
+  width: 100%;
+}
+
+.glb-switch__row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  cursor: pointer;
+  user-select: none;
+  width: fit-content;
+}
+
+.glb-switch--full-width .glb-switch__row {
+  width: 100%;
+}
+
+.glb-switch--label-left .glb-switch__row {
+  flex-direction: row-reverse;
+}
+
+.glb-switch--label-top .glb-switch__row {
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  gap: 0.375rem;
+}
+
+.glb-switch--label-bottom .glb-switch__row {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.375rem;
+}
+
+.glb-switch--disabled .glb-switch__row {
+  cursor: not-allowed;
+}
+
+/* ── Control ── */
+
+.glb-switch__control {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 34px;
+  height: 20px;
+}
+
+.glb-switch--sm .glb-switch__control {
+  width: 28px;
+  height: 16px;
+}
+
+.glb-switch__input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: inherit;
+}
+
+.glb-switch__track {
+  position: absolute;
+  inset: 0;
+  display: block;
+  border-radius: 9999px;
+  background-color: var(--switch-track, #9e9e9e);
+  transition: var(--switch-transition, all 0.15s ease);
+}
+
+.glb-switch__input:hover:not(:disabled) + .glb-switch__track {
+  background-color: var(--switch-track-hover, #8a8a8a);
+}
+
+.glb-switch__input:focus-visible + .glb-switch__track {
+  box-shadow: 0 0 0 3px var(--switch-focus-ring);
+}
+
+.glb-switch--checked .glb-switch__track {
+  background-color: var(--switch-track-checked, #1976d2);
+}
+
+.glb-switch--checked .glb-switch__input:hover:not(:disabled) + .glb-switch__track {
+  background-color: var(--switch-track-checked-hover, #1565c0);
+}
+
+/* ── Thumb ── */
+
+.glb-switch__thumb {
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--switch-thumb, #fafafa);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  transform: translate(0, -50%);
+  transition: var(--switch-transition, all 0.15s ease);
+}
+
+.glb-switch--sm .glb-switch__thumb {
+  width: 12px;
+  height: 12px;
+}
+
+.glb-switch__input:hover:not(:disabled) + .glb-switch__track .glb-switch__thumb {
+  background-color: var(--switch-thumb-hover, #f0f0f0);
+}
+
+.glb-switch--checked .glb-switch__thumb {
+  background-color: var(--switch-thumb-checked, #ffffff);
+  transform: translate(14px, -50%);
+}
+
+.glb-switch--sm.glb-switch--checked .glb-switch__thumb {
+  transform: translate(12px, -50%);
+}
+
+.glb-switch--checked .glb-switch__input:hover:not(:disabled) + .glb-switch__track .glb-switch__thumb {
+  background-color: var(--switch-thumb-checked-hover, #ffffff);
+}
+
+/* ── Disabled / Loading ── */
+
+.glb-switch--disabled .glb-switch__control {
+  opacity: 0.45;
+}
+
+.glb-switch--disabled .glb-switch__label {
+  opacity: 0.5;
+}
+
+.glb-switch--loading .glb-switch__row {
+  cursor: wait;
+}
+
+.glb-switch__loader {
+  width: 62%;
+  height: 62%;
+  border: 2px solid var(--switch-loader, #616161);
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: glb-switch-spin 0.6s linear infinite;
+}
+
+@keyframes glb-switch-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Label / Helper ── */
+
+.glb-switch__label {
+  color: var(--switch-label-color, #1f2937);
+}
+
+.glb-switch__helper {
+  font-size: 0.75rem;
+  color: var(--switch-helper-color, #6b7280);
+}
+
+.glb-switch--error .glb-switch__helper {
+  color: var(--switch-error-color, #b85555);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glb-switch__track,
+  .glb-switch__thumb {
+    transition: none;
+  }
+}

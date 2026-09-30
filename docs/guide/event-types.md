@@ -135,6 +135,13 @@ Guía de uso: [DataGrid](/components/datagrid).
 | `CheckButtonOnChangeHandler` | `(checked: boolean) => void` |
 | `CheckButtonChangeValue` | `boolean` |
 
+### Switch
+
+| Tipo | Signatura |
+|------|-----------|
+| `SwitchOnChangeHandler` | `(checked: boolean) => void` |
+| `SwitchChangeValue` | `boolean` |
+
 ### Sidebar
 
 | Tipo | Signatura |

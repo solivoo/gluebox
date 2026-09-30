@@ -102,7 +102,7 @@ Sin prop `theme`, Button / CheckButton / OptionGroup heredan `data-theme` / `dat
 La prop `theme` es un override puntual (6 presets u objeto custom):
 
 ```tsx
-<Button theme="modern-dark">Acción</Button>
+<Button theme="commerce-dark">Acción</Button>
 <OptionGroup theme={optionGroupThemes.dark} options={options} />
 ```
 

@@ -3,16 +3,13 @@ import type {
   PageActionsMenuThemePreset,
   PageActionsMenuVariantTheme,
 } from './PageActionsMenu.theme.types';
-import {
-  defaultPastel,
-  enterprisePastel,
-  modernPastel,
-} from '@/styles/pastelPalette';
+import { commercePastel } from '@/styles/pastelPalette';
 
 function variants(
   isDark: boolean,
   accentBg: string,
   accentHover: string,
+  accentText: string,
 ): PageActionsMenuTheme['variants'] {
   const ghost: PageActionsMenuVariantTheme = {
     background: 'transparent',
@@ -44,7 +41,7 @@ function variants(
 
   const primary: PageActionsMenuVariantTheme = {
     background: accentBg,
-    text: '#ffffff',
+    text: accentText,
     border: accentBg,
     hoverBackground: accentHover,
     hoverBorder: accentHover,
@@ -59,26 +56,12 @@ function variants(
   return { ghost, outline, primary };
 }
 
-function preset(
-  isDark: boolean,
-  family: 'default' | 'modern' | 'enterprise',
-): PageActionsMenuTheme {
-  const accent =
-    family === 'modern'
-      ? isDark
-        ? modernPastel.dark
-        : modernPastel.light
-      : family === 'enterprise'
-        ? isDark
-          ? enterprisePastel.dark
-          : enterprisePastel.light
-        : isDark
-          ? defaultPastel.dark
-          : defaultPastel.light;
+function preset(isDark: boolean): PageActionsMenuTheme {
+  const accent = isDark ? commercePastel.dark : commercePastel.light;
 
   return {
     fontSize: '0.875rem',
-    borderRadius: '0.5rem',
+    borderRadius: '4px',
     transition: 'all 0.15s ease',
     shadow: 'none',
     hoverShadow: 'none',
@@ -91,7 +74,7 @@ function preset(
     itemHoverBg: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(15,23,42,0.05)',
     itemDisabledText: isDark ? '#64748b' : '#94a3b8',
     divider: isDark ? '#2d3139' : '#eef2f7',
-    variants: variants(isDark, accent.sidebar, accent.surfaceHover),
+    variants: variants(isDark, accent.sidebar, accent.surfaceHover, isDark ? accent.onFill : '#ffffff'),
   };
 }
 
@@ -99,10 +82,6 @@ export const pageActionsMenuThemes: Record<
   PageActionsMenuThemePreset,
   PageActionsMenuTheme
 > = {
-  light: preset(false, 'default'),
-  dark: preset(true, 'default'),
-  'modern-light': preset(false, 'modern'),
-  'modern-dark': preset(true, 'modern'),
-  'enterprise-light': preset(false, 'enterprise'),
-  'enterprise-dark': preset(true, 'enterprise'),
+  'commerce-light': preset(false),
+  'commerce-dark': preset(true),
 };

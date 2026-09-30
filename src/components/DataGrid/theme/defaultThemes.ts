@@ -15,7 +15,7 @@ function buildDataGridTheme(preset: DataGridThemePreset): DataGridTheme {
 
   return {
     fontSize: '0.875rem',
-    borderRadius: '0.5rem',
+    borderRadius: preset.startsWith('commerce') ? '4px' : '0.5rem',
     transition: 'all 0.15s ease',
     shadow: isDark ? '0 1px 2px rgba(0,0,0,0.35)' : '0 1px 2px rgba(0,0,0,0.06)',
     headerBackground: headerBg,
@@ -44,14 +44,7 @@ function buildDataGridTheme(preset: DataGridThemePreset): DataGridTheme {
   };
 }
 
-const presets: DataGridThemePreset[] = [
-  'dark',
-  'light',
-  'modern-dark',
-  'modern-light',
-  'enterprise-dark',
-  'enterprise-light',
-];
+const presets: DataGridThemePreset[] = ['commerce-dark', 'commerce-light'];
 
 export const dataGridThemes = presets.reduce(
   (acc, preset) => {

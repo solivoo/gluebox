@@ -33,6 +33,6 @@ export interface TextBoxTheme {
   variants: Record<TextBoxVariant, TextBoxVariantTheme>;
 }
 
-export type TextBoxThemePreset = 'dark' | 'light' | 'modern-dark' | 'modern-light' | 'enterprise-dark' | 'enterprise-light';
+export type TextBoxThemePreset = 'commerce-dark' | 'commerce-light';
 
 export type TextBoxThemeInput = TextBoxTheme | TextBoxThemePreset;

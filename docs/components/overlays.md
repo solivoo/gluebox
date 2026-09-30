@@ -95,11 +95,11 @@ Ver la guía completa: [Tipos de eventos](/guide/event-types).
 Sin `theme` explícito, **Popup y Toast** heredan `data-theme` / `data-mode` del documento. Override puntual:
 
 ```tsx
-<Popup theme="enterprise-dark" open={open} onClose={onClose} title="Confirmar">
+<Popup theme="commerce-dark" open={open} onClose={onClose} title="Confirmar">
   ...
 </Popup>
 
-<ToastProvider position="top-right" theme="dark" defaultDuration={5000}>
+<ToastProvider position="top-right" theme="commerce-dark" defaultDuration={5000}>
   {children}
 </ToastProvider>
 ```

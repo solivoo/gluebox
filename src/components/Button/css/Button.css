@@ -9,6 +9,8 @@
   font-size: var(--btn-font-size, 0.875rem);
   font-weight: 500;
   line-height: 1;
+  text-transform: var(--btn-text-transform, none);
+  letter-spacing: var(--btn-letter-spacing, normal);
   border-radius: var(--btn-radius, 0.5rem);
   border: 1px solid transparent;
   cursor: pointer;

@@ -34,7 +34,7 @@ import 'glubox/style.css';
 | `width` | `number \| string` | `240px` | Ancho expandido; en colapsado suele usarse `64`. |
 | `onCollapsedChange` | `(collapsed: boolean) => void` | — | Al pulsar el botón contraer/expandir. |
 | `showCollapseButton` | `boolean` | `true` si hay `onCollapsedChange` | Muestra u oculta el botón de colapsar. |
-| `theme` | preset \| `SidebarTheme` | hereda global | Sin prop sigue `data-theme` / `data-mode`. Override: `light`, `dark`, `modern-dark`, … |
+| `theme` | preset \| `SidebarTheme` | hereda global | Sin prop sigue `data-theme` / `data-mode`. Override: `commerce-light`, `commerce-dark` |
 | `renderIcon` | `IconResolver` | — | Resuelve iconos del menú por nombre (Lucide, Iconify, etc.). |
 | `brand` | `SidebarBrandComponent` | — | Componente de logo / nombre de empresa. |
 | `collapseOthersOnSelect` | `boolean` | `false` | Acordeón al **expandir/contraer** módulos de nivel 1. |
@@ -249,8 +249,8 @@ Sin prop `theme`, el Sidebar hereda `data-theme` / `data-mode` del documento (re
 ### Override con presets
 
 ```tsx
-<Sidebar theme="dark" {...props} />
-<Sidebar theme="modern-light" {...props} />
+<Sidebar theme="commerce-light" {...props} />
+<Sidebar theme="commerce-light" {...props} />
 ```
 
 ### Tema personalizado
@@ -288,7 +288,7 @@ Tokens disponibles en `SidebarTheme`:
 | `railActive` | Barra lateral del ítem activo |
 | `iconFallbackBackground` | Fondo del fallback de icono |
 
-Presets exportados: `sidebarThemes` con `light`, `dark`, `modern-light`, `modern-dark`, `enterprise-light`, `enterprise-dark`.
+Presets exportados: `sidebarThemes` con `commerce-light`, `commerce-dark`.
 
 Temas globales CSS: [Guía de temas](/guide/themes).
 

@@ -32,12 +32,13 @@ function TemasContent() {
     <section className="apd__section">
       <h2>Temas</h2>
       <p>
-        <strong>gluBox</strong> incluye <strong>3 temas visuales</strong>, cada uno con
-        su propio modo claro y oscuro. Los temas controlan los colores de todos los
-        componentes (Sidebar, Button, Select, TextBox) mediante variables CSS.
+        <strong>gluBox</strong> usa una sola familia visual, <strong>Commerce</strong>{' '}
+        (Material Design / MUI), con modo claro y oscuro. El tema controla los colores
+        de todos los componentes (Sidebar, Button, Select, TextBox, Switch) mediante
+        variables CSS.
       </p>
 
-      <h3>Temas disponibles</h3>
+      <h3>Tema disponible</h3>
       <table className="apd__table">
         <thead>
           <tr>
@@ -49,27 +50,15 @@ function TemasContent() {
         </thead>
         <tbody>
           <tr>
-            <td className="apd__prop-name">Default</td>
-            <td className="apd__prop-type">default</td>
-            <td>Indigo / Violeta</td>
-            <td className="apd__prop-type">default.css</td>
-          </tr>
-          <tr>
-            <td className="apd__prop-name">Modern</td>
-            <td className="apd__prop-type">modern</td>
-            <td>Emerald / Verde</td>
-            <td className="apd__prop-type">modern.css</td>
-          </tr>
-          <tr>
-            <td className="apd__prop-name">Enterprise</td>
-            <td className="apd__prop-type">enterprise</td>
-            <td>Blue / Slate</td>
-            <td className="apd__prop-type">enterprise.css</td>
+            <td className="apd__prop-name">Commerce</td>
+            <td className="apd__prop-type">commerce</td>
+            <td>Material Design (MUI) / Azul #1976D2</td>
+            <td className="apd__prop-type">commerce.css</td>
           </tr>
         </tbody>
       </table>
 
-      <h3>Cómo usar un tema</h3>
+      <h3>Cómo usar el tema</h3>
       <p>
         El tema se aplica en un solo lugar. Importá el CSS publicado (no existe{' '}
         <code>glubox/styles/base.css</code>) y seteá atributos en{' '}
@@ -77,20 +66,20 @@ function TemasContent() {
       </p>
       <pre className="apd__code">{`// main.tsx o App.tsx
 import 'glubox/style.css';
-import 'glubox/themes/index.css';  // default + modern + enterprise
-// o solo uno:
-import 'glubox/themes/default.css';`}</pre>
+import 'glubox/themes/index.css';  // commerce (light + dark)
+// o solo el tema:
+import 'glubox/themes/commerce.css';`}</pre>
 
       <p>
         Luego aplicá los atributos <code>data-theme</code> y <code>data-mode</code> al{' '}
         <code>&lt;html&gt;</code>:
       </p>
-      <pre className="apd__code">{`<html data-theme="default" data-mode="light">
-  <!-- todos los componentes usan el tema Default · Light -->
+      <pre className="apd__code">{`<html data-theme="commerce" data-mode="light">
+  <!-- todos los componentes usan Commerce · Light -->
 </html>
 
-<html data-theme="modern" data-mode="dark">
-  <!-- todos los componentes usan el tema Modern · Dark -->
+<html data-theme="commerce" data-mode="dark">
+  <!-- todos los componentes usan Commerce · Dark (MUI) -->
 </html>`}</pre>
 
       <h3>Override por componente</h3>
@@ -99,10 +88,10 @@ import 'glubox/themes/default.css';`}</pre>
         ignorar el sistema. No redefinas <code>--select-*</code>,{' '}
         <code>--datagrid-*</code> ni <code>--textbox-*</code> en tu CSS.
       </p>
-      <pre className="apd__code">{`<Button theme="dark">Dark override</Button>
-<Select theme="modern-dark" options={[...]} />
-<TextBox theme="enterprise-light" />
-<Sidebar theme="dark" />`}</pre>
+      <pre className="apd__code">{`<Button theme="commerce-dark">Dark override</Button>
+<Select theme="commerce-light" options={[...]} />
+<TextBox theme="commerce-dark" />
+<Sidebar theme="commerce-light" />`}</pre>
     </section>
   );
 }
@@ -112,7 +101,7 @@ function ModoOscuroContent() {
     <section className="apd__section">
       <h2>Modo Oscuro</h2>
       <p>
-        Todos los temas incluyen modo oscuro (<code>data-mode="dark"</code>). La
+        El tema incluye modo oscuro (<code>data-mode="dark"</code>). La
         transición entre modos se maneja con variables CSS, sin necesidad de
         recargar la página ni manipular estilos inline.
       </p>
@@ -151,16 +140,16 @@ window.matchMedia('(prefers-color-scheme: dark)')
 
       <h3>Variables CSS que cambian</h3>
       <p>El modo oscuro redefine estas variables a nivel :root:</p>
-      <pre className="apd__code">{`[data-mode="dark"] {
-  --glb-app-bg: #0f1117;
-  --glb-app-text: #e2e8f0;
-  --glb-toolbar-bg: #11131a;
-  --glb-surface: #1a1d27;
-  --glb-surface-hover: #22252f;
-  --glb-border: #2d3139;
-  --glb-input-bg: #1a1d27;
-  --glb-text: #e2e8f0;
-  --glb-muted: #64748b;
+      <pre className="apd__code">{`[data-theme="commerce"][data-mode="dark"] {
+  --glb-app-bg: #121212;
+  --glb-app-text: #ffffff;
+  --glb-toolbar-bg: #121212;
+  --glb-surface: #1e1e1e;
+  --glb-surface-hover: #2c2c2c;
+  --glb-border: rgba(255, 255, 255, 0.12);
+  --glb-input-bg: #1e1e1e;
+  --glb-text: #ffffff;
+  --glb-muted: rgba(255, 255, 255, 0.7);
 
   /* + variables del tema activo (--sidebar-*, --btn-*, etc.) */
 }`}</pre>
@@ -205,7 +194,7 @@ yarn add glubox`}</pre>
 import 'glubox/style.css';
 import 'glubox/themes/index.css';
 // o
-import 'glubox/themes/default.css';`}</pre>
+import 'glubox/themes/commerce.css';`}</pre>
     </section>
   );
 }
@@ -231,12 +220,20 @@ function ImportacionContent() {
   MenuSubItem,
 } from 'glubox';`}</pre>
 
-      <h3>Tree shaking</h3>
+      <h3>Tree shaking y Subpath Exports</h3>
       <p>
-        Si tu bundler soporta tree shaking (Vite, webpack 5+, Rollup), podés
-        importar componentes individuales para reducir el bundle:
+        El paquete soporta tree shaking tanto desde el barrel raíz como mediante
+        subpath exports directos por componente (<code>glubox/components/*</code>)
+        para optimizar al máximo el tamaño final del bundle y la velocidad de
+        resolución en TypeScript:
       </p>
-      <pre className="apd__code">{`import { Button } from 'glubox/components/Button';`}</pre>
+      <pre className="apd__code">{`// Importación por subruta (Tree-shaking atómico)
+import { Button } from 'glubox/components/Button';
+import { Switch } from 'glubox/components/Switch';
+import { DataGrid } from 'glubox/components/DataGrid';
+
+// O desde el barrel principal
+import { Button, Switch } from 'glubox';`}</pre>
 
       <h3>Estilos por componente</h3>
       <p>
@@ -284,10 +281,13 @@ function PersonalizacionContent() {
 }`}</pre>
 
       <h3>Fuente</h3>
-      <p>La fuente global es <strong>Poppins</strong>, controlada por:</p>
+      <p>
+        La familia Commerce usa <strong>Roboto</strong> (Material Design) vía{' '}
+        <code>--glb-font-family</code>; si no está disponible cae al stack del sistema.
+      </p>
       <pre className="apd__code">{`// En tu CSS
 :root {
-  --glb-font-family: 'Poppins', sans-serif;
+  --glb-font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 }`}</pre>
 
       <h3>Override inline (theme prop)</h3>

@@ -29,11 +29,6 @@ export interface CheckButtonTheme {
 }
 
 export type CheckButtonThemePreset =
-  | 'dark'
-  | 'light'
-  | 'modern-dark'
-  | 'modern-light'
-  | 'enterprise-dark'
-  | 'enterprise-light';
+  'commerce-dark' | 'commerce-light';
 
 export type CheckButtonThemeInput = CheckButtonTheme | CheckButtonThemePreset;

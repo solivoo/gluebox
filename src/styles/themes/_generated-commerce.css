@@ -1,16 +1,18 @@
 /* ══════════════════════════════════════════════════
-   Generated component tokens — modern
+   Generated component tokens — commerce
    Colores de componente: var(--glb-*). No editar a mano.
    Regenerate: pnpm themes:generate
    ══════════════════════════════════════════════════ */
 
 /* ── Button (light) ── */
-[data-theme="modern"] {
+[data-theme="commerce"] {
   --btn-font-size: 0.875rem;
-  --btn-radius: 0.5rem;
-  --btn-transition: all 0.15s ease;
-  --btn-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
-  --btn-hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --btn-radius: 4px;
+  --btn-transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1), border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --btn-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
+  --btn-hover-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
+  --btn-text-transform: uppercase;
+  --btn-letter-spacing: 0.02857em;
   --btn-primary-bg: var(--glb-accent-surface);
   --btn-primary-text: var(--glb-accent-on-fill);
   --btn-primary-border: var(--glb-accent-border);
@@ -74,12 +76,14 @@
 }
 
 /* ── Button (dark) ── */
-[data-theme="modern"][data-mode="dark"] {
+[data-theme="commerce"][data-mode="dark"] {
   --btn-font-size: 0.875rem;
-  --btn-radius: 0.5rem;
-  --btn-transition: all 0.15s ease;
-  --btn-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --btn-hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --btn-radius: 4px;
+  --btn-transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1), border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --btn-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
+  --btn-hover-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
+  --btn-text-transform: uppercase;
+  --btn-letter-spacing: 0.02857em;
   --btn-primary-bg: var(--glb-accent-surface);
   --btn-primary-text: var(--glb-accent-on-fill);
   --btn-primary-border: var(--glb-accent-border);
@@ -143,9 +147,9 @@
 }
 
 /* ── Select (light) ── */
-[data-theme="modern"] {
+[data-theme="commerce"] {
   --select-font-size: 0.875rem;
-  --select-radius: 0.5rem;
+  --select-radius: 4px;
   --select-transition: all 0.15s ease;
   --select-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
   --select-dropdown-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
@@ -245,9 +249,9 @@
 }
 
 /* ── Select (dark) ── */
-[data-theme="modern"][data-mode="dark"] {
+[data-theme="commerce"][data-mode="dark"] {
   --select-font-size: 0.875rem;
-  --select-radius: 0.5rem;
+  --select-radius: 4px;
   --select-transition: all 0.15s ease;
   --select-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   --select-dropdown-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
@@ -347,9 +351,9 @@
 }
 
 /* ── TextBox (light) ── */
-[data-theme="modern"] {
+[data-theme="commerce"] {
   --textbox-font-size: 0.875rem;
-  --textbox-radius: 0.5rem;
+  --textbox-radius: 4px;
   --textbox-transition: all 0.15s ease;
   --textbox-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
   --textbox-helper-color: var(--glb-muted);
@@ -420,9 +424,9 @@
 }
 
 /* ── TextBox (dark) ── */
-[data-theme="modern"][data-mode="dark"] {
+[data-theme="commerce"][data-mode="dark"] {
   --textbox-font-size: 0.875rem;
-  --textbox-radius: 0.5rem;
+  --textbox-radius: 4px;
   --textbox-transition: all 0.15s ease;
   --textbox-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   --textbox-helper-color: var(--glb-muted);
@@ -493,9 +497,9 @@
 }
 
 /* ── TagBox (light) ── */
-[data-theme="modern"] {
+[data-theme="commerce"] {
   --tagbox-font-size: 0.875rem;
-  --tagbox-radius: 0.5rem;
+  --tagbox-radius: 4px;
   --tagbox-transition: all 0.15s ease;
   --tagbox-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
   --tagbox-helper-color: var(--glb-muted);
@@ -573,9 +577,9 @@
 }
 
 /* ── TagBox (dark) ── */
-[data-theme="modern"][data-mode="dark"] {
+[data-theme="commerce"][data-mode="dark"] {
   --tagbox-font-size: 0.875rem;
-  --tagbox-radius: 0.5rem;
+  --tagbox-radius: 4px;
   --tagbox-transition: all 0.15s ease;
   --tagbox-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   --tagbox-helper-color: var(--glb-muted);
@@ -653,9 +657,9 @@
 }
 
 /* ── TextArea (light) ── */
-[data-theme="modern"] {
+[data-theme="commerce"] {
   --textarea-font-size: 0.875rem;
-  --textarea-radius: 0.5rem;
+  --textarea-radius: 4px;
   --textarea-transition: all 0.15s ease;
   --textarea-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
   --textarea-helper-color: var(--glb-muted);
@@ -726,9 +730,9 @@
 }
 
 /* ── TextArea (dark) ── */
-[data-theme="modern"][data-mode="dark"] {
+[data-theme="commerce"][data-mode="dark"] {
   --textarea-font-size: 0.875rem;
-  --textarea-radius: 0.5rem;
+  --textarea-radius: 4px;
   --textarea-transition: all 0.15s ease;
   --textarea-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   --textarea-helper-color: var(--glb-muted);
@@ -799,9 +803,9 @@
 }
 
 /* ── DateBox (light) ── */
-[data-theme="modern"] {
+[data-theme="commerce"] {
   --datebox-font-size: 0.875rem;
-  --datebox-radius: 0.5rem;
+  --datebox-radius: 4px;
   --datebox-transition: all 0.15s ease;
   --datebox-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
   --datebox-helper-color: var(--glb-muted);
@@ -881,9 +885,9 @@
 }
 
 /* ── DateBox (dark) ── */
-[data-theme="modern"][data-mode="dark"] {
+[data-theme="commerce"][data-mode="dark"] {
   --datebox-font-size: 0.875rem;
-  --datebox-radius: 0.5rem;
+  --datebox-radius: 4px;
   --datebox-transition: all 0.15s ease;
   --datebox-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   --datebox-helper-color: var(--glb-muted);
@@ -963,9 +967,9 @@
 }
 
 /* ── RangeDateBox (light) ── */
-[data-theme="modern"] {
+[data-theme="commerce"] {
   --rangedatebox-font-size: 0.875rem;
-  --rangedatebox-radius: 0.5rem;
+  --rangedatebox-radius: 4px;
   --rangedatebox-transition: all 0.15s ease;
   --rangedatebox-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
   --rangedatebox-helper-color: var(--glb-muted);
@@ -1046,9 +1050,9 @@
 }
 
 /* ── RangeDateBox (dark) ── */
-[data-theme="modern"][data-mode="dark"] {
+[data-theme="commerce"][data-mode="dark"] {
   --rangedatebox-font-size: 0.875rem;
-  --rangedatebox-radius: 0.5rem;
+  --rangedatebox-radius: 4px;
   --rangedatebox-transition: all 0.15s ease;
   --rangedatebox-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   --rangedatebox-helper-color: var(--glb-muted);
@@ -1129,9 +1133,9 @@
 }
 
 /* ── CheckButton (light) ── */
-[data-theme="modern"] {
+[data-theme="commerce"] {
   --checkbtn-font-size: 0.875rem;
-  --checkbtn-radius: 0.5rem;
+  --checkbtn-radius: 4px;
   --checkbtn-transition: all 0.15s ease;
   --checkbtn-shadow: 0 1px 2px rgba(0,0,0,0.06);
   --checkbtn-primary-unchecked-bg: var(--glb-input-bg);
@@ -1209,9 +1213,9 @@
 }
 
 /* ── CheckButton (dark) ── */
-[data-theme="modern"][data-mode="dark"] {
+[data-theme="commerce"][data-mode="dark"] {
   --checkbtn-font-size: 0.875rem;
-  --checkbtn-radius: 0.5rem;
+  --checkbtn-radius: 4px;
   --checkbtn-transition: all 0.15s ease;
   --checkbtn-shadow: 0 1px 2px rgba(0,0,0,0.3);
   --checkbtn-primary-unchecked-bg: var(--glb-input-bg);
@@ -1288,10 +1292,48 @@
   --checkbtn-ghost-checked-icon: var(--glb-accent-subtle-text);
 }
 
+/* ── Switch (light) ── */
+[data-theme="commerce"] {
+  --switch-font-size: 0.875rem;
+  --switch-transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1), transform 150ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --switch-focus-ring: var(--glb-accent-focus-ring);
+  --switch-label-color: var(--glb-text);
+  --switch-helper-color: var(--glb-muted);
+  --switch-error-color: var(--glb-danger-on-fill, #dc2626);
+  --switch-loader: #616161;
+  --switch-track: #9e9e9e;
+  --switch-track-hover: #8a8a8a;
+  --switch-track-checked: var(--glb-accent-surface);
+  --switch-track-checked-hover: var(--glb-accent-surface-hover);
+  --switch-thumb: #fafafa;
+  --switch-thumb-hover: #f0f0f0;
+  --switch-thumb-checked: var(--glb-accent-on-fill);
+  --switch-thumb-checked-hover: var(--glb-accent-on-fill);
+}
+
+/* ── Switch (dark) ── */
+[data-theme="commerce"][data-mode="dark"] {
+  --switch-font-size: 0.875rem;
+  --switch-transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1), transform 150ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --switch-focus-ring: var(--glb-accent-focus-ring);
+  --switch-label-color: var(--glb-text);
+  --switch-helper-color: var(--glb-muted);
+  --switch-error-color: var(--glb-danger-on-fill, #dc2626);
+  --switch-loader: #212121;
+  --switch-track: #4d4d4d;
+  --switch-track-hover: #5c5c5c;
+  --switch-track-checked: var(--glb-accent-surface);
+  --switch-track-checked-hover: var(--glb-accent-surface-hover);
+  --switch-thumb: #bdbdbd;
+  --switch-thumb-hover: #c7c7c7;
+  --switch-thumb-checked: var(--glb-accent-on-fill);
+  --switch-thumb-checked-hover: var(--glb-accent-on-fill);
+}
+
 /* ── OptionGroup (light) ── */
-[data-theme="modern"] {
+[data-theme="commerce"] {
   --optiongroup-font-size: 0.875rem;
-  --optiongroup-radius: 0.5rem;
+  --optiongroup-radius: 4px;
   --optiongroup-transition: all 0.15s ease;
   --optiongroup-shadow: 0 1px 2px rgba(0,0,0,0.06);
   --optiongroup-helper-color: var(--glb-muted);
@@ -1348,9 +1390,9 @@
 }
 
 /* ── OptionGroup (dark) ── */
-[data-theme="modern"][data-mode="dark"] {
+[data-theme="commerce"][data-mode="dark"] {
   --optiongroup-font-size: 0.875rem;
-  --optiongroup-radius: 0.5rem;
+  --optiongroup-radius: 4px;
   --optiongroup-transition: all 0.15s ease;
   --optiongroup-shadow: 0 1px 2px rgba(0,0,0,0.3);
   --optiongroup-helper-color: var(--glb-muted);
@@ -1407,9 +1449,9 @@
 }
 
 /* ── Popup (light) ── */
-[data-theme="modern"] {
+[data-theme="commerce"] {
   --popup-font-size: 0.875rem;
-  --popup-radius: 0.75rem;
+  --popup-radius: 4px;
   --popup-shadow: var(--glb-overlay-shadow, 0 20px 40px rgba(15, 23, 42, 0.12));
   --popup-overlay-bg: var(--glb-overlay-bg, rgba(15, 23, 42, 0.4));
   --popup-panel-bg: var(--glb-surface);
@@ -1423,9 +1465,9 @@
 }
 
 /* ── Popup (dark) ── */
-[data-theme="modern"][data-mode="dark"] {
+[data-theme="commerce"][data-mode="dark"] {
   --popup-font-size: 0.875rem;
-  --popup-radius: 0.75rem;
+  --popup-radius: 4px;
   --popup-shadow: var(--glb-overlay-shadow, 0 20px 40px rgba(15, 23, 42, 0.12));
   --popup-overlay-bg: var(--glb-overlay-bg, rgba(15, 23, 42, 0.4));
   --popup-panel-bg: var(--glb-surface);
@@ -1439,9 +1481,9 @@
 }
 
 /* ── Toast (light) ── */
-[data-theme="modern"] {
+[data-theme="commerce"] {
   --toast-font-size: 0.875rem;
-  --toast-radius: 0.625rem;
+  --toast-radius: 4px;
   --toast-shadow: 0 10px 28px rgba(15, 23, 42, 0.1);
   --toast-gap: 0.625rem;
   --toast-default-bg: var(--glb-surface);
@@ -1482,9 +1524,9 @@
 }
 
 /* ── Toast (dark) ── */
-[data-theme="modern"][data-mode="dark"] {
+[data-theme="commerce"][data-mode="dark"] {
   --toast-font-size: 0.875rem;
-  --toast-radius: 0.625rem;
+  --toast-radius: 4px;
   --toast-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
   --toast-gap: 0.625rem;
   --toast-default-bg: var(--glb-surface);
@@ -1525,9 +1567,9 @@
 }
 
 /* ── DataGrid (light) ── */
-[data-theme="modern"] {
+[data-theme="commerce"] {
   --datagrid-font-size: 0.875rem;
-  --datagrid-radius: 0.5rem;
+  --datagrid-radius: 4px;
   --datagrid-transition: all 0.15s ease;
   --datagrid-shadow: 0 1px 2px rgba(0,0,0,0.06);
   --datagrid-header-bg: var(--glb-muted-surface);
@@ -1556,9 +1598,9 @@
 }
 
 /* ── DataGrid (dark) ── */
-[data-theme="modern"][data-mode="dark"] {
+[data-theme="commerce"][data-mode="dark"] {
   --datagrid-font-size: 0.875rem;
-  --datagrid-radius: 0.5rem;
+  --datagrid-radius: 4px;
   --datagrid-transition: all 0.15s ease;
   --datagrid-shadow: 0 1px 2px rgba(0,0,0,0.35);
   --datagrid-header-bg: var(--glb-muted-surface);
@@ -1587,9 +1629,9 @@
 }
 
 /* ── PageActionsMenu (light) ── */
-[data-theme="modern"] {
+[data-theme="commerce"] {
   --pam-font-size: 0.875rem;
-  --pam-radius: 0.5rem;
+  --pam-radius: 4px;
   --pam-transition: all 0.15s ease;
   --pam-panel-bg: var(--glb-surface);
   --pam-panel-text: var(--glb-text);
@@ -1634,9 +1676,9 @@
 }
 
 /* ── PageActionsMenu (dark) ── */
-[data-theme="modern"][data-mode="dark"] {
+[data-theme="commerce"][data-mode="dark"] {
   --pam-font-size: 0.875rem;
-  --pam-radius: 0.5rem;
+  --pam-radius: 4px;
   --pam-transition: all 0.15s ease;
   --pam-panel-bg: var(--glb-surface);
   --pam-panel-text: var(--glb-text);

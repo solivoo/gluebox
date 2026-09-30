@@ -84,6 +84,7 @@ export function NumberBox(props: Readonly<NumberBoxProps>) {
         className="glb-numberbox__spin-btn"
         tabIndex={-1}
         disabled={disabled}
+        aria-label="Incrementar"
         onMouseDown={(e) => e.preventDefault()}
         onClick={() => stepBy(1)}
       >
@@ -94,6 +95,7 @@ export function NumberBox(props: Readonly<NumberBoxProps>) {
         className="glb-numberbox__spin-btn"
         tabIndex={-1}
         disabled={disabled}
+        aria-label="Decrementar"
         onMouseDown={(e) => e.preventDefault()}
         onClick={() => stepBy(-1)}
       >

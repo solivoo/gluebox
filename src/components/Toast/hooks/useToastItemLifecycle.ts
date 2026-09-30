@@ -25,7 +25,7 @@ export function useToastItemLifecycle({
 
   const clearTimer = useCallback(() => {
     if (timerRef.current != null) {
-      window.clearTimeout(timerRef.current);
+      clearTimeout(timerRef.current);
       timerRef.current = null;
     }
   }, []);
@@ -39,15 +39,15 @@ export function useToastItemLifecycle({
       }
       endAtRef.current = Date.now() + ms;
       remainingRef.current = ms;
-      timerRef.current = window.setTimeout(onRequestExit, ms);
+      timerRef.current = setTimeout(onRequestExit, ms);
     },
     [clearTimer, onRequestExit],
   );
 
   useEffect(() => {
     if (!exiting) return;
-    const timer = window.setTimeout(onRemove, TOAST_EXIT_MS);
-    return () => window.clearTimeout(timer);
+    const timer = setTimeout(onRemove, TOAST_EXIT_MS);
+    return () => clearTimeout(timer);
   }, [exiting, onRemove]);
 
   useEffect(() => {

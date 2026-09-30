@@ -41,13 +41,16 @@ function breadcrumbLabel(pathname: string, entry: DocEntry): string {
   const segments = pathname.split('/').filter(Boolean);
   if (segments.length <= 2) return entry.label;
 
-  const last = segments[segments.length - 1]
+  const lastSegment = segments[segments.length - 1];
+  if (!lastSegment) return entry.label;
+  const last = lastSegment
     .replace(/-/g, ' ')
     .replace(/\b\w/g, (c) => c.toUpperCase());
 
+  const parentSegment = segments[segments.length - 2];
   const parent =
-    segments.length > 3
-      ? segments[segments.length - 2]
+    segments.length > 3 && parentSegment
+      ? parentSegment
           .replace(/-/g, ' ')
           .replace(/\b\w/g, (c) => c.toUpperCase())
       : '';
@@ -127,8 +130,8 @@ function HowTo({ entry }: { entry: DocEntry }) {
 <Button size="lg">Large</Button>
 
 // Tema
-<Button theme="dark">Dark</Button>
-<Button theme="modern-light">Modern Light</Button>
+<Button theme="commerce-dark">Commerce Dark</Button>
+<Button theme="commerce-light">Commerce Light</Button>
 
 // Ancho
 <Button width={200}>200px</Button>
@@ -152,7 +155,7 @@ function HowTo({ entry }: { entry: DocEntry }) {
 <Select error errorMessage="Requerido" options={[...]} />
 
 // Tema
-<Select theme="modern-dark" options={[...]} />`,
+<Select theme="commerce-dark" options={[...]} />`,
     TextBox: `// Campo básico
 <TextBox placeholder="Nombre" />
 

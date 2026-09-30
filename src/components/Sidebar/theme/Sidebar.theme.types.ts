@@ -16,6 +16,6 @@ export interface SidebarTheme {
   railActive?: string;
 }
 
-export type SidebarThemePreset = 'dark' | 'light' | 'modern-dark' | 'modern-light' | 'enterprise-dark' | 'enterprise-light';
+export type SidebarThemePreset = 'commerce-dark' | 'commerce-light';
 
 export type SidebarThemeInput = SidebarTheme | SidebarThemePreset;

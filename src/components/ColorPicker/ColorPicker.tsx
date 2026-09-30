@@ -59,10 +59,6 @@ export function ColorPicker(props: Readonly<ColorPickerProps>) {
   const [isOpen, setIsOpen] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
 
-  useEffect(() => {
-    setDraft(validHex);
-  }, [validHex]);
-
   /**
    * El HSV vive en estado porque el hex no puede representarlo entero: en grises
    * (s = 0) y en negro (v = 0) el matiz se pierde. Solo se resincroniza cuando el
@@ -73,6 +69,7 @@ export function ColorPicker(props: Readonly<ColorPickerProps>) {
 
   if (validHex !== syncedHex) {
     setSyncedHex(validHex);
+    setDraft(validHex);
     if (validHex && validHex !== hsvToHex(hsv)) {
       const next = hexToHsv(validHex);
       if (next) setHsv(next);

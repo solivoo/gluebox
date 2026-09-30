@@ -11,6 +11,7 @@ import '@/components/DateBox/css/DateBox.css';
 import '@/components/RangeDateBox/css/RangeDateBox.css';
 import '@/components/OptionGroup/css/OptionGroup.css';
 import '@/components/CheckButton/css/CheckButton.css';
+import '@/components/Switch/css/Switch.css';
 import '@/components/Popup/css/Popup.css';
 import '@/components/Toast/css/Toast.css';
 import '@/components/PageActionsMenu/css/PageActionsMenu.css';
@@ -243,6 +244,21 @@ export {
   CheckButton,
   checkButtonThemes,
 } from './components/CheckButton';
+
+export type {
+  SwitchProps,
+  SwitchSize,
+  SwitchLabelPosition,
+  SwitchTheme,
+  SwitchTrackTheme,
+  SwitchThumbTheme,
+  SwitchThemePreset,
+  SwitchThemeInput,
+  SwitchChangeValue,
+  SwitchOnChangeHandler,
+} from './components/Switch';
+
+export { Switch, switchThemes } from './components/Switch';
 
 export type {
   PopupProps,

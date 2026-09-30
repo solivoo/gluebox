@@ -22,9 +22,9 @@ const lastNames = [
 function buildDemoEmployees(count: number): DemoEmployee[] {
   return Array.from({ length: count }, (_, index) => {
     const id = index + 1;
-    const first = firstNames[index % firstNames.length];
-    const last = lastNames[(index * 7) % lastNames.length];
-    const department = departments[index % departments.length];
+    const first = firstNames[index % firstNames.length] ?? '';
+    const last = lastNames[(index * 7) % lastNames.length] ?? '';
+    const department = departments[index % departments.length] ?? '';
     const slug = `${first}.${last}`
       .toLowerCase()
       .normalize('NFD')

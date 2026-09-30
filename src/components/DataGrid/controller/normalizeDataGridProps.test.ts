@@ -25,6 +25,12 @@ const rows: Row[] = [
   { id: 2, name: 'Bruno' },
 ];
 
+function at<T>(items: ArrayLike<T>, index: number): T {
+  const item = items[index];
+  if (item === undefined) throw new Error(`Índice ${index} fuera de rango`);
+  return item;
+}
+
 describe('normalizeDataGridProps', () => {
   it('dataSource + keyExpr + columns → data y getRowId', () => {
     const normalized = normalizeDataGridProps<Row>({
@@ -34,7 +40,7 @@ describe('normalizeDataGridProps', () => {
     });
     expect(normalized.data).toBe(rows);
     expect(normalized.columns).toBe(columns);
-    expect(normalized.getRowId(rows[0])).toBe(1);
+    expect(normalized.getRowId(at(rows, 0))).toBe(1);
     expect(normalized.pagination).toBe(false);
   });
 
@@ -49,14 +55,14 @@ describe('normalizeDataGridProps', () => {
   });
 
   it('dataSource con 1 fila', () => {
-    const one = [rows[0]];
+    const one = [at(rows, 0)];
     const normalized = normalizeDataGridProps<Row>({
       dataSource: one,
       keyExpr: 'id',
       columns,
     });
     expect(normalized.data).toHaveLength(1);
-    expect(normalized.getRowId(one[0])).toBe(1);
+    expect(normalized.getRowId(at(one, 0))).toBe(1);
   });
 
   it('paging.pageIndex 0-based → page interna 1-based', () => {

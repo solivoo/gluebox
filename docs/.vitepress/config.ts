@@ -26,6 +26,7 @@ export default defineConfig({
           { text: 'Introducción', link: '/guide/getting-started' },
           { text: 'Instalación', link: '/guide/installation' },
           { text: 'Temas y apariencia', link: '/guide/themes' },
+          { text: 'Migración a 0.2.0', link: '/guide/migration-0.2.0' },
           { text: 'Tipos de eventos', link: '/guide/event-types' },
           { text: 'Esquema del menú (API)', link: '/guide/menu-api' },
           { text: 'Integración con routing', link: '/guide/routing' },

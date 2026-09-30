@@ -169,7 +169,7 @@ export function TagBox(props: Readonly<TagBoxProps>) {
             type="button"
             className="glb-tagbox__tag-remove"
             onClick={() => removeTag(index)}
-            aria-label={`Eliminar tag "${tag}"`}
+            aria-label={`Eliminar tag ${tag}`}
             disabled={disabled}
             tabIndex={-1}
           >

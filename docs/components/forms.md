@@ -12,12 +12,14 @@ import {
   ColorPicker,
   TextArea,
   TagBox,
+  Switch,
   Select,
   DateBox,
   RangeDateBox,
   textBoxThemes,
   textAreaThemes,
   tagBoxThemes,
+  switchThemes,
   selectThemes,
   dateBoxThemes,
   rangeDateBoxThemes,
@@ -31,12 +33,14 @@ import type {
   ColorPickerProps,
   TextAreaProps,
   TagBoxProps,
+  SwitchProps,
   SelectProps,
   DateBoxProps,
   RangeDateBoxProps,
   TextBoxLabelPosition,
   TextAreaLabelPosition,
   TagBoxLabelPosition,
+  SwitchLabelPosition,
   SelectLabelPosition,
 } from 'glubox';
 
@@ -238,6 +242,20 @@ Props destacadas: `rows`, `resize` (`none` | `vertical` | `horizontal` | `both`)
 
 Campo para agregar tags en línea. **Enter** o **coma** confirman cada tag; **Backspace** con el input vacío elimina el último; **Escape** limpia el borrador. Los tags se muestran como chips con botón para quitarlos. `onChange` emite `string[]`. Por defecto previene duplicados (case-insensitive); usá `allowDuplicates` para permitirlos. Admite modo controlado (`value`) y no controlado (`defaultValue`). Comparte variantes, tamaños, labels y temas con TextBox.
 
+## Switch
+
+```tsx
+<Switch
+  label="Notificaciones"
+  labelPosition="right"
+  defaultChecked
+  helperText="Se sincroniza cada hora"
+  onChange={(checked) => setNotificar(checked)}
+/>
+```
+
+Interruptor on/off con thumb deslizante. `labelPosition`: `'right'` (default), `'left'`, `'top'`, `'bottom'`. Tamaños `sm` | `md`. `loading` deshabilita el control y muestra un spinner en el thumb. Admite modo controlado (`checked` + `onChange`) y no controlado (`defaultChecked`), `helperText`, `error`/`errorMessage`, `fullWidth`, `width` y `theme`. Usa un `<input type="checkbox" role="switch">`, por lo que **Space** alterna el estado con el foco puesto.
+
 ## Select
 
 ```tsx
@@ -291,18 +309,18 @@ Valor: `{ start: string; end: string }` (fechas `YYYY-MM-DD`).
 Override puntual:
 
 ```tsx
-<TextBox theme="enterprise-dark" />
-<Select theme={selectThemes['modern-dark']} />
+<TextBox theme="commerce-dark" />
+<Select theme={selectThemes['commerce-light']} />
 ```
 
-Presets exportados: `textBoxThemes`, `textAreaThemes`, `tagBoxThemes`, `selectThemes`, `dateBoxThemes`, `rangeDateBoxThemes`.
+Presets exportados: `textBoxThemes`, `textAreaThemes`, `tagBoxThemes`, `switchThemes`, `selectThemes`, `dateBoxThemes`, `rangeDateBoxThemes`.
 
 Setup del sistema:
 
 ```tsx
 import 'glubox/themes/index.css';
 
-document.documentElement.setAttribute('data-theme', 'modern');
+document.documentElement.setAttribute('data-theme', 'commerce');
 document.documentElement.setAttribute('data-mode', 'dark');
 ```
 
@@ -318,6 +336,7 @@ Herencia, presets y prioridad: [Guía de temas](/guide/themes).
 | `ColorPicker` | `ColorPickerOnChangeHandler`, `ColorPickerChangeValue` |
 | `TextArea` | `TextAreaOnChangeHandler`, `TextAreaOnFocusHandler`, `TextAreaOnBlurHandler` |
 | `TagBox` | `TagBoxOnChangeHandler` |
+| `Switch` | `SwitchOnChangeHandler`, `SwitchChangeValue` |
 | `Select` | `SelectOnChangeHandler`, `SelectChangeValue` |
 | `DateBox` | `DateBoxOnChangeHandler` |
 | `RangeDateBox` | `RangeDateBoxOnChangeHandler`, `RangeDateBoxChangeEvent` |

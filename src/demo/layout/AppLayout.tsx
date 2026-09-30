@@ -8,23 +8,21 @@ import { renderMenuIcon } from '@/icons/menuIconRegistry';
 import { useSidebarNavigation } from '@/demo/routing/useSidebarNavigation';
 import '@/styles/themes/index.css';
 
-type ThemeName = 'default' | 'modern' | 'enterprise';
+type ThemeName = 'commerce';
 type ModeName = 'light' | 'dark';
 
 const THEME_KEY = 'glubox-demo-theme';
 const MODE_KEY = 'glubox-demo-mode';
 
 function getStoredTheme(): ThemeName {
-  return (localStorage.getItem(THEME_KEY) as ThemeName) || 'default';
+  return 'commerce';
 }
 function getStoredMode(): ModeName {
   return (localStorage.getItem(MODE_KEY) as ModeName) || 'dark';
 }
 
 const THEME_OPTIONS: { value: ThemeName; label: string }[] = [
-  { value: 'default', label: 'Default' },
-  { value: 'modern', label: 'Modern' },
-  { value: 'enterprise', label: 'Enterprise' },
+  { value: 'commerce', label: 'Commerce (MUI)' },
 ];
 
 const MODE_OPTIONS: { value: ModeName; label: string }[] = [

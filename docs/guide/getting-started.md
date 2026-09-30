@@ -8,7 +8,7 @@ gluBox es una librería de componentes React para dashboards y aplicaciones inte
 |------------|---------------|
 | Sidebar | [sidebar](/components/sidebar) |
 | DataGrid | [DataGrid — guía de uso](/components/datagrid) |
-| TextBox, NumberBox, FileBox, ColorPicker, TextArea, Select, DateBox, RangeDateBox | [formularios](/components/forms) |
+| TextBox, NumberBox, FileBox, ColorPicker, TextArea, Select, DateBox, RangeDateBox, TagBox, Switch | [formularios](/components/forms) |
 | Button, CheckButton, OptionGroup | [botones](/components/buttons) |
 | Popup, Toast | [overlays](/components/overlays) |
 
@@ -25,7 +25,7 @@ Listado completo: [Componentes](/components/).
 
 ### Formularios
 
-- **[TextBox, NumberBox, FileBox, ColorPicker, TextArea, Select, DateBox, RangeDateBox](/components/forms)** — Campos con variantes, clear button, label outlined y temas.
+- **[TextBox, NumberBox, FileBox, ColorPicker, TextArea, Select, DateBox, RangeDateBox, TagBox, Switch](/components/forms)** — Campos con variantes, clear button, label outlined, tags y switch con temas.
 
 ### Botones y selección
 
@@ -45,7 +45,7 @@ Listado completo: [Componentes](/components/).
 | [DataGrid](/components/datagrid) | Guía de uso: dataSource, paging, altura, cards |
 | [Esquema del menú (API)](/guide/menu-api) | Contrato JSON para backend |
 | [Integración con routing](/guide/routing) | React Router, guards, registro de rutas |
-| [Formularios](/components/forms) | TextBox, NumberBox, FileBox, ColorPicker, Select, fechas, label outlined |
+| [Formularios](/components/forms) | TextBox, NumberBox, FileBox, ColorPicker, Select, fechas, TagBox, Switch, label outlined |
 | [Botones](/components/buttons) | Button, CheckButton, OptionGroup |
 | [Overlays](/components/overlays) | Popup, Toast |
 | [Sidebar (referencia)](/components/sidebar) | Props, temas, RBAC |

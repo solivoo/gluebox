@@ -22,7 +22,7 @@ export function parseDate(str: string): Date | null {
 export function formatDisplay(str: string): string {
   const d = parseDate(str);
   if (!d) return '';
-  return `${d.getDate()} ${MONTHS[d.getMonth()].slice(0, 3).toLowerCase()} ${d.getFullYear()}`;
+  return `${d.getDate()} ${(MONTHS[d.getMonth()] ?? '').slice(0, 3).toLowerCase()} ${d.getFullYear()}`;
 }
 
 export function toDateStr(d: Date): string {

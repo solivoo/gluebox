@@ -73,10 +73,15 @@ describe('navigation helpers', () => {
   it('filterBySurface sidebar conserva group → view sin actions/content', () => {
     const sidebar = filterBySurface(navigation, 'sidebar');
     expect(sidebar).toHaveLength(1);
-    expect(sidebar[0].id).toBe('sub-org');
-    expect(sidebar[0].children).toHaveLength(1);
-    expect(sidebar[0].children[0].id).toBe('sub-companies');
-    expect(sidebar[0].children[0].children).toHaveLength(0);
+    const first = sidebar[0];
+    if (!first) throw new Error('sidebar[0] no existe');
+    expect(first.id).toBe('sub-org');
+    const children = first.children ?? [];
+    expect(children).toHaveLength(1);
+    const child = children[0];
+    if (!child) throw new Error('children[0] no existe');
+    expect(child.id).toBe('sub-companies');
+    expect(child.children ?? []).toHaveLength(0);
   });
 
   it('pageActionsFromNode / contentTabsFromNode', () => {

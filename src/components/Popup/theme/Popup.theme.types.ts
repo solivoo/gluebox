@@ -3,11 +3,6 @@ import type { OverlaySurfaceTheme } from '@/components/shared/overlayThemeBuilde
 export type PopupTheme = OverlaySurfaceTheme;
 
 export type PopupThemePreset =
-  | 'dark'
-  | 'light'
-  | 'modern-dark'
-  | 'modern-light'
-  | 'enterprise-dark'
-  | 'enterprise-light';
+  'commerce-dark' | 'commerce-light';
 
 export type PopupThemeInput = PopupTheme | PopupThemePreset;

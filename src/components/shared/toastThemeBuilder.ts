@@ -10,13 +10,13 @@ function variant(
   const base = buildOverlaySurfaceTheme(isDark, accent);
   if (!semantic) {
     return {
-      background: isDark ? '#1c1a26' : base.panelBg,
+      background: isDark ? '#1e1e1e' : base.panelBg,
       text: base.panelText,
       titleText: base.headerText,
       border: base.panelBorder,
       accent: base.accentBorder,
       closeColor: base.closeColor,
-      closeHoverBg: isDark ? '#2a2836' : base.closeHoverBg,
+      closeHoverBg: base.closeHoverBg,
     };
   }
   return {
@@ -26,7 +26,7 @@ function variant(
     border: base.panelBorder,
     accent: semantic.accent,
     closeColor: base.closeColor,
-    closeHoverBg: isDark ? '#2a2836' : base.closeHoverBg,
+    closeHoverBg: base.closeHoverBg,
   };
 }
 
@@ -47,7 +47,7 @@ export function buildToastTheme(isDark: boolean, accent: PastelAccent): ToastThe
 
   return {
     fontSize: '0.875rem',
-    borderRadius: '0.625rem',
+    borderRadius: '4px',
     shadow: isDark
       ? '0 12px 32px rgba(0, 0, 0, 0.4)'
       : '0 10px 28px rgba(15, 23, 42, 0.1)',

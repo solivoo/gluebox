@@ -81,6 +81,7 @@ export function useFileBoxState(options: UseFileBoxStateOptions): {
       if (from < 0 || from >= files.length || to < 0 || to >= files.length) return;
       const next = [...files];
       const [moved] = next.splice(from, 1);
+      if (!moved) return;
       next.splice(to, 0, moved);
       commit(next);
     },

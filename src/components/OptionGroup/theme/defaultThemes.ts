@@ -2,11 +2,7 @@ import type {
   OptionGroupTheme,
   OptionGroupVariantTheme,
 } from './OptionGroup.theme.types';
-import {
-  defaultPastel,
-  enterprisePastel,
-  modernPastel,
-} from '@/styles/pastelPalette';
+import { commercePastel } from '@/styles/pastelPalette';
 import type { PastelAccent } from '@/styles/pastelPalette';
 
 function buildVariants(isDark: boolean, accent: PastelAccent): OptionGroupTheme['variants'] {
@@ -60,7 +56,7 @@ function buildVariants(isDark: boolean, accent: PastelAccent): OptionGroupTheme[
 function buildTheme(isDark: boolean, accent: PastelAccent): OptionGroupTheme {
   return {
     fontSize: '0.875rem',
-    borderRadius: '0.5rem',
+    borderRadius: '4px',
     transition: 'all 0.15s ease',
     shadow: isDark ? '0 1px 2px rgba(0,0,0,0.3)' : '0 1px 2px rgba(0,0,0,0.06)',
     helperTextColor: isDark ? '#9ca3af' : '#6b7280',
@@ -71,10 +67,6 @@ function buildTheme(isDark: boolean, accent: PastelAccent): OptionGroupTheme {
 }
 
 export const optionGroupThemes = {
-  dark: buildTheme(true, defaultPastel.dark),
-  light: buildTheme(false, defaultPastel.light),
-  'modern-dark': buildTheme(true, modernPastel.dark),
-  'modern-light': buildTheme(false, modernPastel.light),
-  'enterprise-dark': buildTheme(true, enterprisePastel.dark),
-  'enterprise-light': buildTheme(false, enterprisePastel.light),
+  'commerce-dark': buildTheme(true, commercePastel.dark),
+  'commerce-light': buildTheme(false, commercePastel.light),
 } as const;

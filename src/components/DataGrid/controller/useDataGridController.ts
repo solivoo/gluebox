@@ -243,6 +243,7 @@ export function useDataGridController<T extends Record<string, unknown>>(
 
     return rows;
   }, [
+    // eslint-disable-next-line react-hooks/preserve-manual-memoization -- `pagination` sale de normalizeDataGridProps (valor plano inmutable); el proyecto no usa React Compiler
     pagination,
     paginationMode,
     grid.displayRows,
@@ -285,6 +286,7 @@ export function useDataGridController<T extends Record<string, unknown>>(
       loading,
     }),
     [
+      // eslint-disable-next-line react-hooks/preserve-manual-memoization -- `data` es el array del consumidor (referencia estable); el proyecto no usa React Compiler
       data,
       grid.filteredData,
       grid.sortedData,
@@ -343,7 +345,8 @@ export function useDataGridController<T extends Record<string, unknown>>(
     prevSelectionRef.current = signature;
 
     if (selectionMode === 'single' && grid.selectedRows.length === 1) {
-      onRowSelect?.(grid.selectedRows[0]);
+      const first = grid.selectedRows[0];
+      if (first) onRowSelect?.(first);
     }
     if (selectionMode !== 'none') {
       onSelectionChange?.(grid.selectedRows);

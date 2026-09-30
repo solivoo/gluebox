@@ -1,6 +1,6 @@
 # gluBox
 
-Librería de componentes React para aplicaciones empresariales: **Sidebar** con RBAC, **PageActionsMenu**, **DataGrid**, controles de formulario, botones y 3 temas globales (Indigo / Emerald / Blue) en modo claro y oscuro.
+Librería de componentes React.
 
 - **Documentación:** https://solivoo.github.io/gluebox/
 - **Repositorio:** https://github.com/solivoo/gluebox
@@ -31,6 +31,7 @@ import {
   RangeDateBox,
   OptionGroup,
   CheckButton,
+  Switch,
   Popup,
   ToastProvider,
   useToast,
@@ -39,7 +40,7 @@ import {
 } from 'glubox';
 import type { ColumnDef, NavigationNode } from 'glubox';
 import 'glubox/style.css';
-import 'glubox/themes/default.css'; // o modern.css, enterprise.css, index.css
+import 'glubox/themes/commerce.css'; // o index.css
 ```
 
 Tipado de eventos:
@@ -72,6 +73,7 @@ import type {
 | **RangeDateBox** | Rango de fechas en un solo control |
 | **OptionGroup** | Selección exclusiva (vertical, horizontal, segmented) |
 | **CheckButton** | Toggle con semántica checkbox |
+| **Switch** | Interruptor on/off con thumb, label posicionable, loading y temas |
 | **Popup** | Diálogo modal arrastrable con acciones en el pie |
 | **Toast** | Notificaciones con posicionamiento, timer y animaciones |
 
@@ -187,17 +189,15 @@ El tema se aplica **una sola vez** en `<html>` (`data-theme` + `data-mode`). Imp
 import 'glubox/style.css';
 import 'glubox/themes/index.css';
 
-document.documentElement.setAttribute('data-theme', 'enterprise');
+document.documentElement.setAttribute('data-theme', 'commerce');
 document.documentElement.setAttribute('data-mode', 'dark');
 ```
 
 | Tema | Acento |
 |------|--------|
-| `default` | Periwinkle pastel |
-| `modern` | Sage pastel |
-| `enterprise` | Powder blue pastel |
+| `commerce` | Material Design (MUI) — azul #1976D2, radio 4px, Roboto, claro y oscuro |
 
-Cada componente acepta además su prop `theme` (`light`, `dark`, presets como `modern-dark`, o tokens custom).
+Cada componente acepta además su prop `theme` (presets `commerce-light` / `commerce-dark` o tokens custom).
 
 Documentación completa del sistema de temas: [docs/guide/themes.md](docs/guide/themes.md) (VitePress) o `pnpm docs:dev` → **Temas y apariencia**.
 

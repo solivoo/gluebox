@@ -133,6 +133,7 @@ export function computeColumnStickyMeta<T extends Record<string, unknown>>({
 
   for (let i = 0; i < columns.length; i++) {
     const col = columns[i];
+    if (!col) continue;
     const key = columnKeyString(col.key);
     if (positions[i] === 'left') {
       const width = resolveColumnWidthPx(col, columnWidths[col.key], minColumnWidth);
@@ -157,6 +158,7 @@ export function computeColumnStickyMeta<T extends Record<string, unknown>>({
 
   for (let i = columns.length - 1; i >= 0; i--) {
     const col = columns[i];
+    if (!col) continue;
     const key = columnKeyString(col.key);
     if (positions[i] === 'right') {
       const width = resolveColumnWidthPx(col, columnWidths[col.key], minColumnWidth);
@@ -173,6 +175,7 @@ export function computeColumnStickyMeta<T extends Record<string, unknown>>({
   // Set non-sticky columns
   for (let i = 0; i < columns.length; i++) {
     const col = columns[i];
+    if (!col) continue;
     const key = columnKeyString(col.key);
     if (!result.has(key)) {
       result.set(key, {

@@ -29,18 +29,16 @@ Sin este import los componentes no tendrán layout ni tokens visuales.
 Sin un tema CSS + `data-theme` / `data-mode`, los componentes usan solo fallbacks locales. Para que **toda** la librería responda al tema del sistema:
 
 ```tsx
-import 'glubox/themes/index.css'; // o default.css / modern.css / enterprise.css
+import 'glubox/themes/index.css'; // o commerce.css
 
-document.documentElement.setAttribute('data-theme', 'default'); // default | modern | enterprise
+document.documentElement.setAttribute('data-theme', 'commerce'); // commerce (Material Design / MUI)
 document.documentElement.setAttribute('data-mode', 'dark');     // light | dark
 ```
 
 | Archivo | Paleta |
 |---------|--------|
-| `glubox/themes/default.css` | Periwinkle (violeta / indigo) |
-| `glubox/themes/modern.css` | Sage (verde) |
-| `glubox/themes/enterprise.css` | Powder blue (azul) |
-| `glubox/themes/index.css` | Las tres (cambiar familia en runtime) |
+| `glubox/themes/commerce.css` | Material Design (MUI) — azul #1976D2 |
+| `glubox/themes/index.css` | Tema + bridge (recomendado) |
 
 No hace falta pasar `theme` a cada componente: sin esa prop heredan el sistema. Tampoco redefinas `--select-*`, `--datagrid-*` ni `--textbox-*` — ya resuelven a `var(--glb-*)`. Guía completa: [Temas y apariencia](/guide/themes).
 
@@ -148,6 +146,23 @@ const { pathname } = useLocation();
 ```
 
 Guía completa: [Integración con routing](/guide/routing).
+ 
+## Subpath Exports y Tree-shaking
+
+Para optimizar al máximo el peso inicial de tu aplicación o acelerar el tiempo de compilación y tipado de TypeScript, puedes importar componentes individuales a través de subpath exports:
+
+```tsx
+// Importa únicamente el componente y dependencias necesarias
+import { Button } from 'glubox/components/Button';
+import { Switch } from 'glubox/components/Switch';
+import { DataGrid } from 'glubox/components/DataGrid';
+import { FileBox, FileUploader } from 'glubox/components/FileBox';
+```
+
+Al usar subrutas:
+- **Tree-shaking real**: Importar `Button` genera un bundle de ~10 KB sin incluir componentes pesados como `DataGrid` (~48 KB) ni `ColorPicker`.
+- **Tipado más rápido**: El compilador de TypeScript procesa exclusivamente las declaraciones `.d.ts` del componente utilizado.
+- Los estilos siguen requiriendo únicamente el import global de `import 'glubox/style.css'`.
 
 ## TypeScript
 
@@ -168,6 +183,7 @@ import {
   RangeDateBox,
   OptionGroup,
   CheckButton,
+  Switch,
   Popup,
   ToastProvider,
   useToast,
@@ -181,6 +197,7 @@ import {
   rangeDateBoxThemes,
   optionGroupThemes,
   checkButtonThemes,
+  switchThemes,
   popupThemes,
   toastThemes,
   DEFAULT_COLOR_PRESETS,
@@ -202,6 +219,7 @@ import type {
   RangeDateBoxProps,
   OptionGroupProps,
   CheckButtonProps,
+  SwitchProps,
   PopupProps,
   ShowToastOptions,
   Permission,

@@ -41,6 +41,6 @@ export interface SelectTheme {
   variants: Record<SelectVariant, SelectVariantTheme>;
 }
 
-export type SelectThemePreset = 'dark' | 'light' | 'modern-dark' | 'modern-light' | 'enterprise-dark' | 'enterprise-light';
+export type SelectThemePreset = 'commerce-dark' | 'commerce-light';
 
 export type SelectThemeInput = SelectTheme | SelectThemePreset;

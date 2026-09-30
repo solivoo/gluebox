@@ -45,6 +45,6 @@ export interface TagBoxTheme {
   variants: Record<TagBoxVariant, TagBoxVariantTheme>;
 }
 
-export type TagBoxThemePreset = 'dark' | 'light' | 'modern-dark' | 'modern-light' | 'enterprise-dark' | 'enterprise-light';
+export type TagBoxThemePreset = 'commerce-dark' | 'commerce-light';
 
 export type TagBoxThemeInput = TagBoxTheme | TagBoxThemePreset;

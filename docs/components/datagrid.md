@@ -407,7 +407,7 @@ La prop `theme` es un override puntual:
 import { DataGrid, dataGridThemes, defaultDataGridMessages } from 'glubox';
 
 <DataGrid
-  theme="enterprise-dark"
+  theme="commerce-dark"
   messages={{
     ...defaultDataGridMessages,
     rowsPerPage: 'Filas por página',

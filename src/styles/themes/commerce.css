@@ -1,0 +1,97 @@
+/* ══════════════════════════════════════════════════
+   gluBox Commerce Theme — Material Design (MUI)
+   Paleta primaria #1976D2, superficies Material, radio 4px,
+   elevaciones y Roboto. Renovación de la familia commerce.
+   ══════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import "./_generated-commerce.css";
+
+/* ── Sidebar + superficies ── */
+[data-theme="commerce"] {
+  color-scheme: light;
+  --glb-font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+
+  --sidebar-bg: #ffffff;
+  --sidebar-text: rgba(0, 0, 0, 0.87);
+  --sidebar-icon: rgba(0, 0, 0, 0.54);
+  --sidebar-hover-bg: rgba(0, 0, 0, 0.04);
+  --sidebar-active-bg: rgba(25, 118, 210, 0.08);
+  --sidebar-active-text: #1976d2;
+  --sidebar-active-icon: #1976d2;
+  --sidebar-muted-text: rgba(0, 0, 0, 0.6);
+  --sidebar-icon-fallback-bg: #f5f5f5;
+  --sidebar-tree-line: rgba(0, 0, 0, 0.12);
+  --sidebar-rail-active: var(--glb-accent-sidebar-muted);
+
+  --glb-toolbar-bg: #ffffff;
+  --glb-toolbar-border: rgba(0, 0, 0, 0.12);
+  --glb-app-bg: #fafafa;
+  --glb-app-text: rgba(0, 0, 0, 0.87);
+  --glb-surface: #ffffff;
+  --glb-surface-hover: #f5f5f5;
+  --glb-border: rgba(0, 0, 0, 0.12);
+  --glb-input-bg: #ffffff;
+  --glb-text: rgba(0, 0, 0, 0.87);
+  --glb-muted: rgba(0, 0, 0, 0.6);
+  --glb-muted-surface: #f5f5f5;
+  --glb-preview-dot: rgba(0, 0, 0, 0.03);
+  --glb-overlay-bg: rgba(0, 0, 0, 0.5);
+  --glb-overlay-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="commerce"][data-mode="dark"] {
+  color-scheme: dark;
+
+  --sidebar-bg: #121212;
+  --sidebar-text: #ffffff;
+  --sidebar-icon: rgba(255, 255, 255, 0.7);
+  --sidebar-hover-bg: rgba(255, 255, 255, 0.08);
+  --sidebar-active-bg: rgba(144, 202, 249, 0.12);
+  --sidebar-active-text: #90caf9;
+  --sidebar-active-icon: #90caf9;
+  --sidebar-muted-text: rgba(255, 255, 255, 0.7);
+  --sidebar-icon-fallback-bg: rgba(255, 255, 255, 0.08);
+  --sidebar-tree-line: rgba(255, 255, 255, 0.12);
+  --sidebar-rail-active: var(--glb-accent-sidebar-muted);
+
+  --glb-toolbar-bg: #121212;
+  --glb-toolbar-border: rgba(255, 255, 255, 0.12);
+  --glb-app-bg: #121212;
+  --glb-app-text: #ffffff;
+  --glb-surface: #1e1e1e;
+  --glb-surface-hover: #2c2c2c;
+  --glb-border: rgba(255, 255, 255, 0.12);
+  --glb-input-bg: #1e1e1e;
+  --glb-text: #ffffff;
+  --glb-muted: rgba(255, 255, 255, 0.7);
+  --glb-muted-surface: #272727;
+  --glb-preview-dot: rgba(255, 255, 255, 0.03);
+  --glb-overlay-bg: rgba(0, 0, 0, 0.7);
+  --glb-overlay-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.3), 0 24px 38px 3px rgba(0, 0, 0, 0.22), 0 9px 46px 8px rgba(0, 0, 0, 0.18);
+}
+
+/* ── MUI: variantes outlined/text en color primario ──
+   `html[...]` supera en especificidad al bridge compartido (importado después). */
+html[data-theme="commerce"],
+html[data-theme="commerce"][data-mode="dark"] {
+  --btn-outline-text: var(--glb-accent-surface);
+  --btn-outline-hover-bg: var(--glb-accent-subtle-bg);
+  --btn-outline-hover-border: var(--glb-accent-surface);
+  --btn-outline-active-bg: var(--glb-accent-subtle-bg);
+  --btn-outline-active-border: var(--glb-accent-surface);
+  --btn-ghost-text: var(--glb-accent-surface);
+  --btn-ghost-hover-bg: var(--glb-accent-subtle-bg);
+  --btn-ghost-active-bg: var(--glb-accent-subtle-bg);
+}
+
+/* MUI contained: elevación Material en primary/danger (solo familia commerce). */
+html[data-theme="commerce"] .glb-btn--primary:not(:disabled),
+html[data-theme="commerce"] .glb-btn--danger:not(:disabled) {
+  box-shadow: var(--btn-shadow, none);
+}
+
+html[data-theme="commerce"] .glb-btn--primary:not(:disabled):hover,
+html[data-theme="commerce"] .glb-btn--danger:not(:disabled):hover {
+  box-shadow: var(--btn-hover-shadow, var(--btn-shadow, none));
+}

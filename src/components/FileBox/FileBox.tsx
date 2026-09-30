@@ -364,7 +364,7 @@ export function FileBox(props: Readonly<FileBoxProps>) {
     } else if (e.dataTransfer?.items && e.dataTransfer.items.length > 0) {
       for (let i = 0; i < e.dataTransfer.items.length; i++) {
         const item = e.dataTransfer.items[i];
-        if (item.kind === 'file') {
+        if (item?.kind === 'file') {
           const file = item.getAsFile();
           if (file) dropped.push(file);
         }

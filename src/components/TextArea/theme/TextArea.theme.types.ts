@@ -34,11 +34,6 @@ export interface TextAreaTheme {
 }
 
 export type TextAreaThemePreset =
-  | 'dark'
-  | 'light'
-  | 'modern-dark'
-  | 'modern-light'
-  | 'enterprise-dark'
-  | 'enterprise-light';
+  'commerce-dark' | 'commerce-light';
 
 export type TextAreaThemeInput = TextAreaTheme | TextAreaThemePreset;

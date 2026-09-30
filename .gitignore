@@ -32,3 +32,8 @@ docs/.vitepress/temp
 
 *storybook.log
 debug-storybook.log
+
+# Playwright
+test-results/
+playwright-report/
+blob-report/

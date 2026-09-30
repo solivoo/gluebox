@@ -17,6 +17,8 @@ import { rangeDateBoxThemes } from '@/components/RangeDateBox/theme/defaultTheme
 import { themeToStyle as rangeDateBoxToStyle } from '@/components/RangeDateBox/theme/resolveTheme';
 import { checkButtonThemes } from '@/components/CheckButton/theme/defaultThemes';
 import { themeToStyle as checkButtonToStyle } from '@/components/CheckButton/theme/resolveTheme';
+import { switchThemes } from '@/components/Switch/theme/defaultThemes';
+import { themeToStyle as switchToStyle } from '@/components/Switch/theme/resolveTheme';
 import { optionGroupThemes } from '@/components/OptionGroup/theme/defaultThemes';
 import { themeToStyle as optionGroupToStyle } from '@/components/OptionGroup/theme/resolveTheme';
 import { popupThemes } from '@/components/Popup/theme/defaultThemes';
@@ -43,7 +45,7 @@ import {
 
 const themesDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../src/styles/themes');
 
-type Family = 'default' | 'modern' | 'enterprise';
+type Family = 'commerce';
 
 interface ComponentSpec {
   label: string;
@@ -80,6 +82,7 @@ const components: ComponentSpec[] = [
   { label: 'DateBox', toStyle: dateBoxToStyle as ComponentSpec['toStyle'], themes: dateBoxThemes, lightKey: (f) => presetKey(f, 'light'), darkKey: (f) => presetKey(f, 'dark') },
   { label: 'RangeDateBox', toStyle: rangeDateBoxToStyle as ComponentSpec['toStyle'], themes: rangeDateBoxThemes, lightKey: (f) => presetKey(f, 'light'), darkKey: (f) => presetKey(f, 'dark') },
   { label: 'CheckButton', toStyle: checkButtonToStyle as ComponentSpec['toStyle'], themes: checkButtonThemes, lightKey: (f) => presetKey(f, 'light'), darkKey: (f) => presetKey(f, 'dark') },
+  { label: 'Switch', toStyle: switchToStyle as ComponentSpec['toStyle'], themes: switchThemes, lightKey: (f) => presetKey(f, 'light'), darkKey: (f) => presetKey(f, 'dark') },
   { label: 'OptionGroup', toStyle: optionGroupToStyle as ComponentSpec['toStyle'], themes: optionGroupThemes, lightKey: (f) => presetKey(f, 'light'), darkKey: (f) => presetKey(f, 'dark') },
   { label: 'Popup', toStyle: popupToStyle as ComponentSpec['toStyle'], themes: popupThemes, lightKey: (f) => presetKey(f, 'light'), darkKey: (f) => presetKey(f, 'dark') },
   { label: 'Toast', toStyle: toastToStyle as ComponentSpec['toStyle'], themes: toastThemes, lightKey: (f) => presetKey(f, 'light'), darkKey: (f) => presetKey(f, 'dark') },
@@ -109,7 +112,7 @@ function generateForFamily(family: Family): string {
 
 describe('generate missing theme css', () => {
   it('writes one generated file per theme family using var(--glb-*)', () => {
-    for (const family of ['default', 'modern', 'enterprise'] as const) {
+    for (const family of ['commerce'] as const) {
       const css = generateForFamily(family);
       const outFile = path.join(themesDir, `_generated-${family}.css`);
       writeFileSync(outFile, css, 'utf8');

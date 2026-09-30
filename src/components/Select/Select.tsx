@@ -173,7 +173,7 @@ export function Select(props: Readonly<SelectProps>) {
         e.preventDefault();
         setHighlightedIndex((prev) => {
           let next = prev + 1;
-          while (next < options.length && options[next].disabled) next++;
+          while (next < options.length && options[next]?.disabled) next++;
           return next < options.length ? next : 0;
         });
         break;
@@ -182,7 +182,7 @@ export function Select(props: Readonly<SelectProps>) {
         e.preventDefault();
         setHighlightedIndex((prev) => {
           let next = prev - 1;
-          while (next >= 0 && options[next].disabled) next--;
+          while (next >= 0 && options[next]?.disabled) next--;
           return next >= 0 ? next : options.length - 1;
         });
         break;
@@ -203,7 +203,8 @@ export function Select(props: Readonly<SelectProps>) {
       case ' ': {
         e.preventDefault();
         if (highlightedIndex >= 0) {
-          selectOption(options[highlightedIndex]);
+          const option = options[highlightedIndex];
+          if (option) selectOption(option);
         }
         break;
       }

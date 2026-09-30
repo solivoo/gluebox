@@ -104,8 +104,8 @@
 }
 
 .cpg__tab--active {
-  color: #4f46e5;
-  border-bottom-color: #4f46e5;
+  color: var(--glb-accent-sidebar, #4f46e5);
+  border-bottom-color: var(--glb-accent-sidebar, #4f46e5);
 }
 
 /* ── Props scroll area ── */
@@ -168,7 +168,7 @@
 .cpg__event-signature {
   font-size: 0.6875rem;
   font-family: 'SF Mono', 'Fira Code', monospace;
-  color: #4f46e5;
+  color: var(--glb-accent-sidebar, #4f46e5);
   word-break: break-all;
 }
 

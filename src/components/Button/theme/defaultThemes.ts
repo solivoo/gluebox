@@ -100,10 +100,15 @@ function createButtonTheme(preset: ButtonThemePreset): ButtonTheme {
 
   return {
     fontSize: '0.875rem',
-    borderRadius: '0.5rem',
-    transition: 'all 0.15s ease',
-    shadow: isDark ? '0 1px 2px rgba(0, 0, 0, 0.3)' : '0 1px 2px rgba(0, 0, 0, 0.06)',
-    hoverShadow: isDark ? '0 4px 12px rgba(0, 0, 0, 0.4)' : '0 4px 12px rgba(0, 0, 0, 0.1)',
+    borderRadius: '4px',
+    transition:
+      'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1), border-color 250ms cubic-bezier(0.4, 0, 0.2, 1)',
+    shadow:
+      '0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)',
+    hoverShadow:
+      '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
+    textTransform: 'uppercase',
+    letterSpacing: '0.02857em',
     variants: {
       primary: buttonPrimaryVariant(accent, isDark),
       ...neutrals,
@@ -113,10 +118,6 @@ function createButtonTheme(preset: ButtonThemePreset): ButtonTheme {
 }
 
 export const buttonThemes: Record<ButtonThemePreset, ButtonTheme> = {
-  light: createButtonTheme('light'),
-  dark: createButtonTheme('dark'),
-  'modern-light': createButtonTheme('modern-light'),
-  'modern-dark': createButtonTheme('modern-dark'),
-  'enterprise-light': createButtonTheme('enterprise-light'),
-  'enterprise-dark': createButtonTheme('enterprise-dark'),
+  'commerce-light': createButtonTheme('commerce-light'),
+  'commerce-dark': createButtonTheme('commerce-dark'),
 };

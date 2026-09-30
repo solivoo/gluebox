@@ -47,6 +47,6 @@ export interface DateBoxTheme {
   variants: Record<DateBoxVariant, DateBoxVariantTheme>;
 }
 
-export type DateBoxThemePreset = 'dark' | 'light' | 'modern-dark' | 'modern-light' | 'enterprise-dark' | 'enterprise-light';
+export type DateBoxThemePreset = 'commerce-dark' | 'commerce-light';
 
 export type DateBoxThemeInput = DateBoxTheme | DateBoxThemePreset;

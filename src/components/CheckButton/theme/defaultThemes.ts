@@ -2,11 +2,7 @@ import type {
   CheckButtonTheme,
   CheckButtonVariantTheme,
 } from './CheckButton.theme.types';
-import {
-  defaultPastel,
-  enterprisePastel,
-  modernPastel,
-} from '@/styles/pastelPalette';
+import { commercePastel } from '@/styles/pastelPalette';
 import type { PastelAccent } from '@/styles/pastelPalette';
 
 function accentToLegacy(accent: PastelAccent) {
@@ -90,7 +86,7 @@ function buildTheme(isDark: boolean, accent: PastelAccent): CheckButtonTheme {
   const legacy = accentToLegacy(accent);
   return {
     fontSize: '0.875rem',
-    borderRadius: '0.5rem',
+    borderRadius: '4px',
     transition: 'all 0.15s ease',
     shadow: isDark ? '0 1px 2px rgba(0,0,0,0.3)' : '0 1px 2px rgba(0,0,0,0.06)',
     variants: {
@@ -102,10 +98,6 @@ function buildTheme(isDark: boolean, accent: PastelAccent): CheckButtonTheme {
 }
 
 export const checkButtonThemes = {
-  dark: buildTheme(true, defaultPastel.dark),
-  light: buildTheme(false, defaultPastel.light),
-  'modern-dark': buildTheme(true, modernPastel.dark),
-  'modern-light': buildTheme(false, modernPastel.light),
-  'enterprise-dark': buildTheme(true, enterprisePastel.dark),
-  'enterprise-light': buildTheme(false, enterprisePastel.light),
+  'commerce-dark': buildTheme(true, commercePastel.dark),
+  'commerce-light': buildTheme(false, commercePastel.light),
 } as const;

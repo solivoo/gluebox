@@ -48,6 +48,12 @@ function rectAt(index: number): DOMRect {
 }
 
 /** Simula el layout horizontal del strip con rects según el orden actual del DOM. */
+function at<T>(items: ArrayLike<T>, index: number): T {
+  const item = items[index];
+  if (item === undefined) throw new Error(`Índice ${index} fuera de rango`);
+  return item;
+}
+
 function mockStripLayout(container: HTMLDivElement): HTMLElement[] {
   const strip = container.querySelector('.glb-filebox__thumb-strip');
   expect(strip).not.toBeNull();
@@ -159,26 +165,26 @@ describe('FileBox reorderable', () => {
 
     // pointerdown en el primer tile
     act(() => {
-      tiles[0].dispatchEvent(pointerEvent('pointerdown', 10));
+      at(tiles, 0).dispatchEvent(pointerEvent('pointerdown', 10));
     });
 
     // primer movimiento: activa el drag (cruza el umbral)
     act(() => {
-      tiles[0].dispatchEvent(pointerEvent('pointermove', 40));
+      at(tiles, 0).dispatchEvent(pointerEvent('pointermove', 40));
     });
     expect(onChange).not.toHaveBeenCalled();
 
     // segundo movimiento: cruza el punto medio del segundo tile (target = 1)
     mockStripLayout(container);
     act(() => {
-      tiles[0].dispatchEvent(pointerEvent('pointermove', 160));
+      at(tiles, 0).dispatchEvent(pointerEvent('pointermove', 160));
     });
 
     // sin commit hasta soltar
     expect(onChange).not.toHaveBeenCalled();
 
     act(() => {
-      tiles[0].dispatchEvent(pointerEvent('pointerup', 160));
+      at(tiles, 0).dispatchEvent(pointerEvent('pointerup', 160));
     });
 
     expect(onChange).toHaveBeenCalledTimes(1);
@@ -198,20 +204,20 @@ describe('FileBox reorderable', () => {
     const tiles = mockStripLayout(container);
 
     act(() => {
-      tiles[2].dispatchEvent(pointerEvent('pointerdown', 210));
+      at(tiles, 2).dispatchEvent(pointerEvent('pointerdown', 210));
     });
     act(() => {
-      tiles[2].dispatchEvent(pointerEvent('pointermove', 180));
-    });
-
-    mockStripLayout(container);
-    act(() => {
-      tiles[2].dispatchEvent(pointerEvent('pointermove', 40));
+      at(tiles, 2).dispatchEvent(pointerEvent('pointermove', 180));
     });
 
     mockStripLayout(container);
     act(() => {
-      tiles[2].dispatchEvent(pointerEvent('pointerup', 40));
+      at(tiles, 2).dispatchEvent(pointerEvent('pointermove', 40));
+    });
+
+    mockStripLayout(container);
+    act(() => {
+      at(tiles, 2).dispatchEvent(pointerEvent('pointerup', 40));
     });
 
     expect(onChange).toHaveBeenCalledTimes(1);
@@ -231,18 +237,18 @@ describe('FileBox reorderable', () => {
     const tiles = mockStripLayout(container);
 
     act(() => {
-      tiles[0].dispatchEvent(pointerEvent('pointerdown', 10));
-      tiles[0].dispatchEvent(pointerEvent('pointermove', 40));
+      at(tiles, 0).dispatchEvent(pointerEvent('pointerdown', 10));
+      at(tiles, 0).dispatchEvent(pointerEvent('pointermove', 40));
     });
 
     mockStripLayout(container);
     act(() => {
-      tiles[0].dispatchEvent(pointerEvent('pointermove', 3 * TILE_WIDTH + 10));
+      at(tiles, 0).dispatchEvent(pointerEvent('pointermove', 3 * TILE_WIDTH + 10));
     });
 
     mockStripLayout(container);
     act(() => {
-      tiles[0].dispatchEvent(pointerEvent('pointerup', 3 * TILE_WIDTH + 10));
+      at(tiles, 0).dispatchEvent(pointerEvent('pointerup', 3 * TILE_WIDTH + 10));
     });
 
     expect(onChange).toHaveBeenCalledTimes(1);
@@ -260,10 +266,10 @@ describe('FileBox reorderable', () => {
     );
 
     const firstTiles = container.querySelectorAll('[data-file-index]');
-    expect(firstTiles[0].getAttribute('tabindex')).toBe('0');
+    expect(at(firstTiles, 0).getAttribute('tabindex')).toBe('0');
 
     act(() => {
-      firstTiles[0].dispatchEvent(
+      at(firstTiles, 0).dispatchEvent(
         new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, cancelable: true }),
       );
     });
@@ -273,7 +279,7 @@ describe('FileBox reorderable', () => {
 
     const secondTiles = container.querySelectorAll('[data-file-index]');
     act(() => {
-      secondTiles[1].dispatchEvent(
+      at(secondTiles, 1).dispatchEvent(
         new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true, cancelable: true }),
       );
     });
@@ -308,12 +314,12 @@ describe('FileBox reorderable', () => {
     const tiles = mockStripLayout(container);
 
     act(() => {
-      tiles[0].dispatchEvent(pointerEvent('pointerdown', 10, 10));
+      at(tiles, 0).dispatchEvent(pointerEvent('pointerdown', 10, 10));
     });
     expect(document.querySelector('.glb-filebox__thumb-ghost')).toBeNull();
 
     act(() => {
-      tiles[0].dispatchEvent(pointerEvent('pointermove', 40, 10));
+      at(tiles, 0).dispatchEvent(pointerEvent('pointermove', 40, 10));
     });
 
     const ghost = document.querySelector('.glb-filebox__thumb-ghost');
@@ -324,7 +330,7 @@ describe('FileBox reorderable', () => {
     expect(sourceTile).not.toBeNull();
 
     act(() => {
-      tiles[0].dispatchEvent(pointerEvent('pointerup', 40, 10));
+      at(tiles, 0).dispatchEvent(pointerEvent('pointerup', 40, 10));
     });
 
     expect(document.querySelector('.glb-filebox__thumb-ghost')).toBeNull();
@@ -344,13 +350,13 @@ describe('FileBox reorderable', () => {
     const tiles = mockStripLayout(container);
 
     act(() => {
-      tiles[0].dispatchEvent(pointerEvent('pointerdown', 10));
-      tiles[0].dispatchEvent(pointerEvent('pointermove', 40));
+      at(tiles, 0).dispatchEvent(pointerEvent('pointerdown', 10));
+      at(tiles, 0).dispatchEvent(pointerEvent('pointermove', 40));
     });
 
     mockStripLayout(container);
     act(() => {
-      tiles[0].dispatchEvent(pointerEvent('pointermove', 160));
+      at(tiles, 0).dispatchEvent(pointerEvent('pointermove', 160));
     });
     expect(container.querySelector('.glb-filebox__thumb--source')).not.toBeNull();
 
@@ -450,9 +456,9 @@ describe('FileBox reorderable', () => {
 
     const tiles = mockStripLayout(container);
     act(() => {
-      tiles[0].dispatchEvent(pointerEvent('pointerdown', 10));
-      tiles[0].dispatchEvent(pointerEvent('pointermove', 150));
-      tiles[0].dispatchEvent(pointerEvent('pointerup', 150));
+      at(tiles, 0).dispatchEvent(pointerEvent('pointerdown', 10));
+      at(tiles, 0).dispatchEvent(pointerEvent('pointermove', 150));
+      at(tiles, 0).dispatchEvent(pointerEvent('pointerup', 150));
     });
 
     expect(onChange).not.toHaveBeenCalled();

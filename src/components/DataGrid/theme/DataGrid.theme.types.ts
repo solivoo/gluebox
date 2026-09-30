@@ -30,11 +30,6 @@ export interface DataGridTheme {
 }
 
 export type DataGridThemePreset =
-  | 'dark'
-  | 'light'
-  | 'modern-dark'
-  | 'modern-light'
-  | 'enterprise-dark'
-  | 'enterprise-light';
+  'commerce-dark' | 'commerce-light';
 
 export type DataGridThemeInput = DataGridTheme | DataGridThemePreset;

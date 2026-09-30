@@ -18,6 +18,8 @@ export function themeToStyle(theme: ButtonTheme | undefined): CSSProperties | un
     '--btn-transition': theme.transition,
     '--btn-shadow': theme.shadow,
     '--btn-hover-shadow': theme.hoverShadow,
+    '--btn-text-transform': theme.textTransform,
+    '--btn-letter-spacing': theme.letterSpacing,
     '--btn-primary-bg': v.primary.background,
     '--btn-primary-text': v.primary.text,
     '--btn-primary-border': v.primary.border,

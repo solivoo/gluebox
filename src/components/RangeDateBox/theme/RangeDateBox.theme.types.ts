@@ -48,6 +48,6 @@ export interface RangeDateBoxTheme {
   variants: Record<RangeDateBoxVariant, RangeDateBoxVariantTheme>;
 }
 
-export type RangeDateBoxThemePreset = 'dark' | 'light' | 'modern-dark' | 'modern-light' | 'enterprise-dark' | 'enterprise-light';
+export type RangeDateBoxThemePreset = 'commerce-dark' | 'commerce-light';
 
 export type RangeDateBoxThemeInput = RangeDateBoxTheme | RangeDateBoxThemePreset;

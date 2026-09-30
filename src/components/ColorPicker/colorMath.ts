@@ -24,12 +24,18 @@ export function parseHex(input: string): Rgb | null {
   const trimmed = input.trim();
   const six = HEX6.exec(trimmed);
   if (six) {
-    const n = Number.parseInt(six[1], 16);
+    const digits = six[1];
+    if (!digits) return null;
+    const n = Number.parseInt(digits, 16);
     return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
   }
   const three = HEX3.exec(trimmed);
   if (three) {
-    const [r, g, b] = three[1].split('').map((ch) => Number.parseInt(ch + ch, 16));
+    const digits = three[1];
+    if (!digits) return null;
+    const [r = 0, g = 0, b = 0] = digits
+      .split('')
+      .map((ch) => Number.parseInt(ch + ch, 16));
     return { r, g, b };
   }
   return null;

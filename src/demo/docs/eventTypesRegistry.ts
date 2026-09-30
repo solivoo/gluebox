@@ -333,6 +333,28 @@ const handleReject: FileBoxOnRejectHandler = (rejected) => {
   setSubscribed(checked);
 };`,
   },
+  switch: {
+    importTypes: `import type {
+  SwitchOnChangeHandler,
+  SwitchChangeValue,
+} from 'glubox';`,
+    handlers: [
+      {
+        handlerType: 'SwitchOnChangeHandler',
+        payloadType: 'SwitchChangeValue',
+        signature: '(checked: boolean) => void',
+        description: 'Handler de onChange al encender/apagar el switch.',
+      },
+      {
+        handlerType: 'SwitchChangeValue',
+        signature: 'boolean',
+        description: 'Estado checked emitido por onChange.',
+      },
+    ],
+    usageExample: `const handleActivo: SwitchOnChangeHandler = (checked) => {
+  setActivo(checked);
+};`,
+  },
   popup: {
     importTypes: `import type {
   PopupOnCloseHandler,

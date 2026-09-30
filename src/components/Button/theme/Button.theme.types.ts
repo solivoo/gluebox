@@ -28,9 +28,13 @@ export interface ButtonTheme {
   /** Sombras */
   shadow: string;
   hoverShadow: string;
+  /** Transformación tipográfica del label (ej. uppercase estilo Material) */
+  textTransform?: string;
+  /** Espaciado entre letras del label */
+  letterSpacing?: string;
   variants: Record<ButtonVariant, ButtonVariantTheme>;
 }
 
-export type ButtonThemePreset = 'dark' | 'light' | 'modern-dark' | 'modern-light' | 'enterprise-dark' | 'enterprise-light';
+export type ButtonThemePreset = 'commerce-dark' | 'commerce-light';
 
 export type ButtonThemeInput = ButtonTheme | ButtonThemePreset;

@@ -19,11 +19,6 @@ export interface ToastTheme {
 }
 
 export type ToastThemePreset =
-  | 'dark'
-  | 'light'
-  | 'modern-dark'
-  | 'modern-light'
-  | 'enterprise-dark'
-  | 'enterprise-light';
+  'commerce-dark' | 'commerce-light';
 
 export type ToastThemeInput = ToastTheme | ToastThemePreset;

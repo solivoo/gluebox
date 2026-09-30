@@ -21,7 +21,7 @@ features:
   - title: Controles de formulario
     details: TextBox, NumberBox, FileBox, ColorPicker, Select, DateBox con label top, floating, outlined y left.
   - title: Temas globales
-    details: Un solo lugar — data-theme y data-mode en html. Default, Modern y Enterprise × light/dark.
+    details: Un solo lugar — data-theme y data-mode en html. Tema Commerce (MUI) × light/dark.
   - title: Demo interactiva
     details: Playground en el repo para probar props y variantes sin Storybook.
   - title: Overlays
@@ -39,7 +39,7 @@ import { DataGrid, Sidebar } from 'glubox';
 import 'glubox/style.css';
 import 'glubox/themes/index.css';
 
-document.documentElement.setAttribute('data-theme', 'default');
+document.documentElement.setAttribute('data-theme', 'commerce');
 document.documentElement.setAttribute('data-mode', 'dark');
 ```
 

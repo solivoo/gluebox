@@ -7,7 +7,9 @@ export function parseBridgeTokenMap(css: string): Record<string, string> {
   const map: Record<string, string> = {};
   const re = /(--[a-z0-9-]+)\s*:\s*(var\(--glb-[^;]+);/gi;
   for (const match of css.matchAll(re)) {
-    map[match[1]] = match[2].trim();
+    const key = match[1];
+    const value = match[2];
+    if (key && value) map[key] = value.trim();
   }
   return map;
 }
@@ -180,9 +182,10 @@ export function whiteHexAsDirectValue(css: string): string[] {
   const stripped = css.replace(/\/\*[\s\S]*?\*\//g, '');
   const hits: string[] = [];
   for (const match of stripped.matchAll(/(--[a-z0-9-]+)\s*:\s*([^;]+);/gi)) {
-    const val = match[2].trim();
-    if (/^#(?:fff|ffffff)$/i.test(val)) {
-      hits.push(`${match[1]}: ${val}`);
+    const key = match[1];
+    const val = match[2]?.trim();
+    if (key && val && /^#(?:fff|ffffff)$/i.test(val)) {
+      hits.push(`${key}: ${val}`);
     }
   }
   return hits;

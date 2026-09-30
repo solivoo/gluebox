@@ -75,6 +75,7 @@ export function DataGridToolbar<T extends Record<string, unknown>>({
 
   const search = showSearch ? (
     <SearchInput
+      key="glb-toolbar-search"
       value={value}
       placeholder={placeholder}
       searchWidth={searchWidth}
@@ -84,11 +85,11 @@ export function DataGridToolbar<T extends Record<string, unknown>>({
   ) : null;
 
   const left = toolbarLeft ? (
-    <div className="glb-datagrid__toolbar-left">{toolbarLeft}</div>
+    <div key="glb-toolbar-left" className="glb-datagrid__toolbar-left">{toolbarLeft}</div>
   ) : null;
 
   const right = toolbarRight ? (
-    <div className="glb-datagrid__toolbar-right">{toolbarRight}</div>
+    <div key="glb-toolbar-right" className="glb-datagrid__toolbar-right">{toolbarRight}</div>
   ) : null;
 
   const ordered =

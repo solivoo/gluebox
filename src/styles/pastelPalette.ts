@@ -1,6 +1,6 @@
 /**
- * Paleta pastel inspirada en tonos Pantone, armonizada con blancos y grises neutros.
- * Usada por defaultThemes.ts de cada componente.
+ * Paleta de tema Material Design (MUI) usada por defaultThemes.ts de cada componente.
+ * La librería expone una sola familia: `commerce` (claro/oscuro).
  */
 
 export interface PastelAccent {
@@ -30,142 +30,68 @@ export interface PastelDanger {
   focusRing: string;
 }
 
-/** Periwinkle — Default / Indigo suave */
-export const defaultPastel = {
+/** Material Design (MUI): azul primario, neutros y error de Material */
+export const commercePastel = {
   light: {
-    surface: '#E4E9F6',
-    surfaceHover: '#D6DDF0',
-    surfaceActive: '#C8D1E9',
-    border: '#B8C2E3',
-    borderStrong: '#9DABCE',
-    onFill: '#4A5270',
-    focusRing: 'rgba(120, 135, 175, 0.35)',
-    subtleBg: 'rgba(120, 135, 175, 0.14)',
-    subtleText: '#5C6580',
-    sidebar: '#6E7BA3',
-    sidebarMuted: '#8B96B8',
-    optionHoverBg: '#D6DDF0',
-    optionHoverText: '#3D4560',
+    surface: '#1976D2',
+    surfaceHover: '#1565C0',
+    surfaceActive: '#0D47A1',
+    border: '#1976D2',
+    borderStrong: '#1565C0',
+    onFill: '#FFFFFF',
+    focusRing: 'rgba(25, 118, 210, 0.35)',
+    subtleBg: 'rgba(25, 118, 210, 0.08)',
+    subtleText: '#1565C0',
+    sidebar: '#1976D2',
+    sidebarMuted: '#42A5F5',
+    optionHoverBg: 'rgba(25, 118, 210, 0.08)',
+    optionHoverText: '#1565C0',
   } satisfies PastelAccent,
   dark: {
-    surface: '#4E5678',
-    surfaceHover: '#5A6388',
-    surfaceActive: '#454D6C',
-    border: '#6B7599',
-    borderStrong: '#7D88AD',
-    onFill: '#ECEEF7',
-    focusRing: 'rgba(140, 152, 190, 0.4)',
-    subtleBg: 'rgba(140, 152, 190, 0.2)',
-    subtleText: '#B8C0DC',
-    sidebar: '#9AA6CC',
-    sidebarMuted: '#B4BEE0',
-    optionHoverBg: '#5A6388',
-    optionHoverText: '#ECEEF7',
+    surface: '#90CAF9',
+    surfaceHover: '#A6D4FA',
+    surfaceActive: '#79B8F3',
+    border: '#90CAF9',
+    borderStrong: '#B6E0FC',
+    onFill: 'rgba(0, 0, 0, 0.87)',
+    focusRing: 'rgba(144, 202, 249, 0.4)',
+    subtleBg: 'rgba(144, 202, 249, 0.16)',
+    subtleText: '#90CAF9',
+    sidebar: '#90CAF9',
+    sidebarMuted: '#B6E0FC',
+    optionHoverBg: 'rgba(144, 202, 249, 0.16)',
+    optionHoverText: '#BBDEFB',
   } satisfies PastelAccent,
 } as const;
 
-/** Sage — Modern / Emerald suave */
-export const modernPastel = {
+/** Material Design error */
+export const commerceDanger = {
   light: {
-    surface: '#D8EDE4',
-    surfaceHover: '#C8E5D8',
-    surfaceActive: '#B8DBCC',
-    border: '#A8D0BE',
-    borderStrong: '#8BBAA5',
-    onFill: '#3D5C4F',
-    focusRing: 'rgba(100, 150, 125, 0.35)',
-    subtleBg: 'rgba(100, 150, 125, 0.14)',
-    subtleText: '#4A6B5C',
-    sidebar: '#5F8F78',
-    sidebarMuted: '#7FA896',
-    optionHoverBg: '#C8E5D8',
-    optionHoverText: '#2F4A40',
-  } satisfies PastelAccent,
-  dark: {
-    surface: '#3D5C4F',
-    surfaceHover: '#476959',
-    surfaceActive: '#354F44',
-    border: '#5F8F78',
-    borderStrong: '#72A08A',
-    onFill: '#E4F2EB',
-    focusRing: 'rgba(110, 165, 135, 0.4)',
-    subtleBg: 'rgba(110, 165, 135, 0.2)',
-    subtleText: '#A8D4BE',
-    sidebar: '#8FC4A8',
-    sidebarMuted: '#A8D4BE',
-    optionHoverBg: '#476959',
-    optionHoverText: '#E4F2EB',
-  } satisfies PastelAccent,
-} as const;
-
-/** Powder blue — Enterprise */
-export const enterprisePastel = {
-  light: {
-    surface: '#D6E6F5',
-    surfaceHover: '#C5DBF0',
-    surfaceActive: '#B4D0EA',
-    border: '#A3C4E3',
-    borderStrong: '#88AED4',
-    onFill: '#3D5568',
-    focusRing: 'rgba(100, 140, 180, 0.35)',
-    subtleBg: 'rgba(100, 140, 180, 0.14)',
-    subtleText: '#4A6278',
-    sidebar: '#5F85AD',
-    sidebarMuted: '#7A9DBF',
-    optionHoverBg: '#C5DBF0',
-    optionHoverText: '#2F4558',
-  } satisfies PastelAccent,
-  dark: {
-    surface: '#3D5568',
-    surfaceHover: '#476175',
-    surfaceActive: '#354A5C',
-    border: '#5F85AD',
-    borderStrong: '#7296BA',
-    onFill: '#E4EEF7',
-    focusRing: 'rgba(110, 150, 190, 0.4)',
-    subtleBg: 'rgba(110, 150, 190, 0.2)',
-    subtleText: '#A8C4DC',
-    sidebar: '#8FB4D4',
-    sidebarMuted: '#A8C4DC',
-    optionHoverBg: '#476175',
-    optionHoverText: '#E4EEF7',
-  } satisfies PastelAccent,
-} as const;
-
-export const dangerPastel = {
-  light: {
-    background: '#F0D8D8',
-    text: '#7A4545',
-    border: '#E4C0C0',
-    hoverBackground: '#E8CACA',
-    hoverBorder: '#D8B0B0',
-    activeBackground: '#DEB8B8',
-    activeBorder: '#C8A0A0',
-    focusRing: 'rgba(180, 100, 100, 0.35)',
+    background: '#D32F2F',
+    text: '#FFFFFF',
+    border: '#D32F2F',
+    hoverBackground: '#C62828',
+    hoverBorder: '#C62828',
+    activeBackground: '#B71C1C',
+    activeBorder: '#B71C1C',
+    focusRing: 'rgba(211, 47, 47, 0.35)',
   } satisfies PastelDanger,
   dark: {
-    background: '#6B4545',
-    text: '#F5E8E8',
-    border: '#7A5555',
-    hoverBackground: '#7A5555',
-    hoverBorder: '#8A6565',
-    activeBackground: '#5C3838',
-    activeBorder: '#6B4545',
-    focusRing: 'rgba(200, 130, 130, 0.4)',
+    background: '#F44336',
+    text: '#FFFFFF',
+    border: '#F44336',
+    hoverBackground: '#F55549',
+    hoverBorder: '#F55549',
+    activeBackground: '#D32F2F',
+    activeBorder: '#D32F2F',
+    focusRing: 'rgba(244, 67, 54, 0.4)',
   } satisfies PastelDanger,
 } as const;
 
 export function accentForPreset(preset: string): PastelAccent {
-  if (preset.startsWith('modern')) {
-    return preset.includes('dark') ? modernPastel.dark : modernPastel.light;
-  }
-  if (preset.startsWith('enterprise')) {
-    return preset.includes('dark') ? enterprisePastel.dark : enterprisePastel.light;
-  }
-  if (preset === 'dark') return defaultPastel.dark;
-  return defaultPastel.light;
+  return preset.includes('dark') ? commercePastel.dark : commercePastel.light;
 }
 
 export function dangerForPreset(preset: string): PastelDanger {
-  return preset.includes('dark') ? dangerPastel.dark : dangerPastel.light;
+  return preset.includes('dark') ? commerceDanger.dark : commerceDanger.light;
 }

@@ -24,8 +24,8 @@ const NAMES = [
 
 const permissionRows: PermissionRow[] = Array.from({ length: 24 }, (_, index) => ({
   id: index + 1,
-  name: NAMES[index % NAMES.length],
-  module: MODULES[index % MODULES.length],
+  name: NAMES[index % NAMES.length] ?? '',
+  module: MODULES[index % MODULES.length] ?? '',
   assigned: index % 3 !== 0,
 }));
 

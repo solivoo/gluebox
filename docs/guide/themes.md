@@ -21,34 +21,30 @@ No hace falta pasar `theme` a cada componente, ni redefinir `--select-*`, `--dat
 ```tsx
 // main.tsx / App.tsx
 import 'glubox/style.css';
-import 'glubox/themes/index.css'; // default + modern + enterprise
+import 'glubox/themes/index.css'; // commerce (light + dark)
 
-document.documentElement.setAttribute('data-theme', 'default');
+document.documentElement.setAttribute('data-theme', 'commerce');
 document.documentElement.setAttribute('data-mode', 'light');
 ```
 
 O en `index.html` si el modo es fijo:
 
 ```html
-<html data-theme="default" data-mode="dark">
+<html data-theme="commerce" data-mode="dark">
 ```
 
 | Import | Cuándo usarlo |
 |--------|----------------|
-| `glubox/themes/default.css` | Solo familia Default |
-| `glubox/themes/modern.css` | Solo familia Modern |
-| `glubox/themes/enterprise.css` | Solo familia Enterprise |
-| `glubox/themes/index.css` | Las tres (recomendado si el usuario puede cambiar de tema) |
+| `glubox/themes/commerce.css` | Tema Commerce (Material Design / MUI) |
+| `glubox/themes/index.css` | Tema + bridge (recomendado) |
 
 Siempre importa también `glubox/style.css` (layout y estilos base de los componentes).
 
-## Familias y modos
+## Tema y modos
 
 | `data-theme` | Look | Archivo |
 |--------------|------|---------|
-| `default` | Periwinkle (violeta / indigo) | `glubox/themes/default.css` |
-| `modern` | Sage (verde) | `glubox/themes/modern.css` |
-| `enterprise` | Powder blue (azul) | `glubox/themes/enterprise.css` |
+| `commerce` | Material Design (MUI): azul #1976D2, radio 4px, Roboto, botones uppercase | `glubox/themes/commerce.css` |
 
 | `data-mode` | Efecto |
 |-------------|--------|
@@ -87,11 +83,11 @@ Ejemplo con React (toggle de tema y modo):
 ```tsx
 import { useEffect, useState } from 'react';
 
-type ThemeName = 'default' | 'modern' | 'enterprise';
+type ThemeName = 'commerce';
 type ModeName = 'light' | 'dark';
 
 export function useGluBoxTheme(
-  initialTheme: ThemeName = 'default',
+  initialTheme: ThemeName = 'commerce',
   initialMode: ModeName = 'light',
 ) {
   const [theme, setTheme] = useState<ThemeName>(initialTheme);
@@ -108,14 +104,12 @@ export function useGluBoxTheme(
 
 ```tsx
 function ThemeToolbar() {
-  const { theme, mode, setTheme, setMode } = useGluBoxTheme('modern', 'dark');
+  const { theme, mode, setTheme, setMode } = useGluBoxTheme('commerce', 'dark');
 
   return (
     <>
       <select value={theme} onChange={(e) => setTheme(e.target.value as typeof theme)}>
-        <option value="default">Default</option>
-        <option value="modern">Modern</option>
-        <option value="enterprise">Enterprise</option>
+        <option value="commerce">Commerce</option>
       </select>
       <select value={mode} onChange={(e) => setMode(e.target.value as typeof mode)}>
         <option value="light">Light</option>
@@ -137,7 +131,7 @@ useEffect(() => {
 }, [theme, mode]);
 
 // al iniciar:
-const theme = (localStorage.getItem('glubox-theme') as ThemeName) || 'default';
+const theme = (localStorage.getItem('glubox-theme') as ThemeName) || 'commerce';
 const mode = (localStorage.getItem('glubox-mode') as ModeName) || 'light';
 ```
 
@@ -148,7 +142,7 @@ Sin prop `theme`, heredan `data-theme` / `data-mode`:
 | Área | Componentes |
 |------|-------------|
 | Navegación | Sidebar, PageActionsMenu |
-| Formularios | TextBox, NumberBox, FileBox, ColorPicker, TextArea, Select, DateBox, RangeDateBox |
+| Formularios | TextBox, NumberBox, FileBox, ColorPicker, TextArea, Select, DateBox, RangeDateBox, TagBox, Switch |
 | Acciones | Button, CheckButton, OptionGroup |
 | Datos | DataGrid (tabla, toolbar y pager) |
 | Overlays | Popup, Toast / ToastProvider |
@@ -161,22 +155,18 @@ Usalo solo cuando un control deba **ignorar** el tema del sistema (p. ej. un bot
 import { Button, Select, selectThemes } from 'glubox';
 
 // Preset string
-<Button theme="modern-dark">Guardar</Button>
+<Button theme="commerce-dark">Guardar</Button>
 
 // Objeto de tokens exportado
-<Select theme={selectThemes['enterprise-light']} options={options} />
+<Select theme={selectThemes['commerce-light']} options={options} />
 ```
 
 ### Presets
 
 | Preset | Equivale a |
 |--------|------------|
-| `light` | default + light |
-| `dark` | default + dark |
-| `modern-light` | modern + light |
-| `modern-dark` | modern + dark |
-| `enterprise-light` | enterprise + light |
-| `enterprise-dark` | enterprise + dark |
+| `commerce-light` | commerce + light |
+| `commerce-dark` | commerce + dark |
 
 ### Exports de presets
 
@@ -191,6 +181,7 @@ import { Button, Select, selectThemes } from 'glubox';
 | RangeDateBox | `rangeDateBoxThemes` |
 | OptionGroup | `optionGroupThemes` |
 | CheckButton | `checkButtonThemes` |
+| Switch | `switchThemes` |
 | Popup | `popupThemes` |
 | Toast | `toastThemes` |
 | DataGrid | `dataGridThemes` |
@@ -204,7 +195,7 @@ import { Button, Select, selectThemes } from 'glubox';
 </ToastProvider>
 ```
 
-Sin `theme`, los toasts siguen el tema global. Con `theme="enterprise-dark"` quedan fijos a ese preset.
+Sin `theme`, los toasts siguen el tema global. Con `theme="commerce-dark"` quedan fijos a ese preset.
 
 ## Prioridad visual
 
@@ -215,7 +206,7 @@ prop theme (inline)  >  data-theme + data-mode (CSS)  >  fallbacks del component
 | Caso | Resultado |
 |------|-----------|
 | No pasás `theme` | Sigue el sistema (`<html>`) |
-| `theme="dark"` | Siempre dark (familia default), aunque el HTML esté en light |
+| `theme="commerce-dark"` | Siempre dark (aunque el HTML esté en light) |
 | `theme={objeto}` | Tokens custom solo en ese nodo |
 
 ## Integrar con el layout de tu app
@@ -268,7 +259,7 @@ Ver [Formularios](/components/forms#label-outlined-y-fondo-del-contenedor).
 | Cambiar Theme/Mode no afecta un control | Tiene prop `theme` (preset fijo) | Quitá la prop o usá `undefined` |
 | Solo Button cambia y el resto no | CSS de tema desactualizado / cache | Recargá con hard refresh; asegurate de importar `glubox/themes/index.css` |
 | Todo se ve sin estilo / roto | Falta `glubox/style.css` | Importalo en el entry |
-| Querés cambiar de familia en runtime | Solo importaste `default.css` | Usá `glubox/themes/index.css` |
+| Querés cambiar de modo en runtime | Solo importaste `commerce.css` sin `index.css` | Usá `glubox/themes/index.css` |
 | Light y dark “iguales” en tu layout | Tu CSS hardcodea colores | Usá `--glb-app-bg`, `--glb-surface`, etc. |
 | Select / DataGrid / pager con chrome blanco en dark | Override de `--select-*` / `--datagrid-*` o CSS sobre `.glb-datagrid__pagination-select` | Quitá esos overrides; el pager usa el Select de gluBox |
 | Inputs `type="number"` con flechas del SO | TextBox nativo | Usá `NumberBox`; si dejás `type="number"` en TextBox, los spinners nativos ya están ocultos |

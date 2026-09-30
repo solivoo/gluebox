@@ -9,6 +9,7 @@ export function moveFileItem(files: File[], from: number, to: number): File[] {
   if (from < 0 || from >= files.length || to < 0 || to >= files.length) return files;
   const next = [...files];
   const [moved] = next.splice(from, 1);
+  if (!moved) return files;
   next.splice(to, 0, moved);
   return next;
 }

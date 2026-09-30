@@ -12,6 +12,7 @@ import { dateBoxMeta } from '@/demo/metadata/dateBoxMeta';
 import { rangeDateBoxMeta } from '@/demo/metadata/rangeDateBoxMeta';
 import { optionGroupMeta } from '@/demo/metadata/optionGroupMeta';
 import { checkButtonMeta } from '@/demo/metadata/checkButtonMeta';
+import { switchMeta } from '@/demo/metadata/switchMeta';
 import { popupMeta } from '@/demo/metadata/popupMeta';
 import { toastMeta } from '@/demo/metadata/toastMeta';
 import { dataGridMeta } from '@/demo/metadata/dataGridMeta';
@@ -197,6 +198,28 @@ function App() {
     importPath: "import { CheckButton } from 'glubox';",
     installNote:
       'CheckButton usa role="checkbox" y aria-checked. Soporta checked/defaultChecked para modos controlado y no controlado.',
+  },
+  switch: {
+    component: 'Switch',
+    label: 'Switch',
+    description:
+      'Interruptor on/off con thumb deslizante estilo Material, label posicionable (right/left/top/bottom), tamaños sm/md, estado loading, helper/error y temas gluBox.',
+    meta: switchMeta,
+    importPath: "import { Switch } from 'glubox';",
+    installNote:
+      'Switch usa un input checkbox con role="switch", por lo que hereda teclado nativo (Space). Soporta checked/defaultChecked para modos controlado y no controlado.',
+    basicUsage: `import { Switch } from 'glubox';
+
+function App() {
+  return (
+    <Switch
+      label="Notificaciones"
+      defaultChecked
+      helperText="Se sincroniza cada hora"
+      onChange={(checked) => console.log(checked)}
+    />
+  );
+}`,
   },
   popup: {
     component: 'Popup',

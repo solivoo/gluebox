@@ -68,6 +68,6 @@ export function formatFileSize(bytes: number): string {
 
 export function summarizeFiles(files: File[]): string {
   if (files.length === 0) return '';
-  if (files.length === 1) return files[0].name;
+  if (files.length === 1) return files[0]?.name ?? '';
   return `${files.length} archivos`;
 }

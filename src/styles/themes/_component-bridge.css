@@ -4,12 +4,8 @@
  * como overlay compartido, no como parche sobre hex.
  */
 
-[data-theme="default"],
-[data-theme="modern"],
-[data-theme="enterprise"],
-[data-theme="default"][data-mode="dark"],
-[data-theme="modern"][data-mode="dark"],
-[data-theme="enterprise"][data-mode="dark"] {
+[data-theme="commerce"],
+[data-theme="commerce"][data-mode="dark"] {
   /* ── Button ── */
   --btn-primary-bg: var(--glb-accent-surface);
   --btn-primary-text: var(--glb-accent-on-fill);
@@ -478,6 +474,16 @@
   /* ── PAM focus rings ── */
   --pam-ghost-focus-ring: var(--glb-accent-focus-ring);
   --pam-outline-focus-ring: var(--glb-accent-focus-ring);
+
+  /* ── Switch ── */
+  --switch-focus-ring: var(--glb-accent-focus-ring);
+  --switch-label-color: var(--glb-text);
+  --switch-helper-color: var(--glb-muted);
+  --switch-error-color: var(--glb-danger-on-fill, #dc2626);
+  --switch-track-checked: var(--glb-accent-surface);
+  --switch-track-checked-hover: var(--glb-accent-surface-hover);
+  --switch-thumb-checked: var(--glb-accent-on-fill);
+  --switch-thumb-checked-hover: var(--glb-accent-on-fill);
 
   /* ── DataGrid loading ── */
   --datagrid-loading-overlay: color-mix(in srgb, var(--glb-app-bg) 72%, transparent);

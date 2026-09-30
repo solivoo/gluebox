@@ -1,7 +1,7 @@
 {
   "name": "glubox",
-  "version": "0.1.26",
-  "description": "Librería de componentes React para aplicaciones empresariales — Sidebar RBAC, PageActionsMenu, DataGrid, formularios, ColorPicker, FileBox, Popup, Toast, botones y temas pastel",
+  "version": "0.2.0",
+  "description": "Librería de componentes React",
   "type": "module",
   "license": "MIT",
   "author": "solivoo",
@@ -41,6 +41,7 @@
   "files": [
     "dist/glubox.js",
     "dist/glubox.css",
+    "dist/chunks",
     "dist/themes",
     "dist/index.d.ts",
     "dist/components",
@@ -55,11 +56,94 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/glubox.js"
     },
+    "./package.json": "./package.json",
     "./style.css": "./dist/glubox.css",
-    "./themes/default.css": "./dist/themes/default.css",
-    "./themes/modern.css": "./dist/themes/modern.css",
-    "./themes/enterprise.css": "./dist/themes/enterprise.css",
-    "./themes/index.css": "./dist/themes/index.css"
+    "./themes/commerce.css": "./dist/themes/commerce.css",
+    "./themes/index.css": "./dist/themes/index.css",
+    "./components/Button": {
+      "types": "./dist/components/Button/index.d.ts",
+      "import": "./dist/components/Button/index.js"
+    },
+    "./components/CheckButton": {
+      "types": "./dist/components/CheckButton/index.d.ts",
+      "import": "./dist/components/CheckButton/index.js"
+    },
+    "./components/ColorPicker": {
+      "types": "./dist/components/ColorPicker/index.d.ts",
+      "import": "./dist/components/ColorPicker/index.js"
+    },
+    "./components/DataGrid": {
+      "types": "./dist/components/DataGrid/index.d.ts",
+      "import": "./dist/components/DataGrid/index.js"
+    },
+    "./components/DateBox": {
+      "types": "./dist/components/DateBox/index.d.ts",
+      "import": "./dist/components/DateBox/index.js"
+    },
+    "./components/FileBox": {
+      "types": "./dist/components/FileBox/index.d.ts",
+      "import": "./dist/components/FileBox/index.js"
+    },
+    "./components/FileUploader": {
+      "types": "./dist/components/FileBox/index.d.ts",
+      "import": "./dist/components/FileBox/index.js"
+    },
+    "./components/NumberBox": {
+      "types": "./dist/components/NumberBox/index.d.ts",
+      "import": "./dist/components/NumberBox/index.js"
+    },
+    "./components/OptionGroup": {
+      "types": "./dist/components/OptionGroup/index.d.ts",
+      "import": "./dist/components/OptionGroup/index.js"
+    },
+    "./components/PageActionsMenu": {
+      "types": "./dist/components/PageActionsMenu/index.d.ts",
+      "import": "./dist/components/PageActionsMenu/index.js"
+    },
+    "./components/Popup": {
+      "types": "./dist/components/Popup/index.d.ts",
+      "import": "./dist/components/Popup/index.js"
+    },
+    "./components/RangeDateBox": {
+      "types": "./dist/components/RangeDateBox/index.d.ts",
+      "import": "./dist/components/RangeDateBox/index.js"
+    },
+    "./components/Select": {
+      "types": "./dist/components/Select/index.d.ts",
+      "import": "./dist/components/Select/index.js"
+    },
+    "./components/Sidebar": {
+      "types": "./dist/components/Sidebar/index.d.ts",
+      "import": "./dist/components/Sidebar/index.js"
+    },
+    "./components/Switch": {
+      "types": "./dist/components/Switch/index.d.ts",
+      "import": "./dist/components/Switch/index.js"
+    },
+    "./components/TagBox": {
+      "types": "./dist/components/TagBox/index.d.ts",
+      "import": "./dist/components/TagBox/index.js"
+    },
+    "./components/TextArea": {
+      "types": "./dist/components/TextArea/index.d.ts",
+      "import": "./dist/components/TextArea/index.js"
+    },
+    "./components/TextBox": {
+      "types": "./dist/components/TextBox/index.d.ts",
+      "import": "./dist/components/TextBox/index.js"
+    },
+    "./components/Toast": {
+      "types": "./dist/components/Toast/index.d.ts",
+      "import": "./dist/components/Toast/index.js"
+    },
+    "./components/navigation": {
+      "types": "./dist/components/navigation/index.d.ts",
+      "import": "./dist/components/navigation/index.js"
+    },
+    "./components/*": {
+      "types": "./dist/components/*/index.d.ts",
+      "import": "./dist/components/*/index.js"
+    }
   },
   "scripts": {
     "dev": "vite",
@@ -69,23 +153,31 @@
     "clean:dist": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
     "prepublish:lib": "pnpm clean:dist && pnpm build:lib",
     "prepublishOnly": "pnpm clean:dist && pnpm build:lib",
+    "changeset": "changeset",
+    "version:packages": "changeset version",
     "publish:lib": "npm publish --access public",
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:a11y": "vitest run src/test/a11y.test.tsx src/styles/themes/contrast.test.ts",
+    "test:visual": "playwright test",
+    "test:visual:update": "playwright test --update-snapshots",
     "themes:generate": "vitest run --config vitest.generate-themes.config.ts",
     "preview": "vite preview",
     "demo:build": "vite build --base=/gluebox/demo/ --outDir dist-demo",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:preview": "vitepress preview docs",
+    "new:component": "node scripts/scaffold-component.ts"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"
   },
   "devDependencies": {
+    "@changesets/cli": "^3.0.3",
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.60.0",
     "@types/node": "^24.12.3",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
@@ -107,7 +199,8 @@
     "vite": "^8.0.12",
     "vite-plugin-dts": "^5.0.2",
     "vitepress": "^1.6.4",
-    "vitest": "^4.1.8"
+    "vitest": "^4.1.8",
+    "vitest-axe": "^0.1.0"
   },
   "publishConfig": {
     "access": "public"

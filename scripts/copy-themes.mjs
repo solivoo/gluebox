@@ -9,14 +9,10 @@ const destDir = path.join(root, 'dist/themes');
 mkdirSync(destDir, { recursive: true });
 
 const themeFiles = [
-  'default.css',
-  'modern.css',
-  'enterprise.css',
+  'commerce.css',
   'index.css',
   'pastel-accents.css',
-  '_generated-default.css',
-  '_generated-modern.css',
-  '_generated-enterprise.css',
+  '_generated-commerce.css',
   '_component-bridge.css',
 ];
 

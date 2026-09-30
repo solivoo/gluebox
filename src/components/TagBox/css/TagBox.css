@@ -179,6 +179,86 @@
   --glb-outlined-label-color: var(--tagbox-error-color, var(--tagbox-label-color));
 }
 
+/* ── Variant: Primary ── */
+
+.glb-tagbox--primary {
+  --tagbox-bg: var(--tagbox-primary-bg);
+  --tagbox-text: var(--tagbox-primary-text);
+  --tagbox-border: var(--tagbox-primary-border);
+  --tagbox-placeholder: var(--tagbox-primary-placeholder);
+  --tagbox-icon: var(--tagbox-primary-icon);
+  --tagbox-hover-bg: var(--tagbox-primary-hover-bg);
+  --tagbox-hover-border: var(--tagbox-primary-hover-border);
+  --tagbox-focus-bg: var(--tagbox-primary-focus-bg);
+  --tagbox-focus-border: var(--tagbox-primary-focus-border);
+  --tagbox-focus-ring: var(--tagbox-primary-focus-ring);
+  --tagbox-disabled-bg: var(--tagbox-primary-disabled-bg);
+  --tagbox-disabled-text: var(--tagbox-primary-disabled-text);
+  --tagbox-disabled-border: var(--tagbox-primary-disabled-border);
+  --tagbox-error-border: var(--tagbox-primary-error-border);
+  --tagbox-error-focus-ring: var(--tagbox-primary-error-focus-ring);
+}
+
+/* ── Variant: Secondary ── */
+
+.glb-tagbox--secondary {
+  --tagbox-bg: var(--tagbox-secondary-bg);
+  --tagbox-text: var(--tagbox-secondary-text);
+  --tagbox-border: var(--tagbox-secondary-border);
+  --tagbox-placeholder: var(--tagbox-secondary-placeholder);
+  --tagbox-icon: var(--tagbox-secondary-icon);
+  --tagbox-hover-bg: var(--tagbox-secondary-hover-bg);
+  --tagbox-hover-border: var(--tagbox-secondary-hover-border);
+  --tagbox-focus-bg: var(--tagbox-secondary-focus-bg);
+  --tagbox-focus-border: var(--tagbox-secondary-focus-border);
+  --tagbox-focus-ring: var(--tagbox-secondary-focus-ring);
+  --tagbox-disabled-bg: var(--tagbox-secondary-disabled-bg);
+  --tagbox-disabled-text: var(--tagbox-secondary-disabled-text);
+  --tagbox-disabled-border: var(--tagbox-secondary-disabled-border);
+  --tagbox-error-border: var(--tagbox-secondary-error-border);
+  --tagbox-error-focus-ring: var(--tagbox-secondary-error-focus-ring);
+}
+
+/* ── Variant: Outline ── */
+
+.glb-tagbox--outline {
+  --tagbox-bg: var(--tagbox-outline-bg);
+  --tagbox-text: var(--tagbox-outline-text);
+  --tagbox-border: var(--tagbox-outline-border);
+  --tagbox-placeholder: var(--tagbox-outline-placeholder);
+  --tagbox-icon: var(--tagbox-outline-icon);
+  --tagbox-hover-bg: var(--tagbox-outline-hover-bg);
+  --tagbox-hover-border: var(--tagbox-outline-hover-border);
+  --tagbox-focus-bg: var(--tagbox-outline-focus-bg);
+  --tagbox-focus-border: var(--tagbox-outline-focus-border);
+  --tagbox-focus-ring: var(--tagbox-outline-focus-ring);
+  --tagbox-disabled-bg: var(--tagbox-outline-disabled-bg);
+  --tagbox-disabled-text: var(--tagbox-outline-disabled-text);
+  --tagbox-disabled-border: var(--tagbox-outline-disabled-border);
+  --tagbox-error-border: var(--tagbox-outline-error-border);
+  --tagbox-error-focus-ring: var(--tagbox-outline-error-focus-ring);
+}
+
+/* ── Variant: Ghost ── */
+
+.glb-tagbox--ghost {
+  --tagbox-bg: var(--tagbox-ghost-bg);
+  --tagbox-text: var(--tagbox-ghost-text);
+  --tagbox-border: var(--tagbox-ghost-border);
+  --tagbox-placeholder: var(--tagbox-ghost-placeholder);
+  --tagbox-icon: var(--tagbox-ghost-icon);
+  --tagbox-hover-bg: var(--tagbox-ghost-hover-bg);
+  --tagbox-hover-border: var(--tagbox-ghost-hover-border);
+  --tagbox-focus-bg: var(--tagbox-ghost-focus-bg);
+  --tagbox-focus-border: var(--tagbox-ghost-focus-border);
+  --tagbox-focus-ring: var(--tagbox-ghost-focus-ring);
+  --tagbox-disabled-bg: var(--tagbox-ghost-disabled-bg);
+  --tagbox-disabled-text: var(--tagbox-ghost-disabled-text);
+  --tagbox-disabled-border: var(--tagbox-ghost-disabled-border);
+  --tagbox-error-border: var(--tagbox-ghost-error-border);
+  --tagbox-error-focus-ring: var(--tagbox-ghost-error-focus-ring);
+}
+
 /* ── Control container ── */
 
 .glb-tagbox__wrapper {
