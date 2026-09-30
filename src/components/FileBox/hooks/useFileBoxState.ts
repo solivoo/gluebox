@@ -19,6 +19,7 @@ export function useFileBoxState(options: UseFileBoxStateOptions): {
   ingest: (incoming: File[]) => void;
   clearAll: () => void;
   removeAt: (index: number) => void;
+  moveAt: (from: number, to: number) => void;
 } {
   const {
     value: controlledValue,
@@ -73,5 +74,18 @@ export function useFileBoxState(options: UseFileBoxStateOptions): {
     [commit, files],
   );
 
-  return { files, ingest, clearAll, removeAt };
+  const moveAt = useCallback(
+    (from: number, to: number) => {
+      if (disabled) return;
+      if (from === to) return;
+      if (from < 0 || from >= files.length || to < 0 || to >= files.length) return;
+      const next = [...files];
+      const [moved] = next.splice(from, 1);
+      next.splice(to, 0, moved);
+      commit(next);
+    },
+    [commit, disabled, files],
+  );
+
+  return { files, ingest, clearAll, removeAt, moveAt };
 }

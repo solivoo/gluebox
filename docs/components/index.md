@@ -1,6 +1,6 @@
 # Componentes
 
-Inventario de lo publicado en npm (`glubox` v0.1.20).
+Inventario de lo publicado en npm (`glubox` v0.1.26).
 
 ## Todos los componentes
 
@@ -15,6 +15,7 @@ Inventario de lo publicado en npm (`glubox` v0.1.20).
 | **FileBox** | Formulario | (comparte `textBoxThemes`) |
 | **ColorPicker** | Formulario | (comparte `textBoxThemes`) |
 | **TextArea** | Formulario | `textAreaThemes` |
+| **TagBox** | Formulario | `tagBoxThemes` |
 | **Select** | Formulario | `selectThemes` |
 | **DateBox** | Formulario | `dateBoxThemes` |
 | **RangeDateBox** | Formulario | `rangeDateBoxThemes` |
@@ -30,7 +31,7 @@ Inventario de lo publicado en npm (`glubox` v0.1.20).
 | [DataGrid](/components/datagrid) | Guía: estructura `T[]` + `keyExpr` + `columns`, paging, table/card |
 | [Sidebar](/components/sidebar) | Sidebar |
 | [PageActionsMenu](/components/page-actions-menu) | Hamburguesa de acciones (`surface: actions`) |
-| [Formularios](/components/forms) | TextBox, NumberBox, FileBox, ColorPicker, TextArea, Select, DateBox, RangeDateBox |
+| [Formularios](/components/forms) | TextBox, NumberBox, FileBox, ColorPicker, TextArea, TagBox, Select, DateBox, RangeDateBox |
 | [Botones y selección](/components/buttons) | Button, CheckButton, OptionGroup |
 | [Overlays](/components/overlays) | Popup, Toast |
 | [Temas](/guide/themes) | Tema del sistema + prop `theme` opcional |

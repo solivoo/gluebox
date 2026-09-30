@@ -215,6 +215,23 @@ const handleReject: FileBoxOnRejectHandler = (rejected) => {
   setNotes(event.target.value);
 };`,
   },
+  tagbox: {
+    importTypes: `import type {
+  TagBoxOnChangeHandler,
+} from 'glubox';`,
+    handlers: [
+      {
+        handlerType: 'TagBoxOnChangeHandler',
+        payloadType: 'string[]',
+        signature: '(tags: string[]) => void',
+        description:
+          'Handler de onChange con la lista completa de tags al agregar o quitar.',
+      },
+    ],
+    usageExample: `const handleTags: TagBoxOnChangeHandler = (tags) => {
+  setEtiquetas(tags);
+};`,
+  },
   sidebar: {
     importTypes: `import type {
   SidebarOnCollapsedChangeHandler,

@@ -25,6 +25,8 @@ import {
   NumberBox,
   FileBox,
   ColorPicker,
+  TextArea,
+  TagBox,
   DateBox,
   RangeDateBox,
   OptionGroup,
@@ -61,9 +63,10 @@ import type {
 | **Button** | Botón con variantes y temas |
 | **TextBox** | Campo de texto con label top / floating / outlined / left |
 | **NumberBox** | Campo numérico con spin buttons del tema (`min` / `max` / `step`) |
-| **FileBox** | Selector de archivos (campo o dropzone) |
+| **FileBox** | Selector de archivos (campo o dropzone), con modo `reorderable` de miniaturas ordenables por drag/touch |
 | **ColorPicker** | Color HSV + hex (`#rrggbb`), panel en portal |
 | **TextArea** | Multilínea |
+| **TagBox** | Tags en línea: Enter/coma agregan, Backspace borra, chips removibles y `maxTags` |
 | **Select** | Desplegable con teclado y búsqueda type-ahead |
 | **DateBox** | Selector de fecha con calendario |
 | **RangeDateBox** | Rango de fechas en un solo control |

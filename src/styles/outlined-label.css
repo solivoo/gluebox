@@ -60,12 +60,14 @@
   .glb-textbox--outlined,
   .glb-select--outlined,
   .glb-datebox--outlined,
-  .glb-rangedatebox--outlined
+  .glb-rangedatebox--outlined,
+  .glb-tagbox--outlined
 ) :is(
   .glb-textbox__outlined-field,
   .glb-select__outlined-field,
   .glb-datebox__outlined-field,
-  .glb-rangedatebox__outlined-field
+  .glb-rangedatebox__outlined-field,
+  .glb-tagbox__outlined-field
 ) {
   --glb-outlined-bg: transparent;
   --glb-outlined-label-bg: var(--glb-field-canvas, var(--glb-app-bg));
@@ -80,12 +82,15 @@
   .glb-datebox--outlined.glb-datebox--outline,
   .glb-datebox--outlined.glb-datebox--ghost,
   .glb-rangedatebox--outlined.glb-rangedatebox--outline,
-  .glb-rangedatebox--outlined.glb-rangedatebox--ghost
+  .glb-rangedatebox--outlined.glb-rangedatebox--ghost,
+  .glb-tagbox--outlined.glb-tagbox--outline,
+  .glb-tagbox--outlined.glb-tagbox--ghost
 ) :is(
   .glb-textbox__outlined-field,
   .glb-select__outlined-field,
   .glb-datebox__outlined-field,
-  .glb-rangedatebox__outlined-field
+  .glb-rangedatebox__outlined-field,
+  .glb-tagbox__outlined-field
 ) {
   --glb-outlined-bg: transparent;
   --glb-outlined-label-bg: var(--glb-field-canvas, var(--glb-app-bg));
@@ -97,13 +102,15 @@
 .glb-textbox--left.glb-textbox--outlined .glb-textbox__outlined-field,
 .glb-select--left.glb-select--outlined .glb-select__outlined-field,
 .glb-datebox--left.glb-datebox--outlined .glb-datebox__outlined-field,
-.glb-rangedatebox--left.glb-rangedatebox--outlined .glb-rangedatebox__outlined-field {
+.glb-rangedatebox--left.glb-rangedatebox--outlined .glb-rangedatebox__outlined-field,
+.glb-tagbox--left.glb-tagbox--outlined .glb-tagbox__outlined-field {
   margin-top: 0;
 }
 
 .glb-textbox--left.glb-textbox--outlined .glb-outlined-field__legend,
 .glb-select--left.glb-select--outlined .glb-outlined-field__legend,
 .glb-datebox--left.glb-datebox--outlined .glb-outlined-field__legend,
-.glb-rangedatebox--left.glb-rangedatebox--outlined .glb-outlined-field__legend {
+.glb-rangedatebox--left.glb-rangedatebox--outlined .glb-outlined-field__legend,
+.glb-tagbox--left.glb-tagbox--outlined .glb-outlined-field__legend {
   left: 0.5rem;
 }

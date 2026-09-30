@@ -15,6 +15,7 @@ import '@/components/Popup/css/Popup.css';
 import '@/components/Toast/css/Toast.css';
 import '@/components/PageActionsMenu/css/PageActionsMenu.css';
 import '@/components/DataGrid/css/DataGrid.css';
+import '@/components/TagBox/css/TagBox.css';
 
 export type {
   SidebarProps,
@@ -391,3 +392,18 @@ export {
 } from './components/DataGrid';
 
 export type { NormalizedDataGridProps } from './components/DataGrid';
+
+export type {
+  TagBoxProps,
+  TagBoxVariant,
+  TagBoxSize,
+  TagBoxLabelPosition,
+  TagBoxTheme,
+  TagBoxVariantTheme,
+  TagBoxTagTheme,
+  TagBoxThemePreset,
+  TagBoxThemeInput,
+  TagBoxOnChangeHandler,
+} from './components/TagBox';
+
+export { TagBox, tagBoxThemes } from './components/TagBox';

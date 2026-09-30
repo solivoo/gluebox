@@ -15,6 +15,7 @@ export const fileBoxMeta: ComponentMeta<FileBoxProps> = {
     labelPosition: 'top',
     displayMode: 'field',
     multiple: false,
+    reorderable: false,
     showClearButton: true,
     disabled: false,
     error: false,
@@ -60,6 +61,14 @@ export const fileBoxMeta: ComponentMeta<FileBoxProps> = {
           control: 'boolean',
         },
         {
+          name: 'reorderable',
+          type: 'boolean',
+          defaultValue: false,
+          description:
+            'Muestra miniaturas horizontales con tile "+" y reordenado por arrastre (mouse o touch) y teclado. Implica multiple.',
+          control: 'boolean',
+        },
+        {
           name: 'maxSize',
           type: 'number',
           defaultValue: undefined,
@@ -70,7 +79,8 @@ export const fileBoxMeta: ComponentMeta<FileBoxProps> = {
           name: 'maxFiles',
           type: 'number',
           defaultValue: undefined,
-          description: 'Cantidad máxima de archivos (con multiple).',
+          description:
+            'Cantidad máxima de archivos. En modo reorderable muestra un contador N/maxFiles y oculta el "+" al alcanzarlo.',
           control: 'number',
         },
       ],

@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.1.26] — 2026-09-29
+
+### Agregado
+
+- **TagBox (nuevo componente):** campo para agregar tags en línea.
+  - Valor `string[]` con modo controlado (`value`) y no controlado (`defaultValue`); `onChange(tags)` emite la lista completa.
+  - **Enter** o **coma** confirman el tag; **Backspace** con el input vacío elimina el último; **Escape** limpia el borrador.
+  - Chips con botón de quitar, prevención de duplicados (case-insensitive) con opt-in `allowDuplicates`, límite `maxTags` y `showClearButton` (alias legacy `clearable`).
+  - Variantes, tamaños y `labelPosition` (top/floating/outlined/left) compartidos con TextBox; tokens `--tagbox-*` con 6 presets (`tagBoxThemes`) integrados a `pnpm themes:generate`.
+  - Demo/playground (`TagBoxDemo`), registro en menú/docRegistry/eventTypesRegistry, sección en `docs/components/forms.md` y skill `.agents/skills/gluebox-tagbox`.
+- **FileBox `reorderable`:** tira horizontal de miniaturas para ordenar imágenes antes de subir.
+  - Drag con mouse (click sostenido) o touch: fantasma flotante que sigue al puntero, placeholder punteado en el origen y reordenado "live" simétrico en ambas direcciones.
+  - Sesión de drag con listeners a nivel `document` (evita la liberación implícita del pointer capture cuando React mueve nodos del DOM al reordenar).
+  - Teclado: `←` / `→` mueven el tile una posición; `Escape` cancela el drag sin emitir cambios.
+  - Tile "+" para agregar (oculto con `disabled` y al alcanzar `maxFiles`) y **contador `N/maxFiles`** cuando hay límite.
+  - Miniaturas vía `objectURL` (`useObjectUrls`) con fallback de extensión para no-imágenes; con `reorderable` se ocultan el campo de resumen y el botón "Elegir archivo".
+  - Tests en `FileBox.reorder.test.tsx`, documentación en la skill de FileBox, `docs/components/forms.md` y control en el playground.
+
 ## [0.1.25] — 2026-09-26
 
 ### Agregado

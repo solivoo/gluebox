@@ -33,6 +33,8 @@ import { selectThemes } from '@/components/Select/theme/defaultThemes';
 import { themeToStyle as selectToStyle } from '@/components/Select/theme/resolveTheme';
 import { textBoxThemes } from '@/components/TextBox/theme/defaultThemes';
 import { themeToStyle as textBoxToStyle } from '@/components/TextBox/theme/resolveTheme';
+import { tagBoxThemes } from '@/components/TagBox/theme/defaultThemes';
+import { themeToStyle as tagBoxToStyle } from '@/components/TagBox/theme/resolveTheme';
 import {
   parseBridgeTokenMap,
   remapComponentToken,
@@ -73,6 +75,7 @@ const components: ComponentSpec[] = [
   { label: 'Button', toStyle: buttonToStyle as ComponentSpec['toStyle'], themes: buttonThemes, lightKey: (f) => presetKey(f, 'light'), darkKey: (f) => presetKey(f, 'dark') },
   { label: 'Select', toStyle: selectToStyle as ComponentSpec['toStyle'], themes: selectThemes, lightKey: (f) => presetKey(f, 'light'), darkKey: (f) => presetKey(f, 'dark') },
   { label: 'TextBox', toStyle: textBoxToStyle as ComponentSpec['toStyle'], themes: textBoxThemes, lightKey: (f) => presetKey(f, 'light'), darkKey: (f) => presetKey(f, 'dark') },
+  { label: 'TagBox', toStyle: tagBoxToStyle as ComponentSpec['toStyle'], themes: tagBoxThemes, lightKey: (f) => presetKey(f, 'light'), darkKey: (f) => presetKey(f, 'dark') },
   { label: 'TextArea', toStyle: textAreaToStyle as ComponentSpec['toStyle'], themes: textAreaThemes, lightKey: (f) => presetKey(f, 'light'), darkKey: (f) => presetKey(f, 'dark') },
   { label: 'DateBox', toStyle: dateBoxToStyle as ComponentSpec['toStyle'], themes: dateBoxThemes, lightKey: (f) => presetKey(f, 'light'), darkKey: (f) => presetKey(f, 'dark') },
   { label: 'RangeDateBox', toStyle: rangeDateBoxToStyle as ComponentSpec['toStyle'], themes: rangeDateBoxThemes, lightKey: (f) => presetKey(f, 'light'), darkKey: (f) => presetKey(f, 'dark') },

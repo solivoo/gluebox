@@ -11,11 +11,13 @@ import {
   FileBox,
   ColorPicker,
   TextArea,
+  TagBox,
   Select,
   DateBox,
   RangeDateBox,
   textBoxThemes,
   textAreaThemes,
+  tagBoxThemes,
   selectThemes,
   dateBoxThemes,
   rangeDateBoxThemes,
@@ -28,11 +30,13 @@ import type {
   FileBoxProps,
   ColorPickerProps,
   TextAreaProps,
+  TagBoxProps,
   SelectProps,
   DateBoxProps,
   RangeDateBoxProps,
   TextBoxLabelPosition,
   TextAreaLabelPosition,
+  TagBoxLabelPosition,
   SelectLabelPosition,
 } from 'glubox';
 
@@ -96,6 +100,7 @@ Todos los controles de formulario que admiten valor seleccionado o escrito compa
 | `FileBox` | Archivos seleccionados |
 | `ColorPicker` | Hex `#rrggbb` |
 | `TextArea` | Contenido multilínea |
+| `TagBox` | Todos los tags |
 | `Select` | Opción seleccionada |
 | `DateBox` | Fecha (`YYYY-MM-DD`) |
 | `RangeDateBox` | Rango inicio y fin |
@@ -167,6 +172,28 @@ Campo numérico basado en TextBox. Oculta los spinners nativos y usa botones est
 
 `displayMode`: `'field'` (campo compacto, default) o `'dropzone'` (área de arrastre). Con `multiple` (o en dropzone) se lista cada archivo con tamaño y botón para quitarlo. `onChange` emite `File[]`. Validación de `accept`, `maxSize` y `maxFiles` vía `onReject`.
 
+### Reordenamiento de imágenes (`reorderable`)
+
+```tsx
+<FileBox
+  label="Galería"
+  reorderable
+  accept="image/*"
+  maxFiles={6}
+  onChange={(files) => setFotos(files)}
+/>
+```
+
+Con `reorderable` la lista se convierte en una tira horizontal de miniaturas cuadradas (preview de imágenes vía objectURL; los no-imagen muestran su extensión). El campo de resumen ("N archivos seleccionados") y el botón "Elegir archivo" se ocultan: la tira es la interfaz completa.
+
+- El **último tile es un "+"** que abre el selector para agregar archivos: se desplaza al final a medida que agregás y desaparece al alcanzar `maxFiles`.
+- Con `maxFiles` se muestra un **contador `N/maxFiles`** debajo de la tira (ej. `2/3`) para hacer visible el límite.
+- **Reordenado por arrastre** (click sostenido con mouse o touch): la miniatura se "levanta" con un **fantasma flotante** que sigue al puntero y puede soltarse encima de otra; el hueco de origen se muestra punteado como placeholder. El orden se aplica al soltar y emite un único `onChange` con el array en el nuevo orden. La miniatura de la izquierda es la primera del array.
+- **Teclado**: cada tile es focusable; `←` / `→` lo mueven una posición.
+- Cada miniatura tiene botón **×** para quitarla.
+- Arrastrar archivos desde el SO sobre la tira los agrega (resalta el área).
+- `reorderable` implica `multiple`.
+
 ## ColorPicker
 
 ```tsx
@@ -195,6 +222,21 @@ Comparte variantes, tamaños, labels y temas con TextBox.
 ```
 
 Props destacadas: `rows`, `resize` (`none` | `vertical` | `horizontal` | `both`), `showClearButton`, `error`, `errorMessage`, `fullWidth`, `width`, `theme`. Comparte las mismas variantes y posiciones de label que TextBox.
+
+## TagBox
+
+```tsx
+<TagBox
+  label="Etiquetas"
+  placeholder="Escribí un tag y presioná Enter"
+  defaultValue={['react', 'typescript']}
+  maxTags={5}
+  showClearButton
+  onChange={(tags) => setEtiquetas(tags)}
+/>
+```
+
+Campo para agregar tags en línea. **Enter** o **coma** confirman cada tag; **Backspace** con el input vacío elimina el último; **Escape** limpia el borrador. Los tags se muestran como chips con botón para quitarlos. `onChange` emite `string[]`. Por defecto previene duplicados (case-insensitive); usá `allowDuplicates` para permitirlos. Admite modo controlado (`value`) y no controlado (`defaultValue`). Comparte variantes, tamaños, labels y temas con TextBox.
 
 ## Select
 
@@ -253,7 +295,7 @@ Override puntual:
 <Select theme={selectThemes['modern-dark']} />
 ```
 
-Presets exportados: `textBoxThemes`, `textAreaThemes`, `selectThemes`, `dateBoxThemes`, `rangeDateBoxThemes`.
+Presets exportados: `textBoxThemes`, `textAreaThemes`, `tagBoxThemes`, `selectThemes`, `dateBoxThemes`, `rangeDateBoxThemes`.
 
 Setup del sistema:
 
@@ -275,6 +317,7 @@ Herencia, presets y prioridad: [Guía de temas](/guide/themes).
 | `FileBox` | `FileBoxOnChangeHandler`, `FileBoxOnRejectHandler`, `FileBoxChangeValue`, `FileRejection` |
 | `ColorPicker` | `ColorPickerOnChangeHandler`, `ColorPickerChangeValue` |
 | `TextArea` | `TextAreaOnChangeHandler`, `TextAreaOnFocusHandler`, `TextAreaOnBlurHandler` |
+| `TagBox` | `TagBoxOnChangeHandler` |
 | `Select` | `SelectOnChangeHandler`, `SelectChangeValue` |
 | `DateBox` | `DateBoxOnChangeHandler` |
 | `RangeDateBox` | `RangeDateBoxOnChangeHandler`, `RangeDateBoxChangeEvent` |

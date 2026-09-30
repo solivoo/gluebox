@@ -6,6 +6,7 @@ import { numberBoxMeta } from '@/demo/metadata/numberBoxMeta';
 import { fileBoxMeta } from '@/demo/metadata/fileBoxMeta';
 import { colorPickerMeta } from '@/demo/metadata/colorPickerMeta';
 import { textAreaMeta } from '@/demo/metadata/textAreaMeta';
+import { tagBoxMeta } from '@/demo/metadata/tagBoxMeta';
 import { sidebarMeta } from '@/demo/metadata/sidebarMeta';
 import { dateBoxMeta } from '@/demo/metadata/dateBoxMeta';
 import { rangeDateBoxMeta } from '@/demo/metadata/rangeDateBoxMeta';
@@ -123,6 +124,29 @@ function App() {
     importPath: "import { TextArea } from 'glubox';",
     installNote:
       'TextArea extiende TextareaHTMLAttributes. Compatible con formularios controlados y no controlados.',
+  },
+  tagbox: {
+    component: 'TagBox',
+    label: 'TagBox',
+    description:
+      'Campo para agregar tags en línea: Enter o coma confirman cada tag, Backspace elimina el último, chips con botón de quitar, prevención de duplicados, límite de tags y temas.',
+    meta: tagBoxMeta,
+    importPath: "import { TagBox } from 'glubox';",
+    installNote:
+      'TagBox emite onChange con string[]. Compatible con modo controlado (value) y no controlado (defaultValue).',
+    basicUsage: `import { TagBox } from 'glubox';
+
+function App() {
+  return (
+    <TagBox
+      label="Etiquetas"
+      placeholder="Escribí un tag y presioná Enter"
+      maxTags={5}
+      showClearButton
+      onChange={(tags) => console.log(tags)}
+    />
+  );
+}`,
   },
   sidebar: {
     component: 'Sidebar',

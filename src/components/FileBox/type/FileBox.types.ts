@@ -55,6 +55,14 @@ export interface FileBoxProps extends FieldClearButtonProps {
   defaultValue?: File[];
   /** Acepta múltiples archivos */
   multiple?: boolean;
+  /**
+   * Habilita el reordenamiento por arrastre: la lista se muestra como miniaturas
+   * horizontales (preview de imágenes) con un tile "+" al final para agregar más.
+   * El reordenado se puede hacer con mouse (click sostenido) o touch; el primer
+   * elemento de la izquierda es el primero del array emitido en `onChange`.
+   * Implica `multiple`.
+   */
+  reorderable?: boolean;
   /** Filtro nativo `accept` (ej. "image/*,.pdf") */
   accept?: string;
   /** Tamaño máximo por archivo en bytes */

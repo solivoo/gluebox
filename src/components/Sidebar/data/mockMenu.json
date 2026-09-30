@@ -5,55 +5,73 @@
       "label": "UI Components",
       "icon": "layout-dashboard",
       "path": "/componentes",
-      "permissions": ["componentes:read"],
+      "permissions": [
+        "componentes:read"
+      ],
       "position": "top",
       "children": [
         {
           "id": "componentes-button",
           "label": "Button",
-          "permissions": ["componentes:read"],
+          "permissions": [
+            "componentes:read"
+          ],
           "children": [
             {
               "id": "componentes-button-overview",
               "label": "Overview",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-button-overview-getting-started",
                   "label": "Getting Started",
                   "path": "/componentes/button/overview/getting-started",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-button-overview-how-to",
                   "label": "How To",
                   "path": "/componentes/button/overview/how-to",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
             {
               "id": "componentes-button-api",
               "label": "API",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-button-api-props",
                   "label": "Props",
                   "path": "/componentes/button/api/props",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-button-api-events",
                   "label": "Events",
                   "path": "/componentes/button/api/events",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-button-api-types",
                   "label": "Types",
                   "path": "/componentes/button/api/types",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
@@ -61,62 +79,82 @@
               "id": "componentes-button-accessibility",
               "label": "Accessibility",
               "path": "/componentes/button/accessibility",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             },
             {
               "id": "componentes-button-demos",
               "label": "Demos",
               "path": "/componentes/button",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             }
           ]
         },
         {
           "id": "componentes-select",
           "label": "Select",
-          "permissions": ["componentes:read"],
+          "permissions": [
+            "componentes:read"
+          ],
           "children": [
             {
               "id": "componentes-select-overview",
               "label": "Overview",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-select-overview-getting-started",
                   "label": "Getting Started",
                   "path": "/componentes/select/overview/getting-started",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-select-overview-how-to",
                   "label": "How To",
                   "path": "/componentes/select/overview/how-to",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
             {
               "id": "componentes-select-api",
               "label": "API",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-select-api-props",
                   "label": "Props",
                   "path": "/componentes/select/api/props",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-select-api-events",
                   "label": "Events",
                   "path": "/componentes/select/api/events",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-select-api-types",
                   "label": "Types",
                   "path": "/componentes/select/api/types",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
@@ -124,62 +162,82 @@
               "id": "componentes-select-accessibility",
               "label": "Accessibility",
               "path": "/componentes/select/accessibility",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             },
             {
               "id": "componentes-select-demos",
               "label": "Demos",
               "path": "/componentes/select",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             }
           ]
         },
         {
           "id": "componentes-textbox",
           "label": "TextBox",
-          "permissions": ["componentes:read"],
+          "permissions": [
+            "componentes:read"
+          ],
           "children": [
             {
               "id": "componentes-textbox-overview",
               "label": "Overview",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-textbox-overview-getting-started",
                   "label": "Getting Started",
                   "path": "/componentes/textbox/overview/getting-started",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-textbox-overview-how-to",
                   "label": "How To",
                   "path": "/componentes/textbox/overview/how-to",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
             {
               "id": "componentes-textbox-api",
               "label": "API",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-textbox-api-props",
                   "label": "Props",
                   "path": "/componentes/textbox/api/props",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-textbox-api-events",
                   "label": "Events",
                   "path": "/componentes/textbox/api/events",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-textbox-api-types",
                   "label": "Types",
                   "path": "/componentes/textbox/api/types",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
@@ -187,62 +245,82 @@
               "id": "componentes-textbox-accessibility",
               "label": "Accessibility",
               "path": "/componentes/textbox/accessibility",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             },
             {
               "id": "componentes-textbox-demos",
               "label": "Demos",
               "path": "/componentes/textbox",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             }
           ]
         },
         {
           "id": "componentes-numberbox",
           "label": "NumberBox",
-          "permissions": ["componentes:read"],
+          "permissions": [
+            "componentes:read"
+          ],
           "children": [
             {
               "id": "componentes-numberbox-overview",
               "label": "Overview",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-numberbox-overview-getting-started",
                   "label": "Getting Started",
                   "path": "/componentes/numberbox/overview/getting-started",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-numberbox-overview-how-to",
                   "label": "How To",
                   "path": "/componentes/numberbox/overview/how-to",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
             {
               "id": "componentes-numberbox-api",
               "label": "API",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-numberbox-api-props",
                   "label": "Props",
                   "path": "/componentes/numberbox/api/props",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-numberbox-api-events",
                   "label": "Events",
                   "path": "/componentes/numberbox/api/events",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-numberbox-api-types",
                   "label": "Types",
                   "path": "/componentes/numberbox/api/types",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
@@ -250,62 +328,82 @@
               "id": "componentes-numberbox-accessibility",
               "label": "Accessibility",
               "path": "/componentes/numberbox/accessibility",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             },
             {
               "id": "componentes-numberbox-demos",
               "label": "Demos",
               "path": "/componentes/numberbox",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             }
           ]
         },
         {
           "id": "componentes-filebox",
           "label": "FileBox",
-          "permissions": ["componentes:read"],
+          "permissions": [
+            "componentes:read"
+          ],
           "children": [
             {
               "id": "componentes-filebox-overview",
               "label": "Overview",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-filebox-overview-getting-started",
                   "label": "Getting Started",
                   "path": "/componentes/filebox/overview/getting-started",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-filebox-overview-how-to",
                   "label": "How To",
                   "path": "/componentes/filebox/overview/how-to",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
             {
               "id": "componentes-filebox-api",
               "label": "API",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-filebox-api-props",
                   "label": "Props",
                   "path": "/componentes/filebox/api/props",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-filebox-api-events",
                   "label": "Events",
                   "path": "/componentes/filebox/api/events",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-filebox-api-types",
                   "label": "Types",
                   "path": "/componentes/filebox/api/types",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
@@ -313,62 +411,82 @@
               "id": "componentes-filebox-accessibility",
               "label": "Accessibility",
               "path": "/componentes/filebox/accessibility",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             },
             {
               "id": "componentes-filebox-demos",
               "label": "Demos",
               "path": "/componentes/filebox",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             }
           ]
         },
         {
           "id": "componentes-colorpicker",
           "label": "ColorPicker",
-          "permissions": ["componentes:read"],
+          "permissions": [
+            "componentes:read"
+          ],
           "children": [
             {
               "id": "componentes-colorpicker-overview",
               "label": "Overview",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-colorpicker-overview-getting-started",
                   "label": "Getting Started",
                   "path": "/componentes/colorpicker/overview/getting-started",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-colorpicker-overview-how-to",
                   "label": "How To",
                   "path": "/componentes/colorpicker/overview/how-to",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
             {
               "id": "componentes-colorpicker-api",
               "label": "API",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-colorpicker-api-props",
                   "label": "Props",
                   "path": "/componentes/colorpicker/api/props",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-colorpicker-api-events",
                   "label": "Events",
                   "path": "/componentes/colorpicker/api/events",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-colorpicker-api-types",
                   "label": "Types",
                   "path": "/componentes/colorpicker/api/types",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
@@ -376,62 +494,82 @@
               "id": "componentes-colorpicker-accessibility",
               "label": "Accessibility",
               "path": "/componentes/colorpicker/accessibility",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             },
             {
               "id": "componentes-colorpicker-demos",
               "label": "Demos",
               "path": "/componentes/colorpicker",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             }
           ]
         },
         {
           "id": "componentes-textarea",
           "label": "TextArea",
-          "permissions": ["componentes:read"],
+          "permissions": [
+            "componentes:read"
+          ],
           "children": [
             {
               "id": "componentes-textarea-overview",
               "label": "Overview",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-textarea-overview-getting-started",
                   "label": "Getting Started",
                   "path": "/componentes/textarea/overview/getting-started",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-textarea-overview-how-to",
                   "label": "How To",
                   "path": "/componentes/textarea/overview/how-to",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
             {
               "id": "componentes-textarea-api",
               "label": "API",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-textarea-api-props",
                   "label": "Props",
                   "path": "/componentes/textarea/api/props",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-textarea-api-events",
                   "label": "Events",
                   "path": "/componentes/textarea/api/events",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-textarea-api-types",
                   "label": "Types",
                   "path": "/componentes/textarea/api/types",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
@@ -439,62 +577,165 @@
               "id": "componentes-textarea-accessibility",
               "label": "Accessibility",
               "path": "/componentes/textarea/accessibility",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             },
             {
               "id": "componentes-textarea-demos",
               "label": "Demos",
               "path": "/componentes/textarea",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "componentes-tagbox",
+          "label": "TagBox",
+          "permissions": [
+            "componentes:read"
+          ],
+          "children": [
+            {
+              "id": "componentes-tagbox-overview",
+              "label": "Overview",
+              "permissions": [
+                "componentes:read"
+              ],
+              "children": [
+                {
+                  "id": "componentes-tagbox-overview-getting-started",
+                  "label": "Getting Started",
+                  "path": "/componentes/tagbox/overview/getting-started",
+                  "permissions": [
+                    "componentes:read"
+                  ]
+                },
+                {
+                  "id": "componentes-tagbox-overview-how-to",
+                  "label": "How To",
+                  "path": "/componentes/tagbox/overview/how-to",
+                  "permissions": [
+                    "componentes:read"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "componentes-tagbox-api",
+              "label": "API",
+              "permissions": [
+                "componentes:read"
+              ],
+              "children": [
+                {
+                  "id": "componentes-tagbox-api-props",
+                  "label": "Props",
+                  "path": "/componentes/tagbox/api/props",
+                  "permissions": [
+                    "componentes:read"
+                  ]
+                },
+                {
+                  "id": "componentes-tagbox-api-events",
+                  "label": "Events",
+                  "path": "/componentes/tagbox/api/events",
+                  "permissions": [
+                    "componentes:read"
+                  ]
+                },
+                {
+                  "id": "componentes-tagbox-api-types",
+                  "label": "Types",
+                  "path": "/componentes/tagbox/api/types",
+                  "permissions": [
+                    "componentes:read"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "componentes-tagbox-accessibility",
+              "label": "Accessibility",
+              "path": "/componentes/tagbox/accessibility",
+              "permissions": [
+                "componentes:read"
+              ]
+            },
+            {
+              "id": "componentes-tagbox-demos",
+              "label": "Demos",
+              "path": "/componentes/tagbox",
+              "permissions": [
+                "componentes:read"
+              ]
             }
           ]
         },
         {
           "id": "componentes-datagrid",
           "label": "DataGrid",
-          "permissions": ["componentes:read"],
+          "permissions": [
+            "componentes:read"
+          ],
           "children": [
             {
               "id": "componentes-datagrid-overview",
               "label": "Overview",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-datagrid-overview-getting-started",
                   "label": "Getting Started",
                   "path": "/componentes/datagrid/overview/getting-started",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-datagrid-overview-how-to",
                   "label": "How To",
                   "path": "/componentes/datagrid/overview/how-to",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
             {
               "id": "componentes-datagrid-api",
               "label": "API",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-datagrid-api-props",
                   "label": "Props",
                   "path": "/componentes/datagrid/api/props",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-datagrid-api-events",
                   "label": "Events",
                   "path": "/componentes/datagrid/api/events",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-datagrid-api-types",
                   "label": "Types",
                   "path": "/componentes/datagrid/api/types",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
@@ -502,62 +743,82 @@
               "id": "componentes-datagrid-accessibility",
               "label": "Accessibility",
               "path": "/componentes/datagrid/accessibility",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             },
             {
               "id": "componentes-datagrid-demos",
               "label": "Demos",
               "path": "/componentes/datagrid",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             }
           ]
         },
         {
           "id": "componentes-datebox",
           "label": "DateBox",
-          "permissions": ["componentes:read"],
+          "permissions": [
+            "componentes:read"
+          ],
           "children": [
             {
               "id": "componentes-datebox-overview",
               "label": "Overview",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-datebox-overview-getting-started",
                   "label": "Getting Started",
                   "path": "/componentes/datebox/overview/getting-started",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-datebox-overview-how-to",
                   "label": "How To",
                   "path": "/componentes/datebox/overview/how-to",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
             {
               "id": "componentes-datebox-api",
               "label": "API",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-datebox-api-props",
                   "label": "Props",
                   "path": "/componentes/datebox/api/props",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-datebox-api-events",
                   "label": "Events",
                   "path": "/componentes/datebox/api/events",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-datebox-api-types",
                   "label": "Types",
                   "path": "/componentes/datebox/api/types",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
@@ -565,62 +826,82 @@
               "id": "componentes-datebox-accessibility",
               "label": "Accessibility",
               "path": "/componentes/datebox/accessibility",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             },
             {
               "id": "componentes-datebox-demos",
               "label": "Demos",
               "path": "/componentes/datebox",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             }
           ]
         },
         {
           "id": "componentes-rangedatebox",
           "label": "RangeDateBox",
-          "permissions": ["componentes:read"],
+          "permissions": [
+            "componentes:read"
+          ],
           "children": [
             {
               "id": "componentes-rangedatebox-overview",
               "label": "Overview",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-rangedatebox-overview-getting-started",
                   "label": "Getting Started",
                   "path": "/componentes/rangedatebox/overview/getting-started",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-rangedatebox-overview-how-to",
                   "label": "How To",
                   "path": "/componentes/rangedatebox/overview/how-to",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
             {
               "id": "componentes-rangedatebox-api",
               "label": "API",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-rangedatebox-api-props",
                   "label": "Props",
                   "path": "/componentes/rangedatebox/api/props",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-rangedatebox-api-events",
                   "label": "Events",
                   "path": "/componentes/rangedatebox/api/events",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-rangedatebox-api-types",
                   "label": "Types",
                   "path": "/componentes/rangedatebox/api/types",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
@@ -628,62 +909,82 @@
               "id": "componentes-rangedatebox-accessibility",
               "label": "Accessibility",
               "path": "/componentes/rangedatebox/accessibility",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             },
             {
               "id": "componentes-rangedatebox-demos",
               "label": "Demos",
               "path": "/componentes/rangedatebox",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             }
           ]
         },
         {
           "id": "componentes-optiongroup",
           "label": "OptionGroup",
-          "permissions": ["componentes:read"],
+          "permissions": [
+            "componentes:read"
+          ],
           "children": [
             {
               "id": "componentes-optiongroup-overview",
               "label": "Overview",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-optiongroup-overview-getting-started",
                   "label": "Getting Started",
                   "path": "/componentes/optiongroup/overview/getting-started",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-optiongroup-overview-how-to",
                   "label": "How To",
                   "path": "/componentes/optiongroup/overview/how-to",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
             {
               "id": "componentes-optiongroup-api",
               "label": "API",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-optiongroup-api-props",
                   "label": "Props",
                   "path": "/componentes/optiongroup/api/props",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-optiongroup-api-events",
                   "label": "Events",
                   "path": "/componentes/optiongroup/api/events",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-optiongroup-api-types",
                   "label": "Types",
                   "path": "/componentes/optiongroup/api/types",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
@@ -691,62 +992,82 @@
               "id": "componentes-optiongroup-accessibility",
               "label": "Accessibility",
               "path": "/componentes/optiongroup/accessibility",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             },
             {
               "id": "componentes-optiongroup-demos",
               "label": "Demos",
               "path": "/componentes/optiongroup",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             }
           ]
         },
         {
           "id": "componentes-checkbutton",
           "label": "CheckButton",
-          "permissions": ["componentes:read"],
+          "permissions": [
+            "componentes:read"
+          ],
           "children": [
             {
               "id": "componentes-checkbutton-overview",
               "label": "Overview",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-checkbutton-overview-getting-started",
                   "label": "Getting Started",
                   "path": "/componentes/checkbutton/overview/getting-started",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-checkbutton-overview-how-to",
                   "label": "How To",
                   "path": "/componentes/checkbutton/overview/how-to",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
             {
               "id": "componentes-checkbutton-api",
               "label": "API",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-checkbutton-api-props",
                   "label": "Props",
                   "path": "/componentes/checkbutton/api/props",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-checkbutton-api-events",
                   "label": "Events",
                   "path": "/componentes/checkbutton/api/events",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-checkbutton-api-types",
                   "label": "Types",
                   "path": "/componentes/checkbutton/api/types",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
@@ -754,62 +1075,82 @@
               "id": "componentes-checkbutton-accessibility",
               "label": "Accessibility",
               "path": "/componentes/checkbutton/accessibility",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             },
             {
               "id": "componentes-checkbutton-demos",
               "label": "Demos",
               "path": "/componentes/checkbutton",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             }
           ]
         },
         {
           "id": "componentes-popup",
           "label": "Popup",
-          "permissions": ["componentes:read"],
+          "permissions": [
+            "componentes:read"
+          ],
           "children": [
             {
               "id": "componentes-popup-overview",
               "label": "Overview",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-popup-overview-getting-started",
                   "label": "Getting Started",
                   "path": "/componentes/popup/overview/getting-started",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-popup-overview-how-to",
                   "label": "How To",
                   "path": "/componentes/popup/overview/how-to",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
             {
               "id": "componentes-popup-api",
               "label": "API",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-popup-api-props",
                   "label": "Props",
                   "path": "/componentes/popup/api/props",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-popup-api-events",
                   "label": "Events",
                   "path": "/componentes/popup/api/events",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-popup-api-types",
                   "label": "Types",
                   "path": "/componentes/popup/api/types",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
@@ -817,62 +1158,82 @@
               "id": "componentes-popup-accessibility",
               "label": "Accessibility",
               "path": "/componentes/popup/accessibility",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             },
             {
               "id": "componentes-popup-demos",
               "label": "Demos",
               "path": "/componentes/popup",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             }
           ]
         },
         {
           "id": "componentes-toast",
           "label": "Toast",
-          "permissions": ["componentes:read"],
+          "permissions": [
+            "componentes:read"
+          ],
           "children": [
             {
               "id": "componentes-toast-overview",
               "label": "Overview",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-toast-overview-getting-started",
                   "label": "Getting Started",
                   "path": "/componentes/toast/overview/getting-started",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-toast-overview-how-to",
                   "label": "How To",
                   "path": "/componentes/toast/overview/how-to",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
             {
               "id": "componentes-toast-api",
               "label": "API",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-toast-api-props",
                   "label": "Props",
                   "path": "/componentes/toast/api/props",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-toast-api-events",
                   "label": "Events",
                   "path": "/componentes/toast/api/events",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-toast-api-types",
                   "label": "Types",
                   "path": "/componentes/toast/api/types",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
@@ -880,62 +1241,82 @@
               "id": "componentes-toast-accessibility",
               "label": "Accessibility",
               "path": "/componentes/toast/accessibility",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             },
             {
               "id": "componentes-toast-demos",
               "label": "Demos",
               "path": "/componentes/toast",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             }
           ]
         },
         {
           "id": "componentes-pageactionsmenu",
           "label": "PageActionsMenu",
-          "permissions": ["componentes:read"],
+          "permissions": [
+            "componentes:read"
+          ],
           "children": [
             {
               "id": "componentes-pageactionsmenu-overview",
               "label": "Overview",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-pageactionsmenu-overview-getting-started",
                   "label": "Getting Started",
                   "path": "/componentes/pageactionsmenu/overview/getting-started",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-pageactionsmenu-overview-how-to",
                   "label": "How To",
                   "path": "/componentes/pageactionsmenu/overview/how-to",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
             {
               "id": "componentes-pageactionsmenu-api",
               "label": "API",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-pageactionsmenu-api-props",
                   "label": "Props",
                   "path": "/componentes/pageactionsmenu/api/props",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-pageactionsmenu-api-events",
                   "label": "Events",
                   "path": "/componentes/pageactionsmenu/api/events",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-pageactionsmenu-api-types",
                   "label": "Types",
                   "path": "/componentes/pageactionsmenu/api/types",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
@@ -943,62 +1324,82 @@
               "id": "componentes-pageactionsmenu-accessibility",
               "label": "Accessibility",
               "path": "/componentes/pageactionsmenu/accessibility",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             },
             {
               "id": "componentes-pageactionsmenu-demos",
               "label": "Demos",
               "path": "/componentes/pageactionsmenu",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             }
           ]
         },
         {
           "id": "componentes-sidebar",
           "label": "Sidebar",
-          "permissions": ["componentes:read"],
+          "permissions": [
+            "componentes:read"
+          ],
           "children": [
             {
               "id": "componentes-sidebar-overview",
               "label": "Overview",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-sidebar-overview-getting-started",
                   "label": "Getting Started",
                   "path": "/componentes/sidebar/overview/getting-started",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-sidebar-overview-how-to",
                   "label": "How To",
                   "path": "/componentes/sidebar/overview/how-to",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
             {
               "id": "componentes-sidebar-api",
               "label": "API",
-              "permissions": ["componentes:read"],
+              "permissions": [
+                "componentes:read"
+              ],
               "children": [
                 {
                   "id": "componentes-sidebar-api-props",
                   "label": "Props",
                   "path": "/componentes/sidebar/api/props",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-sidebar-api-events",
                   "label": "Events",
                   "path": "/componentes/sidebar/api/events",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 },
                 {
                   "id": "componentes-sidebar-api-types",
                   "label": "Types",
                   "path": "/componentes/sidebar/api/types",
-                  "permissions": ["componentes:read"]
+                  "permissions": [
+                    "componentes:read"
+                  ]
                 }
               ]
             },
@@ -1006,13 +1407,17 @@
               "id": "componentes-sidebar-accessibility",
               "label": "Accessibility",
               "path": "/componentes/sidebar/accessibility",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             },
             {
               "id": "componentes-sidebar-demos",
               "label": "Demos",
               "path": "/componentes/sidebar",
-              "permissions": ["componentes:read"]
+              "permissions": [
+                "componentes:read"
+              ]
             }
           ]
         }
@@ -1023,38 +1428,50 @@
       "label": "Apariencia",
       "icon": "settings",
       "path": "/apariencia",
-      "permissions": ["componentes:read"],
+      "permissions": [
+        "componentes:read"
+      ],
       "position": "bottom",
       "children": [
         {
           "id": "apariencia-temas",
           "label": "Temas",
           "path": "/apariencia/temas",
-          "permissions": ["componentes:read"]
+          "permissions": [
+            "componentes:read"
+          ]
         },
         {
           "id": "apariencia-modo-oscuro",
           "label": "Modo Oscuro",
           "path": "/apariencia/modo-oscuro",
-          "permissions": ["componentes:read"]
+          "permissions": [
+            "componentes:read"
+          ]
         },
         {
           "id": "apariencia-instalacion",
           "label": "Instalación",
           "path": "/apariencia/instalacion",
-          "permissions": ["componentes:read"]
+          "permissions": [
+            "componentes:read"
+          ]
         },
         {
           "id": "apariencia-importacion",
           "label": "Importación",
           "path": "/apariencia/importacion",
-          "permissions": ["componentes:read"]
+          "permissions": [
+            "componentes:read"
+          ]
         },
         {
           "id": "apariencia-personalizacion",
           "label": "Personalización",
           "path": "/apariencia/personalizacion",
-          "permissions": ["componentes:read"]
+          "permissions": [
+            "componentes:read"
+          ]
         }
       ]
     }

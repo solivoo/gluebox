@@ -12,6 +12,7 @@ import { NumberBoxDemo } from '@/demo/pages/demos/NumberBoxDemo';
 import { FileBoxDemo } from '@/demo/pages/demos/FileBoxDemo';
 import { ColorPickerDemo } from '@/demo/pages/demos/ColorPickerDemo';
 import { TextAreaDemo } from '@/demo/pages/demos/TextAreaDemo';
+import { TagBoxDemo } from '@/demo/pages/demos/TagBoxDemo';
 import { SidebarDemo } from '@/demo/pages/demos/SidebarDemo';
 import { DateBoxDemo } from '@/demo/pages/demos/DateBoxDemo';
 import { RangeDateBoxDemo } from '@/demo/pages/demos/RangeDateBoxDemo';
@@ -44,6 +45,7 @@ function ComponentListPage() {
           { name: 'FileBox', desc: 'Selector de archivos con modo campo o dropzone y validación.', color: '#0369a1' },
           { name: 'ColorPicker', desc: 'Selector de color HSV + hex, sin chrome nativo del SO.', color: '#db2777' },
           { name: 'TextArea', desc: 'Texto multilínea con filas, resize y mismas variantes que TextBox.', color: '#38bdf8' },
+          { name: 'TagBox', desc: 'Campo para agregar tags en línea con Enter, chips removibles y límite.', color: '#4f46e5' },
           { name: 'Sidebar', desc: 'Navegación jerárquica RBAC/ABAC con colapsado.', color: '#f59e0b' },
           { name: 'DateBox', desc: 'Selector de fecha individual con calendario nativo y temas.', color: '#8b5cf6' },
           { name: 'RangeDateBox', desc: 'Selector de rango de fechas con campos inicio/fin vinculados.', color: '#ec4899' },
@@ -104,6 +106,7 @@ export function AppRouter() {
           <Route path="componentes/filebox" element={<FileBoxDemo />} />
           <Route path="componentes/colorpicker" element={<ColorPickerDemo />} />
           <Route path="componentes/textarea" element={<TextAreaDemo />} />
+          <Route path="componentes/tagbox" element={<TagBoxDemo />} />
           <Route path="componentes/sidebar" element={<SidebarDemo />} />
           <Route path="componentes/datebox" element={<DateBoxDemo />} />
           <Route path="componentes/rangedatebox" element={<RangeDateBoxDemo />} />
