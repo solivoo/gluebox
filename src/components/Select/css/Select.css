@@ -532,6 +532,22 @@
   font-size: 0.875rem;
 }
 
+.glb-select--outlined.glb-select--sm .glb-select__trigger,
+.glb-select--outlined.glb-select--sm .glb-select__trigger:hover:not(:disabled):not(.glb-select__trigger--open),
+.glb-select--outlined.glb-select--sm .glb-select__trigger:focus-visible,
+.glb-select--outlined.glb-select--sm .glb-select__trigger--open {
+  min-height: 2.25rem;
+  padding-top: 0.625rem;
+}
+
+.glb-select--outlined.glb-select--lg .glb-select__trigger,
+.glb-select--outlined.glb-select--lg .glb-select__trigger:hover:not(:disabled):not(.glb-select__trigger--open),
+.glb-select--outlined.glb-select--lg .glb-select__trigger:focus-visible,
+.glb-select--outlined.glb-select--lg .glb-select__trigger--open {
+  min-height: 3rem;
+  padding-top: 0.75rem;
+}
+
 /* ── Variant: Primary ── */
 
 .glb-select--primary {

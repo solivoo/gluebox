@@ -266,8 +266,16 @@
   box-shadow: 0 0 0 3px var(--textarea-error-focus-ring);
 }
 
-/* Outlined label: el contenedor lleva borde/focus; el input queda transparente */
-.glb-textarea--outlined .glb-textarea__textarea,
+.glb-textarea--outlined .glb-textarea__textarea {
+  border: none;
+  border-color: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  background-color: transparent;
+  padding-top: 0.875rem;
+  min-height: 5rem;
+}
+
 .glb-textarea--outlined .glb-textarea__textarea:hover:not(:disabled),
 .glb-textarea--outlined .glb-textarea__textarea:focus,
 .glb-textarea--outlined .glb-textarea__textarea:disabled {
@@ -276,8 +284,6 @@
   border-radius: 0;
   box-shadow: none;
   background-color: transparent;
-  padding-top: 0.875rem;
-  min-height: 5rem;
 }
 
 /* ── Left / Right icon adjustment ── */

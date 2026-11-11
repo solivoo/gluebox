@@ -13,6 +13,12 @@
   background: var(--glb-outlined-bg, transparent);
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
   box-sizing: border-box;
+  transform: none;
+}
+
+.glb-outlined-field:hover,
+.glb-outlined-field:focus-within {
+  transform: none;
 }
 
 .glb-outlined-field__legend {
