@@ -77,7 +77,7 @@
   background-color: var(--textbox-bg);
   color: var(--textbox-text);
   box-shadow: var(--textbox-shadow, none);
-  transition: var(--textbox-transition, all 0.15s ease);
+  transition: var(--textbox-transition, border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease);
   box-sizing: border-box;
 }
 
@@ -196,7 +196,7 @@
   color: var(--textbox-text);
   cursor: pointer;
   font-family: inherit;
-  transition: var(--textbox-transition, all 0.15s ease);
+  transition: var(--textbox-transition, border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease);
   box-sizing: border-box;
 }
 
@@ -482,7 +482,7 @@
   background: transparent;
   color: var(--textbox-icon);
   cursor: pointer;
-  transition: var(--textbox-transition, all 0.15s ease);
+  transition: var(--textbox-transition, border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease);
 }
 
 .glb-filebox__thumb-add:hover,

@@ -76,7 +76,7 @@
   font-weight: 400;
   color: var(--textbox-placeholder);
   pointer-events: none;
-  transition: all 0.2s ease;
+  transition: top 0.2s ease, transform 0.2s ease, color 0.2s ease, font-weight 0.2s ease;
   transform-origin: left top;
   z-index: 1;
   max-width: calc(100% - 1.5rem);
@@ -218,7 +218,7 @@
   border-radius: var(--textbox-radius, 0.5rem);
   border: 1px solid transparent;
   outline: none;
-  transition: var(--textbox-transition, all 0.15s ease);
+  transition: var(--textbox-transition, border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease);
   box-sizing: border-box;
   padding: 0.5rem 0.75rem;
   background-color: var(--textbox-bg);

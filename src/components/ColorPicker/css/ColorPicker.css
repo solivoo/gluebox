@@ -58,7 +58,7 @@
   background-color: var(--textbox-bg);
   color: var(--textbox-text);
   box-shadow: var(--textbox-shadow, none);
-  transition: var(--textbox-transition, all 0.15s ease);
+  transition: var(--textbox-transition, border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease);
   box-sizing: border-box;
 }
 

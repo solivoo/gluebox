@@ -76,7 +76,7 @@
   font-weight: 400;
   color: var(--tagbox-placeholder);
   pointer-events: none;
-  transition: all 0.2s ease;
+  transition: top 0.2s ease, transform 0.2s ease, color 0.2s ease, font-weight 0.2s ease;
   transform-origin: left top;
   z-index: 1;
   max-width: calc(100% - 1.5rem);
@@ -281,7 +281,7 @@
   border-radius: var(--tagbox-radius, 0.5rem);
   border: 1px solid transparent;
   outline: none;
-  transition: var(--tagbox-transition, all 0.15s ease);
+  transition: var(--tagbox-transition, border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease);
   background-color: var(--tagbox-bg);
   color: var(--tagbox-text);
   border-color: var(--tagbox-border);
@@ -392,7 +392,7 @@
   color: var(--tagbox-tag-remove-color);
   cursor: pointer;
   line-height: 1;
-  transition: var(--tagbox-transition, all 0.15s ease);
+  transition: var(--tagbox-transition, border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease);
 }
 
 .glb-tagbox__tag-remove:hover:not(:disabled),
@@ -461,7 +461,7 @@
   color: var(--tagbox-clear-color);
   cursor: pointer;
   line-height: 1;
-  transition: var(--tagbox-transition, all 0.15s ease);
+  transition: var(--tagbox-transition, border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease);
 }
 
 .glb-tagbox__clear:hover:not(:disabled),

@@ -4,7 +4,7 @@ export const textBoxThemes: Record<TextBoxThemePreset, TextBoxTheme> = {
   "commerce-dark": {
     "fontSize": "0.875rem",
     "borderRadius": "4px",
-    "transition": "all 0.15s ease",
+    "transition": "border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease",
     "shadow": "0 1px 2px rgba(0, 0, 0, 0.3)",
     "helperTextColor": "#9ca3af",
     "errorTextColor": "#fca5a5",
@@ -86,7 +86,7 @@ export const textBoxThemes: Record<TextBoxThemePreset, TextBoxTheme> = {
   "commerce-light": {
     "fontSize": "0.875rem",
     "borderRadius": "4px",
-    "transition": "all 0.15s ease",
+    "transition": "border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease",
     "shadow": "0 1px 2px rgba(0, 0, 0, 0.06)",
     "helperTextColor": "#9ca3af",
     "errorTextColor": "#b85555",

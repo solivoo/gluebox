@@ -200,7 +200,7 @@ export function themeToStyle(theme?: ${PascalName}ThemeTokens): CSSProperties | 
   background: var(--glb-${kebabName}-bg);
   color: var(--glb-${kebabName}-text);
   border: 1px solid var(--glb-${kebabName}-border);
-  transition: all 0.15s ease-in-out;
+  transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease-in-out;
 }
 
 /* Modificadores de tamaño */

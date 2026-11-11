@@ -47,7 +47,7 @@
   font-weight: 500;
   color: var(--datebox-label-color, var(--glb-muted, #6b7280));
   margin-bottom: 0.25rem;
-  transition: var(--datebox-transition, all 0.15s ease);
+  transition: var(--datebox-transition, border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease);
 }
 
 /* ── Floating Label ── */
@@ -65,7 +65,7 @@
   color: var(--datebox-primary-placeholder, var(--glb-muted, #6b7280));
   font-weight: 400;
   font-size: var(--datebox-font-size, 0.875rem);
-  transition: all 0.2s ease;
+  transition: top 0.2s ease, transform 0.2s ease, color 0.2s ease, font-weight 0.2s ease;
   z-index: 2;
 }
 
@@ -168,7 +168,7 @@
   background-color: var(--datebox-primary-bg, var(--glb-input-bg, #ffffff));
   color: var(--datebox-calendar-icon-color, var(--glb-muted, #6b7280));
   cursor: pointer;
-  transition: var(--datebox-transition, all 0.15s ease);
+  transition: var(--datebox-transition, border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease);
   box-shadow: var(--datebox-shadow, 0 1px 2px rgba(0, 0, 0, 0.06));
 }
 
@@ -265,7 +265,7 @@
   padding-left: 0.75rem;
   padding-right: 2.25rem;
   border-radius: var(--datebox-radius, 0.5rem);
-  transition: var(--datebox-transition, all 0.15s ease);
+  transition: var(--datebox-transition, border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease);
   box-sizing: border-box;
   outline: none;
   cursor: pointer;

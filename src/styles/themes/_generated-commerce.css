@@ -150,7 +150,7 @@
 [data-theme="commerce"] {
   --select-font-size: 0.875rem;
   --select-radius: 4px;
-  --select-transition: all 0.15s ease;
+  --select-transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
   --select-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
   --select-dropdown-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   --select-dropdown-border: var(--glb-border);
@@ -252,7 +252,7 @@
 [data-theme="commerce"][data-mode="dark"] {
   --select-font-size: 0.875rem;
   --select-radius: 4px;
-  --select-transition: all 0.15s ease;
+  --select-transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
   --select-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   --select-dropdown-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
   --select-dropdown-border: var(--glb-border);
@@ -354,7 +354,7 @@
 [data-theme="commerce"] {
   --textbox-font-size: 0.875rem;
   --textbox-radius: 4px;
-  --textbox-transition: all 0.15s ease;
+  --textbox-transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
   --textbox-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
   --textbox-helper-color: var(--glb-muted);
   --textbox-error-color: var(--glb-danger-on-fill, #dc2626);
@@ -427,7 +427,7 @@
 [data-theme="commerce"][data-mode="dark"] {
   --textbox-font-size: 0.875rem;
   --textbox-radius: 4px;
-  --textbox-transition: all 0.15s ease;
+  --textbox-transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
   --textbox-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   --textbox-helper-color: var(--glb-muted);
   --textbox-error-color: var(--glb-danger-on-fill, #dc2626);
@@ -500,7 +500,7 @@
 [data-theme="commerce"] {
   --tagbox-font-size: 0.875rem;
   --tagbox-radius: 4px;
-  --tagbox-transition: all 0.15s ease;
+  --tagbox-transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
   --tagbox-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
   --tagbox-helper-color: var(--glb-muted);
   --tagbox-error-color: var(--glb-danger-on-fill, #dc2626);
@@ -580,7 +580,7 @@
 [data-theme="commerce"][data-mode="dark"] {
   --tagbox-font-size: 0.875rem;
   --tagbox-radius: 4px;
-  --tagbox-transition: all 0.15s ease;
+  --tagbox-transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
   --tagbox-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   --tagbox-helper-color: var(--glb-muted);
   --tagbox-error-color: var(--glb-danger-on-fill, #dc2626);
@@ -660,7 +660,7 @@
 [data-theme="commerce"] {
   --textarea-font-size: 0.875rem;
   --textarea-radius: 4px;
-  --textarea-transition: all 0.15s ease;
+  --textarea-transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
   --textarea-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
   --textarea-helper-color: var(--glb-muted);
   --textarea-error-color: var(--glb-danger-on-fill, #dc2626);
@@ -733,7 +733,7 @@
 [data-theme="commerce"][data-mode="dark"] {
   --textarea-font-size: 0.875rem;
   --textarea-radius: 4px;
-  --textarea-transition: all 0.15s ease;
+  --textarea-transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
   --textarea-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   --textarea-helper-color: var(--glb-muted);
   --textarea-error-color: var(--glb-danger-on-fill, #dc2626);
@@ -806,7 +806,7 @@
 [data-theme="commerce"] {
   --datebox-font-size: 0.875rem;
   --datebox-radius: 4px;
-  --datebox-transition: all 0.15s ease;
+  --datebox-transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
   --datebox-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
   --datebox-helper-color: var(--glb-muted);
   --datebox-error-color: var(--glb-danger-on-fill, #dc2626);
@@ -888,7 +888,7 @@
 [data-theme="commerce"][data-mode="dark"] {
   --datebox-font-size: 0.875rem;
   --datebox-radius: 4px;
-  --datebox-transition: all 0.15s ease;
+  --datebox-transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
   --datebox-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   --datebox-helper-color: var(--glb-muted);
   --datebox-error-color: var(--glb-danger-on-fill, #dc2626);
@@ -970,7 +970,7 @@
 [data-theme="commerce"] {
   --rangedatebox-font-size: 0.875rem;
   --rangedatebox-radius: 4px;
-  --rangedatebox-transition: all 0.15s ease;
+  --rangedatebox-transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
   --rangedatebox-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
   --rangedatebox-helper-color: var(--glb-muted);
   --rangedatebox-error-color: var(--glb-danger-on-fill, #dc2626);
@@ -1053,7 +1053,7 @@
 [data-theme="commerce"][data-mode="dark"] {
   --rangedatebox-font-size: 0.875rem;
   --rangedatebox-radius: 4px;
-  --rangedatebox-transition: all 0.15s ease;
+  --rangedatebox-transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
   --rangedatebox-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   --rangedatebox-helper-color: var(--glb-muted);
   --rangedatebox-error-color: var(--glb-danger-on-fill, #dc2626);
@@ -1136,7 +1136,7 @@
 [data-theme="commerce"] {
   --checkbtn-font-size: 0.875rem;
   --checkbtn-radius: 4px;
-  --checkbtn-transition: all 0.15s ease;
+  --checkbtn-transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
   --checkbtn-shadow: 0 1px 2px rgba(0,0,0,0.06);
   --checkbtn-primary-unchecked-bg: var(--glb-input-bg);
   --checkbtn-primary-unchecked-text: var(--glb-text);
@@ -1216,7 +1216,7 @@
 [data-theme="commerce"][data-mode="dark"] {
   --checkbtn-font-size: 0.875rem;
   --checkbtn-radius: 4px;
-  --checkbtn-transition: all 0.15s ease;
+  --checkbtn-transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
   --checkbtn-shadow: 0 1px 2px rgba(0,0,0,0.3);
   --checkbtn-primary-unchecked-bg: var(--glb-input-bg);
   --checkbtn-primary-unchecked-text: var(--glb-text);
@@ -1334,7 +1334,7 @@
 [data-theme="commerce"] {
   --optiongroup-font-size: 0.875rem;
   --optiongroup-radius: 4px;
-  --optiongroup-transition: all 0.15s ease;
+  --optiongroup-transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
   --optiongroup-shadow: 0 1px 2px rgba(0,0,0,0.06);
   --optiongroup-helper-color: var(--glb-muted);
   --optiongroup-error-color: var(--glb-danger-on-fill);
@@ -1393,7 +1393,7 @@
 [data-theme="commerce"][data-mode="dark"] {
   --optiongroup-font-size: 0.875rem;
   --optiongroup-radius: 4px;
-  --optiongroup-transition: all 0.15s ease;
+  --optiongroup-transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
   --optiongroup-shadow: 0 1px 2px rgba(0,0,0,0.3);
   --optiongroup-helper-color: var(--glb-muted);
   --optiongroup-error-color: var(--glb-danger-on-fill);

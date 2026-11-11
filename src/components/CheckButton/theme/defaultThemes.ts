@@ -87,7 +87,7 @@ function buildTheme(isDark: boolean, accent: PastelAccent): CheckButtonTheme {
   return {
     fontSize: '0.875rem',
     borderRadius: '4px',
-    transition: 'all 0.15s ease',
+    transition: 'border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease',
     shadow: isDark ? '0 1px 2px rgba(0,0,0,0.3)' : '0 1px 2px rgba(0,0,0,0.06)',
     variants: {
       primary: buildVariant(isDark, legacy),

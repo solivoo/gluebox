@@ -4,7 +4,7 @@ export const selectThemes: Record<SelectThemePreset, SelectTheme> = {
   "commerce-dark": {
     "fontSize": "0.875rem",
     "borderRadius": "4px",
-    "transition": "all 0.15s ease",
+    "transition": "border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease",
     "shadow": "0 1px 2px rgba(0, 0, 0, 0.3)",
     "dropdownShadow": "0 8px 24px rgba(0, 0, 0, 0.5)",
     "dropdownBorder": "#374151",
@@ -115,7 +115,7 @@ export const selectThemes: Record<SelectThemePreset, SelectTheme> = {
   "commerce-light": {
     "fontSize": "0.875rem",
     "borderRadius": "4px",
-    "transition": "all 0.15s ease",
+    "transition": "border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease",
     "shadow": "0 1px 2px rgba(0, 0, 0, 0.06)",
     "dropdownShadow": "0 8px 24px rgba(0, 0, 0, 0.12)",
     "dropdownBorder": "#e5e7eb",

@@ -102,7 +102,7 @@
   font-weight: 500;
   line-height: 1.25;
   cursor: pointer;
-  transition: var(--optiongroup-transition, all 0.15s ease);
+  transition: var(--optiongroup-transition, border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease);
   box-shadow: var(--optiongroup-shadow);
   outline: none;
   text-align: left;
